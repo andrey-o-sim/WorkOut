@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WO.DAL.Core.DataBaseContext
+namespace WO.Core.DAL.DataBaseContext
 {
     public class WorkoutSingletonContextCreator
     {

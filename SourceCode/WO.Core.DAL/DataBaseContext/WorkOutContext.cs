@@ -5,9 +5,9 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WO.DAL.Core.Model;
+using WO.Core.DAL.Model;
 
-namespace WO.DAL.Core.DataBaseContext
+namespace WO.Core.DAL.DataBaseContext
 {
     public class WorkOutContext : DbContext
     {

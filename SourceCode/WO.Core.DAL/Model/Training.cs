@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WO.DAL.Core.Model
+namespace WO.Core.DAL.Model
 {
     public class Training : BaseModel
     {

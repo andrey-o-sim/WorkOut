@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WO.DAL.Core.Interfaces;
-using WO.DAL.Core.Model;
+using WO.Core.DAL.Interfaces;
+using WO.Core.DAL.Model;
 
-namespace WO.DAL.Core.Repositories
+namespace WO.Core.DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
