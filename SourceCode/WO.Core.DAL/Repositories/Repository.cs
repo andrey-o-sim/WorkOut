@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WO.DAL.Interfaces;
-using WO.DAL.Model;
+using WO.DAL.Core.Interfaces;
+using WO.DAL.Core.Model;
 
-namespace WO.DAL.Repositories
+namespace WO.DAL.Core.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
@@ -18,6 +18,7 @@ namespace WO.DAL.Repositories
         }
         public void Create(T item)
         {
+            item.CreatedDate = DateTime.Now;
             _dbContext.Set<T>().Add(item);
             _dbContext.Entry(item).State = EntityState.Added;
             _dbContext.SaveChanges();
@@ -27,6 +28,7 @@ namespace WO.DAL.Repositories
         {
             var itemForUpdate = _dbContext.Set<T>().Where(i => i.Id == item.Id).FirstOrDefault();
             itemForUpdate = item;
+            itemForUpdate.ModifiedDate = DateTime.Now;
             _dbContext.Entry(itemForUpdate).State = EntityState.Modified;
             _dbContext.SaveChanges();
         }

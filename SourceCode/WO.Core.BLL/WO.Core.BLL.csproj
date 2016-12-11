@@ -7,8 +7,8 @@
     <ProjectGuid>{781AF302-7DCA-493E-8131-2E0C0413CA02}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WO.Core.BL</RootNamespace>
-    <AssemblyName>WO.Core.BL</AssemblyName>
+    <RootNamespace>WO.Core.BLL</RootNamespace>
+    <AssemblyName>WO.Core.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

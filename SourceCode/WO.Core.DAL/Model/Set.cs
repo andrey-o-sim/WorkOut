@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WO.DAL.Model
+namespace WO.DAL.Core.Model
 {
     public class Set : BaseModel
     {

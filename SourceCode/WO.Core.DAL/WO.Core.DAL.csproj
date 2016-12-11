@@ -7,8 +7,8 @@
     <ProjectGuid>{4064522D-4CFC-4BA1-86E7-19AD37D7434E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WO.DAL</RootNamespace>
-    <AssemblyName>WO.DAL</AssemblyName>
+    <RootNamespace>WO.Core.DAL</RootNamespace>
+    <AssemblyName>WO.Core.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

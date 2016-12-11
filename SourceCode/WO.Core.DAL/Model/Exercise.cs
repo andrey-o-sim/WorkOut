@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WO.DAL.Model
+namespace WO.DAL.Core.Model
 {
-    public class Approach : BaseModel
+    public class Exercise : BaseModel
     {
-        public DateTime? PlanTimeForRest { get; set; }
-        public DateTime? SpentTimeForRest { get; set; }
+        [Required]
+        public string Name { get; set; }
 
         public virtual Set Set { get; set; }
         public int? SetId { get; set; }
