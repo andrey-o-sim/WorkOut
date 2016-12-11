@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace WO.DAL.Model
 {
-    public class TrainingType
+    public class TrainingType:BaseModel
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string TypeTraining { get; set; }
         [Required]

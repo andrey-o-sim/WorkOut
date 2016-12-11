@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace WO.DAL.Model
 {
-    public class Approach
+    public class Approach : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
         public DateTime? PlanTimeForRest { get; set; }
         public DateTime? SpentTimeForRest { get; set; }
 

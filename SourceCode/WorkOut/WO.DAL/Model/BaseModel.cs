@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace WO.DAL.Model
 {
-    public class Exercise : BaseModel
+    public class BaseModel
     {
-        [Required]
-        public string Name { get; set; }
-
-        public virtual Set Set { get; set; }
-        public int? SetId { get; set; }
+        [Key]
+        public int Id { get; set; }
     }
 }

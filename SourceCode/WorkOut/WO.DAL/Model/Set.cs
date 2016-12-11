@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace WO.DAL.Model
 {
-    public class Set
+    public class Set : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public DateTime? TimeForRest { get; set; }
         [Required]

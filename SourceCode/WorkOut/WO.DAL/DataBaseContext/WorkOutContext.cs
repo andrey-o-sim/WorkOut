@@ -15,7 +15,7 @@ namespace WO.DAL.DataBaseContext
         {
             Database.SetInitializer<WorkOutContext>(new WorkOutDbInitialized());
         }
-        protected WorkOutContext(string connectionString) 
+        public WorkOutContext(string connectionString) 
             : base(connectionString)
         {
         }
