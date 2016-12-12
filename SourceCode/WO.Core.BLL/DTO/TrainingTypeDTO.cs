@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WO.Core.DAL.Model
+namespace WO.Core.BLL.DTO
 {
-    public class TrainingType : BaseModel
+    public class TrainingTypeDTO : BaseModelDTO
     {
-        [Required]
         public string TypeTraining { get; set; }
-        [Required]
         public string Description { get; set; }
 
-        public Training Training { get; set; }
+        public TrainingDTO Training { get; set; }
         public int? TrainingId { get; set; }
     }
 }
