@@ -9,5 +9,7 @@ namespace WO.Core.BLL
 {
     public class OperationResult : IOperationResult
     {
+        public bool Succeed { get; set; }
+        public int ResultItemId { get; set; }
     }
 }

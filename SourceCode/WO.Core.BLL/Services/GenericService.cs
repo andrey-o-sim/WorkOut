@@ -1,39 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
-using WO.Core.BLL.Services;
+using WO.Core.BLL.Interfaces.Repositories;
 
 namespace WO.Core.BLL.Services
 {
     public class GenericService<T> : IService<T> where T : BaseModelDTO
     {
+        IRepositoryDTO<T> _repository;
+        public GenericService(IRepositoryDTO<T> repository)
+        {
+            _repository = repository;
+        }
         public IOperationResult Create(T item)
         {
-            throw new NotImplementedException();
+            var resultItemId = _repository.Create(item);
+            var result = new OperationResult { ResultItemId = resultItemId, Succeed = true };
+            return result;
         }
 
         public T Get(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
         }
 
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public IOperationResult Remove(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
+            var result = new OperationResult { ResultItemId = id, Succeed = true };
+            return result;
         }
 
         public IOperationResult Update(T item)
         {
-            throw new NotImplementedException();
+            _repository.Update(item);
+            var result = new OperationResult { ResultItemId = item.Id, Succeed = true };
+            return result;
         }
     }
 }

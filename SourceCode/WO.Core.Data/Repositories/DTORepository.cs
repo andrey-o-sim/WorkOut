@@ -16,9 +16,9 @@ namespace WO.Core.Data.Repositories
         {
             _repository = repository;
         }
-        public void Create(T item)
+        public int Create(T item)
         {
-            _repository.Create(item);
+            return _repository.Create(item);
         }
 
         public void Update(T item)
@@ -33,7 +33,7 @@ namespace WO.Core.Data.Repositories
 
         public IEnumerable<T> Find(Func<T, bool> predicate)
         {
-           return _repository.Find(predicate);
+            return _repository.Find(predicate);
         }
 
         public T Get(int id)

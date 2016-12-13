@@ -16,12 +16,14 @@ namespace WO.Core.DAL.Repositories
         {
             _dbContext = dbContext;
         }
-        public void Create(T item)
+        public int Create(T item)
         {
             item.CreatedDate = DateTime.Now;
             _dbContext.Set<T>().Add(item);
             _dbContext.Entry(item).State = EntityState.Added;
             _dbContext.SaveChanges();
+
+            return item.Id;
         }
 
         public void Update(T item)

@@ -8,5 +8,7 @@ namespace WO.Core.BLL.Interfaces
 {
     public interface IOperationResult
     {
+        bool Succeed { get; set; }
+        int ResultItemId { get; set; }
     }
 }
