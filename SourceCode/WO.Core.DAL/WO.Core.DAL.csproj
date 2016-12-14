@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="DataBaseContext\WorkOutContext.cs" />
     <Compile Include="DataBaseContext\WorkOutDbInitialized.cs" />
-    <Compile Include="DataBaseContext\WorkoutSingletonContextCreator.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Model\Approach.cs" />
     <Compile Include="Model\BaseModel.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Model\TrainingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
