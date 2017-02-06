@@ -52,6 +52,7 @@
     <Compile Include="DataBaseContext\WorkOutContext.cs" />
     <Compile Include="DataBaseContext\WorkOutDbInitialized.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Model\Approach.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Exercise.cs" />
