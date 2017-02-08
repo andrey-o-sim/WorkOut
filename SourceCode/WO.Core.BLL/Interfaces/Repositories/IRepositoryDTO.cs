@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WO.Core.BLL.Interfaces.Repositories
 {
-    public interface IRepositoryDTO<T> where T : class
+    public interface IRepositoryDTO<TDto> where TDto : class
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
-        IEnumerable<T> Find(Func<T, Boolean> predicate);
-        int Create(T item);
-        void Update(T item);
+        IEnumerable<TDto> GetAll();
+        TDto Get(int id);
+        IEnumerable<TDto> Find(Func<TDto, Boolean> predicate);
+        int Create(TDto item);
+        void Update(TDto item);
         void Delete(int id);
     }
 }

@@ -6,24 +6,26 @@ using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
+using WO.Core.DAL.Model;
 
 namespace WO.Core.Data.Repositories
 {
-    public class DTORepository<T> : IRepositoryDTO<T> where T : BaseModelDTO
+    public class DTORepository<TBll, TDto> : IRepositoryDTO<TDto> where TBll : BaseModel where TDto : BaseModelDTO
     {
-        IRepository<T> _repository;
-        public DTORepository(IRepository<T> repository)
+        IRepository<TBll> _repository;
+        public DTORepository(IRepository<TBll> repository)
         {
             _repository = repository;
         }
-        public int Create(T item)
+        public int Create(TDto item)
         {
-            return _repository.Create(item);
+            //convert DTO to BLL
+            return _repository.Create(null);
         }
 
-        public void Update(T item)
+        public void Update(TDto item)
         {
-            _repository.Update(item);
+            _repository.Update(null);
         }
 
         public void Delete(int id)
@@ -31,19 +33,22 @@ namespace WO.Core.Data.Repositories
             _repository.Delete(id);
         }
 
-        public IEnumerable<T> Find(Func<T, bool> predicate)
+        public IEnumerable<TDto> Find(Func<TDto, bool> predicate)
         {
-            return _repository.Find(predicate);
+            return null;
+            //return _repository.Find(predicate);
         }
 
-        public T Get(int id)
+        public TDto Get(int id)
         {
-            return _repository.Get(id);
+            return null;
+            //return _repository.Get(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<TDto> GetAll()
         {
-            return _repository.GetAll();
+            return null;
+            //return _repository.GetAll();
         }
     }
 }
