@@ -18,6 +18,7 @@ namespace WO.Core.DAL.DataBaseContext
         public WorkOutContext(string connectionString) 
             : base(connectionString)
         {
+            Database.CreateIfNotExists();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -19,7 +19,7 @@ namespace WO.ApiServices.Controllers.GenericData
         public TrainingTypeController(IService<TrainingTypeDTO> service)
         {
             _service = service;
-            _mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
+            _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
         // GET: api/TrainingType
         public IEnumerable<TrainingType> Get()

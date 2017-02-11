@@ -11,7 +11,6 @@ namespace WO.Core.DAL.Model
     {
         [Required]
         public string TypeTraining { get; set; }
-        [Required]
         public string Description { get; set; }
 
         public Training Training { get; set; }

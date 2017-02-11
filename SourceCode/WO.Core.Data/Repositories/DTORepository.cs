@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,25 +8,34 @@ using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
+using WO.Core.Data.Configs;
 
 namespace WO.Core.Data.Repositories
 {
-    public class DTORepository<TBll, TDto> : IRepositoryDTO<TDto> where TBll : BaseModel where TDto : BaseModelDTO
+    public class DTORepository<TData, TDto> : IRepositoryDTO<TDto> where TData : BaseModel where TDto : BaseModelDTO
     {
-        IRepository<TBll> _repository;
-        public DTORepository(IRepository<TBll> repository)
+        IRepository<TData> _repository;
+        IMapper _mapper;
+        public DTORepository(IRepository<TData> repository)
         {
             _repository = repository;
+            _mapper = AutoMapperDataConfiguration.MapperConfiguration.CreateMapper();
         }
         public int Create(TDto item)
         {
-            //convert DTO to BLL
-            return _repository.Create(null);
+            var dbItem = _mapper.Map<TData>(item);
+            dbItem.CreatedDate = DateTime.Now;
+            dbItem.ModifiedDate = DateTime.Now;
+
+            return _repository.Create(dbItem);
         }
 
         public void Update(TDto item)
         {
-            _repository.Update(null);
+            var dbItem = _mapper.Map<TData>(item);
+            dbItem.ModifiedDate = DateTime.Now;
+
+            _repository.Update(dbItem);
         }
 
         public void Delete(int id)
@@ -41,14 +51,16 @@ namespace WO.Core.Data.Repositories
 
         public TDto Get(int id)
         {
-            return null;
-            //return _repository.Get(id);
+            var dbItem = _repository.Get(id);
+            var dataItem = _mapper.Map<TDto>(dbItem);
+            return dataItem;
         }
 
         public IEnumerable<TDto> GetAll()
         {
-            return null;
-            //return _repository.GetAll();
+            var dbItem = _repository.GetAll();
+            var dataItem = _mapper.Map<List<TDto>>(dbItem);
+            return dataItem;
         }
     }
 }
