@@ -8,7 +8,8 @@ namespace WO.Core.BLL.DTO
 {
     public class TrainingDTO : BaseModelDTO
     {
-        public IEnumerable<TrainingTypeDTO> TrainingTypes { get; set; }
+        public virtual TrainingTypeDTO TrainingType { get; set; }
+        public int? TrainingTypeId { get; set; }
         public IEnumerable<SetDTO> Sets { get; set; }
         public DateTime? StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }

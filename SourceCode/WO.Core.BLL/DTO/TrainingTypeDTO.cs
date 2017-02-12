@@ -10,8 +10,6 @@ namespace WO.Core.BLL.DTO
     {
         public string TypeTraining { get; set; }
         public string Description { get; set; }
-
-        public TrainingDTO Training { get; set; }
-        public int? TrainingId { get; set; }
+        public virtual IEnumerable<TrainingDTO> Trainings { get; set; }
     }
 }

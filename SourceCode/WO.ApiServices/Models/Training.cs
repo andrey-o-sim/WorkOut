@@ -7,7 +7,8 @@ namespace WO.ApiServices.Models
 {
     public class Training : BaseModel
     {
-        public IEnumerable<TrainingType> TrainingTypes { get; set; }
+        public virtual TrainingType TrainingType { get; set; }
+        public int? TrainingTypeId { get; set; }
         public IEnumerable<Set> Sets { get; set; }
         public DateTime? StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }

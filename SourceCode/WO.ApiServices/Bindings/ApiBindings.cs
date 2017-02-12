@@ -10,6 +10,10 @@ namespace WO.ApiServices.Bindings
         public override void Load()
         {
             Bind<IService<TrainingTypeDTO>>().To<TrainingTypeService>();
+            Bind<IService<ApproachDTO>>().To<ApproachService>();
+            Bind<IService<SetDTO>>().To<SetService>();
+            Bind<IService<TrainingDTO>>().To<TrainingService>();
+            Bind<IService<ExerciseDTO>>().To<ExerciseService>();
         }
     }
 }

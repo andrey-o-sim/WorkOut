@@ -9,8 +9,6 @@ namespace WO.ApiServices.Models
     {
         public string TypeTraining { get; set; }
         public string Description { get; set; }
-
-        public Training Training { get; set; }
-        public int? TrainingId { get; set; }
+        public virtual IEnumerable<Training> Trainings { get; set; }
     }
 }

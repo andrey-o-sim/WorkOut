@@ -51,9 +51,13 @@
     <Compile Include="Interfaces\Repositories\IRepositoryDTO.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApproachService.cs" />
+    <Compile Include="Services\ExerciseService.cs" />
     <Compile Include="Services\GenericDataServices\TrainingTypeService.cs" />
     <Compile Include="Services\GenericService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\SetService.cs" />
+    <Compile Include="Services\TrainingService.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

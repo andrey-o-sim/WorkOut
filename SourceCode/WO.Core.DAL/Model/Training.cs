@@ -10,7 +10,9 @@ namespace WO.Core.DAL.Model
     public class Training : BaseModel
     {
         //кол-во > 0
-        public virtual IEnumerable<TrainingType> TrainingTypes { get; set; }
+        public virtual TrainingType TrainingType { get; set; }
+        public int? TrainingTypeId { get; set; }
+
         //кол-во > 0
         public virtual IEnumerable<Set> Sets { get; set; }
         public DateTime? StartDateTime { get; set; }

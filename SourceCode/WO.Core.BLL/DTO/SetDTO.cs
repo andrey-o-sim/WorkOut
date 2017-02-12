@@ -8,14 +8,15 @@ namespace WO.Core.BLL.DTO
 {
     public class SetDTO : BaseModelDTO
     {
-        public DateTime? TimeForRest { get; set; }
+        public int? TimeForRest { get; set; }
         public int CountApproaches { get; set; }
-        public DateTime? PlainTime { get; set; }
-        public DateTime? SummaryTime { get; set; }
+        public int? PlainTime { get; set; }
+        public int? SummaryTime { get; set; }
         public int CountMadeApproaches { get; set; }
 
         public IEnumerable<ExerciseDTO> Exercises { get; set; }
         public IEnumerable<ApproachDTO> Approaches { get; set; }
+        public TrainingDTO Training { get; set; }
         public SetDTO()
         {
             Exercises = new List<ExerciseDTO>();

@@ -10,7 +10,7 @@ namespace WO.Core.DAL.Model
     public class Set : BaseModel
     {
         [Required]
-        public DateTime? TimeForRest { get; set; }
+        public int? TimeForRest { get; set; }
         [Required]
         public int CountApproaches { get; set; }
 
@@ -22,9 +22,12 @@ namespace WO.Core.DAL.Model
         //кол-во > 0
         [Required]
         public virtual IEnumerable<Approach> Approaches { get; set; }
-        public DateTime? PlainTime { get; set; }
-        public DateTime? SummaryTime { get; set; }
+        public int? PlainTime { get; set; }
+        public int? SummaryTime { get; set; }
         public int CountMadeApproaches { get; set; }
+
+        public int? TrainingId { get; set; }
+        public virtual Training Training { get; set; }//навигационное свойство
 
         public Set()
         {

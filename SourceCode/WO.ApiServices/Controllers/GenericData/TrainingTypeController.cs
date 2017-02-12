@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WO.ApiServices.App_Start;
+using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Services;
@@ -36,14 +36,16 @@ namespace WO.ApiServices.Controllers.GenericData
         }
 
         // POST: api/TrainingType
-        public void Post([FromBody]TrainingType trainingType)
+        [HttpPost]
+        public void Create([FromBody]TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
             _service.Create(trainingTypeDTO);
         }
 
         // PUT: api/TrainingType/5
-        public void Put(int id, [FromBody]TrainingType trainingType)
+        [HttpPut]
+        public void Update(int id, [FromBody]TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
             _service.Update(trainingTypeDTO);
