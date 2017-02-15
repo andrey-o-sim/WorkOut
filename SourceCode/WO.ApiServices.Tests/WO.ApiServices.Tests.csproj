@@ -91,9 +91,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TestApproachController.cs" />
+    <Compile Include="Controllers\TestExerciseController.cs" />
+    <Compile Include="Controllers\TestSetController.cs" />
+    <Compile Include="Controllers\TestTrainingController.cs" />
+    <Compile Include="Controllers\TestTrainingTypeController.cs" />
+    <Compile Include="DTORepositories\TestDTORepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="Controllers\ValuesControllerTest.cs" />
+    <Compile Include="Services\TestTrainingTypeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -106,7 +111,12 @@
       <Project>{7DEC7657-9F46-43B9-BEAB-AD5678AFB207}</Project>
       <Name>WO.ApiServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WO.Core.BLL\WO.Core.BLL.csproj">
+      <Project>{781af302-7dca-493e-8131-2e0c0413ca02}</Project>
+      <Name>WO.Core.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

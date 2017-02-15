@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
+using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 
 namespace WO.ApiServices.Controllers.GenericData
@@ -37,24 +34,24 @@ namespace WO.ApiServices.Controllers.GenericData
 
         // POST: api/TrainingType
         [HttpPost]
-        public void Create([FromBody]TrainingType trainingType)
+        public IOperationResult Create([FromBody]TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-            _service.Create(trainingTypeDTO);
+            return _service.Create(trainingTypeDTO);
         }
 
         // PUT: api/TrainingType/5
         [HttpPut]
-        public void Update(int id, [FromBody]TrainingType trainingType)
+        public IOperationResult Update(int id, [FromBody]TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-            _service.Update(trainingTypeDTO);
+            return _service.Update(trainingTypeDTO);
         }
 
         // DELETE: api/TrainingType/5
-        public void Delete(int id)
+        public IOperationResult Delete(int id)
         {
-            _service.Remove(id);
+            return _service.Remove(id);
         }
     }
 }

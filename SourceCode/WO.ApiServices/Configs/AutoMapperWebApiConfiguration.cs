@@ -11,11 +11,22 @@ namespace WO.ApiServices.Configs
 {
     public static class AutoMapperWebApiConfiguration
     {
-        public static MapperConfiguration MapperConfiguration;
+        private static MapperConfiguration _mapperConfiguration;
+        public static MapperConfiguration MapperConfiguration
+        {
+            get
+            {
+                if (_mapperConfiguration == null)
+                {
+                    RegisterMappings();
+                }
+                return _mapperConfiguration;
+            }
+        }
 
         public static void RegisterMappings()
         {
-            MapperConfiguration = new MapperConfiguration(cfg =>
+            _mapperConfiguration = new MapperConfiguration(cfg =>
               {
                   cfg.CreateMap<TrainingType, TrainingTypeDTO>();
                   cfg.CreateMap<TrainingTypeDTO, TrainingType>();
