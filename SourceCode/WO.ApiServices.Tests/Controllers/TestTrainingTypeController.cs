@@ -134,6 +134,12 @@ namespace WO.ApiServices.Tests.Controllers
             Assert.IsFalse(resultTrainingTypes.Any(tt => tt.Id == idForRemove));
         }
 
+        [TestMethod]
+        public void Find()
+        {
+
+        }
+
         private List<TrainingTypeDTO> GetTrainingTypeCollection()
         {
             var trainingTypes = new List<TrainingTypeDTO>

@@ -43,7 +43,12 @@ namespace WO.Core.DAL.Repositories
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<T> Find(Func<T, bool> predicate)
+        public T Find(Func<T, bool> predicate)
+        {
+            return _dbContext.Set<T>().Where(predicate).FirstOrDefault();
+        }
+
+        public IEnumerable<T> FindMany(Func<T, bool> predicate)
         {
             return _dbContext.Set<T>().Where(predicate).ToList();
         }
