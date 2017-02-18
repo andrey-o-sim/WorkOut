@@ -18,18 +18,19 @@ namespace WO.ApiServices.Controllers.GenericData
             _service = service;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
-        // GET: api/TrainingType
-        public IEnumerable<TrainingType> Get()
-        {
-            var allTrainingTypes = _service.GetAll();
-            return _mapper.Map<List<TrainingType>>(allTrainingTypes);
-        }
 
         // GET: api/TrainingType/5
         public TrainingType Get(int id)
         {
             var trainingType = _service.Get(id);
             return _mapper.Map<TrainingType>(trainingType);
+        }
+
+        // GET: api/TrainingType
+        public IEnumerable<TrainingType> GetAll()
+        {
+            var allTrainingTypes = _service.GetAll();
+            return _mapper.Map<List<TrainingType>>(allTrainingTypes);
         }
 
         // POST: api/TrainingType

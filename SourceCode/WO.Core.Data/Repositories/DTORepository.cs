@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
@@ -43,10 +44,22 @@ namespace WO.Core.Data.Repositories
             _repository.Delete(id);
         }
 
-        public IEnumerable<TDto> Find(Func<TDto, bool> predicate)
+        public TDto Find(Func<TDto, bool> predicate)
         {
-            return null;
-            //return _repository.Find(predicate);
+            var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
+            var result = _repository.Find(repPredicate);
+            var dataItems = _mapper.Map<TDto>(result);
+
+            return dataItems;
+        }
+
+        public IEnumerable<TDto> FindMany(Func<TDto, bool> predicate)
+        {
+            var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
+            var result = _repository.FindMany(repPredicate).ToList();
+            var dataItems = _mapper.Map<List<TDto>>(result);
+
+            return dataItems;
         }
 
         public TDto Get(int id)
@@ -59,8 +72,8 @@ namespace WO.Core.Data.Repositories
         public IEnumerable<TDto> GetAll()
         {
             var dbItem = _repository.GetAll();
-            var dataItem = _mapper.Map<List<TDto>>(dbItem);
-            return dataItem;
+            var dataItems = _mapper.Map<List<TDto>>(dbItem);
+            return dataItems;
         }
     }
 }

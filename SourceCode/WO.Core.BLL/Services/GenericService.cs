@@ -13,12 +13,6 @@ namespace WO.Core.BLL.Services
         {
             _repository = repository;
         }
-        public IOperationResult Create(T item)
-        {
-            var resultItemId = _repository.Create(item);
-            var result = new OperationResult { ResultItemId = resultItemId, Succeed = true };
-            return result;
-        }
 
         public T Get(int id)
         {
@@ -28,6 +22,23 @@ namespace WO.Core.BLL.Services
         public IEnumerable<T> GetAll()
         {
             return _repository.GetAll();
+        }
+
+        public T Find(Func<T, bool> predicate)
+        {
+            return _repository.Find(predicate);
+        }
+
+        public IEnumerable<T> FindMany(Func<T, bool> predicate)
+        {
+            return _repository.FindMany(predicate);
+        }
+
+        public IOperationResult Create(T item)
+        {
+            var resultItemId = _repository.Create(item);
+            var result = new OperationResult { ResultItemId = resultItemId, Succeed = true };
+            return result;
         }
 
         public IOperationResult Remove(int id)
