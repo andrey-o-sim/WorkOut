@@ -17,6 +17,7 @@ namespace WO.ApiServices.Areas.HelpPage
             {
                 throw new ArgumentNullException("src");
             }
+
             Src = src;
         }
 

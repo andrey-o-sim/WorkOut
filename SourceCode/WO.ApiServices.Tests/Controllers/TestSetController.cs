@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.ApiServices.Controllers;
 using WO.ApiServices.Models;
 using WO.ApiServices.Models.Helper;
@@ -31,30 +31,30 @@ namespace WO.ApiServices.Tests.Controllers
                 new SetDTO
                 {
                    Id = 1,
-                   CountApproaches=5,
-                   CountMadeApproaches=5,
-                   PlainTime=1000,
-                   TimeForRest=120,
+                   CountApproaches = 5,
+                   CountMadeApproaches = 5,
+                   PlainTime = 1000,
+                   TimeForRest = 120,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                 },
                 new SetDTO
                 {
                    Id = 2,
-                   CountApproaches=4,
-                   CountMadeApproaches=4,
-                   PlainTime=500,
-                   TimeForRest=60,
+                   CountApproaches = 4,
+                   CountMadeApproaches = 4,
+                   PlainTime = 500,
+                   TimeForRest = 60,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                 },
                 new SetDTO
                 {
                    Id = 3,
-                   CountApproaches=6,
-                   CountMadeApproaches=6,
-                   PlainTime=1100,
-                   TimeForRest=100,
+                   CountApproaches = 6,
+                   CountMadeApproaches = 6,
+                   PlainTime = 1100,
+                   TimeForRest = 100,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                 },
@@ -67,9 +67,9 @@ namespace WO.ApiServices.Tests.Controllers
             // Arrange
             var searchSetId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(searchId =>
-            {
-                return _sets.Where(tr => tr.Id == searchId).FirstOrDefault();
-            });
+           {
+               return _sets.Where(tr => tr.Id == searchId).FirstOrDefault();
+           });
 
             // Act
             var result = _setController.Get(searchSetId);
@@ -109,19 +109,19 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Create(It.IsAny<SetDTO>())).Returns<SetDTO>(newItem =>
-            {
-                newItem.Id = _sets.Count + 1;
-                newItem.CreatedDate = DateTime.Now;
-                newItem.ModifiedDate = DateTime.Now;
+           {
+               newItem.Id = _sets.Count + 1;
+               newItem.CreatedDate = DateTime.Now;
+               newItem.ModifiedDate = DateTime.Now;
 
-                _sets.Add(newItem);
+               _sets.Add(newItem);
 
-                return new OperationResult
-                {
-                    ResultItemId = newItem.Id,
-                    Succeed = true
-                };
-            });
+               return new OperationResult
+               {
+                   ResultItemId = newItem.Id,
+                   Succeed = true
+               };
+           });
 
             // Act
             var result = _setController.Create(newSet);
@@ -145,17 +145,17 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Update(It.IsAny<SetDTO>())).Returns<SetDTO>(updateValue =>
-            {
-                updateValue.ModifiedDate = DateTime.Now;
-                var setIndex = _sets.FindIndex(set => set.Id == updateValue.Id);
-                _sets[setIndex] = updateValue;
+           {
+               updateValue.ModifiedDate = DateTime.Now;
+               var setIndex = _sets.FindIndex(set => set.Id == updateValue.Id);
+               _sets[setIndex] = updateValue;
 
-                return new OperationResult
-                {
-                    ResultItemId = updateValue.Id,
-                    Succeed = true
-                };
-            });
+               return new OperationResult
+               {
+                   ResultItemId = updateValue.Id,
+                   Succeed = true
+               };
+           });
 
             // Act
             var result = _setController.Update(updateSet.Id, updateSet);
@@ -176,12 +176,12 @@ namespace WO.ApiServices.Tests.Controllers
             var currentItemsCount = _sets.Count;
 
             _mock.Setup(s => s.Delete(idForRemove)).Returns<int>(id =>
-            {
-                var itemForRemove = _sets.Where(set => set.Id == id).FirstOrDefault();
-                _sets.Remove(itemForRemove);
+           {
+               var itemForRemove = _sets.Where(set => set.Id == id).FirstOrDefault();
+               _sets.Remove(itemForRemove);
 
-                return new OperationResult { ResultItemId = id, Succeed = true };
-            });
+               return new OperationResult { ResultItemId = id, Succeed = true };
+           });
 
             // Act
             var result = _setController.Delete(idForRemove);

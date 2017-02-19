@@ -9,16 +9,22 @@ namespace WO.Core.DAL.Model
 {
     public class Set : BaseModel
     {
+        public Set()
+        {
+            Exercises = new List<Exercise>();
+            Approaches = new List<Approach>();
+        }
+
         [Required]
         public int? TimeForRest { get; set; }
         [Required]
         public int CountApproaches { get; set; }
 
-
         //Использовать конвенции
         //кол-во > 0
         [Required]
         public virtual IEnumerable<Exercise> Exercises { get; set; }
+
         //кол-во > 0
         [Required]
         public virtual IEnumerable<Approach> Approaches { get; set; }
@@ -27,12 +33,8 @@ namespace WO.Core.DAL.Model
         public int CountMadeApproaches { get; set; }
 
         public int? TrainingId { get; set; }
-        public virtual Training Training { get; set; }//навигационное свойство
 
-        public Set()
-        {
-            Exercises = new List<Exercise>();
-            Approaches = new List<Approach>();
-        }
+        //навигационное свойство
+        public virtual Training Training { get; set; }
     }
 }

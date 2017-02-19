@@ -249,7 +249,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
-    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />

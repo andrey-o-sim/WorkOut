@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using AutoMapper;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
@@ -11,8 +11,9 @@ namespace WO.ApiServices.Controllers.GenericData
 {
     public class TrainingTypeController : ApiController
     {
-        IService<TrainingTypeDTO> _service;
-        IMapper _mapper;
+        private IService<TrainingTypeDTO> _service;
+        private IMapper _mapper;
+
         public TrainingTypeController(IService<TrainingTypeDTO> service)
         {
             _service = service;

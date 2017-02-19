@@ -1,10 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Interfaces.Repositories;
@@ -30,30 +28,30 @@ namespace WO.ApiServices.Tests.Services
                 new SetDTO
                 {
                    Id = 1,
-                   CountApproaches=5,
-                   CountMadeApproaches=5,
-                   PlainTime=1000,
-                   TimeForRest=120,
+                   CountApproaches = 5,
+                   CountMadeApproaches = 5,
+                   PlainTime = 1000,
+                   TimeForRest = 120,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                 },
                 new SetDTO
                 {
                    Id = 2,
-                   CountApproaches=4,
-                   CountMadeApproaches=4,
-                   PlainTime=500,
-                   TimeForRest=60,
+                   CountApproaches = 4,
+                   CountMadeApproaches = 4,
+                   PlainTime = 500,
+                   TimeForRest = 60,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                 },
                 new SetDTO
                 {
                    Id = 3,
-                   CountApproaches=6,
-                   CountMadeApproaches=6,
-                   PlainTime=1100,
-                   TimeForRest=100,
+                   CountApproaches = 6,
+                   CountMadeApproaches = 6,
+                   PlainTime = 1100,
+                   TimeForRest = 100,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                 },
@@ -66,9 +64,9 @@ namespace WO.ApiServices.Tests.Services
             // Arrange
             var searchSetId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(searchId =>
-            {
-                return _sets.Where(tr => tr.Id == searchId).FirstOrDefault();
-            });
+           {
+               return _sets.Where(tr => tr.Id == searchId).FirstOrDefault();
+           });
 
             // Act
             var result = _setService.Get(searchSetId);
@@ -100,9 +98,9 @@ namespace WO.ApiServices.Tests.Services
             //Arrange
             var searchSetId = 1;
             _mock.Setup(s => s.Find(It.IsAny<Func<SetDTO, bool>>())).Returns<Func<SetDTO, bool>>(predicate =>
-            {
-                return _sets.Where(predicate).FirstOrDefault();
-            });
+           {
+               return _sets.Where(predicate).FirstOrDefault();
+           });
 
             //Act
             var result = _setService.Find(set => set.Id == searchSetId);
@@ -118,9 +116,9 @@ namespace WO.ApiServices.Tests.Services
         {
             //Arrange
             _mock.Setup(s => s.FindMany(It.IsAny<Func<SetDTO, bool>>())).Returns<Func<SetDTO, bool>>(predicate =>
-            {
-                return _sets.Where(predicate).ToList();
-            });
+           {
+               return _sets.Where(predicate).ToList();
+           });
 
             //Act
             var result = _setService.FindMany(set => set.Id > 0);
@@ -145,15 +143,15 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Create(It.IsAny<SetDTO>())).Returns<SetDTO>(newItem =>
-            {
-                newItem.Id = _sets.Count + 1;
-                newItem.CreatedDate = DateTime.Now;
-                newItem.ModifiedDate = DateTime.Now;
+           {
+               newItem.Id = _sets.Count + 1;
+               newItem.CreatedDate = DateTime.Now;
+               newItem.ModifiedDate = DateTime.Now;
 
-                _sets.Add(newItem);
+               _sets.Add(newItem);
 
-                return newItem.Id;
-            });
+               return newItem.Id;
+           });
 
             // Act
             var result = _setService.Create(newSet);
@@ -177,11 +175,11 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Update(It.IsAny<SetDTO>())).Callback<SetDTO>(updateValue =>
-            {
-                updateValue.ModifiedDate = DateTime.Now;
-                var setIndex = _sets.FindIndex(set => set.Id == updateValue.Id);
-                _sets[setIndex] = updateValue;
-            });
+           {
+               updateValue.ModifiedDate = DateTime.Now;
+               var setIndex = _sets.FindIndex(set => set.Id == updateValue.Id);
+               _sets[setIndex] = updateValue;
+           });
 
             // Act
             var result = _setService.Update(updateSet);
@@ -202,10 +200,10 @@ namespace WO.ApiServices.Tests.Services
             var currentItemsCount = _sets.Count;
 
             _mock.Setup(s => s.Delete(idForRemove)).Callback<int>(id =>
-            {
-                var itemForRemove = _sets.Where(set => set.Id == id).FirstOrDefault();
-                _sets.Remove(itemForRemove);
-            });
+           {
+               var itemForRemove = _sets.Where(set => set.Id == id).FirstOrDefault();
+               _sets.Remove(itemForRemove);
+           });
 
             // Act
             var result = _setService.Delete(idForRemove);

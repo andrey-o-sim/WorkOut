@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.ApiServices.Controllers.GenericData;
 using WO.ApiServices.Models;
 using WO.Core.BLL;
@@ -60,9 +60,9 @@ namespace WO.ApiServices.Tests.Controllers
             // Arrange
             var searchTrainingTypeId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(searchId =>
-            {
-                return _trainingTypes.Where(tr => tr.Id == searchId).FirstOrDefault();
-            });
+           {
+               return _trainingTypes.Where(tr => tr.Id == searchId).FirstOrDefault();
+           });
 
             // Act
             var result = _trainingTypeController.Get(searchTrainingTypeId);
@@ -101,19 +101,19 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Create(It.IsAny<TrainingTypeDTO>())).Returns<TrainingTypeDTO>(newItem =>
-            {
-                newItem.Id = _trainingTypes.Count + 1;
-                newItem.CreatedDate = DateTime.Now;
-                newItem.ModifiedDate = DateTime.Now;
+           {
+               newItem.Id = _trainingTypes.Count + 1;
+               newItem.CreatedDate = DateTime.Now;
+               newItem.ModifiedDate = DateTime.Now;
 
-                _trainingTypes.Add(newItem);
+               _trainingTypes.Add(newItem);
 
-                return new OperationResult
-                {
-                    ResultItemId = newItem.Id,
-                    Succeed = true
-                };
-            });
+               return new OperationResult
+               {
+                   ResultItemId = newItem.Id,
+                   Succeed = true
+               };
+           });
 
             // Act
             var result = _trainingTypeController.Create(newTrainingType);
@@ -138,17 +138,17 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Update(It.IsAny<TrainingTypeDTO>())).Returns<TrainingTypeDTO>(updateValue =>
-              {
-                  updateValue.ModifiedDate = DateTime.Now;
-                  var trainingTypeIndex = _trainingTypes.FindIndex(tt => tt.Id == updateValue.Id);
-                  _trainingTypes[trainingTypeIndex] = updateValue;
+             {
+                 updateValue.ModifiedDate = DateTime.Now;
+                 var trainingTypeIndex = _trainingTypes.FindIndex(tt => tt.Id == updateValue.Id);
+                 _trainingTypes[trainingTypeIndex] = updateValue;
 
-                  return new OperationResult
-                  {
-                      ResultItemId = updateValue.Id,
-                      Succeed = true
-                  };
-              });
+                 return new OperationResult
+                 {
+                     ResultItemId = updateValue.Id,
+                     Succeed = true
+                 };
+             });
 
             // Act
             var result = _trainingTypeController.Update(updateTrainingType.Id, updateTrainingType);
@@ -170,12 +170,12 @@ namespace WO.ApiServices.Tests.Controllers
             var currentItemsCount = _trainingTypes.Count;
 
             _mock.Setup(s => s.Delete(idForRemove)).Returns<int>(id =>
-            {
-                var itemForRemove = _trainingTypes.Where(tt => tt.Id == id).FirstOrDefault();
-                _trainingTypes.Remove(itemForRemove);
+           {
+               var itemForRemove = _trainingTypes.Where(tt => tt.Id == id).FirstOrDefault();
+               _trainingTypes.Remove(itemForRemove);
 
-                return new OperationResult { ResultItemId = id, Succeed = true };
-            });
+               return new OperationResult { ResultItemId = id, Succeed = true };
+           });
 
             // Act
             var result = _trainingTypeController.Delete(idForRemove);

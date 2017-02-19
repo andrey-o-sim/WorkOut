@@ -1,15 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WO.Core.BLL;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Interfaces.Repositories;
-using WO.Core.BLL.Services;
 using WO.Core.BLL.Services.GenericDataServices;
 
 namespace WO.ApiServices.Tests.Services
@@ -56,16 +52,15 @@ namespace WO.ApiServices.Tests.Services
             };
         }
 
-
         [TestMethod]
         public void GetById()
         {
             // Arrange
             var searchId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(id =>
-            {
-                return _trainingTypes.Where(tr => tr.Id == id).FirstOrDefault();
-            });
+           {
+               return _trainingTypes.Where(tr => tr.Id == id).FirstOrDefault();
+           });
 
             // Act
             var result = _trainingTypeService.Get(searchId);
@@ -97,9 +92,9 @@ namespace WO.ApiServices.Tests.Services
             //Arrange
             var searchTrainingType = "Base";
             _mock.Setup(s => s.Find(It.IsAny<Func<TrainingTypeDTO, bool>>())).Returns<Func<TrainingTypeDTO, bool>>(predicate =>
-               {
-                   return _trainingTypes.Where(predicate).FirstOrDefault();
-               });
+              {
+                  return _trainingTypes.Where(predicate).FirstOrDefault();
+              });
 
             //Act
             var result = _trainingTypeService.Find(tt => tt.TypeTraining == searchTrainingType);
@@ -115,9 +110,9 @@ namespace WO.ApiServices.Tests.Services
         {
             //Arrange
             _mock.Setup(s => s.FindMany(It.IsAny<Func<TrainingTypeDTO, bool>>())).Returns<Func<TrainingTypeDTO, bool>>(predicate =>
-            {
-                return _trainingTypes.Where(predicate).ToList();
-            });
+           {
+               return _trainingTypes.Where(predicate).ToList();
+           });
 
             //Act
             var result = _trainingTypeService.FindMany(tt => tt.Id > 0);
@@ -140,15 +135,15 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Create(It.IsAny<TrainingTypeDTO>())).Returns<TrainingTypeDTO>(newItem =>
-            {
-                newItem.Id = _trainingTypes.Count + 1;
-                newItem.CreatedDate = DateTime.Now;
-                newItem.ModifiedDate = DateTime.Now;
+           {
+               newItem.Id = _trainingTypes.Count + 1;
+               newItem.CreatedDate = DateTime.Now;
+               newItem.ModifiedDate = DateTime.Now;
 
-                _trainingTypes.Add(newItem);
+               _trainingTypes.Add(newItem);
 
-                return newItem.Id;
-            });
+               return newItem.Id;
+           });
 
             // Act
             var result = _trainingTypeService.Create(newTrainingType);
@@ -173,11 +168,11 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Update(It.IsAny<TrainingTypeDTO>())).Callback<TrainingTypeDTO>(updateValue =>
-            {
-                updateValue.ModifiedDate = DateTime.Now;
-                var trainingTypeIndex = _trainingTypes.FindIndex(tt => tt.Id == updateValue.Id);
-                _trainingTypes[trainingTypeIndex] = updateValue;
-            });
+           {
+               updateValue.ModifiedDate = DateTime.Now;
+               var trainingTypeIndex = _trainingTypes.FindIndex(tt => tt.Id == updateValue.Id);
+               _trainingTypes[trainingTypeIndex] = updateValue;
+           });
 
             // Act
             var result = _trainingTypeService.Update(updateTrainingType);
@@ -199,10 +194,10 @@ namespace WO.ApiServices.Tests.Services
             var currentItemsCount = _trainingTypes.Count;
 
             _mock.Setup(s => s.Delete(idForRemove)).Callback<int>(id =>
-            {
-                var itemForRemove = _trainingTypes.Where(tt => tt.Id == id).FirstOrDefault();
-                _trainingTypes.Remove(itemForRemove);
-            });
+           {
+               var itemForRemove = _trainingTypes.Where(tt => tt.Id == id).FirstOrDefault();
+               _trainingTypes.Remove(itemForRemove);
+           });
 
             // Act
             var result = _trainingTypeService.Delete(idForRemove);

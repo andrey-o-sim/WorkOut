@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.ApiServices.Controllers;
 using WO.ApiServices.Models;
 using WO.Core.BLL;
@@ -28,24 +28,24 @@ namespace WO.ApiServices.Tests.Controllers
             {
                 new ExerciseDTO
                 {
-                    Id=1,
-                    Name="Tightening",
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now
+                    Id = 1,
+                    Name = "Tightening",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new ExerciseDTO
                 {
-                    Id=2,
-                    Name="Dips",
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now
+                    Id = 2,
+                    Name = "Dips",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new ExerciseDTO
                 {
-                    Id=3,
-                    Name="Curl up",
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now
+                    Id = 3,
+                    Name = "Curl up",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 }
             };
         }
@@ -56,9 +56,9 @@ namespace WO.ApiServices.Tests.Controllers
             //Arrange
             var searchId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(id =>
-            {
-                return _exercises.Find(ex => ex.Id == id);
-            });
+           {
+               return _exercises.Find(ex => ex.Id == id);
+           });
 
             //Act
             var result = _exerciseController.Get(searchId);
@@ -94,19 +94,19 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Create(It.IsAny<ExerciseDTO>())).Returns<ExerciseDTO>(newValue =>
-              {
-                  newValue.Id = _exercises.Count + 1;
-                  newValue.CreatedDate = DateTime.Now;
-                  newValue.ModifiedDate = DateTime.Now;
+             {
+                 newValue.Id = _exercises.Count + 1;
+                 newValue.CreatedDate = DateTime.Now;
+                 newValue.ModifiedDate = DateTime.Now;
 
-                  _exercises.Add(newValue);
+                 _exercises.Add(newValue);
 
-                  return new OperationResult
-                  {
-                      Succeed = true,
-                      ResultItemId = newValue.Id
-                  };
-              });
+                 return new OperationResult
+                 {
+                     Succeed = true,
+                     ResultItemId = newValue.Id
+                 };
+             });
 
             //Act
             var result = _exerciseController.Create(newExercise);
@@ -129,17 +129,17 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Update(It.IsAny<ExerciseDTO>())).Returns<ExerciseDTO>(updateValue =>
-              {
-                  updateValue.ModifiedDate = DateTime.Now;
-                  var indexForUpdate = _exercises.FindIndex(ex => ex.Id == updateValue.Id);
-                  _exercises[indexForUpdate] = updateValue;
+             {
+                 updateValue.ModifiedDate = DateTime.Now;
+                 var indexForUpdate = _exercises.FindIndex(ex => ex.Id == updateValue.Id);
+                 _exercises[indexForUpdate] = updateValue;
 
-                  return new OperationResult
-                  {
-                      Succeed = true,
-                      ResultItemId = updateValue.Id
-                  };
-              });
+                 return new OperationResult
+                 {
+                     Succeed = true,
+                     ResultItemId = updateValue.Id
+                 };
+             });
 
             //Act
             var result = _exerciseController.Update(exerciseForUpdate.Id, exerciseForUpdate);
@@ -157,16 +157,16 @@ namespace WO.ApiServices.Tests.Controllers
             //Arrange
             var idForRemove = 1;
             _mock.Setup(s => s.Delete(It.IsAny<int>())).Returns<int>(id =>
-              {
-                  var removeExercise = _exercises.Find(ex => ex.Id == id);
-                  _exercises.Remove(removeExercise);
+             {
+                 var removeExercise = _exercises.Find(ex => ex.Id == id);
+                 _exercises.Remove(removeExercise);
 
-                  return new OperationResult
-                  {
-                      Succeed = true,
-                      ResultItemId = id
-                  };
-              });
+                 return new OperationResult
+                 {
+                     Succeed = true,
+                     ResultItemId = id
+                 };
+             });
 
             //Act
             var result = _exerciseController.Delete(idForRemove);

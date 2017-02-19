@@ -1,16 +1,16 @@
-﻿using Ninject.Web.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using WO.ApiServices.Configs;
 using Ninject;
 using Ninject.Modules;
-using WO.Core.Data.Bindings;
-using WO.ApiServices.Bindings;
-using WO.Core.Data.Configs;
+using Ninject.Web.Common;
 using Ninject.Web.WebApi;
+using WO.ApiServices.Bindings;
+using WO.ApiServices.Configs;
+using WO.Core.Data.Bindings;
+using WO.Core.Data.Configs;
 
 namespace WO.ApiServices
 {
@@ -29,12 +29,6 @@ namespace WO.ApiServices
             ConfigureAutoMapper();
         }
 
-        private void ConfigureAutoMapper()
-        {
-            AutoMapperWebApiConfiguration.RegisterMappings();
-            AutoMapperDataConfiguration.RegisterMappings();
-        }
-
         protected override IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
@@ -48,6 +42,12 @@ namespace WO.ApiServices
 
             GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
             return kernel;
+        }
+
+        private void ConfigureAutoMapper()
+        {
+            AutoMapperWebApiConfiguration.RegisterMappings();
+            AutoMapperDataConfiguration.RegisterMappings();
         }
     }
 }

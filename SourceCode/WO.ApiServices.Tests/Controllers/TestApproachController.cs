@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.ApiServices.Controllers;
 using WO.ApiServices.Models;
 using WO.ApiServices.Models.Helper;
@@ -30,28 +30,28 @@ namespace WO.ApiServices.Tests.Controllers
             {
                 new ApproachDTO
                 {
-                    Id=1,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    PlanTimeForRest=5,
-                    SpentTimeForRest=5
+                    Id = 1,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    PlanTimeForRest = 5,
+                    SpentTimeForRest = 5
                 },
                 new ApproachDTO
                 {
-                    Id=2,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    PlanTimeForRest=10,
-                    SpentTimeForRest=9
+                    Id = 2,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    PlanTimeForRest = 10,
+                    SpentTimeForRest = 9
                 },
                 new ApproachDTO
                 {
-                    Id=3,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    PlanTimeForRest=15,
-                    SpentTimeForRest=14
-                },
+                    Id = 3,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    PlanTimeForRest = 15,
+                    SpentTimeForRest = 14
+                }
             };
         }
 
@@ -61,9 +61,9 @@ namespace WO.ApiServices.Tests.Controllers
             //Arrange
             var searchId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(id =>
-              {
-                  return _approaches.Where(a => a.Id == id).FirstOrDefault();
-              });
+             {
+                 return _approaches.Where(a => a.Id == id).FirstOrDefault();
+             });
 
             //Act
             var result = _approachController.Get(searchId);
@@ -104,16 +104,16 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Create(It.IsAny<ApproachDTO>())).Returns<ApproachDTO>(newItem =>
-            {
-                newItem.Id = _approaches.Count + 1;
-                _approaches.Add(newItem);
+           {
+               newItem.Id = _approaches.Count + 1;
+               _approaches.Add(newItem);
 
-                return new OperationResult
-                {
-                    Succeed = true,
-                    ResultItemId = newItem.Id
-                };
-            });
+               return new OperationResult
+               {
+                   Succeed = true,
+                   ResultItemId = newItem.Id
+               };
+           });
 
             //Act
             var result = _approachController.Create(approach);
@@ -141,17 +141,17 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Update(It.IsAny<ApproachDTO>())).Returns<ApproachDTO>(approach =>
-              {
-                  approach.ModifiedDate = DateTime.Now;
-                  var indexUpdateItem = _approaches.FindIndex(ap => ap.Id == approach.Id);
-                  _approaches[indexUpdateItem] = approach;
+             {
+                 approach.ModifiedDate = DateTime.Now;
+                 var indexUpdateItem = _approaches.FindIndex(ap => ap.Id == approach.Id);
+                 _approaches[indexUpdateItem] = approach;
 
-                  return new OperationResult
-                  {
-                      ResultItemId = approach.Id,
-                      Succeed = true
-                  };
-              });
+                 return new OperationResult
+                 {
+                     ResultItemId = approach.Id,
+                     Succeed = true
+                 };
+             });
 
             //Act
             var result = _approachController.Update(updateApproach.Id, updateApproach);
@@ -171,16 +171,16 @@ namespace WO.ApiServices.Tests.Controllers
             var countOfApproaches = _approaches.Count;
             var idForRemove = 2;
             _mock.Setup(s => s.Delete(It.IsAny<int>())).Returns<int>(id =>
-              {
-                  var approachForRemove = _approaches.Find(ap => ap.Id == id);
-                  _approaches.Remove(approachForRemove);
+             {
+                 var approachForRemove = _approaches.Find(ap => ap.Id == id);
+                 _approaches.Remove(approachForRemove);
 
-                  return new OperationResult
-                  {
-                      Succeed = true,
-                      ResultItemId = id
-                  };
-              });
+                 return new OperationResult
+                 {
+                     Succeed = true,
+                     ResultItemId = id
+                 };
+             });
 
             //Act
             var result = _approachController.Delete(idForRemove);

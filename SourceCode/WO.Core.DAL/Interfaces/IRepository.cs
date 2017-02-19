@@ -10,7 +10,7 @@ namespace WO.Core.DAL.Interfaces
     {
         IEnumerable<T> GetAll();
         T Get(int id);
-        T Find(Func<T, Boolean> predicate);
+        T Find(Func<T, bool> predicate);
         IEnumerable<T> FindMany(Func<T, bool> predicate);
         int Create(T item);
         void Update(T item);

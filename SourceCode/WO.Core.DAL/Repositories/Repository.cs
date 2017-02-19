@@ -11,11 +11,12 @@ namespace WO.Core.DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
-        DbContext _dbContext;
+        private DbContext _dbContext;
         public Repository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public int Create(T item)
         {
             item.CreatedDate = DateTime.Now;

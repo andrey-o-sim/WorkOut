@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
@@ -15,13 +12,14 @@ namespace WO.Core.Data.Repositories
 {
     public class DTORepository<TData, TDto> : IRepositoryDTO<TDto> where TData : BaseModel where TDto : BaseModelDTO
     {
-        IRepository<TData> _repository;
-        IMapper _mapper;
+        private IRepository<TData> _repository;
+        private IMapper _mapper;
         public DTORepository(IRepository<TData> repository)
         {
             _repository = repository;
             _mapper = AutoMapperDataConfiguration.MapperConfiguration.CreateMapper();
         }
+
         public int Create(TDto item)
         {
             var dbItem = _mapper.Map<TData>(item);

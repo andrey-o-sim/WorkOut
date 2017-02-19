@@ -8,7 +8,7 @@ namespace WO.Core.BLL.Services
 {
     public class GenericService<T> : IService<T> where T : BaseModelDTO
     {
-        IRepositoryDTO<T> _repository;
+        private IRepositoryDTO<T> _repository;
         public GenericService(IRepositoryDTO<T> repository)
         {
             _repository = repository;

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ninject.Modules;
+﻿using Ninject.Modules;
+using WO.Core.BLL.DTO;
+using WO.Core.BLL.Interfaces.Repositories;
+using WO.Core.DAL.DataBaseContext;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
-using WO.Core.DAL.DataBaseContext;
 using WO.Core.DAL.Repositories;
-using WO.Core.BLL.Interfaces.Repositories;
-using WO.Core.BLL.DTO;
 using WO.Core.Data.Repositories;
 
 namespace WO.Core.Data.Bindings

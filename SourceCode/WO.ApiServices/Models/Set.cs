@@ -8,11 +8,14 @@ namespace WO.ApiServices.Models
 {
     public class Set : BaseModel
     {
-        //Use Time object
+        public Set()
+        {
+            Exercises = new List<Exercise>();
+            Approaches = new List<Approach>();
+        }
+
         public TimeWO TimeForRest { get; set; }
-        //Use Time object
         public TimeWO PlainTime { get; set; }
-        //Use Time object
         public TimeWO SummaryTime { get; set; }
         public int CountApproaches { get; set; }
         public int CountMadeApproaches { get; set; }
@@ -21,10 +24,5 @@ namespace WO.ApiServices.Models
         public IEnumerable<Approach> Approaches { get; set; }
 
         public Training Training { get; set; }
-        public Set()
-        {
-            Exercises = new List<Exercise>();
-            Approaches = new List<Approach>();
-        }
     }
 }

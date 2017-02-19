@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using AutoMapper;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
@@ -15,8 +11,9 @@ namespace WO.ApiServices.Controllers
 {
     public class ApproachController : ApiController
     {
-        IService<ApproachDTO> _approachService;
-        IMapper _mapper;
+        private IService<ApproachDTO> _approachService;
+        private IMapper _mapper;
+
         public ApproachController(IService<ApproachDTO> approachService)
         {
             _approachService = approachService;

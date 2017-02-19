@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.ApiServices.Controllers;
 using WO.ApiServices.Models;
 using WO.Core.BLL;
@@ -30,30 +30,30 @@ namespace WO.ApiServices.Tests.Controllers
                 new TrainingDTO
                 {
                    Id = 1,
-                   MainTrainingPurpose="The main purpose is 1...",
-                   Description="Desc 1",
-                   StartDateTime=DateTime.Now,
-                   EndDateTime=DateTime.Now.AddHours(2),
+                   MainTrainingPurpose = "The main purpose is 1...",
+                   Description = "Desc 1",
+                   StartDateTime = DateTime.Now,
+                   EndDateTime = DateTime.Now.AddHours(2),
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now
                 },
                 new TrainingDTO
                 {
                    Id = 2,
-                   MainTrainingPurpose="The main purpose is 2...",
-                   Description="Desc 2",
-                   StartDateTime=DateTime.Now,
-                   EndDateTime=DateTime.Now.AddHours(1).AddMinutes(30),
+                   MainTrainingPurpose = "The main purpose is 2...",
+                   Description = "Desc 2",
+                   StartDateTime = DateTime.Now,
+                   EndDateTime = DateTime.Now.AddHours(1).AddMinutes(30),
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now
                 },
                 new TrainingDTO
                 {
                    Id = 3,
-                   MainTrainingPurpose="The main purpose is 3...",
-                   Description="Desc 3",
-                   StartDateTime=DateTime.Now,
-                   EndDateTime=DateTime.Now.AddHours(1).AddMinutes(40),
+                   MainTrainingPurpose = "The main purpose is 3...",
+                   Description = "Desc 3",
+                   StartDateTime = DateTime.Now,
+                   EndDateTime = DateTime.Now.AddHours(1).AddMinutes(40),
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now
                 },
@@ -66,9 +66,9 @@ namespace WO.ApiServices.Tests.Controllers
             // Arrange
             var searchTrainingId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(searchId =>
-            {
-                return _trainings.Where(tr => tr.Id == searchId).FirstOrDefault();
-            });
+           {
+               return _trainings.Where(tr => tr.Id == searchId).FirstOrDefault();
+           });
 
             // Act
             var result = _trainingController.Get(searchTrainingId);
@@ -108,19 +108,19 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Create(It.IsAny<TrainingDTO>())).Returns<TrainingDTO>(newItem =>
-            {
-                newItem.Id = _trainings.Count + 1;
-                newItem.CreatedDate = DateTime.Now;
-                newItem.ModifiedDate = DateTime.Now;
+           {
+               newItem.Id = _trainings.Count + 1;
+               newItem.CreatedDate = DateTime.Now;
+               newItem.ModifiedDate = DateTime.Now;
 
-                _trainings.Add(newItem);
+               _trainings.Add(newItem);
 
-                return new OperationResult
-                {
-                    ResultItemId = newItem.Id,
-                    Succeed = true
-                };
-            });
+               return new OperationResult
+               {
+                   ResultItemId = newItem.Id,
+                   Succeed = true
+               };
+           });
 
             // Act
             var result = _trainingController.Create(newTraining);
@@ -145,17 +145,17 @@ namespace WO.ApiServices.Tests.Controllers
             };
 
             _mock.Setup(s => s.Update(It.IsAny<TrainingDTO>())).Returns<TrainingDTO>(updateValue =>
-            {
-                updateValue.ModifiedDate = DateTime.Now;
-                var trainingIndex = _trainings.FindIndex(training => training.Id == updateValue.Id);
-                _trainings[trainingIndex] = updateValue;
+           {
+               updateValue.ModifiedDate = DateTime.Now;
+               var trainingIndex = _trainings.FindIndex(training => training.Id == updateValue.Id);
+               _trainings[trainingIndex] = updateValue;
 
-                return new OperationResult
-                {
-                    ResultItemId = updateValue.Id,
-                    Succeed = true
-                };
-            });
+               return new OperationResult
+               {
+                   ResultItemId = updateValue.Id,
+                   Succeed = true
+               };
+           });
 
             // Act
             var result = _trainingController.Update(updateTraining.Id, updateTraining);
@@ -176,12 +176,12 @@ namespace WO.ApiServices.Tests.Controllers
             var currentItemsCount = _trainings.Count;
 
             _mock.Setup(s => s.Delete(idForRemove)).Returns<int>(id =>
-            {
-                var itemForRemove = _trainings.Where(training => training.Id == id).FirstOrDefault();
-                _trainings.Remove(itemForRemove);
+           {
+               var itemForRemove = _trainings.Where(training => training.Id == id).FirstOrDefault();
+               _trainings.Remove(itemForRemove);
 
-                return new OperationResult { ResultItemId = id, Succeed = true };
-            });
+               return new OperationResult { ResultItemId = id, Succeed = true };
+           });
 
             // Act
             var result = _trainingController.Delete(idForRemove);

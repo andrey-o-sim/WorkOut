@@ -9,7 +9,7 @@ namespace WO.ApiServices.Models.Helper
     {
         public static int FromTimeWoToSeconds(TimeWO timeWO)
         {
-            return timeWO.Hours * 3600 + timeWO.Minutes * 60 + timeWO.Seconds;
+            return (timeWO.Hours * 3600) + (timeWO.Minutes * 60) + timeWO.Seconds;
         }
 
         public static TimeWO FromSecondsToTimeWo(int? seconds)
@@ -18,9 +18,10 @@ namespace WO.ApiServices.Models.Helper
             if (seconds.HasValue)
             {
                 timeWo.Hours = seconds.Value / 3600;
-                timeWo.Minutes = seconds.Value % 3600 / 60;
+                timeWo.Minutes = (seconds.Value % 3600) / 60;
                 timeWo.Seconds = seconds.Value % 3600 % 60;
             }
+
             return timeWo;
         }
     }

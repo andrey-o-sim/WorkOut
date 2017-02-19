@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
 using WO.Core.DAL.Model;
 
@@ -20,9 +15,11 @@ namespace WO.Core.Data.Configs
                 {
                     RegisterMappings();
                 }
+
                 return _mapperConfiguration;
             }
         }
+
         public static void RegisterMappings()
         {
             _mapperConfiguration = new MapperConfiguration(cfg =>

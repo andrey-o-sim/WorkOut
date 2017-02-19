@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
@@ -15,8 +15,8 @@ namespace WO.ApiServices.Controllers
 {
     public class TrainingController : ApiController
     {
-        IService<TrainingDTO> _trainingService;
-        IMapper _mapper;
+        private IService<TrainingDTO> _trainingService;
+        private IMapper _mapper;
 
         public TrainingController(IService<TrainingDTO> trainingService)
         {

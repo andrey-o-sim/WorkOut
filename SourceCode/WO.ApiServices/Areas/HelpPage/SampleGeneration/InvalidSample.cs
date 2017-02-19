@@ -13,6 +13,7 @@ namespace WO.ApiServices.Areas.HelpPage
             {
                 throw new ArgumentNullException("errorMessage");
             }
+
             ErrorMessage = errorMessage;
         }
 

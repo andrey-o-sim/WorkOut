@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WO.ApiServices.Models;
 using WO.ApiServices.Models.Helper;
 using WO.Core.BLL.DTO;
@@ -12,6 +8,7 @@ namespace WO.ApiServices.Configs
     public static class AutoMapperWebApiConfiguration
     {
         private static MapperConfiguration _mapperConfiguration;
+
         public static MapperConfiguration MapperConfiguration
         {
             get
@@ -20,6 +17,7 @@ namespace WO.ApiServices.Configs
                 {
                     RegisterMappings();
                 }
+
                 return _mapperConfiguration;
             }
         }

@@ -1,10 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.BLL.Services;
@@ -28,24 +26,24 @@ namespace WO.ApiServices.Tests.Services
             {
                 new ExerciseDTO
                 {
-                    Id=1,
-                    Name="Tightening",
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now
+                    Id = 1,
+                    Name = "Tightening",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new ExerciseDTO
                 {
-                    Id=2,
-                    Name="Dips",
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now
+                    Id = 2,
+                    Name = "Dips",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new ExerciseDTO
                 {
-                    Id=3,
-                    Name="Curl up",
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now
+                    Id = 3,
+                    Name = "Curl up",
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 }
             };
         }
@@ -56,9 +54,9 @@ namespace WO.ApiServices.Tests.Services
             //Arrange
             var searchId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(id =>
-            {
-                return _exercises.Find(ex => ex.Id == id);
-            });
+           {
+               return _exercises.Find(ex => ex.Id == id);
+           });
 
             //Act
             var result = _exerciseService.Get(searchId);
@@ -90,9 +88,9 @@ namespace WO.ApiServices.Tests.Services
             //Arrange
             var searchExerciseId = 1;
             _mock.Setup(s => s.Find(It.IsAny<Func<ExerciseDTO, bool>>())).Returns<Func<ExerciseDTO, bool>>(predicate =>
-            {
-                return _exercises.Where(predicate).FirstOrDefault();
-            });
+           {
+               return _exercises.Where(predicate).FirstOrDefault();
+           });
 
             //Act
             var result = _exerciseService.Find(exercise => exercise.Id == searchExerciseId);
@@ -108,9 +106,9 @@ namespace WO.ApiServices.Tests.Services
         {
             //Arrange
             _mock.Setup(s => s.FindMany(It.IsAny<Func<ExerciseDTO, bool>>())).Returns<Func<ExerciseDTO, bool>>(predicate =>
-            {
-                return _exercises.Where(predicate).ToList();
-            });
+           {
+               return _exercises.Where(predicate).ToList();
+           });
 
             //Act
             var result = _exerciseService.FindMany(exercise => exercise.Id > 0);
@@ -131,15 +129,15 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Create(It.IsAny<ExerciseDTO>())).Returns<ExerciseDTO>(newValue =>
-            {
-                newValue.Id = _exercises.Count + 1;
-                newValue.CreatedDate = DateTime.Now;
-                newValue.ModifiedDate = DateTime.Now;
+           {
+               newValue.Id = _exercises.Count + 1;
+               newValue.CreatedDate = DateTime.Now;
+               newValue.ModifiedDate = DateTime.Now;
 
-                _exercises.Add(newValue);
+               _exercises.Add(newValue);
 
-                return newValue.Id;
-            });
+               return newValue.Id;
+           });
 
             //Act
             var result = _exerciseService.Create(newExercise);
@@ -162,11 +160,11 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Update(It.IsAny<ExerciseDTO>())).Callback<ExerciseDTO>(updateValue =>
-            {
-                updateValue.ModifiedDate = DateTime.Now;
-                var indexForUpdate = _exercises.FindIndex(ex => ex.Id == updateValue.Id);
-                _exercises[indexForUpdate] = updateValue;
-            });
+           {
+               updateValue.ModifiedDate = DateTime.Now;
+               var indexForUpdate = _exercises.FindIndex(ex => ex.Id == updateValue.Id);
+               _exercises[indexForUpdate] = updateValue;
+           });
 
             //Act
             var result = _exerciseService.Update(exerciseForUpdate);
@@ -184,10 +182,10 @@ namespace WO.ApiServices.Tests.Services
             //Arrange
             var idForRemove = 1;
             _mock.Setup(s => s.Delete(It.IsAny<int>())).Callback<int>(id =>
-            {
-                var removeExercise = _exercises.Find(ex => ex.Id == id);
-                _exercises.Remove(removeExercise);
-            });
+           {
+               var removeExercise = _exercises.Find(ex => ex.Id == id);
+               _exercises.Remove(removeExercise);
+           });
 
             //Act
             var result = _exerciseService.Delete(idForRemove);

@@ -10,6 +10,7 @@ namespace WO.Core.DAL
     public class UnitOfWork : IUnitOfWork
     {
         private static WorkOutContext _woContext;
+        private bool disposed = false;
 
         public UnitOfWork(string contextName)
         {
@@ -30,7 +31,6 @@ namespace WO.Core.DAL
         }
 
         #region Dispose Context
-        private bool disposed = false;
         public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -39,9 +39,11 @@ namespace WO.Core.DAL
                 {
                     _woContext.Dispose();
                 }
+
                 this.disposed = true;
             }
         }
+
         public void Dispose()
         {
             Dispose(true);

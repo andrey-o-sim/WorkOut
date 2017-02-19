@@ -1,10 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Interfaces.Repositories;
@@ -29,31 +27,30 @@ namespace WO.ApiServices.Tests.Services
             {
                 new ApproachDTO
                 {
-                    Id=1,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    PlanTimeForRest=5,
-                    SpentTimeForRest=5
+                    Id = 1,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    PlanTimeForRest = 5,
+                    SpentTimeForRest = 5
                 },
                 new ApproachDTO
                 {
-                    Id=2,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    PlanTimeForRest=10,
-                    SpentTimeForRest=9
+                    Id = 2,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    PlanTimeForRest = 10,
+                    SpentTimeForRest = 9
                 },
                 new ApproachDTO
                 {
-                    Id=3,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    PlanTimeForRest=15,
-                    SpentTimeForRest=14
+                    Id = 3,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    PlanTimeForRest = 15,
+                    SpentTimeForRest = 14
                 },
             };
         }
-
 
         [TestMethod]
         public void GetById()
@@ -61,9 +58,9 @@ namespace WO.ApiServices.Tests.Services
             // Arrange
             var searchId = 2;
             _mock.Setup(s => s.Get(It.IsAny<int>())).Returns<int>(id =>
-            {
-                return _approaches.Where(approach => approach.Id == id).FirstOrDefault();
-            });
+           {
+               return _approaches.Where(approach => approach.Id == id).FirstOrDefault();
+           });
 
             // Act
             var result = _approachService.Get(searchId);
@@ -95,9 +92,9 @@ namespace WO.ApiServices.Tests.Services
             //Arrange
             var searchApproachId = 1;
             _mock.Setup(s => s.Find(It.IsAny<Func<ApproachDTO, bool>>())).Returns<Func<ApproachDTO, bool>>(predicate =>
-            {
-                return _approaches.Where(predicate).FirstOrDefault();
-            });
+           {
+               return _approaches.Where(predicate).FirstOrDefault();
+           });
 
             //Act
             var result = _approachService.Find(approach => approach.Id == searchApproachId);
@@ -113,9 +110,9 @@ namespace WO.ApiServices.Tests.Services
         {
             //Arrange
             _mock.Setup(s => s.FindMany(It.IsAny<Func<ApproachDTO, bool>>())).Returns<Func<ApproachDTO, bool>>(predicate =>
-            {
-                return _approaches.Where(predicate).ToList();
-            });
+           {
+               return _approaches.Where(predicate).ToList();
+           });
 
             //Act
             var result = _approachService.FindMany(approach => approach.Id > 0);
@@ -141,15 +138,15 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Create(It.IsAny<ApproachDTO>())).Returns<ApproachDTO>(newItem =>
-            {
-                newItem.Id = _approaches.Count + 1;
-                newItem.CreatedDate = DateTime.Now;
-                newItem.ModifiedDate = DateTime.Now;
+           {
+               newItem.Id = _approaches.Count + 1;
+               newItem.CreatedDate = DateTime.Now;
+               newItem.ModifiedDate = DateTime.Now;
 
-                _approaches.Add(newItem);
+               _approaches.Add(newItem);
 
-                return newItem.Id;
-            });
+               return newItem.Id;
+           });
 
             // Act
             var result = _approachService.Create(approach);
@@ -174,11 +171,11 @@ namespace WO.ApiServices.Tests.Services
             };
 
             _mock.Setup(s => s.Update(It.IsAny<ApproachDTO>())).Callback<ApproachDTO>(updateValue =>
-            {
-                updateValue.ModifiedDate = DateTime.Now;
-                var approachIndex = _approaches.FindIndex(approach => approach.Id == updateValue.Id);
-                _approaches[approachIndex] = updateValue;
-            });
+           {
+               updateValue.ModifiedDate = DateTime.Now;
+               var approachIndex = _approaches.FindIndex(approach => approach.Id == updateValue.Id);
+               _approaches[approachIndex] = updateValue;
+           });
 
             // Act
             var result = _approachService.Update(updateApproach);
@@ -198,10 +195,10 @@ namespace WO.ApiServices.Tests.Services
             var currentItemsCount = _approaches.Count;
 
             _mock.Setup(s => s.Delete(idForRemove)).Callback<int>(id =>
-            {
-                var itemForRemove = _approaches.Where(approach => approach.Id == id).FirstOrDefault();
-                _approaches.Remove(itemForRemove);
-            });
+           {
+               var itemForRemove = _approaches.Where(approach => approach.Id == id).FirstOrDefault();
+               _approaches.Remove(itemForRemove);
+           });
 
             // Act
             var result = _approachService.Delete(idForRemove);

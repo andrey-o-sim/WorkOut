@@ -15,15 +15,11 @@ namespace WO.Core.DAL.DataBaseContext
         {
             Database.SetInitializer<WorkOutContext>(new WorkOutDbInitialized());
         }
+
         public WorkOutContext(string connectionString) 
             : base(connectionString)
         {
             Database.CreateIfNotExists();
-        }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-
         }
 
         public DbSet<TrainingType> TrainingTypes { get; set; }
@@ -32,5 +28,8 @@ namespace WO.Core.DAL.DataBaseContext
         public DbSet<Set> Sets { get; set; }
         public DbSet<Approach> Approachs { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+        }
     }
 }
