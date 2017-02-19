@@ -8,6 +8,7 @@ using System.Web.Http;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
+using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 
 namespace WO.ApiServices.Controllers
@@ -22,14 +23,6 @@ namespace WO.ApiServices.Controllers
             _trainingService = trainingService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
-        // GET: api/Training
-        public IEnumerable<Training> Get()
-        {
-            var trainigsDTO = _trainingService.GetAll();
-            var trainings = _mapper.Map<List<Training>>(trainigsDTO);
-
-            return trainings;
-        }
 
         // GET: api/Training/5
         public Training Get(int id)
@@ -40,26 +33,35 @@ namespace WO.ApiServices.Controllers
             return training;
         }
 
+        // GET: api/Training
+        public IEnumerable<Training> GetAll()
+        {
+            var trainigsDTO = _trainingService.GetAll();
+            var trainings = _mapper.Map<List<Training>>(trainigsDTO);
+
+            return trainings;
+        }
+
         // POST: api/Training
         [HttpPost]
-        public void Create([FromBody]Training training)
+        public IOperationResult Create([FromBody]Training training)
         {
             var trainigDTO = _mapper.Map<TrainingDTO>(training);
-            _trainingService.Create(trainigDTO);
+            return _trainingService.Create(trainigDTO);
         }
 
         // PUT: api/Training/5
         [HttpPut]
-        public void Update(int id, [FromBody]Training training)
+        public IOperationResult Update(int id, [FromBody]Training training)
         {
             var trainigDTO = _mapper.Map<TrainingDTO>(training);
-            _trainingService.Update(trainigDTO);
+            return _trainingService.Update(trainigDTO);
         }
 
         // DELETE: api/Training/5
-        public void Delete(int id)
+        public IOperationResult Delete(int id)
         {
-            _trainingService.Remove(id);
+            return _trainingService.Delete(id);
         }
     }
 }

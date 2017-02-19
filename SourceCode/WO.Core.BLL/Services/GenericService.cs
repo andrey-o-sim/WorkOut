@@ -41,7 +41,7 @@ namespace WO.Core.BLL.Services
             return result;
         }
 
-        public IOperationResult Remove(int id)
+        public IOperationResult Delete(int id)
         {
             _repository.Delete(id);
             var result = new OperationResult { ResultItemId = id, Succeed = true };

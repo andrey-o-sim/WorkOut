@@ -8,6 +8,7 @@ using System.Web.Http;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
+using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 
 namespace WO.ApiServices.Controllers
@@ -22,14 +23,6 @@ namespace WO.ApiServices.Controllers
             _setService = exerciseService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
-        // GET: api/Set
-        public IEnumerable<Set> Get()
-        {
-            var setsDTO = _setService.GetAll();
-            var sets = _mapper.Map<List<Set>>(setsDTO);
-
-            return sets;
-        }
 
         // GET: api/Set/5
         public Set Get(int id)
@@ -40,26 +33,35 @@ namespace WO.ApiServices.Controllers
             return set;
         }
 
+        // GET: api/Set
+        public IEnumerable<Set> GetAll()
+        {
+            var setsDTO = _setService.GetAll();
+            var sets = _mapper.Map<List<Set>>(setsDTO);
+
+            return sets;
+        }
+
         // POST: api/Set
         [HttpPost]
-        public void Create([FromBody]Set set)
+        public IOperationResult Create([FromBody]Set set)
         {
             var setDTO = _mapper.Map<SetDTO>(set);
-            _setService.Create(setDTO);
+            return _setService.Create(setDTO);
         }
 
         // PUT: api/Set/5
         [HttpPut]
-        public void Update(int id, [FromBody]Set set)
+        public IOperationResult Update(int id, [FromBody]Set set)
         {
             var setDTO = _mapper.Map<SetDTO>(set);
-            _setService.Update(setDTO);
+            return _setService.Update(setDTO);
         }
 
         // DELETE: api/Set/5
-        public void Delete(int id)
+        public IOperationResult Delete(int id)
         {
-            _setService.Remove(id);
+            return _setService.Delete(id);
         }
     }
 }

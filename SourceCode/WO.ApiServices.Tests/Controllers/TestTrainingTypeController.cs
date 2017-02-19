@@ -3,9 +3,6 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WO.ApiServices.Configs;
 using WO.ApiServices.Controllers.GenericData;
 using WO.ApiServices.Models;
 using WO.Core.BLL;
@@ -99,8 +96,6 @@ namespace WO.ApiServices.Tests.Controllers
             var countTrainingTypes = _trainingTypes.Count;
             var newTrainingType = new TrainingType
             {
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now,
                 Description = string.Empty,
                 TypeTraining = "Test Training Type"
             };
@@ -137,14 +132,14 @@ namespace WO.ApiServices.Tests.Controllers
             // Arrange
             var updateTrainingType = new TrainingType
             {
-                ModifiedDate = DateTime.Now,
+                Id = 2,
                 Description = string.Empty,
-                TypeTraining = "Test CrossFit",
-                Id = 2
+                TypeTraining = "Test CrossFit"
             };
 
             _mock.Setup(s => s.Update(It.IsAny<TrainingTypeDTO>())).Returns<TrainingTypeDTO>(updateValue =>
               {
+                  updateValue.ModifiedDate = DateTime.Now;
                   var trainingTypeIndex = _trainingTypes.FindIndex(tt => tt.Id == updateValue.Id);
                   _trainingTypes[trainingTypeIndex] = updateValue;
 
@@ -156,7 +151,7 @@ namespace WO.ApiServices.Tests.Controllers
               });
 
             // Act
-            var result = _trainingTypeController.Update(2, updateTrainingType);
+            var result = _trainingTypeController.Update(updateTrainingType.Id, updateTrainingType);
 
             // Assert
             Assert.IsNotNull(result);
@@ -168,13 +163,13 @@ namespace WO.ApiServices.Tests.Controllers
         }
 
         [TestMethod]
-        public void Remove()
+        public void Delete()
         {
             // Arrange
             var idForRemove = 2;
             var currentItemsCount = _trainingTypes.Count;
 
-            _mock.Setup(s => s.Remove(idForRemove)).Returns<int>(id =>
+            _mock.Setup(s => s.Delete(idForRemove)).Returns<int>(id =>
             {
                 var itemForRemove = _trainingTypes.Where(tt => tt.Id == id).FirstOrDefault();
                 _trainingTypes.Remove(itemForRemove);

@@ -3,8 +3,6 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.ApiServices.Controllers;
 using WO.ApiServices.Models;
 using WO.ApiServices.Models.Helper;
@@ -96,6 +94,15 @@ namespace WO.ApiServices.Tests.Controllers
         {
             //Arrange
             var countApproaches = _approaches.Count;
+
+            var approach = new Approach
+            {
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now,
+                PlanTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 30 },
+                SpentTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 0 }
+            };
+
             _mock.Setup(s => s.Create(It.IsAny<ApproachDTO>())).Returns<ApproachDTO>(newItem =>
             {
                 newItem.Id = _approaches.Count + 1;
@@ -107,14 +114,6 @@ namespace WO.ApiServices.Tests.Controllers
                     ResultItemId = newItem.Id
                 };
             });
-
-            var approach = new Approach
-            {
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now,
-                PlanTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 30 },
-                SpentTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 0 }
-            };
 
             //Act
             var result = _approachController.Create(approach);
@@ -137,13 +136,13 @@ namespace WO.ApiServices.Tests.Controllers
             var updateApproach = new Approach
             {
                 Id = 2,
-                ModifiedDate = DateTime.Now,
                 PlanTimeForRest = planTimeForRest,
                 SpentTimeForRest = spentTimeForRest
             };
 
             _mock.Setup(s => s.Update(It.IsAny<ApproachDTO>())).Returns<ApproachDTO>(approach =>
               {
+                  approach.ModifiedDate = DateTime.Now;
                   var indexUpdateItem = _approaches.FindIndex(ap => ap.Id == approach.Id);
                   _approaches[indexUpdateItem] = approach;
 
@@ -171,7 +170,7 @@ namespace WO.ApiServices.Tests.Controllers
             //Arrange
             var countOfApproaches = _approaches.Count;
             var idForRemove = 2;
-            _mock.Setup(s => s.Remove(It.IsAny<int>())).Returns<int>(id =>
+            _mock.Setup(s => s.Delete(It.IsAny<int>())).Returns<int>(id =>
               {
                   var approachForRemove = _approaches.Find(ap => ap.Id == id);
                   _approaches.Remove(approachForRemove);

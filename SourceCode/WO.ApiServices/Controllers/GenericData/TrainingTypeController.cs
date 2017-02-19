@@ -52,7 +52,7 @@ namespace WO.ApiServices.Controllers.GenericData
         // DELETE: api/TrainingType/5
         public IOperationResult Delete(int id)
         {
-            return _service.Remove(id);
+            return _service.Delete(id);
         }
     }
 }

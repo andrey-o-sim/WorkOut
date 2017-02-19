@@ -60,7 +60,7 @@ namespace WO.ApiServices.Controllers
         // DELETE: api/Approach/5
         public IOperationResult Delete(int id)
         {
-            return _approachService.Remove(id);
+            return _approachService.Delete(id);
         }
     }
 }

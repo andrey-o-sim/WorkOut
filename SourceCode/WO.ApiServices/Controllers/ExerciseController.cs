@@ -8,6 +8,7 @@ using System.Web.Http;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
+using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 
 namespace WO.ApiServices.Controllers
@@ -21,13 +22,6 @@ namespace WO.ApiServices.Controllers
             _exerciseService = exerciseService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
-        // GET: api/Exercise
-        public IEnumerable<Exercise> Get()
-        {
-            var exercisesDTO = _exerciseService.GetAll();
-            var exercises = _mapper.Map<List<Exercise>>(exercisesDTO);
-            return exercises;
-        }
 
         // GET: api/Exercise/5
         public Exercise Get(int id)
@@ -37,26 +31,34 @@ namespace WO.ApiServices.Controllers
             return exercise;
         }
 
+        // GET: api/Exercise
+        public IEnumerable<Exercise> GetAll()
+        {
+            var exercisesDTO = _exerciseService.GetAll();
+            var exercises = _mapper.Map<List<Exercise>>(exercisesDTO);
+            return exercises;
+        }
+
         // POST: api/Exercise
         [HttpPost]
-        public void Create([FromBody]Exercise exercise)
+        public IOperationResult Create([FromBody]Exercise exercise)
         {
             var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-            _exerciseService.Create(exerciseDTO);
+            return _exerciseService.Create(exerciseDTO);
         }
 
         // PUT: api/Exercise/5
         [HttpPut]
-        public void Update(int id, [FromBody]Exercise exercise)
+        public IOperationResult Update(int id, [FromBody]Exercise exercise)
         {
             var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-            _exerciseService.Update(exerciseDTO);
+            return _exerciseService.Update(exerciseDTO);
         }
 
         // DELETE: api/Exercise/5
-        public void Delete(int id)
+        public IOperationResult Delete(int id)
         {
-            _exerciseService.Remove(id);
+            return _exerciseService.Delete(id);
         }
     }
 }
