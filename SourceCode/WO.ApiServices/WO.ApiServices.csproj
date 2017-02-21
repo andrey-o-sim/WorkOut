@@ -283,37 +283,37 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\ai.0.15.0-build58334.js" />
-    <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-aria.js" />
-    <Content Include="Scripts\angular-aria.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-csp.css" />
-    <Content Include="Scripts\angular-loader.js" />
-    <Content Include="Scripts\angular-loader.min.js" />
-    <Content Include="Scripts\angular-message-format.js" />
-    <Content Include="Scripts\angular-message-format.min.js" />
-    <Content Include="Scripts\angular-messages.js" />
-    <Content Include="Scripts\angular-messages.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-parse-ext.js" />
-    <Content Include="Scripts\angular-parse-ext.min.js" />
-    <Content Include="Scripts\angular-resource.js" />
-    <Content Include="Scripts\angular-resource.min.js" />
-    <Content Include="Scripts\angular-route.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
-    <Content Include="Scripts\angular-scenario.js" />
-    <Content Include="Scripts\angular-touch.js" />
-    <Content Include="Scripts\angular-touch.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\app\assets\libs\ai.0.15.0-build58334.js" />
+    <Content Include="Scripts\app\assets\libs\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-animate.js" />
+    <Content Include="Scripts\app\assets\libs\angular-animate.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-aria.js" />
+    <Content Include="Scripts\app\assets\libs\angular-aria.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-cookies.js" />
+    <Content Include="Scripts\app\assets\libs\angular-cookies.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-csp.css" />
+    <Content Include="Scripts\app\assets\libs\angular-loader.js" />
+    <Content Include="Scripts\app\assets\libs\angular-loader.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-message-format.js" />
+    <Content Include="Scripts\app\assets\libs\angular-message-format.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-messages.js" />
+    <Content Include="Scripts\app\assets\libs\angular-messages.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-mocks.js" />
+    <Content Include="Scripts\app\assets\libs\angular-parse-ext.js" />
+    <Content Include="Scripts\app\assets\libs\angular-parse-ext.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-resource.js" />
+    <Content Include="Scripts\app\assets\libs\angular-resource.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-route.js" />
+    <Content Include="Scripts\app\assets\libs\angular-route.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-sanitize.js" />
+    <Content Include="Scripts\app\assets\libs\angular-sanitize.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular-scenario.js" />
+    <Content Include="Scripts\app\assets\libs\angular-touch.js" />
+    <Content Include="Scripts\app\assets\libs\angular-touch.min.js" />
+    <Content Include="Scripts\app\assets\libs\angular.js" />
+    <Content Include="Scripts\app\assets\libs\angular.min.js" />
+    <Content Include="Scripts\app\assets\libs\bootstrap.js" />
+    <Content Include="Scripts\app\assets\libs\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -336,20 +336,20 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-parse-ext.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\app\assets\libs\errors.json" />
+    <Content Include="Scripts\app\assets\libs\angular.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-touch.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-route.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-resource.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-parse-ext.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-messages.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-message-format.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-loader.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-cookies.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-aria.min.js.map" />
+    <Content Include="Scripts\app\assets\libs\angular-animate.min.js.map" />
+    <None Include="Scripts\app\assets\libs\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -1079,16 +1079,18 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\app\assets\libs\jquery-1.10.2.js" />
+    <Content Include="Scripts\app\assets\libs\jquery-1.10.2.min.js" />
+    <None Include="Scripts\app\assets\libs\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\app\assets\libs\jquery.validate.js" />
+    <Content Include="Scripts\app\assets\libs\jquery.validate.min.js" />
+    <Content Include="Scripts\app\assets\libs\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\app\assets\libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\app\assets\libs\modernizr-2.6.2.js" />
+    <Content Include="Scripts\app\assets\libs\respond.js" />
+    <Content Include="Scripts\app\assets\libs\respond.min.js" />
+    <Content Include="Scripts\app\app.module.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1098,7 +1100,7 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\app\assets\libs\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1108,7 +1110,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\WorkOutScripts\" />
+    <Folder Include="Scripts\app\assets\css\" />
+    <Folder Include="Scripts\app\assets\img\" />
+    <Folder Include="Scripts\app\assets\js\" />
+    <Folder Include="Scripts\app\components\Approach\" />
+    <Folder Include="Scripts\app\components\Exercise\" />
+    <Folder Include="Scripts\app\components\Set\" />
+    <Folder Include="Scripts\app\components\TrainingType\" />
+    <Folder Include="Scripts\app\components\Training\" />
+    <Folder Include="Scripts\app\shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1116,7 +1126,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WO.Core.BLL\WO.Core.BLL.csproj">
