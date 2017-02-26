@@ -19,7 +19,6 @@ namespace WO.Core.DAL.Repositories
 
         public int Create(T item)
         {
-            item.CreatedDate = DateTime.Now;
             _dbContext.Set<T>().Add(item);
             _dbContext.Entry(item).State = EntityState.Added;
             _dbContext.SaveChanges();
@@ -31,7 +30,6 @@ namespace WO.Core.DAL.Repositories
         {
             var itemForUpdate = _dbContext.Set<T>().Where(i => i.Id == item.Id).FirstOrDefault();
             itemForUpdate = item;
-            itemForUpdate.ModifiedDate = DateTime.Now;
             _dbContext.Entry(itemForUpdate).State = EntityState.Modified;
             _dbContext.SaveChanges();
         }

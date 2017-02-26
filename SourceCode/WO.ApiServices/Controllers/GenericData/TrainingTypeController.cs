@@ -36,7 +36,7 @@ namespace WO.ApiServices.Controllers.GenericData
 
         // POST: api/TrainingType
         [HttpPost]
-        public IOperationResult Create([FromBody]TrainingType trainingType)
+        public IOperationResult Create(TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
             return _service.Create(trainingTypeDTO);
@@ -44,7 +44,7 @@ namespace WO.ApiServices.Controllers.GenericData
 
         // PUT: api/TrainingType/5
         [HttpPut]
-        public IOperationResult Update(int id, [FromBody]TrainingType trainingType)
+        public IOperationResult Update(int id, TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
             return _service.Update(trainingTypeDTO);
