@@ -23,8 +23,16 @@ namespace TestConsoleApplication
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
+            rep.Create(tt);
 
-            var result = rep.Create(tt);
+            Repository<TrainingType> rep1 = new Repository<TrainingType>(context);
+
+            var trainingType= rep1.Get(tt.Id);
+            trainingType.TypeTraining = "fwefwef";
+            trainingType.Trainings = new List<Training>();
+            rep1.Update(tt);
+
+            
         }
     }
 }

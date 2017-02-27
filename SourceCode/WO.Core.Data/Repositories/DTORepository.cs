@@ -31,10 +31,12 @@ namespace WO.Core.Data.Repositories
 
         public void Update(TDto item)
         {
-            var dbItem = _mapper.Map<TData>(item);
-            dbItem.ModifiedDate = DateTime.Now;
+            var itemForUpdate = _repository.Get(item.Id);
 
-            _repository.Update(dbItem);
+            _mapper.Map<TDto, TData>(item, itemForUpdate);
+            itemForUpdate.ModifiedDate = DateTime.Now;
+
+            _repository.Update(itemForUpdate);
         }
 
         public void Delete(int id)

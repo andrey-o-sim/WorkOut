@@ -28,9 +28,7 @@ namespace WO.Core.DAL.Repositories
 
         public void Update(T item)
         {
-            var itemForUpdate = _dbContext.Set<T>().Where(i => i.Id == item.Id).FirstOrDefault();
-            itemForUpdate = item;
-            _dbContext.Entry(itemForUpdate).State = EntityState.Modified;
+            _dbContext.Entry(item).State = EntityState.Modified;
             _dbContext.SaveChanges();
         }
 
@@ -61,6 +59,11 @@ namespace WO.Core.DAL.Repositories
         public IEnumerable<T> GetAll()
         {
             return _dbContext.Set<T>().ToList();
+        }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
         }
     }
 }

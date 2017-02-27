@@ -8,19 +8,36 @@ var serviceUrl = "api/TrainingType";
 
 function trainingTypeService($http) {
     var service = {
-        getData: getData,
-        save: save
+        getById: getById,
+        create: create,
+        update: update
     };
 
     return service;
 
-    function getData() { }
+    function getById(id) {
+        return $http.get(serviceUrl + "/" + id).then(function (response) {
+            var data = response ? response.data : {};
+            return data;
+        }, function errorCallback(response) {
+            alert('Error');
+        });
+    }
 
-    function save(trainingType) {
+    function create(trainingType) {
         return $http.post(serviceUrl, trainingType).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
+            alert('Error');
+        });
+    }
+
+    function update(trainingType) {
+        return $http.put(serviceUrl + "/" + trainingType.Id, trainingType).then(function (response) {
+            var data = response ? response.data : {};
+            return data;
+        }, function errorCallBack(response) {
             alert('Error');
         });
     }

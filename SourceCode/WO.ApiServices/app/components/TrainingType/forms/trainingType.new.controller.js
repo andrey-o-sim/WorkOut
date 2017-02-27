@@ -14,8 +14,29 @@ function trainingTypeNewController(
     };
 
     function save(trainingType) {
-        trainingTypeService.save(trainingType).then(function (result) {
-            alert(result.ResultItemId);
-        });
+        $scope.disableSaveButton = true;
+        var isValid = isRequiredFieldsPopulated(trainingType);
+
+        if (isValid) {
+            trainingTypeService.create(trainingType).then(function (result) {
+                if (result.Succeed) {
+                    alert(result.ResultItemId);
+                    $scope.disableSaveButton = false;
+                }
+                else {
+                    $scope.disableSaveButton = false;
+                }
+            });
+        }
+        else {
+            $scope.disableSaveButton = false;
+        }
+    }
+
+    function isRequiredFieldsPopulated(trainingType) {
+        $scope.requiredTypeTraining = trainingType.TypeTraining == "";
+        $scope.requiredDescription = trainingType.Description == "";
+
+        return !($scope.requiredTypeTraining || $scope.requiredDescription);
     }
 }

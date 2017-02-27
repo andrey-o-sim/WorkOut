@@ -6,6 +6,7 @@
             </div>
             <div class="controls">
                 <input type="text" name="typeTraining" ng-model="trainingType.TypeTraining" />
+                <label ng-show="requiredTypeTraining" class="requiredError">*</label>
             </div>
         </div>
     </div>
@@ -16,12 +17,13 @@
             </div>
             <div>
                 <input type="text" name="description" ng-model="trainingType.Description" />
+                <label ng-show="requiredDescription" class="requiredError">*</label>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button id="save" type="button" class="btn btn-primary" ng-click="save(trainingType)">Save</button>
+            <button id="save" type="button" ng-disabled="disableSaveButton" class="btn btn-primary" ng-click="save(trainingType)">Save</button>
         </div>
     </div>
 </div>

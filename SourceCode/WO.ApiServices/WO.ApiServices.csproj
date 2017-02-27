@@ -277,6 +277,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\assets\css\app.css" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.edit.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.html" />
@@ -1115,7 +1116,6 @@
     <Content Include="app\assets\version.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\assets\css\" />
     <Folder Include="app\assets\img\" />
     <Folder Include="app\assets\js\" />
     <Folder Include="app\components\Approach\" />
