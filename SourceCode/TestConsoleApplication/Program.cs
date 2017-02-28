@@ -15,6 +15,29 @@ namespace TestConsoleApplication
         {
             WorkOutContext context = new WorkOutContext("WorkOutDbConnection");
             Repository<TrainingType> rep = new Repository<TrainingType>(context);
+            //var test = rep.Get(1);
+
+            TrainingType test1 = new TrainingType
+            {
+                Id = 1,
+                TypeTraining = "Op",
+                Description = "aaa",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            foreach (var changeTrack in context.ChangeTracker.Entries())
+            {
+                Console.WriteLine(changeTrack.Entity);
+            }
+
+            context.Set<TrainingType>().Attach(test1);
+
+            foreach(var changeTrack in context.ChangeTracker.Entries())
+            {
+                Console.WriteLine(changeTrack.Entity);
+            }
+            rep.Update(test1);
 
             var tt = new TrainingType
             {

@@ -2,14 +2,16 @@
     .module('woApp')
     .controller('trainingTypeViewController', trainingTypeViewController)
 
-function trainingTypeViewController($scope) {
-    $scope.trainingTypes = [{
-        Id: 1,
-        TrainingType: "Elements",
+function trainingTypeViewController(
+    $scope,
+    $routeParams,
+    trainingTypeService) {
+    
+    init();
 
-    },
-    {
-        Id: 2,
-        TrainingType: "Base"
-    }];
+    function init() {
+        trainingTypeService.getById($routeParams.id).then(function (result) {
+            $scope.trainingType = result;
+        });
+    }
 }

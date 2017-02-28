@@ -15,6 +15,6 @@ function routeConfig($routeProvider, $locationProvider) {
     $routeProvider.when('/trainingType/view/:id',
         {
             controller: 'trainingTypeViewController',
-            templateUrl: 'app/components/TrainingType/forms/trainingType.edit.html',
+            templateUrl: 'app/components/TrainingType/forms/trainingType.view.html',
         });
 }
