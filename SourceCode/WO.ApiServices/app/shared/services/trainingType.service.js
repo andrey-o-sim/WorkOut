@@ -4,7 +4,7 @@
 
 trainingTypeService.$inject = ['$http'];
 
-var serviceUrl = "api/TrainingType";
+var serviceUrl = "/api/TrainingType";
 
 function trainingTypeService($http) {
     var service = {

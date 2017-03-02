@@ -260,6 +260,7 @@
     <Compile Include="Controllers\ApproachController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\GenericData\TrainingTypeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SetController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Global.asax.cs">
@@ -289,7 +290,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Index.html" />
     <Content Include="app\assets\libs\ai.0.15.0-build58334.js" />
     <Content Include="app\assets\libs\ai.0.15.0-build58334.min.js" />
     <Content Include="app\assets\libs\angular-animate.js" />
@@ -1112,8 +1112,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="app\assets\libs\_references.js" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="app\assets\version.json" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\img\" />
