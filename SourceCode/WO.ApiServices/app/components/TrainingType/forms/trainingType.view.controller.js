@@ -4,14 +4,16 @@
 
 function trainingTypeViewController(
     $scope,
-    $routeParams,
+    $stateParams,
     trainingTypeService) {
-    
+
+    var vm = this;
+
     init();
 
     function init() {
-        trainingTypeService.getById($routeParams.id).then(function (result) {
-            $scope.trainingType = result;
+        trainingTypeService.getById($stateParams.id).then(function (result) {
+            vm.trainingType = result;
         });
     }
 }

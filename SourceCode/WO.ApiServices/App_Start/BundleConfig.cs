@@ -25,6 +25,9 @@ namespace WO.ApiServices
                 "~/app/assets/libs/angular.js",
                 "~/app/assets/libs/angular-route.js"));
 
+            bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
+                "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));
+
             bundles.Add(new ScriptBundle("~/app/components/modules").Include(
                 "~/app/app.module.js"));
 
@@ -32,6 +35,7 @@ namespace WO.ApiServices
                 "~/app/shared/services/trainingType.service.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/controllers").Include(
+                "~/app/components/TrainingType/pages/trainingType.home.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.new.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.edit.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.view.controller.js",

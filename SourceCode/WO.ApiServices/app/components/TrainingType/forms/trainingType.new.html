@@ -1,12 +1,13 @@
-﻿<div class="container-fluid">
+﻿<h2 class="page-header">Add Training Type</h2>
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div>
                 <h4>Training Type:</h4>
             </div>
             <div class="controls">
-                <input type="text" name="typeTraining" ng-model="trainingType.TypeTraining" />
-                <label ng-show="requiredTypeTraining" class="requiredError">*</label>
+                <input type="text" name="typeTraining" ng-model="vm.trainingType.TypeTraining" />
+                <label ng-show="vm.requiredTypeTraining" class="requiredError">*</label>
             </div>
         </div>
     </div>
@@ -16,14 +17,14 @@
                 <h4>Description:</h4>
             </div>
             <div>
-                <input type="text" name="description" ng-model="trainingType.Description" />
-                <label ng-show="requiredDescription" class="requiredError">*</label>
+                <input type="text" name="description" ng-model="vm.trainingType.Description" />
+                <label ng-show="vm.requiredDescription" class="requiredError">*</label>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button id="save" type="button" ng-disabled="disableSaveButton" class="btn btn-primary" ng-click="save(trainingType)">Save</button>
+            <button id="save" type="button" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.trainingType)">Save</button>
         </div>
     </div>
 </div>

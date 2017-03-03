@@ -4,43 +4,45 @@
 
 function trainingTypeEditController(
     $scope,
-    $routeParams,
-    trainingTypeService) {
+    $stateParams,
+    trainingTypeService,
+    $state) {
 
-    $scope.save = save;
+    var vm = this;
+
+    vm.save = save;
 
     init();
 
     function init() {
-        trainingTypeService.getById($routeParams.id).then(function (result) {
-            $scope.trainingType = result;
+        trainingTypeService.getById($stateParams.id).then(function (result) {
+            vm.trainingType = result;
         });
     }
 
     function save(trainingType) {
-        $scope.disableSaveButton = true;
+        vm.disableSaveButton = true;
         var isValid = isRequiredFieldsPopulated(trainingType);
 
         if (isValid) {
             trainingTypeService.update(trainingType).then(function (result) {
                 if (result.Succeed) {
-                    alert(result.ResultItemId);
-                    $scope.disableSaveButton = false;
+                    $state.go('trainingTypeHome');
                 }
                 else {
-                    $scope.disableSaveButton = false;
+                    vm.disableSaveButton = false;
                 }
             });
         }
         else {
-            $scope.disableSaveButton = false;
+            vm.disableSaveButton = false;
         }
     }
 
     function isRequiredFieldsPopulated(trainingType) {
-        $scope.requiredTypeTraining = trainingType.TypeTraining == "";
-        $scope.requiredDescription = trainingType.Description == "";
+        vm.requiredTypeTraining = vm.trainingType.TypeTraining == "";
+        vm.requiredDescription = vm.trainingType.Description == "";
 
-        return !($scope.requiredTypeTraining || $scope.requiredDescription);
+        return !(vm.requiredTypeTraining || vm.requiredDescription);
     }
 }

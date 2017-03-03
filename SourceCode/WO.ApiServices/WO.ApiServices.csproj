@@ -279,10 +279,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\assets\css\app.css" />
+    <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.js" />
+    <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.min.js" />
+    <Content Include="app\assets\libs\angular-ui-router\resolveService.js" />
+    <Content Include="app\assets\libs\angular-ui-router\resolveService.min.js" />
+    <Content Include="app\assets\libs\angular-ui-router\stateEvents.js" />
+    <Content Include="app\assets\libs\angular-ui-router\stateEvents.min.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.edit.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.html" />
     <Content Include="app\components\TrainingType\forms\trainingType.edit.html" />
+    <Content Include="app\components\TrainingType\pages\trainingType.home.controller.js" />
+    <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1114,6 +1122,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="app\assets\version.json" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\img\" />

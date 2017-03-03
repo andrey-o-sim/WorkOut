@@ -8,12 +8,22 @@ var serviceUrl = "/api/TrainingType";
 
 function trainingTypeService($http) {
     var service = {
+        getAll:getAll,
         getById: getById,
         create: create,
         update: update
     };
 
     return service;
+
+    function getAll() {
+        return $http.get(serviceUrl).then(function (response) {
+            var data = response ? response.data : {};
+            return data;
+        }, function errorCallback(response) {
+            alert('Error');
+        });
+    }
 
     function getById(id) {
         return $http.get(serviceUrl + "/" + id).then(function (response) {
