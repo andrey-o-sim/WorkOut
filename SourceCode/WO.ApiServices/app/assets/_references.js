@@ -31,3 +31,4 @@
 /// <reference path="../components/trainingtype/pages/trainingtype.home.controller.js" />
 /// <reference path="../components/trainingtype/trainingtype.route.js" />
 /// <reference path="../shared/services/trainingtype.service.js" />
+/// <reference path="../shared/workout.helper.js" />

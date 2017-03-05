@@ -34,6 +34,9 @@ namespace WO.ApiServices
             bundles.Add(new ScriptBundle("~/app/components/services").Include(
                 "~/app/shared/services/trainingType.service.js"));
 
+            bundles.Add(new ScriptBundle("~/app/components/helpers").Include(
+                "~/app/shared/workOut.helper.js"));
+
             bundles.Add(new ScriptBundle("~/app/components/controllers").Include(
                 "~/app/components/TrainingType/pages/trainingType.home.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.new.controller.js",

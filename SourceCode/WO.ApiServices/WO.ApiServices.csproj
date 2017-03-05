@@ -279,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\assets\css\app.css" />
+    <Content Include="app\assets\img\loading.gif" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="app\assets\libs\angular-ui-router\resolveService.js" />
@@ -292,6 +293,7 @@
     <Content Include="app\components\TrainingType\pages\trainingType.home.controller.js" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
     <Content Include="app\shared\services\trainingType.service.js" />
+    <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1126,7 +1128,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\assets\img\" />
     <Folder Include="app\assets\js\" />
     <Folder Include="app\components\Approach\" />
     <Folder Include="app\components\Exercise\" />

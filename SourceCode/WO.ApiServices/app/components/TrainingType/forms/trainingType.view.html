@@ -1,12 +1,14 @@
-﻿<h2 class="page-header">View Training Type</h2>
-<div class="container-fluid">
+﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+
+<div class="container-fluid" ng-if="vm.formIsReady">
     <div class="row">
+        <h2 class="page-header">View Training Type</h2>
         <div class="col-md-12">
             <div>
                 <h4>Training Type:</h4>
             </div>
             <div class="controls">
-                <label ng-bind="vm.trainingType.TypeTraining"/>
+                <label ng-bind="vm.trainingType.TypeTraining" />
             </div>
         </div>
     </div>
@@ -22,7 +24,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button id="cancel" type="button" class="btn btn-primary" ng-click="cancel()">Cancel</button>
+            <a id="cancel" class="btn btn-primary" ui-sref="trainingTypeHome">Cancel</a>
         </div>
     </div>
 </div>

@@ -1,30 +1,17 @@
 ﻿<h2 class="page-header">Add Training Type</h2>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div>
-                <h4>Training Type:</h4>
-            </div>
-            <div class="controls">
-                <input type="text" name="typeTraining" ng-model="vm.trainingType.TypeTraining" />
-                <label ng-show="vm.requiredTypeTraining" class="requiredError">*</label>
-            </div>
+    <form data-toggle="validator" role="form">
+        <div class="form-group">
+            <label for="trainingType" class="control-label">Training Type:</label>
+            <input type="text" class="form-control" id="trainingType" ng-model="vm.trainingType.TypeTraining" required/>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div>
-                <h4>Description:</h4>
-            </div>
-            <div>
-                <input type="text" name="description" ng-model="vm.trainingType.Description" />
-                <label ng-show="vm.requiredDescription" class="requiredError">*</label>
-            </div>
+        <div class="form-group">
+            <label for="description" class="control-label">Description:</label>
+            <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.trainingType.Description" required></textarea>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <button id="save" type="button" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.trainingType)">Save</button>
+        <div class="form-group">
+            <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.trainingType)">Save</button>
+            <a id="cancel" class="btn btn-primary" ui-sref="trainingTypeHome">Cancel</a>
         </div>
-    </div>
+    </form>
 </div>

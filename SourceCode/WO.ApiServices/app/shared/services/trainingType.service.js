@@ -8,10 +8,11 @@ var serviceUrl = "/api/TrainingType";
 
 function trainingTypeService($http) {
     var service = {
-        getAll:getAll,
+        getAll: getAll,
         getById: getById,
         create: create,
-        update: update
+        update: update,
+        remove: remove
     };
 
     return service;
@@ -45,6 +46,15 @@ function trainingTypeService($http) {
 
     function update(trainingType) {
         return $http.put(serviceUrl + "/" + trainingType.Id, trainingType).then(function (response) {
+            var data = response ? response.data : {};
+            return data;
+        }, function errorCallBack(response) {
+            alert('Error');
+        });
+    }
+
+    function remove(id) {
+        return $http.delete(serviceUrl + "/" + id).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallBack(response) {

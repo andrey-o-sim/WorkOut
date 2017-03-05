@@ -9,6 +9,7 @@ function trainingTypeEditController(
     $state) {
 
     var vm = this;
+    vm.formIsReady = false;
 
     vm.save = save;
 
@@ -17,6 +18,7 @@ function trainingTypeEditController(
     function init() {
         trainingTypeService.getById($stateParams.id).then(function (result) {
             vm.trainingType = result;
+            vm.formIsReady = true;
         });
     }
 
