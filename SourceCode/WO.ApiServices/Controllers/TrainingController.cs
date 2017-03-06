@@ -15,53 +15,63 @@ namespace WO.ApiServices.Controllers
 {
     public class TrainingController : ApiController
     {
-        private IService<TrainingDTO> _trainingService;
+        private IService<TrainingDTO> _service;
         private IMapper _mapper;
 
         public TrainingController(IService<TrainingDTO> trainingService)
         {
-            _trainingService = trainingService;
+            _service = trainingService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
 
         // GET: api/Training/5
-        public Training Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            var trainigDTO = _trainingService.Get(id);
-            var training = _mapper.Map<Training>(trainigDTO);
+            var trainigDTO = _service.Get(id);
+            if (trainigDTO != null)
+            {
+                var training = _mapper.Map<Training>(trainigDTO);
+                return Ok<Training>(training);
+            }
 
-            return training;
+            return NotFound();
         }
 
         // GET: api/Training
-        public IEnumerable<Training> GetAll()
+        public IHttpActionResult GetAll()
         {
-            var trainigsDTO = _trainingService.GetAll();
+            var trainigsDTO = _service.GetAll();
             var trainings = _mapper.Map<List<Training>>(trainigsDTO);
 
-            return trainings;
+            return Ok<List<Training>>(trainings);
         }
 
         // POST: api/Training
         [HttpPost]
-        public IOperationResult Create([FromBody]Training training)
+        public IHttpActionResult Create([FromBody]Training training)
         {
             var trainigDTO = _mapper.Map<TrainingDTO>(training);
-            return _trainingService.Create(trainigDTO);
+            var result = _service.Create(trainigDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // PUT: api/Training/5
         [HttpPut]
-        public IOperationResult Update(int id, [FromBody]Training training)
+        public IHttpActionResult Update([FromBody]Training training)
         {
             var trainigDTO = _mapper.Map<TrainingDTO>(training);
-            return _trainingService.Update(trainigDTO);
+            var result = _service.Update(trainigDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // DELETE: api/Training/5
-        public IOperationResult Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            return _trainingService.Delete(id);
+            var result = _service.Delete(id);
+
+            return Ok<IOperationResult>(result);
         }
     }
 }

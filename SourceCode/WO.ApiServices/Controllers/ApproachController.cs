@@ -11,53 +11,62 @@ namespace WO.ApiServices.Controllers
 {
     public class ApproachController : ApiController
     {
-        private IService<ApproachDTO> _approachService;
+        private IService<ApproachDTO> _service;
         private IMapper _mapper;
 
         public ApproachController(IService<ApproachDTO> approachService)
         {
-            _approachService = approachService;
+            _service = approachService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
 
         // GET: api/Approach/5
-        public Approach Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            var approachDTO = _approachService.Get(id);
-            var approach = _mapper.Map<Approach>(approachDTO);
-
-            return approach;
+            var approachDTO = _service.Get(id);
+            if (approachDTO != null)
+            {
+                var approach = _mapper.Map<Approach>(approachDTO);
+                return Ok<Approach>(approach);
+            }
+            return NotFound();
         }
 
         // GET: api/Approach
-        public IEnumerable<Approach> GetAll()
+        public IHttpActionResult GetAll()
         {
-            var approachesDTO = _approachService.GetAll();
+            var approachesDTO = _service.GetAll();
             var approaches = _mapper.Map<List<Approach>>(approachesDTO);
 
-            return approaches;
+            return Ok<List<Approach>>(approaches);
         }
 
         // POST: api/Approach
         [HttpPost]
-        public IOperationResult Create([FromBody]Approach approach)
+        public IHttpActionResult Create([FromBody]Approach approach)
         {
             var approachDTO = _mapper.Map<ApproachDTO>(approach);
-            return _approachService.Create(approachDTO);
+            var result = _service.Create(approachDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // PUT: api/Approach/5
         [HttpPut]
-        public IOperationResult Update(int id, [FromBody]Approach approach)
+        public IHttpActionResult Update([FromBody]Approach approach)
         {
             var approachDTO = _mapper.Map<ApproachDTO>(approach);
-            return _approachService.Update(approachDTO);
+            var result = _service.Update(approachDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // DELETE: api/Approach/5
-        public IOperationResult Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            return _approachService.Delete(id);
+            var result = _service.Delete(id);
+
+            return Ok<IOperationResult>(result);
         }
     }
 }

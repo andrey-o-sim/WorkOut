@@ -21,39 +21,53 @@ namespace WO.ApiServices.Controllers.GenericData
         }
 
         // GET: api/TrainingType/5
-        public TrainingType Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            var trainingType = _service.Get(id);
-            return _mapper.Map<TrainingType>(trainingType);
+            var trainingTypeDTO = _service.Get(id);
+            if (trainingTypeDTO != null)
+            {
+                var trainingType = _mapper.Map<TrainingType>(trainingTypeDTO);
+                return Ok<TrainingType>(trainingType);
+            }
+
+            return NotFound();
         }
 
         // GET: api/TrainingType
-        public IEnumerable<TrainingType> GetAll()
+        public IHttpActionResult GetAll()
         {
-            var allTrainingTypes = _service.GetAll();
-            return _mapper.Map<List<TrainingType>>(allTrainingTypes);
+            var allTrainingTypesDTO = _service.GetAll();
+            var trainingTypes = _mapper.Map<List<TrainingType>>(allTrainingTypesDTO);
+
+            return Ok<List<TrainingType>>(trainingTypes);
         }
 
         // POST: api/TrainingType
         [HttpPost]
-        public IOperationResult Create(TrainingType trainingType)
+        public IHttpActionResult Create(TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-            return _service.Create(trainingTypeDTO);
+            var result = _service.Create(trainingTypeDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // PUT: api/TrainingType/5
         [HttpPut]
-        public IOperationResult Update(int id, TrainingType trainingType)
+        public IHttpActionResult Update(TrainingType trainingType)
         {
             var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-            return _service.Update(trainingTypeDTO);
+            var result = _service.Update(trainingTypeDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // DELETE: api/TrainingType/5
-        public IOperationResult Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            return _service.Delete(id);
+            var result = _service.Delete(id);
+
+            return Ok<IOperationResult>(result);
         }
     }
 }

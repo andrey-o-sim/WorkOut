@@ -9,6 +9,7 @@ using WO.Core.BLL;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using System.Web.Http.Results;
 
 namespace WO.ApiServices.Tests.Controllers
 {
@@ -72,11 +73,11 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingController.Get(searchTrainingId);
+            var trainingResult = result as OkNegotiatedContentResult<Training>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Training));
-            Assert.IsTrue(result.Id > 0);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Training>));
+            Assert.IsTrue(trainingResult.Content.Id > 0);
         }
 
         [TestMethod]
@@ -87,11 +88,11 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingController.GetAll();
+            var trainingsResult = result as OkNegotiatedContentResult<List<Training>>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<Training>));
-            Assert.AreEqual(_trainings.Count, result.Count());
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<List<Training>>));
+            Assert.AreEqual(_trainings.Count, trainingsResult.Content.Count());
         }
 
         [TestMethod]
@@ -124,13 +125,13 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingController.Create(newTraining);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
             Assert.AreEqual(countTrainings + 1, _trainings.Count);
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
         }
 
         [TestMethod]
@@ -158,13 +159,13 @@ namespace WO.ApiServices.Tests.Controllers
            });
 
             // Act
-            var result = _trainingController.Update(updateTraining.Id, updateTraining);
+            var result = _trainingController.Update(updateTraining);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
             Assert.AreEqual(_trainings.Find(training => training.Id == updateTraining.Id).MainTrainingPurpose, updateTraining.MainTrainingPurpose);
         }
 
@@ -185,12 +186,12 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingController.Delete(idForRemove);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
             Assert.AreEqual(_trainings.Count, currentItemsCount - 1);
-            Assert.IsTrue(result.Succeed);
+            Assert.IsTrue(operationResult.Content.Succeed);
             Assert.IsFalse(_trainings.Any(training => training.Id == idForRemove));
         }
     }

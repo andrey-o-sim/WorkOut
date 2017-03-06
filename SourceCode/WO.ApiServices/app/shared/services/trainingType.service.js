@@ -31,6 +31,7 @@ function trainingTypeService($http) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
+            //response = Object {data: "", status: 404, config: Object, statusText: "Not Found"}
             alert('Error');
         });
     }
@@ -45,7 +46,7 @@ function trainingTypeService($http) {
     }
 
     function update(trainingType) {
-        return $http.put(serviceUrl + "/" + trainingType.Id, trainingType).then(function (response) {
+        return $http.put(serviceUrl, trainingType).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallBack(response) {

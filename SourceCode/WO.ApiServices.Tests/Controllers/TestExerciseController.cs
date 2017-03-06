@@ -8,6 +8,8 @@ using WO.ApiServices.Models;
 using WO.Core.BLL;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Services;
+using System.Web.Http.Results;
+using WO.Core.BLL.Interfaces;
 
 namespace WO.ApiServices.Tests.Controllers
 {
@@ -62,11 +64,11 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _exerciseController.Get(searchId);
+            var exerciseResult = result as OkNegotiatedContentResult<Exercise>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, searchId);
-            Assert.IsInstanceOfType(result, typeof(Exercise));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Exercise>));
+            Assert.AreEqual(exerciseResult.Content.Id, searchId);
         }
 
         [TestMethod]
@@ -77,11 +79,11 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _exerciseController.GetAll();
+            var exercisesResult = result as OkNegotiatedContentResult<List<Exercise>>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count() > 0);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<Exercise>));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<List<Exercise>>));
+            Assert.IsTrue(exercisesResult.Content.Count() > 0);
         }
 
         [TestMethod]
@@ -110,12 +112,13 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _exerciseController.Create(newExercise);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
-            Assert.AreEqual(_exercises.Find(ex => ex.Id == result.ResultItemId).Name, newExercise.Name);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
+            Assert.AreEqual(_exercises.Find(ex => ex.Id == operationResult.Content.ResultItemId).Name, newExercise.Name);
         }
 
         [TestMethod]
@@ -142,13 +145,14 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             //Act
-            var result = _exerciseController.Update(exerciseForUpdate.Id, exerciseForUpdate);
+            var result = _exerciseController.Update(exerciseForUpdate);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
-            Assert.AreEqual(_exercises.Find(ex => ex.Id == result.ResultItemId).Name, exerciseForUpdate.Name);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
+            Assert.AreEqual(_exercises.Find(ex => ex.Id == operationResult.Content.ResultItemId).Name, exerciseForUpdate.Name);
         }
 
         [TestMethod]
@@ -170,12 +174,13 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _exerciseController.Delete(idForRemove);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
-            Assert.IsFalse(_exercises.Any(ex => ex.Id == result.ResultItemId));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
+            Assert.IsFalse(_exercises.Any(ex => ex.Id == operationResult.Content.ResultItemId));
         }
     }
 }

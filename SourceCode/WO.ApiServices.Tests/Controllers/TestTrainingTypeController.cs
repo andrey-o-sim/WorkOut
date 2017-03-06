@@ -9,6 +9,7 @@ using WO.Core.BLL;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using System.Web.Http.Results;
 
 namespace WO.ApiServices.Tests.Controllers
 {
@@ -69,9 +70,10 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Assert
             var testTrainingType = _trainingTypes.Where(tt => tt.Id == searchTrainingTypeId).First();
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(TrainingType));
-            Assert.AreEqual(testTrainingType.TypeTraining, result.TypeTraining);
+            var trainingTypeResult = result as OkNegotiatedContentResult<TrainingType>;
+
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<TrainingType>));
+            Assert.AreEqual(testTrainingType.TypeTraining, trainingTypeResult.Content.TypeTraining);
         }
 
         [TestMethod]
@@ -82,11 +84,11 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingTypeController.GetAll();
+            var trainingTypeResult = result as OkNegotiatedContentResult<List<TrainingType>>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<TrainingType>));
-            Assert.AreEqual(_trainingTypes.Count, result.Count());
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<List<TrainingType>>));
+            Assert.AreEqual(_trainingTypes.Count, trainingTypeResult.Content.Count());
         }
 
         [TestMethod]
@@ -117,13 +119,13 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingTypeController.Create(newTrainingType);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
             Assert.AreEqual(countTrainingTypes + 1, _trainingTypes.Count);
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
         }
 
         [TestMethod]
@@ -151,13 +153,13 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             // Act
-            var result = _trainingTypeController.Update(updateTrainingType.Id, updateTrainingType);
+            var result = _trainingTypeController.Update(updateTrainingType);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
 
             Assert.AreEqual(_trainingTypes.Find(tt => tt.Id == updateTrainingType.Id).TypeTraining, updateTrainingType.TypeTraining);
         }
@@ -179,12 +181,12 @@ namespace WO.ApiServices.Tests.Controllers
 
             // Act
             var result = _trainingTypeController.Delete(idForRemove);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
             Assert.AreEqual(_trainingTypes.Count, currentItemsCount - 1);
-            Assert.IsTrue(result.Succeed);
             Assert.IsFalse(_trainingTypes.Any(tt => tt.Id == idForRemove));
         }
     }

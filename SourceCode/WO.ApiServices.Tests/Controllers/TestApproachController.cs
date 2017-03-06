@@ -10,6 +10,7 @@ using WO.Core.BLL;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using System.Web.Http.Results;
 
 namespace WO.ApiServices.Tests.Controllers
 {
@@ -67,11 +68,11 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _approachController.Get(searchId);
+            var approachResult = result as OkNegotiatedContentResult<Approach>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, searchId);
-            Assert.IsInstanceOfType(result, typeof(Approach));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Approach>));
+            Assert.AreEqual(approachResult.Content.Id, searchId);
         }
 
         [TestMethod]
@@ -81,12 +82,12 @@ namespace WO.ApiServices.Tests.Controllers
             _mock.Setup(s => s.GetAll()).Returns(_approaches);
 
             //Act
-            var approachesData = _approachController.GetAll();
+            var result = _approachController.GetAll();
+            var approachResult = result as OkNegotiatedContentResult<List<Approach>>;
 
             //Assert
-            Assert.IsNotNull(approachesData);
-            Assert.AreEqual(approachesData.Count(), _approaches.Count);
-            Assert.IsInstanceOfType(approachesData, typeof(IEnumerable<Approach>));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<List<Approach>>));
+            Assert.AreEqual(approachResult.Content.Count(), _approaches.Count);
         }
 
         [TestMethod]
@@ -117,12 +118,12 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _approachController.Create(approach);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
-            Assert.IsTrue(result.Succeed);
-            Assert.IsTrue(result.ResultItemId > 0);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
+            Assert.IsTrue(operationResult.Content.ResultItemId > 0);
             Assert.AreEqual(countApproaches + 1, _approaches.Count);
         }
 
@@ -154,12 +155,12 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             //Act
-            var result = _approachController.Update(updateApproach.Id, updateApproach);
+            var result = _approachController.Update(updateApproach);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
-            Assert.IsTrue(result.Succeed);
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
+            Assert.IsTrue(operationResult.Content.Succeed);
             Assert.AreEqual(TimeWoOperations.FromTimeWoToSeconds(planTimeForRest), _approaches.Find(ap => ap.Id == updateApproach.Id).PlanTimeForRest);
             Assert.AreEqual(TimeWoOperations.FromTimeWoToSeconds(spentTimeForRest), _approaches.Find(ap => ap.Id == updateApproach.Id).SpentTimeForRest);
         }
@@ -184,12 +185,12 @@ namespace WO.ApiServices.Tests.Controllers
 
             //Act
             var result = _approachController.Delete(idForRemove);
+            var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IOperationResult));
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
             Assert.AreEqual(countOfApproaches - 1, _approaches.Count);
-            Assert.IsTrue(result.Succeed);
+            Assert.IsTrue(operationResult.Content.Succeed);
             Assert.IsFalse(_approaches.Any(tt => tt.Id == idForRemove));
         }
     }

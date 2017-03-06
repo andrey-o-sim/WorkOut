@@ -11,51 +11,64 @@ namespace WO.ApiServices.Controllers
 {
     public class ExerciseController : ApiController
     {
-        private IService<ExerciseDTO> _exerciseService;
+        private IService<ExerciseDTO> _service;
         private IMapper _mapper;
 
         public ExerciseController(IService<ExerciseDTO> exerciseService)
         {
-            _exerciseService = exerciseService;
+            _service = exerciseService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
 
         // GET: api/Exercise/5
-        public Exercise Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            var exerciseDTO = _exerciseService.Get(id);
-            var exercise = _mapper.Map<Exercise>(exerciseDTO);
-            return exercise;
+            var exerciseDTO = _service.Get(id);
+
+            if (exerciseDTO != null)
+            {
+                var exercise = _mapper.Map<Exercise>(exerciseDTO);
+                return Ok<Exercise>(exercise);
+            }
+
+            return NotFound();
         }
 
         // GET: api/Exercise
-        public IEnumerable<Exercise> GetAll()
+        public IHttpActionResult GetAll()
         {
-            var exercisesDTO = _exerciseService.GetAll();
+            var exercisesDTO = _service.GetAll();
             var exercises = _mapper.Map<List<Exercise>>(exercisesDTO);
-            return exercises;
+
+            return Ok<List<Exercise>>(exercises);
         }
 
         // POST: api/Exercise
         [HttpPost]
-        public IOperationResult Create([FromBody]Exercise exercise)
+        public IHttpActionResult Create([FromBody]Exercise exercise)
         {
             var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-            return _exerciseService.Create(exerciseDTO);
+            var result = _service.Create(exerciseDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // PUT: api/Exercise/5
         [HttpPut]
-        public IOperationResult Update(int id, [FromBody]Exercise exercise)
+        public IHttpActionResult Update([FromBody]Exercise exercise)
         {
             var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-            return _exerciseService.Update(exerciseDTO);
+            var result = _service.Update(exerciseDTO);
+
+            return Ok<IOperationResult>(result);
         }
 
         // DELETE: api/Exercise/5
-        public IOperationResult Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            return _exerciseService.Delete(id);
+            var result = _service.Delete(id);
+
+            return Ok<IOperationResult>(result);
         }
     }
 }
