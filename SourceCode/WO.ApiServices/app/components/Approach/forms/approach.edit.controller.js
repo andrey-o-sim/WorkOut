@@ -50,7 +50,7 @@ function approachEditController(
 
     function save(approach) {
         vm.disableSaveButton = true;
-        approachService.create(approach).then(function (result) {
+        approachService.update(approach).then(function (result) {
             if (result.Succeed) {
                 $state.go('approachHome')
             }

@@ -1,14 +1,26 @@
-﻿    angular
-        .module('woApp')
-        .controller('approachViewController', approachViewController);
+﻿angular
+    .module('woApp')
+    .controller('approachViewController', approachViewController);
 
-    approachViewController.$inject = ['$location'];
+approachViewController.$inject = [
+    'approachService',
+    '$state',
+    '$stateParams'];
 
-    function approachViewController($location) {
-        var vm = this;
-        vm.title = 'approach';
+function approachViewController(
+    approachService,
+    $state,
+    $stateParams) {
 
-        activate();
+    var vm = this;
+    vm.formIsReady = false;
 
-        function activate() { }
+    init();
+
+    function init() {
+        approachService.getById($stateParams.id).then(function (result) {
+            vm.approach = result;
+            vm.formIsReady = true;
+        });
     }
+}

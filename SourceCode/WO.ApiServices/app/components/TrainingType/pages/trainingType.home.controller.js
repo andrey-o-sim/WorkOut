@@ -2,9 +2,11 @@
     .module('woApp')
     .controller('trainingTypeHomeController', trainingTypeHomeController)
 
+trainingTypeHomeController.$inject = [
+    'trainingTypeService',
+    'workOutHelper'];
+
 function trainingTypeHomeController(
-    $scope,
-    $stateParams,
     trainingTypeService,
     workOutHelper) {
 
