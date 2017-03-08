@@ -2,6 +2,12 @@
     .module('woApp')
     .controller('trainingTypeEditController', trainingTypeEditController)
 
+trainingTypeEditController.$inject = [
+    '$scope',
+    '$stateParams',
+    'trainingTypeService',
+    '$state'];
+
 function trainingTypeEditController(
     $scope,
     $stateParams,

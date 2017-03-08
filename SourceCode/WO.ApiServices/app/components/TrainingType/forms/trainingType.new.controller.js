@@ -2,9 +2,13 @@
     .module('woApp')
     .controller('trainingTypeNewController', trainingTypeNewController)
 
+trainingTypeNewController
+.$inject = ['$scope',
+           'trainingTypeService',
+           '$state'];
+
 function trainingTypeNewController(
     $scope,
-    $stateParams,
     trainingTypeService,
     $state) {
 

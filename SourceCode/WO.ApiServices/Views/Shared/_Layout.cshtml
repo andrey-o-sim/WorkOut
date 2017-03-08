@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/app/assets/css")
     @Scripts.Render("~/app/assets/js")
@@ -46,10 +47,10 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <li ui-sref-active="active"><a ui-sref="trainingTypeHome">Training Types</a></li>
-                    <li><a href="#">Trainings</a></li>
+                    <li ui-sref-active="active"><a ui-sref="approachHome">Approaches</a></li>
                     <li><a href="#">Exercises</a></li>
                     <li><a href="#">Sets</a></li>
-                    <li><a href="#">Approaches</a></li>
+                    <li><a href="#">Trainings</a></li>
                 </ul>
             </div>
 

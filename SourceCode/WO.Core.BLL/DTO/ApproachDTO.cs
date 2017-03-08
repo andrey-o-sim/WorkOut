@@ -8,7 +8,7 @@ namespace WO.Core.BLL.DTO
 {
     public class ApproachDTO : BaseModelDTO
     {
-        public int PlanTimeForRest { get; set; }
+        public int PlannedTimeForRest { get; set; }
         public int SpentTimeForRest { get; set; }
 
         public SetDTO Set { get; set; }

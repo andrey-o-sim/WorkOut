@@ -4,7 +4,7 @@
 
 trainingTypeService.$inject = ['$http'];
 
-var serviceUrl = "/api/TrainingType";
+var trainingTypeServiceUrl = "/api/TrainingType";
 
 function trainingTypeService($http) {
     var service = {
@@ -18,7 +18,7 @@ function trainingTypeService($http) {
     return service;
 
     function getAll() {
-        return $http.get(serviceUrl).then(function (response) {
+        return $http.get(trainingTypeServiceUrl).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
@@ -27,7 +27,7 @@ function trainingTypeService($http) {
     }
 
     function getById(id) {
-        return $http.get(serviceUrl + "/" + id).then(function (response) {
+        return $http.get(trainingTypeServiceUrl + "/" + id).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
@@ -37,7 +37,7 @@ function trainingTypeService($http) {
     }
 
     function create(trainingType) {
-        return $http.post(serviceUrl, trainingType).then(function (response) {
+        return $http.post(trainingTypeServiceUrl, trainingType).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
@@ -46,7 +46,7 @@ function trainingTypeService($http) {
     }
 
     function update(trainingType) {
-        return $http.put(serviceUrl, trainingType).then(function (response) {
+        return $http.put(trainingTypeServiceUrl, trainingType).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallBack(response) {
@@ -55,7 +55,7 @@ function trainingTypeService($http) {
     }
 
     function remove(id) {
-        return $http.delete(serviceUrl + "/" + id).then(function (response) {
+        return $http.delete(trainingTypeServiceUrl + "/" + id).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallBack(response) {

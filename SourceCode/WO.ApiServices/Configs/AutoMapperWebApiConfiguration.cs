@@ -52,14 +52,14 @@ namespace WO.ApiServices.Configs
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.TimeForRest)));
 
                   cfg.CreateMap<Approach, ApproachDTO>()
-                  .ForMember(dest => dest.PlanTimeForRest,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.PlanTimeForRest)))
+                  .ForMember(dest => dest.PlannedTimeForRest,
+                             opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.PlannedTimeForRest)))
                   .ForMember(dest => dest.SpentTimeForRest,
                              opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.SpentTimeForRest)));
 
                   cfg.CreateMap<ApproachDTO, Approach>()
-                  .ForMember(dest => dest.PlanTimeForRest,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlanTimeForRest)))
+                  .ForMember(dest => dest.PlannedTimeForRest,
+                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlannedTimeForRest)))
                   .ForMember(dest => dest.SpentTimeForRest,
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.SpentTimeForRest)));
               });

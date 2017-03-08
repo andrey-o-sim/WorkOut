@@ -1,5 +1,6 @@
 ﻿angular
-    .module('woApp').config(routeConfig)
+    .module('woApp')
+    .config(routeConfig)
 
 function routeConfig($stateProvider) {
     var homeRoute = {

@@ -1,5 +1,5 @@
 ﻿angular
-.module('woApp', ['ui.router']);
+.module('woApp', ['ui.router','ui.bootstrap']);
 
 angular
 .module('woApp').config(['$locationProvider', function ($locationProvider) {

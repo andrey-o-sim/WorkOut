@@ -30,7 +30,7 @@ namespace WO.ApiServices.Tests.Services
                     Id = 1,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
-                    PlanTimeForRest = 5,
+                    PlannedTimeForRest = 5,
                     SpentTimeForRest = 5
                 },
                 new ApproachDTO
@@ -38,7 +38,7 @@ namespace WO.ApiServices.Tests.Services
                     Id = 2,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
-                    PlanTimeForRest = 10,
+                    PlannedTimeForRest = 10,
                     SpentTimeForRest = 9
                 },
                 new ApproachDTO
@@ -46,7 +46,7 @@ namespace WO.ApiServices.Tests.Services
                     Id = 3,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
-                    PlanTimeForRest = 15,
+                    PlannedTimeForRest = 15,
                     SpentTimeForRest = 14
                 },
             };
@@ -133,7 +133,7 @@ namespace WO.ApiServices.Tests.Services
             {
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now,
-                PlanTimeForRest = 100,
+                PlannedTimeForRest = 100,
                 SpentTimeForRest = 150
             };
 
@@ -166,7 +166,7 @@ namespace WO.ApiServices.Tests.Services
             var updateApproach = new ApproachDTO
             {
                 Id = 2,
-                PlanTimeForRest = 150,
+                PlannedTimeForRest = 150,
                 SpentTimeForRest = 110
             };
 

@@ -9,10 +9,10 @@ namespace WO.ApiServices
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/app/assets/libs/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/app/assets/libs/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -23,7 +23,10 @@ namespace WO.ApiServices
 
             bundles.Add(new ScriptBundle("~/app/assets/js").Include(
                 "~/app/assets/libs/angular.js",
-                "~/app/assets/libs/angular-route.js"));
+                "~/app/assets/libs/angular-route.js",
+                "~/app/assets/libs/angular-animate.js",
+                "~/app/assets/libs/angular-sanitize.js",
+                "~/app/assets/libs/angular-ui/ui-bootstrap-tpls.js"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));
@@ -32,7 +35,8 @@ namespace WO.ApiServices
                 "~/app/app.module.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/services").Include(
-                "~/app/shared/services/trainingType.service.js"));
+                "~/app/shared/services/trainingType.service.js",
+                "~/app/shared/services/approach.service.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/helpers").Include(
                 "~/app/shared/workOut.helper.js"));
@@ -42,7 +46,13 @@ namespace WO.ApiServices
                 "~/app/components/TrainingType/forms/trainingType.new.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.edit.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.view.controller.js",
-                "~/app/components/TrainingType/trainingType.route.js"));
+                "~/app/components/TrainingType/trainingType.route.js",
+
+                "~/app/components/Approach/pages/approach.home.controller.js",
+                "~/app/components/Approach/forms/approach.new.controller.js",
+                "~/app/components/Approach/forms/approach.edit.controller.js",
+                "~/app/components/Approach/forms/approach.view.controller.js",
+                "~/app/components/Approach/approach.route.js"));
 
             BundleTable.EnableOptimizations = false;
         }

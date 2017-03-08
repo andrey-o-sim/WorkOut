@@ -34,7 +34,7 @@ namespace WO.ApiServices.Tests.Controllers
                     Id = 1,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
-                    PlanTimeForRest = 5,
+                    PlannedTimeForRest = 5,
                     SpentTimeForRest = 5
                 },
                 new ApproachDTO
@@ -42,7 +42,7 @@ namespace WO.ApiServices.Tests.Controllers
                     Id = 2,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
-                    PlanTimeForRest = 10,
+                    PlannedTimeForRest = 10,
                     SpentTimeForRest = 9
                 },
                 new ApproachDTO
@@ -50,7 +50,7 @@ namespace WO.ApiServices.Tests.Controllers
                     Id = 3,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
-                    PlanTimeForRest = 15,
+                    PlannedTimeForRest = 15,
                     SpentTimeForRest = 14
                 }
             };
@@ -100,7 +100,7 @@ namespace WO.ApiServices.Tests.Controllers
             {
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now,
-                PlanTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 30 },
+                PlannedTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 30 },
                 SpentTimeForRest = new TimeWO { Hours = 0, Minutes = 2, Seconds = 0 }
             };
 
@@ -131,13 +131,13 @@ namespace WO.ApiServices.Tests.Controllers
         public void Update()
         {
             //Arrange
-            var planTimeForRest = new TimeWO { Hours = 0, Minutes = 10, Seconds = 30 };
+            var plannedTimeForRest = new TimeWO { Hours = 0, Minutes = 10, Seconds = 30 };
             var spentTimeForRest = new TimeWO { Hours = 0, Minutes = 5, Seconds = 10 };
 
             var updateApproach = new Approach
             {
                 Id = 2,
-                PlanTimeForRest = planTimeForRest,
+                PlannedTimeForRest = plannedTimeForRest,
                 SpentTimeForRest = spentTimeForRest
             };
 
@@ -161,7 +161,7 @@ namespace WO.ApiServices.Tests.Controllers
             //Assert
             Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
             Assert.IsTrue(operationResult.Content.Succeed);
-            Assert.AreEqual(TimeWoOperations.FromTimeWoToSeconds(planTimeForRest), _approaches.Find(ap => ap.Id == updateApproach.Id).PlanTimeForRest);
+            Assert.AreEqual(TimeWoOperations.FromTimeWoToSeconds(plannedTimeForRest), _approaches.Find(ap => ap.Id == updateApproach.Id).PlannedTimeForRest);
             Assert.AreEqual(TimeWoOperations.FromTimeWoToSeconds(spentTimeForRest), _approaches.Find(ap => ap.Id == updateApproach.Id).SpentTimeForRest);
         }
 
