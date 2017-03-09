@@ -24,9 +24,9 @@ function approachHomeController(
     }
 
     function remove(id) {
-        approachService.remove(id).then(function (response) {
-            if (response.Succeed) {
-                vm.approaches = workOutHelper.removeElementFromArray(vm.approaches, response.ResultItemId);
+        approachService.remove(id).then(function (result) {
+            if (result.Succeed) {
+                vm.approaches = workOutHelper.removeElementFromArray(vm.approaches, result.ResultItemId);
             }
         });
     }

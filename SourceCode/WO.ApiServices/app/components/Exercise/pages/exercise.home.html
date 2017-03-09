@@ -1,0 +1,23 @@
+﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">Exercise Informations</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="exercise in vm.exercises">
+                    <td ng-bind="exercise.Name"></td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(exercise.Id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

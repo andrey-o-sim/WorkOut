@@ -24,9 +24,9 @@ function trainingTypeHomeController(
     }
 
     function remove(id) {
-        trainingTypeService.remove(id).then(function (response) {
-            if (response.Succeed) {
-                vm.trainingTypes = workOutHelper.removeElementFromArray(vm.trainingTypes, response.ResultItemId);
+        trainingTypeService.remove(id).then(function (result) {
+            if (result.Succeed) {
+                vm.trainingTypes = workOutHelper.removeElementFromArray(vm.trainingTypes, result.ResultItemId);
             }
         });
     }

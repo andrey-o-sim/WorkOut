@@ -4,7 +4,8 @@
 
 function workOutHelper() {
     var service = {
-        removeElementFromArray: removeElementFromArray
+        removeElementFromArray: removeElementFromArray,
+        writeErrorMessageToConsole: writeErrorMessageToConsole
     };
 
     return service;
@@ -20,5 +21,9 @@ function workOutHelper() {
         }
 
         return array;
+    }
+
+    function writeErrorMessageToConsole(response) {
+        console.error(response.status + " " + response.statusText);
     }
 }

@@ -12,8 +12,8 @@
     @Scripts.Render("~/app/assets/js")
     @Scripts.Render("~/app/assets/js/angularUiRoute")
     @Scripts.Render("~/app/components/modules")
-    @Scripts.Render("~/app/components/services")
     @Scripts.Render("~/app/components/helpers")
+    @Scripts.Render("~/app/components/services")
     @Scripts.Render("~/app/components/controllers")
 </head>
 <body ng-app="woApp">
@@ -48,7 +48,7 @@
                 <ul class="nav nav-sidebar">
                     <li ui-sref-active="active"><a ui-sref="trainingTypeHome">Training Types</a></li>
                     <li ui-sref-active="active"><a ui-sref="approachHome">Approaches</a></li>
-                    <li><a href="#">Exercises</a></li>
+                    <li ui-sref-active="active"><a ui-sref="exerciseHome">Exercises</a></li>
                     <li><a href="#">Sets</a></li>
                     <li><a href="#">Trainings</a></li>
                 </ul>

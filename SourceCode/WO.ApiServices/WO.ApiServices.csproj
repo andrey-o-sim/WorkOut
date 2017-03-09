@@ -295,6 +295,9 @@
     <Content Include="app\components\Approach\forms\approach.view.html" />
     <Content Include="app\components\Approach\pages\approach.home.controller.js" />
     <Content Include="app\components\Approach\pages\approach.home.html" />
+    <Content Include="app\components\Exercise\exercise.route.js" />
+    <Content Include="app\components\Exercise\pages\exercise.home.controller.js" />
+    <Content Include="app\components\Exercise\pages\exercise.home.html" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.edit.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.html" />
@@ -302,6 +305,7 @@
     <Content Include="app\components\TrainingType\pages\trainingType.home.controller.js" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
     <Content Include="app\shared\services\approach.service.js" />
+    <Content Include="app\shared\services\exercise.service.js" />
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -1144,7 +1148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\js\" />
-    <Folder Include="app\components\Exercise\" />
+    <Folder Include="app\components\Exercise\forms\" />
     <Folder Include="app\components\Set\" />
     <Folder Include="app\components\Training\" />
     <Folder Include="App_Data\" />

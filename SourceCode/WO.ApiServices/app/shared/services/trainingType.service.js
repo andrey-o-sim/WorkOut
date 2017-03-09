@@ -2,11 +2,16 @@
     .module('woApp')
     .factory('trainingTypeService', trainingTypeService);
 
-trainingTypeService.$inject = ['$http'];
+trainingTypeService.$inject = [
+    '$http',
+    'workOutHelper'];
 
-var trainingTypeServiceUrl = "/api/TrainingType";
+var trainingTypeServiceUrl = "/api/TrainingType/";
 
-function trainingTypeService($http) {
+function trainingTypeService(
+    $http,
+    workOutHelper) {
+
     var service = {
         getAll: getAll,
         getById: getById,
@@ -22,17 +27,16 @@ function trainingTypeService($http) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
-            alert('Error');
+            workOutHelper.writeErrorMessageToConsole(response);
         });
     }
 
     function getById(id) {
-        return $http.get(trainingTypeServiceUrl + "/" + id).then(function (response) {
+        return $http.get(trainingTypeServiceUrl + id).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
-            //response = Object {data: "", status: 404, config: Object, statusText: "Not Found"}
-            alert('Error');
+            workOutHelper.writeErrorMessageToConsole(response);
         });
     }
 
@@ -41,7 +45,7 @@ function trainingTypeService($http) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallback(response) {
-            alert('Error');
+            workOutHelper.writeErrorMessageToConsole(response);
         });
     }
 
@@ -50,16 +54,16 @@ function trainingTypeService($http) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallBack(response) {
-            alert('Error');
+            workOutHelper.writeErrorMessageToConsole(response);
         });
     }
 
     function remove(id) {
-        return $http.delete(trainingTypeServiceUrl + "/" + id).then(function (response) {
+        return $http.delete(trainingTypeServiceUrl + id).then(function (response) {
             var data = response ? response.data : {};
             return data;
         }, function errorCallBack(response) {
-            alert('Error');
+            workOutHelper.writeErrorMessageToConsole(response);
         });
     }
 };
