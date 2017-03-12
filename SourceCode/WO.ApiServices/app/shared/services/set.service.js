@@ -1,18 +1,12 @@
 ﻿(function () {
-    angular
-        .module('woApp')
-        .factory('exerciseService', exerciseService)
+    angular.module('woApp')
+        .factory('setService', setService);
 
-    exerciseService.$inject = [
-        '$http',
-        'workOutHelper'];
+    setService.$inject = ['$http'];
 
-    var exerciseServiceUrl = '/api/Exercise/';
+    var serviceUrl = '/api/Set/';
 
-    function exerciseService(
-        $http,
-        workOutHelper) {
-
+    function setService($http) {
         var service = {
             getById: getById,
             getAll: getAll,
@@ -24,7 +18,7 @@
         return service;
 
         function getById(id) {
-            return $http.get(exerciseServiceUrl + id)
+            return $http.get(serviceUrl + id)
                 .then(success, error);
 
             function success(response) {
@@ -32,13 +26,13 @@
                 return result;
             }
 
-            function error(response) {
+            function error(error) {
                 workOutHelper.writeErrorMessageToConsole(response);
             }
         }
 
         function getAll() {
-            return $http.get(exerciseServiceUrl)
+            return $http.get(serviceUrl)
                 .then(success, error);
 
             function success(response) {
@@ -46,13 +40,13 @@
                 return result;
             }
 
-            function error(response) {
+            function error(error) {
                 workOutHelper.writeErrorMessageToConsole(response);
             }
         }
 
-        function create(exercise) {
-            return $http.post(exerciseServiceUrl, exercise)
+        function create(set) {
+            return $http.post(serviceUrl, set)
                 .then(success, error);
 
             function success(response) {
@@ -60,13 +54,13 @@
                 return result;
             }
 
-            function error(response) {
+            function error(error) {
                 workOutHelper.writeErrorMessageToConsole(response);
             }
         }
 
-        function update(exercise) {
-            return $http.put(exerciseServiceUrl, exercise)
+        function update(set) {
+            return $http.put(serviceUrl, set)
                 .then(success, error);
 
             function success(response) {
@@ -74,13 +68,13 @@
                 return result;
             }
 
-            function error(response) {
+            function error(error) {
                 workOutHelper.writeErrorMessageToConsole(response);
             }
         }
 
         function remove(id) {
-            return $http.delete(exerciseServiceUrl + id)
+            return $http.delete(serviceUrl + id)
                 .then(success, error);
 
             function success(response) {
@@ -88,9 +82,9 @@
                 return result;
             }
 
-            function error(response) {
+            function error(error) {
                 workOutHelper.writeErrorMessageToConsole(response);
             }
         }
     }
-}());
+}())

@@ -37,10 +37,14 @@ namespace WO.ApiServices
             bundles.Add(new ScriptBundle("~/app/components/services").Include(
                 "~/app/shared/services/trainingType.service.js",
                 "~/app/shared/services/approach.service.js",
-                "~/app/shared/services/exercise.service.js"));
+                "~/app/shared/services/exercise.service.js",
+                "~/app/shared/services/set.service.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/helpers").Include(
                 "~/app/shared/workOut.helper.js"));
+
+            bundles.Add(new ScriptBundle("~/app/shared/directives").Include(
+                "~/app/shared/directives/wo.timeSelector.directive.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/controllers").Include(
                 "~/app/components/TrainingType/pages/trainingType.home.controller.js",
@@ -56,7 +60,14 @@ namespace WO.ApiServices
                 "~/app/components/Approach/approach.route.js",
 
                 "~/app/components/Exercise/pages/exercise.home.controller.js",
-                "~/app/components/Exercise/exercise.route.js"));
+                "~/app/components/Exercise/exercise.route.js",
+
+                "~/app/components/Set/pages/set.home.controller.js",
+                "~/app/components/Set/forms/set.new.controller.js",
+                "~/app/components/Set/forms/set.edit.controller.js",
+                "~/app/components/Set/forms/set.view.controller.js",
+                "~/app/components/Set/set.route.js"
+                ));
 
             BundleTable.EnableOptimizations = false;
         }

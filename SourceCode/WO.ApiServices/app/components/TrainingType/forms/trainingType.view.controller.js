@@ -1,21 +1,23 @@
-﻿angular
-    .module('woApp')
-    .controller('trainingTypeViewController', trainingTypeViewController)
+﻿(function () {
+    angular
+        .module('woApp')
+        .controller('trainingTypeViewController', trainingTypeViewController)
 
-function trainingTypeViewController(
-    $scope,
-    $stateParams,
-    trainingTypeService) {
+    function trainingTypeViewController(
+        $scope,
+        $stateParams,
+        trainingTypeService) {
 
-    var vm = this;
-    vm.formIsReady = false;
+        var vm = this;
+        vm.formIsReady = false;
 
-    init();
+        init();
 
-    function init() {
-        trainingTypeService.getById($stateParams.id).then(function (result) {
-            vm.trainingType = result;
-            vm.formIsReady = true;
-        });
+        function init() {
+            trainingTypeService.getById($stateParams.id).then(function (result) {
+                vm.trainingType = result;
+                vm.formIsReady = true;
+            });
+        }
     }
-}
+}());

@@ -11,14 +11,9 @@
                             <h3 for="planTimeForRest" class="control-label">Planned Time For Rest:</h3>
                         </div>
                     </div>
-                    <div class="row border">
-                        <div class="col-md-6">
-                            <label for="planTimeForRestMinutes" class="control-label">Minutes:</label>
-                            <select class="form-control" id="planTimeForRestMinutes" ng-model="vm.approach.PlannedTimeForRest.Minutes" ng-options="minute for minute in vm.minutes"></select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="planTimeForRestSeconds" class="control-label">Seconds:</label>
-                            <select class="form-control" id="planTimeForRestSeconds" ng-model="vm.approach.PlannedTimeForRest.Seconds" ng-options="second for second in vm.seconds"></select>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.approach.PlannedTimeForRest"></wo-time-selector>
                         </div>
                     </div>
                 </div>
@@ -29,15 +24,9 @@
                             <h3 for="planTimeForRest" class="control-label">Spent Time For Rest:</h3>
                         </div>
                     </div>
-                    <div class="row border">
-                        <div class="col-md-6">
-                            <label for="spentTimeForRestMinutes" class="control-label">Minutes:</label>
-                            <select class="form-control" id="spentTimeForRestMinutes" ng-model="vm.approach.SpentTimeForRest.Minutes" ng-options="minute for minute in vm.minutes"></select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="spentTimeForRestSeconds" class="control-label">Seconds:</label>
-                            <select class="form-control" id="spentTimeForRestSeconds" ng-model="vm.approach.SpentTimeForRest.Seconds" ng-options="second for second in vm.seconds"></select>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.approach.SpentTimeForRest"></wo-time-selector>
                         </div>
                     </div>
                 </div>

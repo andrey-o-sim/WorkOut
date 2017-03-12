@@ -298,14 +298,26 @@
     <Content Include="app\components\Exercise\exercise.route.js" />
     <Content Include="app\components\Exercise\pages\exercise.home.controller.js" />
     <Content Include="app\components\Exercise\pages\exercise.home.html" />
+    <Content Include="app\components\Set\forms\set.edit.controller.js" />
+    <Content Include="app\components\Set\forms\set.edit.html" />
+    <Content Include="app\components\Set\forms\set.new.Controller.js" />
+    <Content Include="app\components\Set\forms\set.new.html" />
+    <Content Include="app\components\Set\forms\set.view.controller.js" />
+    <Content Include="app\components\Set\forms\set.view.html" />
+    <Content Include="app\components\Set\pages\set.home.controller.js" />
+    <Content Include="app\components\Set\pages\set.home.html" />
+    <Content Include="app\components\Set\set.route.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.edit.controller.js" />
     <Content Include="app\components\TrainingType\forms\trainingType.view.html" />
     <Content Include="app\components\TrainingType\forms\trainingType.edit.html" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.controller.js" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
+    <Content Include="app\shared\directives\wo.timeSelector.directive.js" />
+    <Content Include="app\shared\directives\wo.timeSelector.html" />
     <Content Include="app\shared\services\approach.service.js" />
     <Content Include="app\shared\services\exercise.service.js" />
+    <Content Include="app\shared\services\set.service.js" />
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -1149,7 +1161,6 @@
   <ItemGroup>
     <Folder Include="app\assets\js\" />
     <Folder Include="app\components\Exercise\forms\" />
-    <Folder Include="app\components\Set\" />
     <Folder Include="app\components\Training\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />

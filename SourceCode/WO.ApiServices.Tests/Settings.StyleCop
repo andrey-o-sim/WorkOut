@@ -259,6 +259,7 @@
       <AnalyzerSettings>
         <CollectionProperty Name="Hungarian">
           <Value>db</Value>
+          <Value>id</Value>
           <Value>wo</Value>
         </CollectionProperty>
       </AnalyzerSettings>

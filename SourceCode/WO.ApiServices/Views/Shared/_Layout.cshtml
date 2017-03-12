@@ -14,6 +14,7 @@
     @Scripts.Render("~/app/components/modules")
     @Scripts.Render("~/app/components/helpers")
     @Scripts.Render("~/app/components/services")
+    @Scripts.Render("~/app/shared/directives")
     @Scripts.Render("~/app/components/controllers")
 </head>
 <body ng-app="woApp">
@@ -49,8 +50,8 @@
                     <li ui-sref-active="active"><a ui-sref="trainingTypeHome">Training Types</a></li>
                     <li ui-sref-active="active"><a ui-sref="approachHome">Approaches</a></li>
                     <li ui-sref-active="active"><a ui-sref="exerciseHome">Exercises</a></li>
-                    <li><a href="#">Sets</a></li>
-                    <li><a href="#">Trainings</a></li>
+                    <li ui-sref-active="active"><a ui-sref="setHome">Sets</a></li>
+                    <li ui-sref-active="active"><a ui-sref="trainingHome">Trainings</a></li>
                 </ul>
             </div>
 
