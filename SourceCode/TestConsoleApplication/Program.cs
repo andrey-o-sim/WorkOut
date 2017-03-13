@@ -11,6 +11,44 @@ namespace TestConsoleApplication
         static void Main(string[] args)
         {
             WorkOutContext context = new WorkOutContext("WorkOutDbConnection");
+
+            Repository<Set> repSet = new Repository<Set>(context);
+            Repository<Exercise> repExercise = new Repository<Exercise>(context);
+            Repository<Approach> repApproach = new Repository<Approach>(context);
+
+            Exercise firstEx = new Exercise
+            {
+                Name = "Test",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            Approach firstApproach = new Approach
+            {
+                PlannedTimeForRest = 0,
+                SpentTimeForRest = 0,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            repExercise.Create(firstEx);
+            repApproach.Create(firstApproach);
+
+            Set set = new Set
+            {
+                TimeForRest=10,
+                PlannedTime = 0,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            set.Approaches.Add(firstApproach);
+            set.Exercises.Add(firstEx);
+
+            repSet.Create(set);
+
+
+
             Repository<TrainingType> rep = new Repository<TrainingType>(context);
             //var test = rep.Get(1);
 
@@ -30,7 +68,7 @@ namespace TestConsoleApplication
 
             context.Set<TrainingType>().Attach(test1);
 
-            foreach(var changeTrack in context.ChangeTracker.Entries())
+            foreach (var changeTrack in context.ChangeTracker.Entries())
             {
                 Console.WriteLine(changeTrack.Entity);
             }
@@ -47,12 +85,12 @@ namespace TestConsoleApplication
 
             Repository<TrainingType> rep1 = new Repository<TrainingType>(context);
 
-            var trainingType= rep1.Get(tt.Id);
+            var trainingType = rep1.Get(tt.Id);
             trainingType.TypeTraining = "fwefwef";
             trainingType.Trainings = new List<Training>();
             rep1.Update(tt);
 
-            
+
         }
     }
 }

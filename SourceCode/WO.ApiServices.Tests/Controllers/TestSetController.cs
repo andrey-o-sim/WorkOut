@@ -34,7 +34,7 @@ namespace WO.ApiServices.Tests.Controllers
                    Id = 1,
                    CountApproaches = 5,
                    CountMadeApproaches = 5,
-                   PlainTime = 1000,
+                   PlannedTimeFor = 1000,
                    TimeForRest = 120,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -44,7 +44,7 @@ namespace WO.ApiServices.Tests.Controllers
                    Id = 2,
                    CountApproaches = 4,
                    CountMadeApproaches = 4,
-                   PlainTime = 500,
+                   PlannedTimeFor = 500,
                    TimeForRest = 60,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -54,7 +54,7 @@ namespace WO.ApiServices.Tests.Controllers
                    Id = 3,
                    CountApproaches = 6,
                    CountMadeApproaches = 6,
-                   PlainTime = 1100,
+                   PlannedTimeFor = 1100,
                    TimeForRest = 100,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -107,7 +107,7 @@ namespace WO.ApiServices.Tests.Controllers
             {
                 CountApproaches = 7,
                 CountMadeApproaches = 7,
-                PlainTime = new TimeWO { Hours = 0, Minutes = 30, Seconds = 0 },
+                PlannedTime = new TimeWO { Hours = 0, Minutes = 30, Seconds = 0 },
                 TimeForRest = new TimeWO { Hours = 0, Minutes = 1, Seconds = 50 },
             };
 
@@ -144,7 +144,7 @@ namespace WO.ApiServices.Tests.Controllers
             var updateSet = new Set
             {
                 Id = 2,
-                SummaryTime = new TimeWO { Hours = 0, Minutes = 5, Seconds = 55 }
+                SpentTime = new TimeWO { Hours = 0, Minutes = 5, Seconds = 55 }
             };
 
             _mock.Setup(s => s.Update(It.IsAny<SetDTO>())).Returns<SetDTO>(updateValue =>
@@ -168,7 +168,7 @@ namespace WO.ApiServices.Tests.Controllers
             Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<IOperationResult>));
             Assert.IsTrue(operationResult.Content.Succeed);
             Assert.IsTrue(operationResult.Content.ResultItemId > 0);
-            Assert.AreEqual(_sets.Find(set => set.Id == updateSet.Id).SummaryTime, TimeWoOperations.FromTimeWoToSeconds(updateSet.SummaryTime));
+            Assert.AreEqual(_sets.Find(set => set.Id == updateSet.Id).SpentTime, TimeWoOperations.FromTimeWoToSeconds(updateSet.SpentTime));
         }
 
         [TestMethod]

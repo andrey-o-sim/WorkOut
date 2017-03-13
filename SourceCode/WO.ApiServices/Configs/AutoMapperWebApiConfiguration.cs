@@ -36,18 +36,18 @@ namespace WO.ApiServices.Configs
                   cfg.CreateMap<ExerciseDTO, Exercise>();
 
                   cfg.CreateMap<Set, SetDTO>()
-                    .ForMember(dest => dest.PlainTime,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.PlainTime)))
-                    .ForMember(dest => dest.SummaryTime,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.SummaryTime)))
+                    .ForMember(dest => dest.PlannedTimeFor,
+                             opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.PlannedTime)))
+                    .ForMember(dest => dest.SpentTime,
+                             opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.SpentTime)))
                     .ForMember(dest => dest.TimeForRest,
                              opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.TimeForRest)));
 
                   cfg.CreateMap<SetDTO, Set>()
-                  .ForMember(dest => dest.PlainTime,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlainTime)))
-                  .ForMember(dest => dest.SummaryTime,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.SummaryTime)))
+                  .ForMember(dest => dest.PlannedTime,
+                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlannedTimeFor)))
+                  .ForMember(dest => dest.SpentTime,
+                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.SpentTime)))
                   .ForMember(dest => dest.TimeForRest,
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.TimeForRest)));
 

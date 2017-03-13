@@ -30,8 +30,6 @@
             vm.decreaseMinutes = decreaseMinutes;
             vm.decreaseSeconds = decreaseSeconds;
 
-            //vm.onlyNumbersPattern = /^\d+$/;
-
             var emptyTime = {
                 Hours: 0,
                 Minutes: 0,

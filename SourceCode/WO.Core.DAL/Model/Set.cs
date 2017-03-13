@@ -15,26 +15,23 @@ namespace WO.Core.DAL.Model
             Approaches = new List<Approach>();
         }
 
+        public int? PlannedTime { get; set; }
+
         [Required]
         public int? TimeForRest { get; set; }
+
         [Required]
         public int CountApproaches { get; set; }
-
-        //Использовать конвенции
-        //кол-во > 0
-        [Required]
-        public virtual IEnumerable<Exercise> Exercises { get; set; }
-
-        //кол-во > 0
-        [Required]
-        public virtual IEnumerable<Approach> Approaches { get; set; }
-        public int? PlainTime { get; set; }
-        public int? SummaryTime { get; set; }
+        public int? SpentTime { get; set; }
         public int CountMadeApproaches { get; set; }
 
-        public int? TrainingId { get; set; }
+        [Required]
+        public virtual ICollection<Exercise> Exercises { get; set; }
 
-        //навигационное свойство
+        [Required]
+        public virtual ICollection<Approach> Approaches { get; set; }
+
+        public int? TrainingId { get; set; }
         public virtual Training Training { get; set; }
     }
 }

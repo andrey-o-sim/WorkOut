@@ -30,7 +30,7 @@ namespace WO.ApiServices.Tests.Services
                    Id = 1,
                    CountApproaches = 5,
                    CountMadeApproaches = 5,
-                   PlainTime = 1000,
+                   PlannedTimeFor = 1000,
                    TimeForRest = 120,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -40,7 +40,7 @@ namespace WO.ApiServices.Tests.Services
                    Id = 2,
                    CountApproaches = 4,
                    CountMadeApproaches = 4,
-                   PlainTime = 500,
+                   PlannedTimeFor = 500,
                    TimeForRest = 60,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -50,7 +50,7 @@ namespace WO.ApiServices.Tests.Services
                    Id = 3,
                    CountApproaches = 6,
                    CountMadeApproaches = 6,
-                   PlainTime = 1100,
+                   PlannedTimeFor = 1100,
                    TimeForRest = 100,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -138,7 +138,7 @@ namespace WO.ApiServices.Tests.Services
             {
                 CountApproaches = 7,
                 CountMadeApproaches = 7,
-                PlainTime = 1800,
+                PlannedTimeFor = 1800,
                 TimeForRest = 90,
             };
 
@@ -171,7 +171,7 @@ namespace WO.ApiServices.Tests.Services
             var updateSet = new SetDTO
             {
                 Id = 2,
-                SummaryTime = 355
+                SpentTime = 355
             };
 
             _mock.Setup(s => s.Update(It.IsAny<SetDTO>())).Callback<SetDTO>(updateValue =>
@@ -189,7 +189,7 @@ namespace WO.ApiServices.Tests.Services
             Assert.IsInstanceOfType(result, typeof(IOperationResult));
             Assert.IsTrue(result.Succeed);
             Assert.IsTrue(result.ResultItemId > 0);
-            Assert.AreEqual(_sets.Find(set => set.Id == updateSet.Id).SummaryTime, updateSet.SummaryTime);
+            Assert.AreEqual(_sets.Find(set => set.Id == updateSet.Id).SpentTime, updateSet.SpentTime);
         }
 
         [TestMethod]

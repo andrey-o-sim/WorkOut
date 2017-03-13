@@ -1,1 +1,53 @@
-﻿
+﻿<h2 class="page-header">Add Set</h2>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Planned Time For Set:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.PlannedTime"></wo-time-selector>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Time For Rest After Approach:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.TimeForRest"></wo-time-selector>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Count Approaches:</h3>
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="form-control" id="countApproaches" ng-model="vm.set.CountApproaches" required />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h3 for="planTimeForRest" class="control-label">Exercises:</h3>
+        </div>
+        <div class="col-md-8">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.set)">Save</button>
+        <a id="cancel" class="btn btn-primary" ui-sref="setHome">Cancel</a>
+    </div>
+</div>

@@ -4,7 +4,8 @@
         .controller('approachNewController', approachNewController);
 
     approachNewController
-        .$inject = ['approachService',
+        .$inject = [
+            'approachService',
             '$state'];
 
     function approachNewController(

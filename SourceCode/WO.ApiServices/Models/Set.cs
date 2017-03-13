@@ -14,14 +14,14 @@ namespace WO.ApiServices.Models
             Approaches = new List<Approach>();
         }
 
+        public TimeWO PlannedTime { get; set; }
         public TimeWO TimeForRest { get; set; }
-        public TimeWO PlainTime { get; set; }
-        public TimeWO SummaryTime { get; set; }
+        public TimeWO SpentTime { get; set; }
         public int CountApproaches { get; set; }
         public int CountMadeApproaches { get; set; }
 
-        public IEnumerable<Exercise> Exercises { get; set; }
-        public IEnumerable<Approach> Approaches { get; set; }
+        public ICollection<Exercise> Exercises { get; set; }
+        public ICollection<Approach> Approaches { get; set; }
 
         public Training Training { get; set; }
     }

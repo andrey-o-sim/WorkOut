@@ -5,7 +5,7 @@
     function routeConfig($stateProvider) {
         var homeRoute = {
             name: 'setHome',
-            url: '/setHome',
+            url: '/set',
             templateUrl: '/app/components/Set/pages/set.home.html',
             controller: 'setHomeController',
             controllerAs: 'vm'
@@ -13,7 +13,7 @@
 
         var newRoute = {
             name: 'setNew',
-            url: '/setNew',
+            url: '/set/new',
             templateUrl: '/app/components/Set/forms/set.new.html',
             controller: 'setNewController',
             controllerAs: 'vm'
@@ -21,7 +21,7 @@
 
         var editRoute = {
             name: 'setEdit',
-            url: '/setEdit',
+            url: '/set/edit/{id}',
             templateUrl: '/app/components/Set/forms/set.edit.html',
             controller: 'setEditController',
             controllerAs: 'vm'
@@ -29,7 +29,7 @@
 
         var viewRoute = {
             name: 'setView',
-            url: '/setView',
+            url: '/set/view/{id}',
             templateUrl: '/app/components/Set/forms/set.View.html',
             controller: 'setViewController',
             controllerAs: 'vm'

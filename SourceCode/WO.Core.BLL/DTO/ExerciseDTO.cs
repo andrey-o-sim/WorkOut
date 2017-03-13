@@ -8,9 +8,14 @@ namespace WO.Core.BLL.DTO
 {
     public class ExerciseDTO : BaseModelDTO
     {
+        public ExerciseDTO()
+        {
+            Sets = new List<SetDTO>();
+        }
+
         public string Name { get; set; }
 
-        public SetDTO Set { get; set; }
+        public ICollection<SetDTO> Sets { get; set; }
         public int? SetId { get; set; }
     }
 }
