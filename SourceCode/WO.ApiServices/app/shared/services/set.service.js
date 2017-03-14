@@ -2,11 +2,14 @@
     angular.module('woApp')
         .factory('setService', setService);
 
-    setService.$inject = ['$http'];
+    setService.$inject = ['$http', 'workOutHelper'];
 
     var serviceUrl = '/api/Set/';
 
-    function setService($http) {
+    function setService(
+        $http,
+        workOutHelper) {
+
         var service = {
             getById: getById,
             getAll: getAll,

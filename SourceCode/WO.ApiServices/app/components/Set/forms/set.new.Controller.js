@@ -16,8 +16,26 @@
 
         init();
 
-        function init() {
+        vm.validator = validator;
 
+        function validator() {
+            return false;
+        }
+
+        function init() {
+            vm.set = {
+                PlannedTime: {
+                    Hours: 0,
+                    Minutes: 0,
+                    Seconds: 0
+                },
+                TimeForRest: {
+                    Hours: 0,
+                    Minutes: 0,
+                    Seconds: 0
+                },
+                CountApproaches: 0
+            }
         }
 
         function save(set) {

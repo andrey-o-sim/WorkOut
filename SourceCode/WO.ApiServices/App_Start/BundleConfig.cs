@@ -25,7 +25,8 @@ namespace WO.ApiServices
                 "~/app/assets/libs/angular-route.js",
                 "~/app/assets/libs/angular-animate.js",
                 "~/app/assets/libs/angular-sanitize.js",
-                "~/app/assets/libs/angular-ui/ui-bootstrap-tpls.js"));
+                "~/app/assets/libs/angular-ui/ui-bootstrap-tpls.js",
+                "~/app/assets/libs/angular-validator/angular-validator.js"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));
