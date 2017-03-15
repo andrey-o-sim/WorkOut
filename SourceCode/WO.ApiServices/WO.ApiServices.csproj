@@ -296,6 +296,8 @@
     <Content Include="app\components\Approach\pages\approach.home.controller.js" />
     <Content Include="app\components\Approach\pages\approach.home.html" />
     <Content Include="app\components\Exercise\exercise.route.js" />
+    <Content Include="app\components\Exercise\forms\exercise.add.edit.controller.js" />
+    <Content Include="app\components\Exercise\forms\exercise.add.edit.html" />
     <Content Include="app\components\Exercise\pages\exercise.home.controller.js" />
     <Content Include="app\components\Exercise\pages\exercise.home.html" />
     <Content Include="app\components\Set\forms\set.edit.controller.js" />
@@ -321,13 +323,18 @@
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\select.css" />
     <Content Include="Content\select.min.css" />
     <Content Include="Content\selectize.default.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="app\assets\libs\ai.0.15.0-build58334.js" />
@@ -1168,17 +1175,26 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\js\" />
-    <Folder Include="app\components\Exercise\forms\" />
     <Folder Include="app\components\Training\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Content\select.min.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
-    <Content Include="Content\select.min.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Project_Readme.html" />
     <Content Include="app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>

@@ -18,12 +18,12 @@ namespace WO.Core.DAL.Model
         public int? PlannedTime { get; set; }
 
         [Required]
-        public int? TimeForRest { get; set; }
+        public int TimeForRest { get; set; }
 
         [Required]
         public int CountApproaches { get; set; }
         public int? SpentTime { get; set; }
-        public int CountMadeApproaches { get; set; }
+        public int? CountMadeApproaches { get; set; }
 
         [Required]
         public virtual ICollection<Exercise> Exercises { get; set; }

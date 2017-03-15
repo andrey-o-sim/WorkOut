@@ -17,7 +17,8 @@ namespace WO.ApiServices
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/selectize.default.css",
-                      "~/Content/select.css"));
+                      "~/Content/select.css",
+                      "~/Content/font-awesome.css"));
 
             bundles.Add(new StyleBundle("~/app/assets/css").Include(
                 "~/app/assets/css/app.css"));
@@ -63,6 +64,7 @@ namespace WO.ApiServices
                 "~/app/components/Approach/approach.route.js",
 
                 "~/app/components/Exercise/pages/exercise.home.controller.js",
+                "~/app/components/Exercise/forms/exercise.add.edit.controller.js",
                 "~/app/components/Exercise/exercise.route.js",
 
                 "~/app/components/Set/pages/set.home.controller.js",
