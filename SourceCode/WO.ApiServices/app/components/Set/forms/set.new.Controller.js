@@ -3,12 +3,14 @@
         .controller('setNewController', setNewController);
 
     setNewController.$inject = [
-        'setService',
-        '$state'];
+        '$state',
+        'exerciseService',
+        'setService', ];
 
     function setNewController(
-        setService,
-        $state) {
+        $state,
+        exerciseService,
+        setService) {
 
         var vm = this;
 
@@ -34,8 +36,15 @@
                     Minutes: 0,
                     Seconds: 0
                 },
-                CountApproaches: 0
-            }
+                CountApproaches: 0,
+                Exercise: { id: 0, Name: '' }
+            };
+
+            exerciseService.getAll().then(function (result) {
+                if (result) {
+                    vm.Exercises = result;
+                }
+            });
         }
 
         function save(set) {

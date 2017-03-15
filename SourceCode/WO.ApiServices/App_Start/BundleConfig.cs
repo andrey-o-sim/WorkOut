@@ -15,7 +15,9 @@ namespace WO.ApiServices
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/selectize.default.css",
+                      "~/Content/select.css"));
 
             bundles.Add(new StyleBundle("~/app/assets/css").Include(
                 "~/app/assets/css/app.css"));
@@ -26,7 +28,8 @@ namespace WO.ApiServices
                 "~/app/assets/libs/angular-animate.js",
                 "~/app/assets/libs/angular-sanitize.js",
                 "~/app/assets/libs/angular-ui/ui-bootstrap-tpls.js",
-                "~/app/assets/libs/angular-validator/angular-validator.js"));
+                "~/app/assets/libs/angular-validator/angular-validator.js",
+                "~/app/assets/libs/ui-select/select.js"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));

@@ -323,6 +323,9 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\select.css" />
+    <Content Include="Content\select.min.css" />
+    <Content Include="Content\selectize.default.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1144,6 +1147,8 @@
     <Content Include="app\assets\libs\angular-ui\ui-bootstrap.min.js" />
     <Content Include="app\assets\libs\angular-validator\angular-validator.js" />
     <Content Include="app\assets\libs\angular-validator\angular-validator.min.js" />
+    <Content Include="app\assets\libs\ui-select\select.js" />
+    <Content Include="app\assets\libs\ui-select\select.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1159,6 +1164,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="app\assets\libs\ui-select\select.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\js\" />
@@ -1172,6 +1178,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Content\select.min.css.map" />
     <None Include="Project_Readme.html" />
     <Content Include="app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>
