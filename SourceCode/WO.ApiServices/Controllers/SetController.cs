@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using AutoMapper;
 using WO.ApiServices.Configs;
@@ -10,6 +6,7 @@ using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using WO.ApiServices.Controllers.ViewModel;
 
 namespace WO.ApiServices.Controllers
 {
@@ -52,6 +49,10 @@ namespace WO.ApiServices.Controllers
         public IHttpActionResult Create([FromBody]Set set)
         {
             var setDTO = _mapper.Map<SetDTO>(set);
+
+            var setViewModel = new SetViewModel();
+            setViewModel.GetFullSetData(setDTO);
+
             var result = _service.Create(setDTO);
 
             return Ok<IOperationResult>(result);

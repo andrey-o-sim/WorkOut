@@ -16,6 +16,5 @@ namespace WO.Core.BLL.DTO
         public string Name { get; set; }
 
         public ICollection<SetDTO> Sets { get; set; }
-        public int? SetId { get; set; }
     }
 }

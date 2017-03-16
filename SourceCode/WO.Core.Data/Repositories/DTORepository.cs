@@ -12,15 +12,15 @@ namespace WO.Core.Data.Repositories
 {
     public class DTORepository<TData, TDto> : IRepositoryDTO<TDto> where TData : BaseModel where TDto : BaseModelDTO
     {
-        private IRepository<TData> _repository;
-        private IMapper _mapper;
+        protected IRepository<TData> _repository;
+        protected IMapper _mapper;
         public DTORepository(IRepository<TData> repository)
         {
             _repository = repository;
             _mapper = AutoMapperDataConfiguration.MapperConfiguration.CreateMapper();
         }
 
-        public int Create(TDto item)
+        public virtual int Create(TDto item)
         {
             var dbItem = _mapper.Map<TData>(item);
             dbItem.CreatedDate = DateTime.Now;
@@ -29,7 +29,7 @@ namespace WO.Core.Data.Repositories
             return _repository.Create(dbItem);
         }
 
-        public void Update(TDto item)
+        public virtual void Update(TDto item)
         {
             var itemForUpdate = _repository.Get(item.Id);
 
@@ -39,12 +39,12 @@ namespace WO.Core.Data.Repositories
             _repository.Update(itemForUpdate);
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             _repository.Delete(id);
         }
 
-        public TDto Find(Func<TDto, bool> predicate)
+        public virtual TDto Find(Func<TDto, bool> predicate)
         {
             var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
             var result = _repository.Find(repPredicate);
@@ -53,7 +53,7 @@ namespace WO.Core.Data.Repositories
             return dataItems;
         }
 
-        public IEnumerable<TDto> FindMany(Func<TDto, bool> predicate)
+        public virtual IEnumerable<TDto> FindMany(Func<TDto, bool> predicate)
         {
             var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
             var result = _repository.FindMany(repPredicate).ToList();
@@ -62,17 +62,17 @@ namespace WO.Core.Data.Repositories
             return dataItems;
         }
 
-        public TDto Get(int id)
+        public virtual TDto Get(int id)
         {
             var dbItem = _repository.Get(id);
             var dataItem = _mapper.Map<TDto>(dbItem);
             return dataItem;
         }
 
-        public IEnumerable<TDto> GetAll()
+        public virtual IEnumerable<TDto> GetAll()
         {
-            var dbItem = _repository.GetAll();
-            var dataItems = _mapper.Map<List<TDto>>(dbItem);
+            var dbItems = _repository.GetAll();
+            var dataItems = _mapper.Map<List<TDto>>(dbItems);
             return dataItems;
         }
     }

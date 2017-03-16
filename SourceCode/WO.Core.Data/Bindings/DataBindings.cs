@@ -20,7 +20,7 @@ namespace WO.Core.Data.Bindings
             Bind<IRepositoryDTO<ApproachDTO>>().To<DTORepository<Approach, ApproachDTO>>();
 
             Bind<IRepository<Set>>().To<Repository<Set>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
-            Bind<IRepositoryDTO<SetDTO>>().To<DTORepository<Set, SetDTO>>();
+            Bind<IRepositoryDTO<SetDTO>>().To<DTOSetRepository>();
 
             Bind<IRepository<Training>>().To<Repository<Training>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
             Bind<IRepositoryDTO<TrainingDTO>>().To<DTORepository<Training, TrainingDTO>>();

@@ -33,10 +33,14 @@ namespace WO.Core.Data.Configs
                 cfg.CreateMap<Set, SetDTO>();
                 cfg.CreateMap<SetDTO, Set>();
 
-                cfg.CreateMap<Exercise, ExerciseDTO>();
+                cfg.CreateMap<Exercise, ExerciseDTO>()
+                .ForMember(exDto => exDto.Sets, ex => ex.MapFrom(e => e.Sets));
+                //.ForMember(exDto => exDto.Id, ex => ex.MapFrom(e => e.Id))
+                //.ForMember(exDto => exDto.Name, ex => ex.MapFrom(e => e.Name));
                 cfg.CreateMap<ExerciseDTO, Exercise>();
 
-                cfg.CreateMap<Approach, ApproachDTO>();
+                cfg.CreateMap<Approach, ApproachDTO>()
+                .ForMember(exDto => exDto.Set, ex => ex.MapFrom(e => e.Set));
                 cfg.CreateMap<ApproachDTO, Approach>();
             });
         }

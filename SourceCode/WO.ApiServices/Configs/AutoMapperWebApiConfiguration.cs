@@ -36,7 +36,7 @@ namespace WO.ApiServices.Configs
                   cfg.CreateMap<ExerciseDTO, Exercise>();
 
                   cfg.CreateMap<Set, SetDTO>()
-                    .ForMember(dest => dest.PlannedTimeFor,
+                    .ForMember(dest => dest.PlannedTime,
                              opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.PlannedTime)))
                     .ForMember(dest => dest.SpentTime,
                              opt => opt.MapFrom(src => TimeWoOperations.FromTimeWoToSeconds(src.SpentTime)))
@@ -45,7 +45,7 @@ namespace WO.ApiServices.Configs
 
                   cfg.CreateMap<SetDTO, Set>()
                   .ForMember(dest => dest.PlannedTime,
-                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlannedTimeFor)))
+                             opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlannedTime)))
                   .ForMember(dest => dest.SpentTime,
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.SpentTime)))
                   .ForMember(dest => dest.TimeForRest,

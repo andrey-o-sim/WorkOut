@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WO.Core.DAL.Model;
 
 namespace WO.Core.DAL.Interfaces
 {
@@ -15,5 +16,6 @@ namespace WO.Core.DAL.Interfaces
         int Create(T item);
         void Update(T item);
         void Delete(int id);
+        void AttachToContext<TEntity>(TEntity item) where TEntity : class;
     }
 }

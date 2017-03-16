@@ -30,7 +30,7 @@ namespace WO.ApiServices.Tests.Services
                    Id = 1,
                    CountApproaches = 5,
                    CountMadeApproaches = 5,
-                   PlannedTimeFor = 1000,
+                   PlannedTime = 1000,
                    TimeForRest = 120,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -40,7 +40,7 @@ namespace WO.ApiServices.Tests.Services
                    Id = 2,
                    CountApproaches = 4,
                    CountMadeApproaches = 4,
-                   PlannedTimeFor = 500,
+                   PlannedTime = 500,
                    TimeForRest = 60,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -50,7 +50,7 @@ namespace WO.ApiServices.Tests.Services
                    Id = 3,
                    CountApproaches = 6,
                    CountMadeApproaches = 6,
-                   PlannedTimeFor = 1100,
+                   PlannedTime = 1100,
                    TimeForRest = 100,
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
@@ -138,7 +138,7 @@ namespace WO.ApiServices.Tests.Services
             {
                 CountApproaches = 7,
                 CountMadeApproaches = 7,
-                PlannedTimeFor = 1800,
+                PlannedTime = 1800,
                 TimeForRest = 90,
             };
 

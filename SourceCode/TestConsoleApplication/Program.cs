@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using WO.Core.BLL.DTO;
 using WO.Core.DAL.DataBaseContext;
 using WO.Core.DAL.Model;
 using WO.Core.DAL.Repositories;
+using WO.Core.Data.Repositories;
 
 namespace TestConsoleApplication
 {
@@ -11,10 +14,13 @@ namespace TestConsoleApplication
         static void Main(string[] args)
         {
             WorkOutContext context = new WorkOutContext("WorkOutDbConnection");
+            WorkOutContext context1 = new WorkOutContext("WorkOutDbConnection");
 
-            Repository<Set> repSet = new Repository<Set>(context);
+            Repository<Set> repSet = new Repository<Set>(context1);
             Repository<Exercise> repExercise = new Repository<Exercise>(context);
             Repository<Approach> repApproach = new Repository<Approach>(context);
+
+            DTOSetRepository dtoSet = new DTOSetRepository(repSet);
 
             Exercise firstEx = new Exercise
             {
@@ -22,6 +28,55 @@ namespace TestConsoleApplication
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
+
+            repExercise.Create(firstEx);
+
+
+            //Exercise ex = new Exercise
+            //{
+            //    Id = 1,
+            //    Name = "Test"
+            //};
+
+            //Set set1 = new Set
+            //{
+            //    TimeForRest = 10,
+            //    PlannedTime = 0,
+            //    CountApproaches = 1,
+            //    CreatedDate = DateTime.Now,
+            //    ModifiedDate = DateTime.Now
+            //};
+
+            ExerciseDTO ex = new ExerciseDTO
+            {
+                Id = 1,
+                Name = "Test"
+            };
+
+            SetDTO set1 = new SetDTO
+            {
+                TimeForRest = 10,
+                PlannedTime = 0,
+                CountApproaches = 1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+            set1.Exercises.Add(ex);
+
+            //context1.Exercises.Attach(ex);
+            //var contextChanges = context1.ChangeTracker.Entries().ToList();
+            //repSet.Create(set1);
+
+            dtoSet.Create(set1);
+
+
+            //Exercise firstEx = new Exercise
+            //{
+            //    Name = "Test",
+            //    CreatedDate = DateTime.Now,
+            //    ModifiedDate = DateTime.Now
+            //};
 
             Approach firstApproach = new Approach
             {
@@ -31,12 +86,11 @@ namespace TestConsoleApplication
                 ModifiedDate = DateTime.Now
             };
 
-            repExercise.Create(firstEx);
             repApproach.Create(firstApproach);
 
             Set set = new Set
             {
-                TimeForRest=10,
+                TimeForRest = 10,
                 PlannedTime = 0,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
