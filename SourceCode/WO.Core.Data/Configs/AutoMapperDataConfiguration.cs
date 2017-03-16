@@ -24,7 +24,8 @@ namespace WO.Core.Data.Configs
         {
             _mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TrainingType, TrainingTypeDTO>();
+                cfg.CreateMap<TrainingType, TrainingTypeDTO>()
+                .ForMember(dto => dto.Trainings, dl => dl.Ignore());
                 cfg.CreateMap<TrainingTypeDTO, TrainingType>();
 
                 cfg.CreateMap<Training, TrainingDTO>();
@@ -34,13 +35,11 @@ namespace WO.Core.Data.Configs
                 cfg.CreateMap<SetDTO, Set>();
 
                 cfg.CreateMap<Exercise, ExerciseDTO>()
-                .ForMember(exDto => exDto.Sets, ex => ex.MapFrom(e => e.Sets));
-                //.ForMember(exDto => exDto.Id, ex => ex.MapFrom(e => e.Id))
-                //.ForMember(exDto => exDto.Name, ex => ex.MapFrom(e => e.Name));
+                .ForMember(dto => dto.Sets, dl => dl.Ignore());
                 cfg.CreateMap<ExerciseDTO, Exercise>();
 
                 cfg.CreateMap<Approach, ApproachDTO>()
-                .ForMember(exDto => exDto.Set, ex => ex.MapFrom(e => e.Set));
+                .ForMember(dto => dto.Set, dl => dl.Ignore());
                 cfg.CreateMap<ApproachDTO, Approach>();
             });
         }

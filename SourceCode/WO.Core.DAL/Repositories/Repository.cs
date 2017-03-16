@@ -61,9 +61,13 @@ namespace WO.Core.DAL.Repositories
             return _dbContext.Set<T>().ToList();
         }
 
-        public void AttachToContext<TEntity>(TEntity item) where TEntity : class
+        public void AttachToContext<TEntity>(TEntity item) where TEntity : BaseModel
         {
-            _dbContext.Set<TEntity>().Attach(item);
+            if (!_dbContext.ChangeTracker.Entries<TEntity>().Any(b => b.Entity.Id == item.Id))
+            {
+                _dbContext.Set<TEntity>().Attach(item);
+            }
+
         }
 
         public void Dispose()

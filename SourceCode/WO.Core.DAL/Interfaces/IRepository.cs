@@ -16,6 +16,6 @@ namespace WO.Core.DAL.Interfaces
         int Create(T item);
         void Update(T item);
         void Delete(int id);
-        void AttachToContext<TEntity>(TEntity item) where TEntity : class;
+        void AttachToContext<TEntity>(TEntity item) where TEntity : BaseModel;
     }
 }

@@ -1,74 +1,74 @@
 ﻿<h2 class="page-header">Add Set</h2>
 
 <div class="container-fluid">
-    <form angular-validator-submit="vm.save(vm.set)" name="setNewForm" novalidate angular-validator>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 for="planTimeForRest" class="control-label">Planned Time For Set:</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.PlannedTime"></wo-time-selector>
-                    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Planned Time For Set:</h3>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 for="planTimeForRest" class="control-label">Time For Rest After Approach:</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.TimeForRest"></wo-time-selector>
-                        <label ng-show="vm.validateForm==true && (vm.set.TimeForRest.Minutes===0 || vm.set.TimeForRest.Seconds===0)" class="requiredError">Need provide 'Time For Reset After Approach'</label>
-                    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.PlannedTime"></wo-time-selector>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <h3 for="planTimeForRest" class="control-label">Exercises:</h3>
-            </div>
-            <div class="col-md-9">
-                <div ng-show="!vm.Exercises">
-                    <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Time For Rest After Approach:</h3>
                 </div>
-                <div class="input-group" ng-if="vm.Exercises">
-                    <ui-select ng-model="vm.set.Exercises" multiple theme="selectize" title="Choose Exercises">
-                        <ui-select-match placeholder="Select or search an excercise in the list...">{{$item.Name}}</ui-select-match>
-                        <ui-select-choices repeat="exercise in vm.Exercises">
-                            <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-md" ng-click="vm.openModal()">
-                            Add New <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </span>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.TimeForRest"></wo-time-selector>
+                    <label ng-show="vm.validateForm==true && vm.validator.ValidTimeForRest==false" class="requiredError">Need to provide 'Time For Reset After Approach'</label>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row" ng-show="vm.set.TimeForRest.Minutes>=1 || vm.set.TimeForRest.Seconds>=1">
-            <div class="col-md-12">
-                <h3 for="planTimeForRest" class="control-label">Count Approaches:</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Exercises:</h3>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="!vm.Exercises">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
             </div>
-            <div class="col-md-3">
-                <input type="number" class="form-control" name="countApproaches"
-                       validator="vm.set.CountApproaches>=1" invalid-message="'Count of Approaches must be great than 0.'"
-                       ng-model="vm.set.CountApproaches" required required-message="'The Field is required.'" />
+            <div class="input-group" ng-if="vm.Exercises">
+                <ui-select ng-model="vm.set.Exercises" multiple theme="selectize" title="Choose Exercises">
+                    <ui-select-match placeholder="Select or search an excercise in the list...">{{$item.Name}}</ui-select-match>
+                    <ui-select-choices repeat="exercise in vm.Exercises">
+                        <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-md" ng-click="vm.openModal()">
+                        Add New <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+            </div>
+            <div>
+                <label ng-show="vm.validateForm==true && vm.validator.ValidExercises==false" class="requiredError">Need to provide at least one exercise</label>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary">Save</button>
-            <a id="cancel" class="btn btn-primary" ui-sref="setHome">Cancel</a>
+    <div class="row" ng-show="vm.set.TimeForRest.Minutes>=1 || vm.set.TimeForRest.Seconds>=1">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Count Approaches:</h3>
         </div>
-    </form>
+        <div class="col-md-3">
+            <input type="number" class="form-control" name="countApproaches" ng-model="vm.set.CountApproaches" />
+            <label ng-show="vm.validateForm==true && vm.validator.ValidCountApproaches==false" class="requiredError">Count of Approaches must be great than 0.</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button id="save" type="submit" class="btn btn-primary" ng-click="vm.save(vm.set)" ng-disabled="vm.disableSaveButton">Save</button>
+        <a id="cancel" class="btn btn-warning" ui-sref="setHome">Cancel</a>
+    </div>
 </div>

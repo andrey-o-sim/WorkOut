@@ -1,15 +1,33 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('setHomeController', setHomeController);
+        .controller('SetHomeController', SetHomeController);
 
-    setHomeController.$inject = ['setService'];
+    SetHomeController.$inject = ['setService', 'workOutHelper'];
 
-    function setHomeController(setService) {
+    function SetHomeController(setService, workOutHelper) {
         var vm = this;
+
+        vm.formIsReady = false;
+
+        vm.remove = remove;
 
         init();
 
-        function init() { }
+        function init() {
+            setService.getAll().then(function (result) {
+                if (result) {
+                    vm.sets = result;
+                }
+
+                vm.formIsReady = true;
+            });
+        }
+
+        function remove(id) {
+            setService.remove(id).then(function (result) {
+                vm.sets = workOutHelper.removeElementFromArray(vm.sets, result.ResultItemId);
+            });
+        }
     }
 })();

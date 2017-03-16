@@ -7,7 +7,7 @@
             name: 'setHome',
             url: '/set',
             templateUrl: '/app/components/Set/pages/set.home.html',
-            controller: 'setHomeController',
+            controller: 'SetHomeController',
             controllerAs: 'vm'
         };
 
