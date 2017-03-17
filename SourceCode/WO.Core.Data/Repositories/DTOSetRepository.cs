@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,17 @@ namespace WO.Core.Data.Repositories
 {
     public class DTOSetRepository : DTORepository<Set, SetDTO>, IRepositoryDTO<SetDTO>
     {
-        public DTOSetRepository(IRepository<Set> setRepository)
+        IRepository<Approach> _approachRepository;
+        IRepository<Exercise> _exerciseRepository;
+
+        public DTOSetRepository(IRepository<Set> setRepository,
+            IRepository<Approach> approachRepository,
+            IRepository<Exercise> exerciseRepository)
             : base(setRepository)
-        { }
+        {
+            _approachRepository = approachRepository;
+            _exerciseRepository = exerciseRepository;
+        }
 
         public override int Create(SetDTO setDto)
         {
@@ -24,10 +33,10 @@ namespace WO.Core.Data.Repositories
 
             foreach (Exercise exercise in set.Exercises)
             {
-                _repository.AttachToContext<Exercise>(exercise);
+                _repository.AttachToContext<Exercise>(exercise, EntityState.Unchanged);
             }
 
-            foreach(Approach approach in set.Approaches)
+            foreach (Approach approach in set.Approaches)
             {
                 approach.CreatedDate = DateTime.Now;
                 approach.ModifiedDate = DateTime.Now;
@@ -38,20 +47,32 @@ namespace WO.Core.Data.Repositories
 
         public override void Update(SetDTO setDto)
         {
-            var set = _mapper.Map<Set>(setDto);
-            set.ModifiedDate = DateTime.Now;
+            var setForUpdate = _repository.Get(setDto.Id);
+            _mapper.Map<SetDTO, Set>(setDto, setForUpdate);
 
-            foreach (Exercise exercise in set.Exercises)
+            setForUpdate.ModifiedDate = DateTime.Now;
+
+            var setExercises = setForUpdate.Exercises;
+            setForUpdate.Exercises = new List<Exercise>();
+            foreach (Exercise exercise in setExercises)
             {
-                _repository.AttachToContext<Exercise>(exercise);
+                var exerciseForUpdate = _exerciseRepository.Get(exercise.Id);
+                if (exerciseForUpdate.Sets.Any(s => s.Id == setForUpdate.Id) == false)
+                {
+                    exerciseForUpdate.Sets.Add(setForUpdate);
+                }
+                setForUpdate.Exercises.Add(exerciseForUpdate);
             }
 
-            foreach (Approach approach in set.Approaches)
+            var setApproaches = setForUpdate.Approaches;
+            setForUpdate.Approaches = new List<Approach>();
+            foreach (Approach approach in setApproaches)
             {
-                _repository.AttachToContext<Approach>(approach);
+                var approachForUpdate = _approachRepository.Get(approach.Id);
+                setForUpdate.Approaches.Add(approachForUpdate);
             }
 
-            _repository.Update(set);
+            _repository.Update(setForUpdate);
         }
     }
 }

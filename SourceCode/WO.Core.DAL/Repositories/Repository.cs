@@ -28,7 +28,10 @@ namespace WO.Core.DAL.Repositories
 
         public void Update(T item)
         {
-            _dbContext.Entry(item).State = EntityState.Modified;
+            var entry = _dbContext.Entry(item);
+            AttachToContext(item, EntityState.Modified);
+
+            entry.Property(i => i.CreatedDate).IsModified = false;
             _dbContext.SaveChanges();
         }
 
@@ -61,12 +64,12 @@ namespace WO.Core.DAL.Repositories
             return _dbContext.Set<T>().ToList();
         }
 
-        public void AttachToContext<TEntity>(TEntity item) where TEntity : BaseModel
+        public void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel
         {
             if (!_dbContext.ChangeTracker.Entries<TEntity>().Any(b => b.Entity.Id == item.Id))
             {
                 _dbContext.Set<TEntity>().Attach(item);
-                _dbContext.Entry(item).State = EntityState.Unchanged;
+                _dbContext.Entry(item).State = state;
             }
         }
 

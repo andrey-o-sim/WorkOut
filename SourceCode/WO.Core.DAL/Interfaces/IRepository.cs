@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,6 @@ namespace WO.Core.DAL.Interfaces
         int Create(T item);
         void Update(T item);
         void Delete(int id);
-        void AttachToContext<TEntity>(TEntity item) where TEntity : BaseModel;
+        void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel;
     }
 }
