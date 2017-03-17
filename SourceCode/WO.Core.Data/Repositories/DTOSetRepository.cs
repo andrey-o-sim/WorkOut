@@ -27,7 +27,31 @@ namespace WO.Core.Data.Repositories
                 _repository.AttachToContext<Exercise>(exercise);
             }
 
+            foreach(Approach approach in set.Approaches)
+            {
+                approach.CreatedDate = DateTime.Now;
+                approach.ModifiedDate = DateTime.Now;
+            }
+
             return _repository.Create(set);
+        }
+
+        public override void Update(SetDTO setDto)
+        {
+            var set = _mapper.Map<Set>(setDto);
+            set.ModifiedDate = DateTime.Now;
+
+            foreach (Exercise exercise in set.Exercises)
+            {
+                _repository.AttachToContext<Exercise>(exercise);
+            }
+
+            foreach (Approach approach in set.Approaches)
+            {
+                _repository.AttachToContext<Approach>(approach);
+            }
+
+            _repository.Update(set);
         }
     }
 }

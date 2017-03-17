@@ -26,21 +26,32 @@ namespace WO.Core.Data.Configs
             {
                 cfg.CreateMap<TrainingType, TrainingTypeDTO>()
                 .ForMember(dto => dto.Trainings, dl => dl.Ignore());
-                cfg.CreateMap<TrainingTypeDTO, TrainingType>();
+
+                cfg.CreateMap<TrainingTypeDTO, TrainingType>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
 
                 cfg.CreateMap<Training, TrainingDTO>();
-                cfg.CreateMap<TrainingDTO, Training>();
+                cfg.CreateMap<TrainingDTO, Training>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
 
                 cfg.CreateMap<Set, SetDTO>();
-                cfg.CreateMap<SetDTO, Set>();
+                cfg.CreateMap<SetDTO, Set>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
 
                 cfg.CreateMap<Exercise, ExerciseDTO>()
                 .ForMember(dto => dto.Sets, dl => dl.Ignore());
-                cfg.CreateMap<ExerciseDTO, Exercise>();
+                cfg.CreateMap<ExerciseDTO, Exercise>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
 
                 cfg.CreateMap<Approach, ApproachDTO>()
                 .ForMember(dto => dto.Set, dl => dl.Ignore());
-                cfg.CreateMap<ApproachDTO, Approach>();
+                cfg.CreateMap<ApproachDTO, Approach>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
             });
         }
     }

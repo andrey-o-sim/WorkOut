@@ -1,1 +1,96 @@
-﻿
+﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+
+<div class="container-fluid" ng-if="vm.formIsReady">
+    <h2 class="page-header">Edit Set</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Planned Time For Set:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.PlannedTime"></wo-time-selector>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Time For Rest After Approach:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.TimeForRest"></wo-time-selector>
+                    <label ng-show="vm.validateForm==true && vm.validator.ValidTimeForRest==false" class="requiredError">Need to provide 'Time For Reset After Approach'</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Exercises:</h3>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="!vm.Exercises">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+            </div>
+            <div class="input-group" ng-if="vm.Exercises">
+                <ui-select ng-model="vm.set.Exercises" multiple close-on-select="false" theme="selectize" title="Choose Exercises">
+                    <ui-select-match placeholder="Select or search an excercise in the list...">{{$item.Name}}</ui-select-match>
+                    <ui-select-choices repeat="exercise in vm.Exercises">
+                        <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-md" ng-click="vm.openModal()">
+                        Add New <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+            </div>
+            <div>
+                <label ng-show="vm.validateForm==true && vm.validator.ValidExercises==false" class="requiredError">Need to provide at least one exercise</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Approaches:</h3>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>Planned Time For Rest</th>
+                    <th>Spent Time For Rest</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="approach in vm.set.Approaches">
+                    <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
+                    <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-info" ui-sref="approachEdit({id:{{approach.Id}}})">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-sm btn-danger" ng-click="vm.removeApproach(approach.Id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{vm.set.Approaches.length}}"></td>
+                </tr>
+            </table>
+            <label ng-show="vm.set.CountApproaches===0 || vm.validator.ValidCountApproaches==false" class="requiredError">Count of Approaches must be great than 0.</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button id="save" type="submit" class="btn btn-primary" ng-click="vm.save(vm.set)" ng-disabled="vm.disableSaveButton">Save</button>
+        <a id="cancel" class="btn btn-warning" ui-sref="setHome">Cancel</a>
+    </div>
+</div>

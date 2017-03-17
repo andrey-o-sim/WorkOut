@@ -66,8 +66,8 @@ namespace WO.Core.DAL.Repositories
             if (!_dbContext.ChangeTracker.Entries<TEntity>().Any(b => b.Entity.Id == item.Id))
             {
                 _dbContext.Set<TEntity>().Attach(item);
+                _dbContext.Entry(item).State = EntityState.Unchanged;
             }
-
         }
 
         public void Dispose()

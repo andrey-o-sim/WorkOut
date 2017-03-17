@@ -1,14 +1,14 @@
 ﻿(function () {
     angular.module('woApp')
-        .controller('setNewController', setNewController);
+        .controller('SetNewController', SetNewController);
 
-    setNewController.$inject = [
+    SetNewController.$inject = [
         '$state',
         '$uibModal',
         'exerciseService',
         'setService',];
 
-    function setNewController(
+    function SetNewController(
         $state,
         $uibModal,
         exerciseService,
@@ -71,7 +71,7 @@
             var isValid = true;
 
             if (!set.TimeForRest
-                || (set.TimeForRest.Hours === 0 && set.TimeForRest.Minutes === 0 || set.TimeForRest.Seconds === 0)) {
+                || (set.TimeForRest.Hours === 0 && set.TimeForRest.Minutes === 0 && set.TimeForRest.Seconds === 0)) {
                 vm.validator.ValidTimeForRest = false;
                 isValid = false;
             }

@@ -1,10 +1,10 @@
 ﻿(function () {
     angular.module('woApp')
-        .controller('setViewController', setViewController);
+        .controller('SetViewController', SetViewController);
 
-    setViewController.$inject = ['setService'];
+    SetViewController.$inject = ['setService'];
 
-    function setViewController(setService) {
+    function SetViewController(setService) {
         var vm = this;
 
         init();

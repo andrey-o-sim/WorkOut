@@ -15,7 +15,7 @@
             name: 'setNew',
             url: '/set/new',
             templateUrl: '/app/components/Set/forms/set.new.html',
-            controller: 'setNewController',
+            controller: 'SetNewController',
             controllerAs: 'vm'
         };
 
@@ -23,7 +23,7 @@
             name: 'setEdit',
             url: '/set/edit/{id}',
             templateUrl: '/app/components/Set/forms/set.edit.html',
-            controller: 'setEditController',
+            controller: 'SetEditController',
             controllerAs: 'vm'
         };
 
@@ -31,7 +31,7 @@
             name: 'setView',
             url: '/set/view/{id}',
             templateUrl: '/app/components/Set/forms/set.View.html',
-            controller: 'setViewController',
+            controller: 'SetViewController',
             controllerAs: 'vm'
         };
 

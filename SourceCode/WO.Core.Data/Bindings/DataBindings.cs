@@ -1,4 +1,6 @@
 ﻿using Ninject.Modules;
+using Ninject.Web.Common;
+using System.Data.Entity;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.DataBaseContext;
@@ -13,19 +15,21 @@ namespace WO.Core.Data.Bindings
     {
         public override void Load()
         {
-            Bind<IRepository<TrainingType>>().To<Repository<TrainingType>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
+            Bind<DbContext>().To<WorkOutContext>().InRequestScope().WithConstructorArgument("connectionString", "WorkOutDbConnection");
+
+            Bind<IRepository<TrainingType>>().To<Repository<TrainingType>>();
             Bind<IRepositoryDTO<TrainingTypeDTO>>().To<DTORepository<TrainingType, TrainingTypeDTO>>();
 
-            Bind<IRepository<Approach>>().To<Repository<Approach>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
+            Bind<IRepository<Approach>>().To<Repository<Approach>>();
             Bind<IRepositoryDTO<ApproachDTO>>().To<DTORepository<Approach, ApproachDTO>>();
 
-            Bind<IRepository<Set>>().To<Repository<Set>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
+            Bind<IRepository<Set>>().To<Repository<Set>>();
             Bind<IRepositoryDTO<SetDTO>>().To<DTOSetRepository>();
 
-            Bind<IRepository<Training>>().To<Repository<Training>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
+            Bind<IRepository<Training>>().To<Repository<Training>>();
             Bind<IRepositoryDTO<TrainingDTO>>().To<DTORepository<Training, TrainingDTO>>();
 
-            Bind<IRepository<Exercise>>().To<Repository<Exercise>>().WithConstructorArgument("dbContext", new WorkOutContext("WorkOutDbConnection"));
+            Bind<IRepository<Exercise>>().To<Repository<Exercise>>();
             Bind<IRepositoryDTO<ExerciseDTO>>().To<DTORepository<Exercise, ExerciseDTO>>();
         }
     }

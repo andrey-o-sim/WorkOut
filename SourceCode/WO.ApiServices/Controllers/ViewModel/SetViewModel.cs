@@ -21,8 +21,6 @@ namespace WO.ApiServices.Controllers.ViewModel
             {
                 var approach = new ApproachDTO
                 {
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
                     PlannedTimeForRest = setDTO.TimeForRest
                 };
 

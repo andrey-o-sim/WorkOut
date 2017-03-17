@@ -39,7 +39,7 @@
                 <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
             </div>
             <div class="input-group" ng-if="vm.Exercises">
-                <ui-select ng-model="vm.set.Exercises" multiple theme="selectize" title="Choose Exercises">
+                <ui-select ng-model="vm.set.Exercises" multiple close-on-select="false" theme="selectize" title="Choose Exercises">
                     <ui-select-match placeholder="Select or search an excercise in the list...">{{$item.Name}}</ui-select-match>
                     <ui-select-choices repeat="exercise in vm.Exercises">
                         <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
