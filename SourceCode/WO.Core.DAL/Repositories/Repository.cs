@@ -11,13 +11,13 @@ namespace WO.Core.DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
-        private DbContext _dbContext;
+        protected DbContext _dbContext;
         public Repository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public int Create(T item)
+        public virtual int Create(T item)
         {
             _dbContext.Set<T>().Add(item);
             _dbContext.Entry(item).State = EntityState.Added;
@@ -26,7 +26,7 @@ namespace WO.Core.DAL.Repositories
             return item.Id;
         }
 
-        public void Update(T item)
+        public virtual void Update(T item)
         {
             var entry = _dbContext.Entry(item);
             AttachToContext(item, EntityState.Modified);
@@ -35,7 +35,7 @@ namespace WO.Core.DAL.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             var itemForRemove = _dbContext.Set<T>().Where(item => item.Id == id).FirstOrDefault();
             _dbContext.Set<T>().Remove(itemForRemove);
@@ -43,28 +43,28 @@ namespace WO.Core.DAL.Repositories
             _dbContext.SaveChanges();
         }
 
-        public T Find(Func<T, bool> predicate)
+        public virtual T Find(Func<T, bool> predicate)
         {
             return _dbContext.Set<T>().Where(predicate).FirstOrDefault();
         }
 
-        public IEnumerable<T> FindMany(Func<T, bool> predicate)
+        public virtual IEnumerable<T> FindMany(Func<T, bool> predicate)
         {
             return _dbContext.Set<T>().Where(predicate).ToList();
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             var result = _dbContext.Set<T>().Where(item => item.Id == id).FirstOrDefault();
             return result;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _dbContext.Set<T>().ToList();
         }
 
-        public void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel
+        public virtual void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel
         {
             if (!_dbContext.ChangeTracker.Entries<TEntity>().Any(b => b.Entity.Id == item.Id))
             {

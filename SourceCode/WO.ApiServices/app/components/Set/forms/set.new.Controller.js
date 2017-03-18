@@ -76,7 +76,7 @@
                 isValid = false;
             }
 
-            if (!set.Exercises || set.Exercises.length == 0) {
+            if (!set.Exercises || set.Exercises.length === 0) {
                 vm.validator.ValidExercises = false;
                 isValid = false;
             }
@@ -89,14 +89,19 @@
             return isValid;
         }
 
-        function openModal() {
+        function openModal(id) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 backdrop: 'static',
                 ariaLabelledBy: 'Exercise New',
                 templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
                 controller: 'ExerciseAddEditController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return id;
+                    }
+                }
             });
 
             modalInstance.result.then(function (exercise) {

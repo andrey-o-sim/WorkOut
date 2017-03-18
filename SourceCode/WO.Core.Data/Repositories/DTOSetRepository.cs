@@ -31,15 +31,19 @@ namespace WO.Core.Data.Repositories
             set.CreatedDate = DateTime.Now;
             set.ModifiedDate = DateTime.Now;
 
-            foreach (Exercise exercise in set.Exercises)
+            foreach (ExerciseDTO exercisedto in setDto.Exercises)
             {
-                _repository.AttachToContext<Exercise>(exercise, EntityState.Unchanged);
+                var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
+                set.Exercises.Add(exerciseForUpdate);
+                exerciseForUpdate.Sets.Add(set);
             }
 
-            foreach (Approach approach in set.Approaches)
+            foreach (ApproachDTO approachDto in setDto.Approaches)
             {
+                var approach = _mapper.Map<Approach>(approachDto);
                 approach.CreatedDate = DateTime.Now;
                 approach.ModifiedDate = DateTime.Now;
+                set.Approaches.Add(approach);
             }
 
             return _repository.Create(set);
@@ -52,27 +56,56 @@ namespace WO.Core.Data.Repositories
 
             setForUpdate.ModifiedDate = DateTime.Now;
 
-            var setExercises = setForUpdate.Exercises;
-            setForUpdate.Exercises = new List<Exercise>();
-            foreach (Exercise exercise in setExercises)
-            {
-                var exerciseForUpdate = _exerciseRepository.Get(exercise.Id);
-                if (exerciseForUpdate.Sets.Any(s => s.Id == setForUpdate.Id) == false)
-                {
-                    exerciseForUpdate.Sets.Add(setForUpdate);
-                }
-                setForUpdate.Exercises.Add(exerciseForUpdate);
-            }
+            AddDeleteExercises(setForUpdate, setDto);
 
-            var setApproaches = setForUpdate.Approaches;
-            setForUpdate.Approaches = new List<Approach>();
-            foreach (Approach approach in setApproaches)
-            {
-                var approachForUpdate = _approachRepository.Get(approach.Id);
-                setForUpdate.Approaches.Add(approachForUpdate);
-            }
+            //After add new approach button need to check and remove the method
+            AddApproaches(setForUpdate, setDto);
 
             _repository.Update(setForUpdate);
+        }
+
+        private void AddDeleteExercises(Set setForUpdate, SetDTO setDto)
+        {
+            var setExercises = setForUpdate.Exercises;
+
+            foreach (ExerciseDTO exercisedto in setDto.Exercises)
+            {
+                if (setExercises.Any(s => s.Id == exercisedto.Id) == false)
+                {
+                    var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
+                    setForUpdate.Exercises.Add(exerciseForUpdate);
+                    exerciseForUpdate.Sets.Add(setForUpdate);
+                }
+            }
+
+            var exercisesForRemove = new List<Exercise>();
+            foreach (Exercise exercise in setExercises)
+            {
+                if (setDto.Exercises.Any(s => s.Id == exercise.Id) == false)
+                {
+                    exercisesForRemove.Add(exercise);
+                }
+            }
+
+            foreach(Exercise exerciseForRemove in exercisesForRemove)
+            {
+                setForUpdate.Exercises.Remove(exerciseForRemove);
+                exerciseForRemove.Sets.Remove(setForUpdate);
+            }
+        }
+
+        private void AddApproaches(Set setForUpdate, SetDTO setDto)
+        {
+            var setApporoaches = setForUpdate.Approaches;
+
+            foreach (ApproachDTO approachDto in setDto.Approaches)
+            {
+                if (setApporoaches.Any(s => s.Id == approachDto.Id) == false)
+                {
+                    var approachForUpdate = _approachRepository.Get(approachDto.Id);
+                    setForUpdate.Approaches.Add(approachForUpdate);
+                }
+            }
         }
     }
 }

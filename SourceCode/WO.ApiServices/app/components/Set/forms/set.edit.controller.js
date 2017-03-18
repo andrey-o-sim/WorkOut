@@ -5,6 +5,7 @@
     SetEditController.$inject = [
         '$state',
         '$stateParams',
+        '$uibModal',
         'setService',
         'exerciseService',
         'approachService',
@@ -13,6 +14,7 @@
     function SetEditController(
         $state,
         $stateParams,
+        $uibModal,
         setService,
         exerciseService,
         approachService,
@@ -23,6 +25,7 @@
 
         vm.save = save;
         vm.removeApproach = removeApproach;
+        vm.openModal = openModal;
 
         init();
 
@@ -92,7 +95,7 @@
                 isValid = false;
             }
 
-            if (!set.Exercises || set.Exercises.length == 0) {
+            if (!set.Exercises || set.Exercises.length === 0) {
                 vm.validator.ValidExercises = false;
                 isValid = false;
             }
@@ -102,6 +105,52 @@
                 isValid = false;
             }
             return isValid;
+        }
+
+        function openModal(id) {
+            var ariaLabell = id > 0 ? 'Exercise Edit' : 'Exercise New';
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: ariaLabell,
+                templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
+                controller: 'ExerciseAddEditController',
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return id;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (exercise) {
+                var indexForUpdate = -1;
+                vm.Exercises.forEach(function (item, index) {
+                    if (item.Id === exercise.Id) {
+                        indexForUpdate = index;
+                        return true;
+                    }
+                });
+
+                if (indexForUpdate > -1) {
+                    vm.Exercises[indexForUpdate].Name = exercise.Name;
+
+                    indexForUpdate = -1;
+                    vm.set.Exercises.forEach(function (item, index) {
+                        if (item.Id === exercise.Id) {
+                            indexForUpdate = index;
+                            return true;
+                        }
+                    });
+
+                    if (indexForUpdate > -1) {
+                        vm.set.Exercises[indexForUpdate].Name = exercise.Name;
+                    }
+                }
+                else {
+                    vm.Exercises.push(exercise);
+                }
+            });
         }
     }
 }());

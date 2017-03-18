@@ -16,12 +16,18 @@ namespace TestConsoleApplication
             WorkOutContext context = new WorkOutContext("WorkOutDbConnection");
             WorkOutContext context1 = new WorkOutContext("WorkOutDbConnection");
 
-            Repository<Set> repSet = new Repository<Set>(context1);
+            Repository<Set> repSet = new Repository<Set>(context);
             Repository<Exercise> repExercise = new Repository<Exercise>(context);
             Repository<Approach> repApproach = new Repository<Approach>(context);
 
-            DTOSetRepository dtoSetRepository = new DTOSetRepository(repSet);
-            DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(repApproach);
+            ExerciseDTO firstEx = new ExerciseDTO
+            {
+                Name = "Test",
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+
+
 
             SetDTO set1 = new SetDTO
             {
@@ -32,6 +38,23 @@ namespace TestConsoleApplication
                 ModifiedDate = DateTime.Now
             };
 
+
+            DTOSetRepository dtoSetRepository = new DTOSetRepository(repSet, repApproach, repExercise);
+            DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(repApproach);
+            DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(repExercise);
+
+            firstEx.Id = dtoExcerciseRepository.Create(firstEx);
+            firstEx.CreatedDate = DateTime.Now;
+            firstEx.ModifiedDate = DateTime.Now;
+
+            set1.Exercises.Add(firstEx);
+            dtoSetRepository.Create(set1);
+
+            string settttt = "Set";
+            var exer = context.Exercises.Include(settttt).Where(item => item.Id == 1).FirstOrDefault();
+
+
+
             ApproachDTO approachDTO = new ApproachDTO
             {
                 CreatedDate = DateTime.Now,
@@ -40,8 +63,7 @@ namespace TestConsoleApplication
                 SpentTimeForRest = 12
             };
 
-            set1.Approaches.Add(approachDTO);
-            dtoSetRepository.Create(set1);
+
 
             var approaches = dtoApproachRepository.GetAll();
 

@@ -41,7 +41,7 @@
             </div>
             <div class="input-group" ng-if="vm.Exercises">
                 <ui-select ng-model="vm.set.Exercises" multiple close-on-select="false" theme="selectize" title="Choose Exercises">
-                    <ui-select-match placeholder="Select or search an excercise in the list...">{{$item.Name}}</ui-select-match>
+                    <ui-select-match placeholder="Select or search an excercise in the list..."><span ng-click="vm.openModal($item.Id)" tooltip-placement="right" uib-tooltip="Update">{{$item.Name}}</span></ui-select-match>
                     <ui-select-choices repeat="exercise in vm.Exercises">
                         <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
                     </ui-select-choices>
@@ -82,7 +82,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{vm.set.Approaches.length}}"></td>
+                    <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Approaches: {{vm.set.Approaches.length}}"></td>
                 </tr>
             </table>
             <label ng-show="vm.set.CountApproaches===0 || vm.validator.ValidCountApproaches==false" class="requiredError">Count of Approaches must be great than 0.</label>

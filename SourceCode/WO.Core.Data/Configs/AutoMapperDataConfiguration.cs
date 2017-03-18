@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
 using WO.Core.BLL.DTO;
 using WO.Core.DAL.Model;
 
@@ -39,13 +40,16 @@ namespace WO.Core.Data.Configs
                 cfg.CreateMap<Set, SetDTO>();
                 cfg.CreateMap<SetDTO, Set>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
-                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.Approaches, dl => dl.Ignore())
+                .ForMember(dto => dto.Exercises, dl => dl.Ignore());
 
                 cfg.CreateMap<Exercise, ExerciseDTO>()
-                .ForMember(dto => dto.Sets, dl => dl.Ignore());
+                .ForMember(dl => dl.Sets, dl => dl.Ignore());
                 cfg.CreateMap<ExerciseDTO, Exercise>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
-                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.Sets, dto => dto.Ignore());
 
                 cfg.CreateMap<Approach, ApproachDTO>()
                 .ForMember(dto => dto.Set, dl => dl.Ignore());
