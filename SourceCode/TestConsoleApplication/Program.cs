@@ -33,7 +33,6 @@ namespace TestConsoleApplication
             {
                 TimeForRest = 10,
                 PlannedTime = 0,
-                CountApproaches = 1,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };

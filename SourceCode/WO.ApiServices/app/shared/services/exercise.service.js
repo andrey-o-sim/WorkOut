@@ -15,6 +15,7 @@
 
         var service = {
             getById: getById,
+            getByName: getByName,
             getAll: getAll,
             create: create,
             update: update,
@@ -25,6 +26,20 @@
 
         function getById(id) {
             return $http.get(exerciseServiceUrl + id)
+                .then(success, error);
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(response) {
+                workOutHelper.writeErrorMessageToConsole(response);
+            }
+        }
+
+        function getByName(name) {
+            return $http.get(exerciseServiceUrl + name)
                 .then(success, error);
 
             function success(response) {

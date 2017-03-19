@@ -92,42 +92,42 @@ namespace WO.ApiServices.Tests.Services
             Assert.AreEqual(_sets.Count, result.Count());
         }
 
-        [TestMethod]
-        public void Find()
-        {
-            //Arrange
-            var searchSetId = 1;
-            _mock.Setup(s => s.Find(It.IsAny<Func<SetDTO, bool>>())).Returns<Func<SetDTO, bool>>(predicate =>
-           {
-               return _sets.Where(predicate).FirstOrDefault();
-           });
+        //[TestMethod]
+        //public void Find()
+        //{
+        //    //Arrange
+        //    var searchSetId = 1;
+        //    _mock.Setup(s => s.Find(It.IsAny<Func<SetDTO, bool>>())).Returns<Func<SetDTO, bool>>(predicate =>
+        //   {
+        //       return _sets.Where(predicate).FirstOrDefault();
+        //   });
 
-            //Act
-            var result = _setService.Find(set => set.Id == searchSetId);
+        //    //Act
+        //    var result = _setService.Find(set => set.Id == searchSetId);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SetDTO));
-            Assert.AreEqual(result.Id, searchSetId);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(SetDTO));
+        //    Assert.AreEqual(result.Id, searchSetId);
+        //}
 
-        [TestMethod]
-        public void FindMany()
-        {
-            //Arrange
-            _mock.Setup(s => s.FindMany(It.IsAny<Func<SetDTO, bool>>())).Returns<Func<SetDTO, bool>>(predicate =>
-           {
-               return _sets.Where(predicate).ToList();
-           });
+        //[TestMethod]
+        //public void FindMany()
+        //{
+        //    //Arrange
+        //    _mock.Setup(s => s.FindMany(It.IsAny<Func<SetDTO, bool>>())).Returns<Func<SetDTO, bool>>(predicate =>
+        //   {
+        //       return _sets.Where(predicate).ToList();
+        //   });
 
-            //Act
-            var result = _setService.FindMany(set => set.Id > 0);
+        //    //Act
+        //    var result = _setService.FindMany(set => set.Id > 0);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<SetDTO>));
-            Assert.AreEqual(result.Count(), _sets.Count);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(IEnumerable<SetDTO>));
+        //    Assert.AreEqual(result.Count(), _sets.Count);
+        //}
 
         [TestMethod]
         public void Create()

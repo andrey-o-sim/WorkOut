@@ -41,13 +41,15 @@
             </div>
             <div class="input-group" ng-if="vm.Exercises">
                 <ui-select ng-model="vm.set.Exercises" multiple close-on-select="false" theme="selectize" title="Choose Exercises">
-                    <ui-select-match placeholder="Select or search an excercise in the list..."><span ng-click="vm.openModal($item.Id)" tooltip-placement="right" uib-tooltip="Update">{{$item.Name}}</span></ui-select-match>
+                    <ui-select-match placeholder="Select an excercise in the list...">
+                        <span ng-click="vm.addEditExercise($item.Id,vm.set.Id)" tooltip-placement="right" uib-tooltip="Update">{{$item.Name}}</span>
+                    </ui-select-match>
                     <ui-select-choices repeat="exercise in vm.Exercises">
                         <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-success btn-md" ng-click="vm.openModal()">
+                    <button type="button" class="btn btn-success btn-md" ng-click="vm.addEditExercise(null,vm.set.Id)">
                         Add New <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </span>
@@ -73,7 +75,7 @@
                     <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
                     <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
                     <td class="text-right">
-                        <a class="btn btn-sm btn-info" ui-sref="approachEdit({id:{{approach.Id}}})">
+                        <a class="btn btn-sm btn-info" ng-click="vm.addEditApproach(approach.Id,vm.set.Id)">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-sm btn-danger" ng-click="vm.removeApproach(approach.Id)">
@@ -82,10 +84,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Approaches: {{vm.set.Approaches.length}}"></td>
+                    <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{vm.set.Approaches.length}}"></td>
+                    <td class="text-right">
+                        <button id="createApproach" class="btn btn-primary" ng-click="vm.addEditApproach(null,vm.set.Id)">
+                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                            Add Approach
+                        </button>
+                    </td>
                 </tr>
             </table>
-            <label ng-show="vm.set.CountApproaches===0 || vm.validator.ValidCountApproaches==false" class="requiredError">Count of Approaches must be great than 0.</label>
+            <label ng-show="vm.set.validateForm===true || vm.validator.ValidCountApproaches===false" class="requiredError">Count of Approaches must be great than 0.</label>
         </div>
     </div>
 

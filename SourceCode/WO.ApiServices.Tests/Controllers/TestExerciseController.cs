@@ -10,20 +10,21 @@ using WO.Core.BLL;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using WO.Core.BLL.Interfaces.Services;
 
 namespace WO.ApiServices.Tests.Controllers
 {
     [TestClass]
     public class TestExerciseController
     {
-        private Mock<IService<ExerciseDTO>> _mock;
+        private Mock<IExerciseService> _mock;
         private ExerciseController _exerciseController;
         private List<ExerciseDTO> _exercises;
 
         [TestInitialize]
         public void Init()
         {
-            _mock = new Mock<IService<ExerciseDTO>>();
+            _mock = new Mock<IExerciseService>();
             _exerciseController = new ExerciseController(_mock.Object);
 
             _exercises = new List<ExerciseDTO>

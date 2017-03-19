@@ -9,7 +9,7 @@ namespace WO.Core.DAL.Model
 {
     public class Approach : BaseModel
     {
-        //Добавить правила на ввод только чисел, знака тире и точки
+        [Required]
         public int PlannedTimeForRest { get; set; }
         public int SpentTimeForRest { get; set; }
 

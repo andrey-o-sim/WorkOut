@@ -92,42 +92,42 @@ namespace WO.ApiServices.Tests.Services
             Assert.AreEqual(_trainings.Count, result.Count());
         }
 
-        [TestMethod]
-        public void Find()
-        {
-            //Arrange
-            var searchTrainingId = 1;
-            _mock.Setup(s => s.Find(It.IsAny<Func<TrainingDTO, bool>>())).Returns<Func<TrainingDTO, bool>>(predicate =>
-           {
-               return _trainings.Where(predicate).FirstOrDefault();
-           });
+        //[TestMethod]
+        //public void Find()
+        //{
+        //    //Arrange
+        //    var searchTrainingId = 1;
+        //    _mock.Setup(s => s.Find(It.IsAny<Func<TrainingDTO, bool>>())).Returns<Func<TrainingDTO, bool>>(predicate =>
+        //   {
+        //       return _trainings.Where(predicate).FirstOrDefault();
+        //   });
 
-            //Act
-            var result = _trainingService.Find(training => training.Id == searchTrainingId);
+        //    //Act
+        //    var result = _trainingService.Find(training => training.Id == searchTrainingId);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(TrainingDTO));
-            Assert.AreEqual(result.Id, searchTrainingId);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(TrainingDTO));
+        //    Assert.AreEqual(result.Id, searchTrainingId);
+        //}
 
-        [TestMethod]
-        public void FindMany()
-        {
-            //Arrange
-            _mock.Setup(s => s.FindMany(It.IsAny<Func<TrainingDTO, bool>>())).Returns<Func<TrainingDTO, bool>>(predicate =>
-           {
-               return _trainings.Where(predicate).ToList();
-           });
+        //[TestMethod]
+        //public void FindMany()
+        //{
+        //    //Arrange
+        //    _mock.Setup(s => s.FindMany(It.IsAny<Func<TrainingDTO, bool>>())).Returns<Func<TrainingDTO, bool>>(predicate =>
+        //   {
+        //       return _trainings.Where(predicate).ToList();
+        //   });
 
-            //Act
-            var result = _trainingService.FindMany(training => training.Id > 0);
+        //    //Act
+        //    var result = _trainingService.FindMany(training => training.Id > 0);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<TrainingDTO>));
-            Assert.AreEqual(result.Count(), _trainings.Count);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(IEnumerable<TrainingDTO>));
+        //    Assert.AreEqual(result.Count(), _trainings.Count);
+        //}
 
         [TestMethod]
         public void Create()

@@ -86,42 +86,42 @@ namespace WO.ApiServices.Tests.Services
             Assert.AreEqual(_trainingTypes.Count, result.Count());
         }
 
-        [TestMethod]
-        public void Find()
-        {
-            //Arrange
-            var searchTrainingType = "Base";
-            _mock.Setup(s => s.Find(It.IsAny<Func<TrainingTypeDTO, bool>>())).Returns<Func<TrainingTypeDTO, bool>>(predicate =>
-              {
-                  return _trainingTypes.Where(predicate).FirstOrDefault();
-              });
+        //[TestMethod]
+        //public void Find()
+        //{
+        //    //Arrange
+        //    var searchTrainingType = "Base";
+        //    _mock.Setup(s => s.Find(It.IsAny<Func<TrainingTypeDTO, bool>>())).Returns<Func<TrainingTypeDTO, bool>>(predicate =>
+        //      {
+        //          return _trainingTypes.Where(predicate).FirstOrDefault();
+        //      });
 
-            //Act
-            var result = _trainingTypeService.Find(tt => tt.TypeTraining == searchTrainingType);
+        //    //Act
+        //    var result = _trainingTypeService.Find(tt => tt.TypeTraining == searchTrainingType);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(TrainingTypeDTO));
-            Assert.AreEqual(result.TypeTraining, searchTrainingType);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(TrainingTypeDTO));
+        //    Assert.AreEqual(result.TypeTraining, searchTrainingType);
+        //}
 
-        [TestMethod]
-        public void FindMany()
-        {
-            //Arrange
-            _mock.Setup(s => s.FindMany(It.IsAny<Func<TrainingTypeDTO, bool>>())).Returns<Func<TrainingTypeDTO, bool>>(predicate =>
-           {
-               return _trainingTypes.Where(predicate).ToList();
-           });
+        //[TestMethod]
+        //public void FindMany()
+        //{
+        //    //Arrange
+        //    _mock.Setup(s => s.FindMany(It.IsAny<Func<TrainingTypeDTO, bool>>())).Returns<Func<TrainingTypeDTO, bool>>(predicate =>
+        //   {
+        //       return _trainingTypes.Where(predicate).ToList();
+        //   });
 
-            //Act
-            var result = _trainingTypeService.FindMany(tt => tt.Id > 0);
+        //    //Act
+        //    var result = _trainingTypeService.FindMany(tt => tt.Id > 0);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<TrainingTypeDTO>));
-            Assert.AreEqual(result.Count(), _trainingTypes.Count);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(IEnumerable<TrainingTypeDTO>));
+        //    Assert.AreEqual(result.Count(), _trainingTypes.Count);
+        //}
 
         [TestMethod]
         public void Create()

@@ -2,15 +2,23 @@
     angular.module('woApp')
         .controller('SetViewController', SetViewController);
 
-    SetViewController.$inject = ['setService'];
+    SetViewController.$inject = [
+        '$stateParams',
+        'setService'];
 
-    function SetViewController(setService) {
+    function SetViewController(
+        $stateParams,
+        setService) {
         var vm = this;
+        vm.formIsReady = false;
 
         init();
 
         function init() {
-
+            setService.getById($stateParams.id).then(function (result) {
+                vm.set = result;
+                vm.formIsReady = true;
+            })
         }
     }
 }());

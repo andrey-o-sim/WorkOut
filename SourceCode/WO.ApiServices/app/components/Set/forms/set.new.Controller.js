@@ -20,7 +20,7 @@
 
         init();
 
-        vm.openModal = openModal;
+        vm.addEditExercise = addEditExercise;
 
         vm.validator = validator;
 
@@ -89,24 +89,71 @@
             return isValid;
         }
 
-        function openModal(id) {
+        function addEditExercise(exerciseId, setId) {
+            var ariaLabel = exerciseId > 0 ? 'Exercise Edit' : 'Exercise New';
+
+            var modalProperties = {
+                ariaLabelledBy: ariaLabel,
+                templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
+                controller: 'ExerciseAddEditController',
+                itemId: exerciseId,
+                setId: setId
+            };
+
+            var modalInstance = openModal(modalProperties);
+
+            modalInstance.result.then(
+                function (resultExercise) {
+                    var indexForUpdate = -1;
+                    vm.Exercises.forEach(function (item, index) {
+                        if (item.Id === resultExercise.Id) {
+                            indexForUpdate = index;
+                            return true;
+                        }
+                    });
+
+                    if (indexForUpdate > -1) {
+                        vm.Exercises[indexForUpdate].Name = resultExercise.Name;
+
+                        indexForUpdate = -1;
+                        vm.set.Exercises.forEach(function (item, index) {
+                            if (item.Id === resultExercise.Id) {
+                                indexForUpdate = index;
+                                return true;
+                            }
+                        });
+
+                        if (indexForUpdate > -1) {
+                            vm.set.Exercises[indexForUpdate].Name = resultExercise.Name;
+                        }
+                    }
+                    else {
+                        vm.Exercises.push(resultExercise);
+                    }
+                },
+                function () {
+                });
+        }
+
+        function openModal(modalProperties) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 backdrop: 'static',
-                ariaLabelledBy: 'Exercise New',
-                templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
-                controller: 'ExerciseAddEditController',
+                ariaLabelledBy: modalProperties.ariaLabell,
+                templateUrl: modalProperties.templateUrl,
+                controller: modalProperties.controller,
                 controllerAs: 'vm',
                 resolve: {
                     id: function () {
-                        return id;
+                        return modalProperties.itemId;
+                    },
+                    setId: function () {
+                        return modalProperties.setId;
                     }
                 }
             });
 
-            modalInstance.result.then(function (exercise) {
-                vm.Exercises.push(exercise);
-            });
+            return modalInstance;
         }
     }
 }());

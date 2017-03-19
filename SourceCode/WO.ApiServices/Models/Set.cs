@@ -18,7 +18,6 @@ namespace WO.ApiServices.Models
         public TimeWO TimeForRest { get; set; }
         public TimeWO SpentTime { get; set; }
         public int CountApproaches { get; set; }
-        public int CountMadeApproaches { get; set; }
 
         public ICollection<Exercise> Exercises { get; set; }
         public ICollection<Approach> Approaches { get; set; }

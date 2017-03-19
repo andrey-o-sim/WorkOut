@@ -86,42 +86,42 @@ namespace WO.ApiServices.Tests.Services
             Assert.AreEqual(_approaches.Count, result.Count());
         }
 
-        [TestMethod]
-        public void Find()
-        {
-            //Arrange
-            var searchApproachId = 1;
-            _mock.Setup(s => s.Find(It.IsAny<Func<ApproachDTO, bool>>())).Returns<Func<ApproachDTO, bool>>(predicate =>
-           {
-               return _approaches.Where(predicate).FirstOrDefault();
-           });
+        //[TestMethod]
+        //public void Find()
+        //{
+        //    //Arrange
+        //    var searchApproachId = 1;
+        //    _mock.Setup(s => s.Find(It.IsAny<Func<ApproachDTO, bool>>())).Returns<Func<ApproachDTO, bool>>(predicate =>
+        //   {
+        //       return _approaches.Where(predicate).FirstOrDefault();
+        //   });
 
-            //Act
-            var result = _approachService.Find(approach => approach.Id == searchApproachId);
+        //    //Act
+        //    var result = _approachService.Find(approach => approach.Id == searchApproachId);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ApproachDTO));
-            Assert.AreEqual(result.Id, searchApproachId);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(ApproachDTO));
+        //    Assert.AreEqual(result.Id, searchApproachId);
+        //}
 
-        [TestMethod]
-        public void FindMany()
-        {
-            //Arrange
-            _mock.Setup(s => s.FindMany(It.IsAny<Func<ApproachDTO, bool>>())).Returns<Func<ApproachDTO, bool>>(predicate =>
-           {
-               return _approaches.Where(predicate).ToList();
-           });
+        //[TestMethod]
+        //public void FindMany()
+        //{
+        //    //Arrange
+        //    _mock.Setup(s => s.FindMany(It.IsAny<Func<ApproachDTO, bool>>())).Returns<Func<ApproachDTO, bool>>(predicate =>
+        //   {
+        //       return _approaches.Where(predicate).ToList();
+        //   });
 
-            //Act
-            var result = _approachService.FindMany(approach => approach.Id > 0);
+        //    //Act
+        //    var result = _approachService.FindMany(approach => approach.Id > 0);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IEnumerable<ApproachDTO>));
-            Assert.AreEqual(result.Count(), _approaches.Count);
-        }
+        //    //Assert
+        //    Assert.IsNotNull(result);
+        //    Assert.IsInstanceOfType(result, typeof(IEnumerable<ApproachDTO>));
+        //    Assert.AreEqual(result.Count(), _approaches.Count);
+        //}
 
         [TestMethod]
         public void Create()

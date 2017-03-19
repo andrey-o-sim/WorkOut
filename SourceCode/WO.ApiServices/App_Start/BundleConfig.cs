@@ -60,6 +60,7 @@ namespace WO.ApiServices
                 "~/app/components/Approach/forms/approach.new.controller.js",
                 "~/app/components/Approach/forms/approach.edit.controller.js",
                 "~/app/components/Approach/forms/approach.view.controller.js",
+                "~/app/components/Approach/forms/approach.add.edit.controller.js",
                 "~/app/components/Approach/approach.route.js",
 
                 "~/app/components/Exercise/pages/exercise.home.controller.js",

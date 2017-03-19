@@ -8,7 +8,7 @@ namespace WO.Core.BLL.Services
 {
     public class GenericService<T> : IService<T> where T : BaseModelDTO
     {
-        private IRepositoryDTO<T> _repository;
+        protected IRepositoryDTO<T> _repository;
         public GenericService(IRepositoryDTO<T> repository)
         {
             _repository = repository;
@@ -22,16 +22,6 @@ namespace WO.Core.BLL.Services
         public IEnumerable<T> GetAll()
         {
             return _repository.GetAll();
-        }
-
-        public T Find(Func<T, bool> predicate)
-        {
-            return _repository.Find(predicate);
-        }
-
-        public IEnumerable<T> FindMany(Func<T, bool> predicate)
-        {
-            return _repository.FindMany(predicate);
         }
 
         public IOperationResult Create(T item)

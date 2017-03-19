@@ -288,6 +288,8 @@
     <Content Include="app\assets\libs\angular-ui-router\stateEvents.js" />
     <Content Include="app\assets\libs\angular-ui-router\stateEvents.min.js" />
     <Content Include="app\components\Approach\approach.route.js" />
+    <Content Include="app\components\Approach\forms\approach.add.edit.controller.js" />
+    <Content Include="app\components\Approach\forms\approach.add.edit.html" />
     <Content Include="app\components\Approach\forms\approach.edit.controller.js" />
     <Content Include="app\components\Approach\forms\approach.edit.html" />
     <Content Include="app\components\Approach\forms\approach.new.controller.js" />

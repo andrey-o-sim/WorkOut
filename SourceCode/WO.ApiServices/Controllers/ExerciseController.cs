@@ -6,21 +6,24 @@ using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using WO.Core.BLL.Interfaces.Services;
 
 namespace WO.ApiServices.Controllers
 {
+    [RoutePrefix("api/Exercise")]
     public class ExerciseController : ApiController
     {
-        private IService<ExerciseDTO> _service;
+        private IExerciseService _service;
         private IMapper _mapper;
 
-        public ExerciseController(IService<ExerciseDTO> exerciseService)
+        public ExerciseController(IExerciseService exerciseService)
         {
             _service = exerciseService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
 
         // GET: api/Exercise/5
+        [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
             var exerciseDTO = _service.Get(id);
@@ -32,6 +35,20 @@ namespace WO.ApiServices.Controllers
             }
 
             return NotFound();
+        }
+
+        [Route("{exerciseName}")]
+        public IHttpActionResult GetByName(string exerciseName)
+        {
+            var exerciseDTO = _service.GetByName(exerciseName);
+
+            if (exerciseDTO != null)
+            {
+                var exercise = _mapper.Map<Exercise>(exerciseDTO);
+                return Ok<Exercise>(exercise);
+            }
+
+            return Ok<Exercise>(new Exercise());
         }
 
         // GET: api/Exercise
@@ -64,6 +81,7 @@ namespace WO.ApiServices.Controllers
         }
 
         // DELETE: api/Exercise/5
+        [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
             var result = _service.Delete(id);

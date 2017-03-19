@@ -30,7 +30,7 @@ namespace WO.Core.Data.Bindings
             Bind<IRepositoryDTO<TrainingDTO>>().To<DTORepository<Training, TrainingDTO>>();
 
             Bind<IRepository<Exercise>>().To<Repository<Exercise>>();
-            Bind<IRepositoryDTO<ExerciseDTO>>().To<DTORepository<Exercise, ExerciseDTO>>();
+            Bind<IExerciseRepositoryDTO>().To<DTOExerciseRepository>();
         }
     }
 }

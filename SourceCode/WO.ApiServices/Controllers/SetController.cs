@@ -48,10 +48,10 @@ namespace WO.ApiServices.Controllers
         [HttpPost]
         public IHttpActionResult Create([FromBody]Set set)
         {
-            var setDTO = _mapper.Map<SetDTO>(set);
-
             var setViewModel = new SetViewModel();
-            setViewModel.GetFullSetData(setDTO);
+            setViewModel.GetFullSetData(set);
+
+            var setDTO = _mapper.Map<SetDTO>(set);
 
             var result = _service.Create(setDTO);
 

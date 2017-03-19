@@ -11,8 +11,6 @@ namespace WO.Core.BLL.Services
     {
         T Get(int id);
         IEnumerable<T> GetAll();
-        T Find(Func<T, bool> predicate);
-        IEnumerable<T> FindMany(Func<T, bool> predicate);
         IOperationResult Create(T item);
         IOperationResult Update(T item);
         IOperationResult Delete(int id);

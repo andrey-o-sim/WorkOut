@@ -25,7 +25,8 @@
 
         vm.save = save;
         vm.removeApproach = removeApproach;
-        vm.openModal = openModal;
+        vm.addEditApproach = addEditApproach;
+        vm.addEditExercise = addEditExercise;
 
         init();
 
@@ -64,7 +65,6 @@
             approachService.remove(id).then(function (result) {
                 if (result.Succeed) {
                     vm.set.Approaches = workOutHelper.removeElementFromArray(vm.set.Approaches, id);
-                    vm.set.CountApproaches = vm.set.Approaches.length;
                 }
             });
         }
@@ -100,57 +100,113 @@
                 isValid = false;
             }
 
-            if (vm.set.CountApproaches === 0) {
+            if (vm.set.Approaches.length === 0) {
                 vm.validator.ValidCountApproaches = false;
                 isValid = false;
             }
             return isValid;
         }
 
-        function openModal(id) {
-            var ariaLabell = id > 0 ? 'Exercise Edit' : 'Exercise New';
-            var modalInstance = $uibModal.open({
-                animation: true,
-                backdrop: 'static',
-                ariaLabelledBy: ariaLabell,
+        function addEditExercise(exerciseId, setId) {
+            var ariaLabel = exerciseId > 0 ? 'Exercise Edit' : 'Exercise New';
+
+            var modalProperties = {
+                ariaLabelledBy: ariaLabel,
                 templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
                 controller: 'ExerciseAddEditController',
-                controllerAs: 'vm',
-                resolve: {
-                    id: function () {
-                        return id;
-                    }
-                }
-            });
+                itemId: exerciseId,
+                setId: setId
+            };
 
-            modalInstance.result.then(function (exercise) {
-                var indexForUpdate = -1;
-                vm.Exercises.forEach(function (item, index) {
-                    if (item.Id === exercise.Id) {
-                        indexForUpdate = index;
-                        return true;
-                    }
-                });
+            var modalInstance = openModal(modalProperties);
 
-                if (indexForUpdate > -1) {
-                    vm.Exercises[indexForUpdate].Name = exercise.Name;
-
-                    indexForUpdate = -1;
-                    vm.set.Exercises.forEach(function (item, index) {
-                        if (item.Id === exercise.Id) {
+            modalInstance.result.then(
+                function (resultExercise) {
+                    var indexForUpdate = -1;
+                    vm.Exercises.forEach(function (item, index) {
+                        if (item.Id === resultExercise.Id) {
                             indexForUpdate = index;
                             return true;
                         }
                     });
 
                     if (indexForUpdate > -1) {
-                        vm.set.Exercises[indexForUpdate].Name = exercise.Name;
+                        vm.Exercises[indexForUpdate].Name = resultExercise.Name;
+
+                        indexForUpdate = -1;
+                        vm.set.Exercises.forEach(function (item, index) {
+                            if (item.Id === resultExercise.Id) {
+                                indexForUpdate = index;
+                                return true;
+                            }
+                        });
+
+                        if (indexForUpdate > -1) {
+                            vm.set.Exercises[indexForUpdate].Name = resultExercise.Name;
+                        }
+                    }
+                    else {
+                        vm.Exercises.push(resultExercise);
+                    }
+                },
+                function () {
+                });
+        }
+
+        function addEditApproach(approachId, setId) {
+            var ariaLabel = approachId > 0 ? 'Approach Edit' : 'Approach New';
+
+            var modalProperties = {
+                ariaLabelledBy: ariaLabel,
+                templateUrl: '/app/components/Approach/forms/approach.add.edit.html',
+                controller: 'ApproachAddEditController',
+                itemId: approachId,
+                setId: setId
+            };
+
+            var modalInstance = openModal(modalProperties);
+
+            modalInstance.result.then(
+                function (resultApproach) {
+                    var indexForUpdate = -1;
+                    vm.set.Approaches.forEach(function (setApproach, index) {
+                        if (setApproach.Id === resultApproach.Id) {
+                            indexForUpdate = index;
+                            return true;
+                        }
+                    });
+
+                    if (indexForUpdate > -1) {
+                        vm.set.Approaches[indexForUpdate].PlannedTimeForRest = resultApproach.PlannedTimeForRest;
+                        vm.set.Approaches[indexForUpdate].SpentTimeForRest = resultApproach.SpentTimeForRest;
+                    }
+                    else {
+                        vm.set.Approaches.push(resultApproach);
+                    }
+                },
+                function () { }
+            );
+        }
+
+        function openModal(modalProperties) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: modalProperties.ariaLabell,
+                templateUrl: modalProperties.templateUrl,
+                controller: modalProperties.controller,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return modalProperties.itemId;
+                    },
+                    setId: function () {
+                        return modalProperties.setId;
                     }
                 }
-                else {
-                    vm.Exercises.push(exercise);
-                }
             });
+
+            return modalInstance;
         }
     }
 }());

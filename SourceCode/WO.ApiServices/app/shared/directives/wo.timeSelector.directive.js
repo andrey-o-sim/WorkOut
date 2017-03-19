@@ -22,6 +22,10 @@
         function woTimeSelectorController() {
             var vm = this;
 
+            vm.maxHours = 23;
+            vm.maxMinutes = 59;
+            vm.maxSeconds = 55;
+
             vm.increaseHours = increaseHours;
             vm.increaseMinutes = increaseMinutes;
             vm.increaseSeconds = increaseSeconds;
@@ -37,30 +41,67 @@
             }
 
             function increaseHours() {
-                vm.time = vm.time ? vm.time : emptyTime
-                vm.time.Hours++;
+                if (vm.time.Hours !== vm.maxHours) {
+                    vm.time = vm.time ? vm.time : emptyTime
+                    vm.time.Hours++;
+                }
             }
 
             function increaseMinutes() {
                 vm.time = vm.time ? vm.time : emptyTime
-                vm.time.Minutes++;
+
+                if (vm.showHours && vm.time.Hours !== vm.maxHours && vm.time.Minutes === vm.maxMinutes) {
+                    increaseHours();
+                    vm.time.Minutes = 0;
+                }
+                else {
+                    if (vm.time.Minutes !== vm.maxMinutes) {
+                        vm.time.Minutes++;
+                    }
+                }
             }
 
             function increaseSeconds() {
                 vm.time = vm.time ? vm.time : emptyTime
-                vm.time.Seconds = vm.time.Seconds + 5;
+                if (vm.time.Seconds + 5 === 60 && vm.time.Hours !== vm.maxHours && vm.time.Minutes !== vm.maxMinutes) {
+                    increaseMinutes();
+                    vm.time.Seconds = 0;
+                }
+                else {
+                    if (vm.time.Seconds !== vm.maxSeconds) {
+                        vm.time.Seconds = vm.time.Seconds + 5;
+                    }
+                }
             }
 
             function decreaseHours() {
-                vm.time.Hours--;
+                if (vm.time.Hours !== 0) {
+                    vm.time.Hours--;
+                }
             }
 
             function decreaseMinutes() {
-                vm.time.Minutes--;
+                if (vm.showHours && vm.time.Hours >= 1 && vm.time.Minutes === 0) {
+                    decreaseHours();
+                    vm.time.Minutes = vm.maxMinutes;
+                }
+                else {
+                    if (vm.time.Minutes !== 0) {
+                        vm.time.Minutes--;
+                    }
+                }
             }
 
             function decreaseSeconds() {
-                vm.time.Seconds = vm.time.Seconds - 5;
+                if (vm.time.Seconds === 0 && vm.time.Minutes !== 0) {
+                    decreaseMinutes();
+                    vm.time.Seconds = vm.maxSeconds;
+                }
+                else {
+                    if (vm.time.Seconds !== 0) {
+                        vm.time.Seconds = vm.time.Seconds - 5;
+                    }
+                }
             }
         }
     }

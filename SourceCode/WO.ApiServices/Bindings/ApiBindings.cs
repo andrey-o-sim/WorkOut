@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using WO.Core.BLL.DTO;
+using WO.Core.BLL.Interfaces.Services;
 using WO.Core.BLL.Services;
 using WO.Core.BLL.Services.GenericDataServices;
 
@@ -13,7 +14,7 @@ namespace WO.ApiServices.Bindings
             Bind<IService<ApproachDTO>>().To<ApproachService>();
             Bind<IService<SetDTO>>().To<SetService>();
             Bind<IService<TrainingDTO>>().To<TrainingService>();
-            Bind<IService<ExerciseDTO>>().To<ExerciseService>();
+            Bind<IExerciseService>().To<ExerciseService>();
         }
     }
 }

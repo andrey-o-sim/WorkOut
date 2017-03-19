@@ -12,9 +12,7 @@ namespace WO.Core.BLL.DTO
 
         public int? PlannedTime { get; set; }
         public int TimeForRest { get; set; }
-        public int CountApproaches { get; set; }
         public int? SpentTime { get; set; }
-        public int? CountMadeApproaches { get; set; }
 
         public ICollection<ExerciseDTO> Exercises { get; set; }
         public ICollection<ApproachDTO> Approaches { get; set; }
