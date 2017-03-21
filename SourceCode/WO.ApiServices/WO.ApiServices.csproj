@@ -318,11 +318,20 @@
     <Content Include="app\components\TrainingType\forms\trainingType.edit.html" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.controller.js" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
+    <Content Include="app\components\Training\forms\training.edit.html" />
+    <Content Include="app\components\Training\forms\training.edit.js" />
+    <Content Include="app\components\Training\forms\training.new.html" />
+    <Content Include="app\components\Training\forms\training.new.js" />
+    <Content Include="app\components\Training\forms\training.view.html" />
+    <Content Include="app\components\Training\forms\training.view.js" />
+    <Content Include="app\components\Training\pages\training.home.js" />
+    <Content Include="app\components\Training\training.route.js" />
     <Content Include="app\shared\directives\wo.timeSelector.directive.js" />
     <Content Include="app\shared\directives\wo.timeSelector.html" />
     <Content Include="app\shared\services\approach.service.js" />
     <Content Include="app\shared\services\exercise.service.js" />
     <Content Include="app\shared\services\set.service.js" />
+    <Content Include="app\shared\services\training.service.js" />
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -1178,7 +1187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\js\" />
-    <Folder Include="app\components\Training\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
@@ -1198,6 +1206,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="app\components\Training\pages\training.home.html" />
     <None Include="Project_Readme.html" />
     <Content Include="app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>

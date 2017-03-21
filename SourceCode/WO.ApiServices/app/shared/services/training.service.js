@@ -1,20 +1,20 @@
 ﻿(function () {
     angular
         .module('woApp')
-    .factory('approachService', approachService);
+        .factory('trainingService', trainingService);
 
-    approachService.$inject = [
+    trainingService.$inject = [
         '$http',
         'workOutHelper'];
 
-    var serviceUrl = "/api/Approach/";
+    var serviceUrl = "/api/Training/";
 
-    function approachService(
+    function trainingService(
         $http,
         workOutHelper) {
 
         var service = {
-            getById: getById,
+            getById, getById,
             getAll: getAll,
             create: create,
             update: update,
@@ -51,8 +51,8 @@
             }
         }
 
-        function create(approach) {
-            return $http.post(serviceUrl, approach)
+        function create(training) {
+            return $http.post(serviceUrl, training)
                 .then(success, error);
 
             function success(response) {
@@ -65,8 +65,8 @@
             }
         }
 
-        function update(approach) {
-            return $http.put(serviceUrl, approach)
+        function update(training) {
+            return $http.put(serviceUrl, training)
                 .then(success, error);
 
             function success(response) {
@@ -93,4 +93,4 @@
             }
         }
     }
-}());
+})();
