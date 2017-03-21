@@ -17,19 +17,23 @@ namespace WO.ApiServices
                       "~/Content/site.css",
                       "~/Content/selectize.default.css",
                       "~/Content/select.css",
-                      "~/Content/font-awesome.css"));
+                      "~/Content/font-awesome.css",
+                      "~/Content/datetimepicker.css"));
 
             bundles.Add(new StyleBundle("~/app/assets/css").Include(
                 "~/app/assets/css/app.css"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js").Include(
+                "~/app/assets/libs/moment/moment.js",
                 "~/app/assets/libs/angular.js",
                 "~/app/assets/libs/angular-route.js",
                 "~/app/assets/libs/angular-animate.js",
                 "~/app/assets/libs/angular-sanitize.js",
                 "~/app/assets/libs/angular-ui/ui-bootstrap-tpls.js",
                 "~/app/assets/libs/angular-validator/angular-validator.js",
-                "~/app/assets/libs/ui-select/select.js"));
+                "~/app/assets/libs/ui-select/select.js",
+                "~/app/assets/libs/angular-datetime-picker/datetimepicker.js",
+                "~/app/assets/libs/angular-datetime-picker/datetimepicker.templates.js"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));

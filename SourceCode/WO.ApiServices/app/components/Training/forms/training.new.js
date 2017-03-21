@@ -1,10 +1,11 @@
 ﻿(function () {
-
     angular
         .module('woApp')
         .controller('TrainingNewController', TrainingNewController);
 
-    TrainingNewController.$inject = ['trainingService'];
+    TrainingNewController.$inject = [
+        'trainingService',
+        'trainingTypeService'];
 
     function TrainingNewController(trainingService) {
         var vm = this;

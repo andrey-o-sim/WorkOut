@@ -1,1 +1,53 @@
-﻿
+﻿<h2 class="page-header">Add Training</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Training Type:</h3>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="!vm.TrainingTypes">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+            </div>
+            <div ng-show="vm.TrainingTypes">
+                <div>
+                    <ui-select ng-model="vm.training.TrainingType" theme="selectize" title="Choose a Training Type">
+                        <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TrainingType}}</ui-select-match>
+                        <ui-select-choices repeat="trainingType in vm.TrainingTypes">
+                            <div ng-bind-html="trainingType.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div>
+                    <label ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false" class="requiredError">Need to provide "Training Type"</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Start Training:</h3>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="vm.TrainingTypes">
+                <datetimepicker data-ng-model="vm.training.StartDateTime"></datetimepicker>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Main Training Purpose:</h3>
+        </div>
+        <div class="col-md-12">
+            <input type="text" class="form-control" name="mainTrainingPurpose" ng-model="vm.training.MainTrainingPurpose" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Description:</h3>
+        </div>
+        <div class="col-md-12">
+            <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
+        </div>
+    </div>
+</div>

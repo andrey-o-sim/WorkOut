@@ -281,6 +281,8 @@
   <ItemGroup>
     <Content Include="app\assets\css\app.css" />
     <Content Include="app\assets\img\loading.gif" />
+    <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.js" />
+    <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.templates.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="app\assets\libs\angular-ui-router\resolveService.js" />
@@ -339,6 +341,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datetimepicker.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\select.css" />
@@ -1168,6 +1171,10 @@
     <Content Include="app\assets\libs\angular-validator\angular-validator.min.js" />
     <Content Include="app\assets\libs\ui-select\select.js" />
     <Content Include="app\assets\libs\ui-select\select.min.js" />
+    <Content Include="app\assets\libs\moment\moment-with-locales.js" />
+    <Content Include="app\assets\libs\moment\moment-with-locales.min.js" />
+    <Content Include="app\assets\libs\moment\moment.js" />
+    <Content Include="app\assets\libs\moment\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1207,6 +1214,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="app\components\Training\pages\training.home.html" />
+    <Content Include="Content\datetimepicker.css.map" />
     <None Include="Project_Readme.html" />
     <Content Include="app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>
