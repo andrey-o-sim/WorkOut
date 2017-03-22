@@ -27,7 +27,7 @@ namespace WO.Core.Data.Bindings
             Bind<IRepositoryDTO<SetDTO>>().To<DTOSetRepository>();
 
             Bind<IRepository<Training>>().To<Repository<Training>>();
-            Bind<IRepositoryDTO<TrainingDTO>>().To<DTORepository<Training, TrainingDTO>>();
+            Bind<IRepositoryDTO<TrainingDTO>>().To<DTOTrainingRepository>();
 
             Bind<IRepository<Exercise>>().To<Repository<Exercise>>();
             Bind<IExerciseRepositoryDTO>().To<DTOExerciseRepository>();

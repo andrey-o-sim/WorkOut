@@ -32,8 +32,6 @@ namespace WO.ApiServices.Tests.Controllers
                 new SetDTO
                 {
                    Id = 1,
-                   CountApproaches = 5,
-                   CountMadeApproaches = 5,
                    PlannedTime = 1000,
                    TimeForRest = 120,
                    CreatedDate = DateTime.Now,
@@ -42,8 +40,6 @@ namespace WO.ApiServices.Tests.Controllers
                 new SetDTO
                 {
                    Id = 2,
-                   CountApproaches = 4,
-                   CountMadeApproaches = 4,
                    PlannedTime = 500,
                    TimeForRest = 60,
                    CreatedDate = DateTime.Now,
@@ -52,8 +48,6 @@ namespace WO.ApiServices.Tests.Controllers
                 new SetDTO
                 {
                    Id = 3,
-                   CountApproaches = 6,
-                   CountMadeApproaches = 6,
                    PlannedTime = 1100,
                    TimeForRest = 100,
                    CreatedDate = DateTime.Now,
@@ -106,7 +100,6 @@ namespace WO.ApiServices.Tests.Controllers
             var newSet = new Set
             {
                 CountApproaches = 7,
-                CountMadeApproaches = 7,
                 PlannedTime = new TimeWO { Hours = 0, Minutes = 30, Seconds = 0 },
                 TimeForRest = new TimeWO { Hours = 0, Minutes = 1, Seconds = 50 },
             };

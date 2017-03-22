@@ -9,16 +9,15 @@ namespace WO.Core.DAL.Model
 {
     public class Training : BaseModel
     {
-        //кол-во > 0
+        [Required]
         public virtual TrainingType TrainingType { get; set; }
         public int? TrainingTypeId { get; set; }
+        [Required]
+        public string MainTrainingPurpose { get; set; }
 
-        //кол-во > 0
         public virtual IEnumerable<Set> Sets { get; set; }
         public DateTime? StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }
-        [Required]
-        public string MainTrainingPurpose { get; set; }
         public string Description { get; set; }
     }
 }

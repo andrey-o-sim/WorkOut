@@ -3,9 +3,13 @@
         .module('woApp')
         .controller('SetHomeController', SetHomeController);
 
-    SetHomeController.$inject = ['setService', 'workOutHelper'];
+    SetHomeController.$inject = [
+        'setService',
+        'workOutHelper'];
 
-    function SetHomeController(setService, workOutHelper) {
+    function SetHomeController(
+        setService,
+        workOutHelper) {
         var vm = this;
 
         vm.formIsReady = false;

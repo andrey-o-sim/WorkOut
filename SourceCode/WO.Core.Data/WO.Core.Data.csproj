@@ -68,6 +68,7 @@
     <Compile Include="Repositories\DTOExerciseRepository.cs" />
     <Compile Include="Repositories\DTORepository.cs" />
     <Compile Include="Repositories\DTOSetRepository.cs" />
+    <Compile Include="Repositories\DTOTrainingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WO.Core.BLL\WO.Core.BLL.csproj">

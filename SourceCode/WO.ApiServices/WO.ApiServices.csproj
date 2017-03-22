@@ -321,12 +321,12 @@
     <Content Include="app\components\TrainingType\pages\trainingType.home.controller.js" />
     <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
     <Content Include="app\components\Training\forms\training.edit.html" />
-    <Content Include="app\components\Training\forms\training.edit.js" />
+    <Content Include="app\components\Training\forms\training.edit.controller.js" />
     <Content Include="app\components\Training\forms\training.new.html" />
-    <Content Include="app\components\Training\forms\training.new.js" />
+    <Content Include="app\components\Training\forms\training.new.controller.js" />
     <Content Include="app\components\Training\forms\training.view.html" />
-    <Content Include="app\components\Training\forms\training.view.js" />
-    <Content Include="app\components\Training\pages\training.home.js" />
+    <Content Include="app\components\Training\forms\training.view.controller.js" />
+    <Content Include="app\components\Training\pages\training.home.controller.js" />
     <Content Include="app\components\Training\training.route.js" />
     <Content Include="app\shared\directives\wo.timeSelector.directive.js" />
     <Content Include="app\shared\directives\wo.timeSelector.html" />

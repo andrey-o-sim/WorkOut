@@ -17,8 +17,8 @@
                     <td ng-bind-template="Minutes: {{set.PlannedTime.Minutes}}, Seconds: {{set.PlannedTime.Seconds}}"></td>
                     <td ng-bind-template="Minutes: {{set.TimeForRest.Minutes}}, Seconds: {{set.TimeForRest.Seconds}}"></td>
                     <td ng-bind-template="Minutes: {{set.SpentTime.Minutes}}, Seconds: {{set.SpentTime.Seconds}}"></td>
-                    <td ng-bind="set.CountApproaches"></td>
-                    <td ng-bind="set.CountMadeApproaches"></td>
+                    <td ng-bind="set.Approaches.length"></td>
+                    <td ng-bind-template="{{set.CountMadeApproaches?set.CountMadeApproaches:0}}"></td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ui-sref="setView({id:{{set.Id}}})">
                             <span class="glyphicon glyphicon-file"></span>

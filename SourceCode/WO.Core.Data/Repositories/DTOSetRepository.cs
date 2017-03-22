@@ -13,8 +13,8 @@ namespace WO.Core.Data.Repositories
 {
     public class DTOSetRepository : DTORepository<Set, SetDTO>, IRepositoryDTO<SetDTO>
     {
-        IRepository<Approach> _approachRepository;
-        IRepository<Exercise> _exerciseRepository;
+        private IRepository<Approach> _approachRepository;
+        private IRepository<Exercise> _exerciseRepository;
 
         public DTOSetRepository(IRepository<Set> setRepository,
             IRepository<Approach> approachRepository,
@@ -58,9 +58,6 @@ namespace WO.Core.Data.Repositories
 
             AddDeleteExercises(setForUpdate, setDto);
 
-            //After add new approach button need to check and remove the method
-            AddApproaches(setForUpdate, setDto);
-
             _repository.Update(setForUpdate);
         }
 
@@ -87,24 +84,10 @@ namespace WO.Core.Data.Repositories
                 }
             }
 
-            foreach(Exercise exerciseForRemove in exercisesForRemove)
+            foreach (Exercise exerciseForRemove in exercisesForRemove)
             {
                 setForUpdate.Exercises.Remove(exerciseForRemove);
                 exerciseForRemove.Sets.Remove(setForUpdate);
-            }
-        }
-
-        private void AddApproaches(Set setForUpdate, SetDTO setDto)
-        {
-            var setApporoaches = setForUpdate.Approaches;
-
-            foreach (ApproachDTO approachDto in setDto.Approaches)
-            {
-                if (setApporoaches.Any(s => s.Id == approachDto.Id) == false)
-                {
-                    var approachForUpdate = _approachRepository.Get(approachDto.Id);
-                    setForUpdate.Approaches.Add(approachForUpdate);
-                }
             }
         }
     }

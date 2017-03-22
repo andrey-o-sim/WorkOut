@@ -1,4 +1,8 @@
-﻿.requiredError {
+﻿body {
+    padding-top: 50px;
+}
+
+.requiredError {
     color: red;
     font-size: 16px;
 }
@@ -20,8 +24,9 @@
     font-size: large;
 }
 
-body {
-    padding-top: 50px;
+.footer-buttons {
+    padding-top: 15px;
+    text-align: left;
 }
 
 @media (min-width: 768px) {

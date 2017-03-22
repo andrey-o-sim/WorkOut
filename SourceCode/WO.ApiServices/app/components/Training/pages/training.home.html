@@ -1,1 +1,42 @@
-﻿
+﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">Training Informations</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Training Type</th>
+                    <th>Main Training Purpose</th>
+                    <th>Start Date Time</th>
+                    <th>End Date Time</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="training in vm.trainings">
+                    <td ng-bind="training.TrainingType.TypeTraining"></td>
+                    <td ng-bind="training.MainTrainingPurpose"></td>
+                    <td ng-bind="training.StartDateTime"></td>
+                    <td ng-bind="training.EndDateTime"></td>
+                    <td ng-bind-template="{{ training.Description | limitTo: 100 }}{{training.Description.length > 100 ? '...' : ''}}"></td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-info" ui-sref="trainingView({id:{{training.Id}}})">
+                            <span class="glyphicon glyphicon-file"></span>
+                        </a>
+                        <a class="btn btn-sm btn-info" ui-sref="trainingEdit({id:{{training.Id}}})">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(training.Id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <a class="btn btn-primary" ui-sref="trainingNew">
+                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp; Create New
+            </a>
+        </div>
+    </div>
+</div>
