@@ -23,5 +23,6 @@ namespace WO.ApiServices.Models
         public ICollection<Approach> Approaches { get; set; }
 
         public Training Training { get; set; }
+        public int? TrainingId { get; set; }
     }
 }

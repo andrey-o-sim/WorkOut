@@ -15,14 +15,17 @@ namespace WO.Core.Data.Repositories
     {
         private IRepository<Approach> _approachRepository;
         private IRepository<Exercise> _exerciseRepository;
+        private IRepository<Training> _trainingRepository;
 
         public DTOSetRepository(IRepository<Set> setRepository,
             IRepository<Approach> approachRepository,
-            IRepository<Exercise> exerciseRepository)
+            IRepository<Exercise> exerciseRepository,
+            IRepository<Training> trainingRepository)
             : base(setRepository)
         {
             _approachRepository = approachRepository;
             _exerciseRepository = exerciseRepository;
+            _trainingRepository = trainingRepository;
         }
 
         public override int Create(SetDTO setDto)
@@ -46,6 +49,8 @@ namespace WO.Core.Data.Repositories
                 set.Approaches.Add(approach);
             }
 
+            AddDeleteTraining(set);
+
             return _repository.Create(set);
         }
 
@@ -57,6 +62,7 @@ namespace WO.Core.Data.Repositories
             setForUpdate.ModifiedDate = DateTime.Now;
 
             AddDeleteExercises(setForUpdate, setDto);
+            AddDeleteTraining(setForUpdate);
 
             _repository.Update(setForUpdate);
         }
@@ -88,6 +94,18 @@ namespace WO.Core.Data.Repositories
             {
                 setForUpdate.Exercises.Remove(exerciseForRemove);
                 exerciseForRemove.Sets.Remove(setForUpdate);
+            }
+        }
+
+        private void AddDeleteTraining(Set setForUpdate)
+        {
+            if (setForUpdate.TrainingId.HasValue && setForUpdate.TrainingId.Value > 0)
+            {
+                setForUpdate.Training = _trainingRepository.Get(setForUpdate.TrainingId.Value);
+            }
+            else
+            {
+                setForUpdate.Training = null;
             }
         }
     }

@@ -38,7 +38,9 @@ namespace WO.Core.Data.Configs
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
 
-                cfg.CreateMap<Set, SetDTO>();
+                cfg.CreateMap<Set, SetDTO>()
+                .ForMember(dto => dto.Training, dl => dl.Ignore());
+
                 cfg.CreateMap<SetDTO, Set>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())

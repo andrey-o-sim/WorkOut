@@ -19,6 +19,14 @@ namespace TestConsoleApplication
             Repository<Set> repSet = new Repository<Set>(context);
             Repository<Exercise> repExercise = new Repository<Exercise>(context);
             Repository<Approach> repApproach = new Repository<Approach>(context);
+            Repository<Approach> repTraining = new Repository<Approach>(context);
+
+            //var set = context.Sets.FirstOrDefault();
+
+            var training = context.Trainings.Where(tr => tr.Id == 1).FirstOrDefault();
+
+            //set.Training = training;
+            //context.SaveChanges();
 
             ExerciseDTO firstEx = new ExerciseDTO
             {
@@ -38,7 +46,7 @@ namespace TestConsoleApplication
             };
 
 
-            DTOSetRepository dtoSetRepository = new DTOSetRepository(repSet, repApproach, repExercise);
+            DTOSetRepository dtoSetRepository = new DTOSetRepository(repSet, repApproach, repExercise, repTraining);
             DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(repApproach);
             DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(repExercise);
 
