@@ -41,7 +41,8 @@ namespace WO.Core.Data.Repositories
 
         public virtual void Delete(int id)
         {
-            _repository.Delete(id);
+            var itemForRemove = _repository.Get(id);
+            _repository.Delete(itemForRemove);
         }
 
         public virtual TDto Find(Func<TDto, bool> predicate)

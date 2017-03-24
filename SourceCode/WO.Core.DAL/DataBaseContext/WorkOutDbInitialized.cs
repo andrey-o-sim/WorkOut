@@ -27,28 +27,28 @@ namespace WO.Core.DAL.DataBaseContext
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Base"
+                   TypeTraining = "База"
                 },
                 new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "CrossFit"
+                   TypeTraining = "Кросфит"
                 },
                 new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Elements"
+                   TypeTraining = "Элементы"
                 },
                  new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Statics"
+                   TypeTraining = "Статика"
                 }
             };
 
@@ -63,55 +63,55 @@ namespace WO.Core.DAL.DataBaseContext
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Pull-up"
+                    Name="Подтягивание"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Push-up"
+                    Name="Отжимание на Брусьях"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Dip"
+                    Name="Отжимание от пола"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="chin-up"
+                    Name="Скручивание"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="hyper extension"
+                    Name="Гиперэкстензия"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="plank"
+                    Name="Планка"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="swing"
+                    Name="Приседание"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="burpee"
+                    Name="Берпи"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="chest to bar pull-up"
+                    Name="Подьем гири"
                 }
             };
 

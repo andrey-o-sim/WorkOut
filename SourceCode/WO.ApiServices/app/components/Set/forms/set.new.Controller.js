@@ -4,12 +4,14 @@
 
     SetNewController.$inject = [
         '$state',
+        '$stateParams',
         '$uibModal',
         'exerciseService',
         'setService',];
 
     function SetNewController(
         $state,
+        $stateParams,
         $uibModal,
         exerciseService,
         setService) {
@@ -40,7 +42,8 @@
                     Minutes: 0,
                     Seconds: 0
                 },
-                CountApproaches: 0
+                CountApproaches: 0,
+                TrainingId: $stateParams.trainingId
             };
 
             exerciseService.getAll().then(function (result) {
@@ -57,7 +60,12 @@
 
                 setService.create(set).then(function (result) {
                     if (result.Succeed) {
-                        $state.go('setHome');
+                        if ($stateParams.trainingId && $stateParams.trainingId > 0) {
+                            $state.go('trainingEdit', { 'id': set.TrainingId });
+                        }
+                        else {
+                            $state.go('setHome');
+                        }
                     }
                     else {
                         vm.disableSaveButton = false;

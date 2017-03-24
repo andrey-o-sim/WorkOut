@@ -35,11 +35,10 @@ namespace WO.Core.DAL.Repositories
             _dbContext.SaveChanges();
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete(T item)
         {
-            var itemForRemove = _dbContext.Set<T>().Where(item => item.Id == id).FirstOrDefault();
-            _dbContext.Set<T>().Remove(itemForRemove);
-            _dbContext.Entry(itemForRemove).State = EntityState.Deleted;
+            _dbContext.Set<T>().Remove(item);
+            _dbContext.Entry(item).State = EntityState.Deleted;
             _dbContext.SaveChanges();
         }
 

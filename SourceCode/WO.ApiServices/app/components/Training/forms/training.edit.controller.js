@@ -8,17 +8,24 @@
         '$state',
         '$stateParams',
         'trainingService',
-        'trainingTypeService'];
+        'trainingTypeService',
+        'setService',
+        'workOutHelper'];
 
     function TrainingEditController(
         $state,
         $stateParams,
         trainingService,
-        trainingTypeService) {
+        trainingTypeService,
+        setService,
+        workOutHelper) {
 
         var vm = this;
         vm.save = save;
         vm.formIsReady = false;
+
+        vm.editSet = editSet;
+        vm.removeSet = removeSet;
 
         init();
 
@@ -35,6 +42,18 @@
 
         function save(training) {
 
+        }
+
+        function editSet(setId) {
+
+        }
+
+        function removeSet(setId) {
+            setService.remove(setId).then(function (result) {
+                if (result.Succeed) {
+                    vm.training.Sets = workOutHelper.removeElementFromArray(vm.training.Sets, result.ResultItemId);
+                }
+            });
         }
     }
 })();

@@ -328,6 +328,7 @@
     <Content Include="app\components\Training\forms\training.view.controller.js" />
     <Content Include="app\components\Training\pages\training.home.controller.js" />
     <Content Include="app\components\Training\training.route.js" />
+    <Content Include="app\app.global.js" />
     <Content Include="app\shared\directives\wo.timeSelector.directive.js" />
     <Content Include="app\shared\directives\wo.timeSelector.html" />
     <Content Include="app\shared\services\approach.service.js" />

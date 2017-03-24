@@ -13,7 +13,7 @@
 
         var newRoute = {
             name: 'setNew',
-            url: '/set/new',
+            url: '/set/new?trainingId',
             templateUrl: '/app/components/Set/forms/set.new.html',
             controller: 'SetNewController',
             controllerAs: 'vm'

@@ -16,7 +16,7 @@ namespace WO.Core.DAL.DataBaseContext
             Database.SetInitializer<WorkOutContext>(new WorkOutDbInitialized());
         }
 
-        public WorkOutContext(string connectionString) 
+        public WorkOutContext(string connectionString)
             : base(connectionString)
         {
             Database.CreateIfNotExists();
@@ -30,6 +30,11 @@ namespace WO.Core.DAL.DataBaseContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Approach>()
+                .HasOptional<Set>(a => a.Set)
+                .WithMany(s => s.Approaches)
+                .HasForeignKey(a => new { a.SetId })
+                .WillCascadeOnDelete(true);
         }
     }
 }

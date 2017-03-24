@@ -39,7 +39,8 @@ namespace WO.ApiServices
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/modules").Include(
-                "~/app/app.module.js"));
+                "~/app/app.module.js",
+                "~/app/app.global.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/services").Include(
                 "~/app/shared/services/trainingType.service.js",

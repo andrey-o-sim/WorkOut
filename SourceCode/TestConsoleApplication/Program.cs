@@ -19,7 +19,7 @@ namespace TestConsoleApplication
             Repository<Set> repSet = new Repository<Set>(context);
             Repository<Exercise> repExercise = new Repository<Exercise>(context);
             Repository<Approach> repApproach = new Repository<Approach>(context);
-            Repository<Approach> repTraining = new Repository<Approach>(context);
+            Repository<Training> repTraining = new Repository<Training>(context);
 
             //var set = context.Sets.FirstOrDefault();
 

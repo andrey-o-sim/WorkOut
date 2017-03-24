@@ -67,6 +67,13 @@ namespace WO.Core.Data.Repositories
             _repository.Update(setForUpdate);
         }
 
+        public override void Delete(int id)
+        {
+            var itemForRemove = _repository.Get(id);
+            itemForRemove.Approaches = _approachRepository.FindMany(app => app.SetId == id).ToList(); ;
+            _repository.Delete(itemForRemove);
+        }
+
         private void AddDeleteExercises(Set setForUpdate, SetDTO setDto)
         {
             var setExercises = setForUpdate.Exercises;
