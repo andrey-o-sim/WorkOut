@@ -13,11 +13,14 @@ namespace WO.Core.Data.Repositories
     public class DTOTrainingRepository : DTORepository<Training, TrainingDTO>, IRepositoryDTO<TrainingDTO>
     {
         private IRepository<TrainingType> _trainingTypeRepository;
+        private IRepository<Set> _setRepository;
         public DTOTrainingRepository(
             IRepository<Training> repository,
-            IRepository<TrainingType> trainingTypeRepository) : base(repository)
+            IRepository<TrainingType> trainingTypeRepository,
+            IRepository<Set> setRepository) : base(repository)
         {
             _trainingTypeRepository = trainingTypeRepository;
+            _setRepository = setRepository;
         }
 
         public override int Create(TrainingDTO trainingDTO)
@@ -29,6 +32,16 @@ namespace WO.Core.Data.Repositories
             training.TrainingType = _trainingTypeRepository.Get(training.TrainingType.Id);
 
             return _repository.Create(training);
+        }
+
+        public override void Update(TrainingDTO trainingDTO)
+        {
+            var training = _mapper.Map<Training>(trainingDTO);
+            training.ModifiedDate = DateTime.Now;
+
+            training.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
+
+            _repository.Update(training);
         }
 
     }

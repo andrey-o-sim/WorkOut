@@ -41,8 +41,8 @@
             }
 
             function increaseHours() {
+                vm.time = vm.time ? vm.time : emptyTime
                 if (vm.time.Hours !== vm.maxHours) {
-                    vm.time = vm.time ? vm.time : emptyTime
                     vm.time.Hours++;
                 }
             }
@@ -75,7 +75,7 @@
             }
 
             function decreaseHours() {
-                if (vm.time.Hours !== 0) {
+                if (vm.time && vm.time.Hours !== 0) {
                     vm.time.Hours--;
                 }
             }

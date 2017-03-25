@@ -16,8 +16,8 @@
                 <tr ng-repeat="training in vm.trainings">
                     <td ng-bind="training.TrainingType.TypeTraining"></td>
                     <td ng-bind="training.MainTrainingPurpose"></td>
-                    <td ng-bind="training.StartDateTime"></td>
-                    <td ng-bind="training.EndDateTime"></td>
+                    <td ng-bind-template="{{ training.StartDateTime | date : 'medium'}}"></td>
+                    <td ng-bind-template="{{ training.EndDateTime | date : 'medium'}}"></td>
                     <td ng-bind-template="{{ training.Description | limitTo: 100 }}{{training.Description.length > 100 ? '...' : ''}}"></td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ui-sref="trainingView({id:{{training.Id}}})">

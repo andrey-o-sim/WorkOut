@@ -35,7 +35,7 @@
                 vm.disableButton = true;
                 trainingService.create(training).then(function (result) {
                     if (result.Succeed) {
-                        $state.go('trainingHome');
+                        $state.go('trainingEdit', { 'id': + result.ResultItemId });
                     }
                     else {
                         vm.disableButton = false;

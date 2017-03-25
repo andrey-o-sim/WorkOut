@@ -1,6 +1,7 @@
 ﻿<span ng-if="!vm.formIsReady" class="loader"></span>
 
 <div ng-if="vm.formIsReady">
+    <h2 class="page-header">Edit Training</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -36,6 +37,38 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <h3 for="planTimeForRest" class="control-label">Description:</h3>
+            </div>
+            <div class="col-md-12">
+                <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="control-label">Start Training:</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <wo-time-selector show-hours="true" show-minutes="true" show-seconds="true" time="vm.training.StartDateTime"></wo-time-selector>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="control-label">End Training:</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <wo-time-selector show-hours="true" show-minutes="true" show-seconds="true" time="vm.training.EndDateTime"></wo-time-selector>
+                        <label ng-show="vm.validateForm && vm.validator.ValidEndDate===false" class="requiredError">'End Training' must be later than 'Start Training'</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <h3 for="planTimeForRest" class="control-label">Sets:</h3>
             </div>
             <div class="col-md-12">
@@ -54,7 +87,7 @@
                         </td>
                         <td ng-bind-template="Minute(s): {{ set.PlannedTime.Minutes }} Second(s): {{set.PlannedTime.Seconds}}"></td>
                         <td>
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 <tr>
                                     <th>Planned Time For Rest</th>
                                     <th>Spent Time For Rest</th>
@@ -69,7 +102,7 @@
                             </table>
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-sm btn-info" ng-click="vm.editSet(set.Id)">
+                            <a class="btn btn-sm btn-info" ui-sref="setEdit({id:set.Id})">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
                             <a class="btn btn-sm btn-danger" ng-click="vm.removeSet(set.Id)">
@@ -87,40 +120,15 @@
                         </td>
                     </tr>
                 </table>
+                <div>
+                    <label ng-show="vm.validateForm && vm.validator.ValidSets===false" class="requiredError">If you provide 'Start Training', then sets must not be empty</label>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3 for="planTimeForRest" class="control-label">Description:</h3>
-            </div>
-            <div class="col-md-12">
-                <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
-            </div>
-        </div>
+    </div>
+
+    <div class="footer-buttons">
+        <button id="save" type="submit" class="btn btn-primary" ng-click="vm.save(vm.training)" ng-disabled="vm.disableSaveButton">Save</button>
+        <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
     </div>
 </div>
-
-<!--public virtual TrainingType TrainingType { get; set; }
-public int? TrainingTypeId { get; set; }
-public IEnumerable<Set> Sets { get; set; }
-public DateTime? StartDateTime { get; set; }
-public DateTime? EndDateTime { get; set; }
-public string MainTrainingPurpose { get; set; }
-public string Description { get; set; }-->
-<!--<div class="row">
-    <div class="col-md-12">
-        <h3 class="control-label">Start Training:</h3>
-    </div>
-    <div class="col-md-9">
-        <div class="dropdown">
-            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                <div class="input-group">
-                    <input type="text" class="form-control" data-ng-model="vm.training.StartDateTime"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker data-ng-model="vm.training.StartDateTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" />
-            </ul>
-        </div>
-    </div>
-</div>-->

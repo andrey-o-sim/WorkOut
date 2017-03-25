@@ -3,6 +3,7 @@
         .controller('SetEditController', SetEditController)
 
     SetEditController.$inject = [
+        '$rootScope',
         '$state',
         '$stateParams',
         '$uibModal',
@@ -12,6 +13,7 @@
         'workOutHelper'];
 
     function SetEditController(
+        $rootScope,
         $state,
         $stateParams,
         $uibModal,
@@ -76,7 +78,7 @@
 
                 setService.update(set).then(function (result) {
                     if (result.Succeed) {
-                        $state.go('setHome');
+                        $rootScope.close();
                     }
                     else {
                         vm.disableSaveButton = false;
