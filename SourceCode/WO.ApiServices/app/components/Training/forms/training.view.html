@@ -1,0 +1,108 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">View Training</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h4>Training Type:</h4>
+                </div>
+                <div class="controls">
+                    <label ng-bind="::vm.training.TrainingType.TypeTraining" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h4>Main Training Purpose:</h4>
+                </div>
+                <div class="controls">
+                    <label ng-bind="::vm.training.MainTrainingPurpose" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h4>Description:</h4>
+                </div>
+                <div class="controls">
+                    <label ng-bind="::vm.training.Description" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h4>Start Training:</h4>
+                        </div>
+                        <div class="controls">
+                            <label ng-bind-template="{{vm.training.StartDateTime|date:'medium'}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h4>End Training:</h4>
+                        </div>
+                        <div class="controls">
+                            <label ng-bind-template="{{vm.training.EndDateTime|date:'medium'}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h4>Sets:</h4>
+                </div>
+                <div class="controls">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Exercises:</th>
+                            <th>Planned time for Rest:</th>
+                            <th>Approaches:</th>
+                        </tr>
+                        <tr ng-repeat="set in vm.training.Sets">
+                            <td>
+                                <div class="exerciseText" ng-repeat="exercise in set.Exercises">
+                                    <span ng-bind="::exercise.Name"></span>
+                                </div>
+                            </td>
+                            <td ng-bind-template="Minute(s): {{ set.PlannedTime.Minutes }} Second(s): {{set.PlannedTime.Seconds}}"></td>
+                            <td>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Planned Time For Rest</th>
+                                        <th>Spent Time For Rest</th>
+                                    </tr>
+                                    <tr ng-repeat="approach in set.Approaches">
+                                        <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
+                                        <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{set.Approaches.length}}"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="footer-buttons">
+            <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{vm.title}}</h3>
+    </div>
+
+    <div class="modal-body" id="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">Planned Time For Rest:</label>
+                        <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.approach.PlannedTimeForRest"></wo-time-selector>
+                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidPlannedTimeForRest==false">Need to provide 'Planned Time For Rest'</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">Spent Time For Rest:</label>
+                        <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.approach.SpentTimeForRest"></wo-time-selector>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.approach)">Save</button>
+        <a id="cancel" class="btn btn-warning" ng-click="vm.cancel()">Cancel</a>
+    </div>
+</div>

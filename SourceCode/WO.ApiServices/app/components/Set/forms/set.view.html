@@ -1,0 +1,83 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div class="container-fluid" ng-if="vm.formIsReady">
+    <h2 class="page-header">View Set</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Planned Time For Rest:</h3>
+                </div>
+            </div>
+            <div class="row border">
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.set.PlannedTime.Minutes"></label>
+                    <label class="control-label">Minute(s)</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.set.PlannedTime.Seconds"></label>
+                    <label class="control-label">Second(s)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Time For Rest After Approach:</h3>
+                </div>
+            </div>
+            <div class="row border">
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.set.TimeForRest.Minutes"></label>
+                    <label class="control-label">Minute(s)</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.set.TimeForRest.Seconds"></label>
+                    <label class="control-label">Second(s)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Exercises:</h3>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="!vm.set.Exercises">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+            </div>
+            <div class="input-group" ng-if="vm.set.Exercises">
+                <div class="exerciseText" ng-repeat="exercise in vm.set.Exercises">
+                    <span ng-bind="::exercise.Name"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Approaches:</h3>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>Planned Time For Rest</th>
+                    <th>Spent Time For Rest</th>
+                </tr>
+                <tr ng-repeat="approach in vm.set.Approaches">
+                    <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
+                    <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{vm.set.Approaches.length}}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer-buttons">
+        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
+    </div>
+</div>

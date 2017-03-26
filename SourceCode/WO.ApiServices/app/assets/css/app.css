@@ -1,0 +1,96 @@
+﻿body {
+    padding-top: 50px;
+}
+
+.requiredError {
+    color: red;
+    font-size: 16px;
+}
+
+.exerciseText {
+    padding: 2px 6px;
+    margin: 0 3px 3px 0;
+    color: #ffffff;
+    background: #1b9dec;
+    border: 1px solid #0073bb;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.countTableText {
+    font-weight: bold;
+    font-size: large;
+}
+
+.footer-buttons {
+    padding-top: 15px;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+    }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+
+    .nav-sidebar > li > a {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .nav-sidebar > .active > a,
+    .nav-sidebar > .active > a:hover,
+    .nav-sidebar > .active > a:focus {
+        color: #fff;
+        background-color: #428bca;
+    }
+
+.main {
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+
+.main .page-header {
+    margin-top: 0;
+}
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: url('/app/assets/img/loading.gif') 50% 50% no-repeat;
+}
+
+.border {
+    border-radius: 10px;
+    border: 2px solid #cbc4c4;
+    padding: 10px;
+    margin: 5px;
+}

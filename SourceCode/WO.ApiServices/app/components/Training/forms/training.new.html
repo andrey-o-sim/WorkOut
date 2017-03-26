@@ -1,0 +1,49 @@
+﻿<h2 class="page-header">Add Training</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Training Type:</h3>
+        </div>
+        <div class="col-md-9">
+            <div ng-show="!vm.TrainingTypes">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+            </div>
+            <div ng-show="vm.TrainingTypes">
+                <div>
+                    <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
+                        <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
+                        <ui-select-choices repeat="trainingType in vm.TrainingTypes">
+                            <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false">Need to provide "Training Type"</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Main Training Purpose:</h3>
+        </div>
+        <div class="col-md-12">
+            <input type="text" class="form-control" name="mainTrainingPurpose" ng-model="vm.training.MainTrainingPurpose" />
+            <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidMainTrainingPurpose==false">Need to provide "Main Training Purpose"</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Description:</h3>
+        </div>
+        <div class="col-md-12">
+            <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
+        </div>
+    </div>
+
+    <div class="footer-buttons">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.training)">Save</button>
+        <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
+    </div>
+</div>

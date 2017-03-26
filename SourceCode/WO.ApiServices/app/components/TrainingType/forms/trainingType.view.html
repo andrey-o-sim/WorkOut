@@ -1,0 +1,28 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div class="container-fluid" ng-if="vm.formIsReady">
+    <div class="row">
+        <h2 class="page-header">View Training Type</h2>
+        <div class="col-md-12">
+            <div>
+                <h4>Training Type:</h4>
+            </div>
+            <div class="controls">
+                <label ng-bind="::vm.trainingType.TypeTraining" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h4>Description:</h4>
+            </div>
+            <div>
+                <label ng-bind="::vm.trainingType.Description" />
+            </div>
+        </div>
+    </div>
+    <div class="footer-buttons">
+        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
+    </div>
+</div>

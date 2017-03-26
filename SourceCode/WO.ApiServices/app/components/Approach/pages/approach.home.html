@@ -1,0 +1,36 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">Approach Informations</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Planned Time For Rest</th>
+                    <th>Spent Time For Rest</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="approach in vm.approaches">
+                    <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
+                    <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-info" ui-sref="approachView({id:{{approach.Id}}})">
+                            <span class="glyphicon glyphicon-file"></span>
+                        </a>
+                        <a class="btn btn-sm btn-info" ui-sref="approachEdit({id:{{approach.Id}}})">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(approach.Id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <a class="btn btn-primary" ui-sref="approachNew">
+                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp; Create New
+            </a>
+        </div>
+    </div>
+</div>

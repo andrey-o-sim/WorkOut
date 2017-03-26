@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/app/assets/css")
+</head>
+<body ng-app="woApp">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">WorkOut</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <div class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li ui-sref-active="active"><a ui-sref="trainingTypeHome">Training Types</a></li>
+                    <li ui-sref-active="active"><a ui-sref="approachHome">Approaches</a></li>
+                    <li ui-sref-active="active"><a ui-sref="exerciseHome">Exercises</a></li>
+                    <li ui-sref-active="active"><a ui-sref="setHome">Sets</a></li>
+                    <li ui-sref-active="active"><a ui-sref="trainingHome">Trainings</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/app/assets/js")
+@Scripts.Render("~/app/assets/js/angularUiRoute")
+@Scripts.Render("~/app/components/modules")
+@Scripts.Render("~/app/components/helpers")
+@Scripts.Render("~/app/components/services")
+@Scripts.Render("~/app/shared/directives")
+@Scripts.Render("~/app/components/controllers")
+</html>

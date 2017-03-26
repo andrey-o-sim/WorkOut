@@ -1,0 +1,44 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div class="container-fluid" ng-if="vm.formIsReady">
+    <h2 class="page-header">View Approach</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Planned Time For Rest:</h3>
+                </div>
+            </div>
+            <div class="row border">
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.approach.PlannedTimeForRest.Minutes"></label>
+                    <label class="control-label">Minute(s)</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.approach.PlannedTimeForRest.Seconds"></label>
+                    <label class="control-label">Second(s)</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Spent Time For Rest:</h3>
+                </div>
+            </div>
+            <div class="row border">
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.approach.SpentTimeForRest.Minutes"></label>
+                    <label class="control-label">Minute(s)</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.approach.SpentTimeForRest.Seconds"></label>
+                    <label class="control-label">Second(s)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-buttons">
+        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
+    </div>
+</div>

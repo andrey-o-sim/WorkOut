@@ -1,0 +1,134 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">Edit Training</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="control-label">Training Type:</h3>
+            </div>
+            <div class="col-md-9">
+                <div ng-show="!vm.TrainingTypes">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+                </div>
+                <div ng-show="vm.TrainingTypes">
+                    <div>
+                        <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
+                            <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
+                            <ui-select-choices repeat="trainingType in vm.TrainingTypes">
+                                <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div>
+                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false">Need to provide "Training Type"</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 for="planTimeForRest" class="control-label">Main Training Purpose:</h3>
+            </div>
+            <div class="col-md-12">
+                <input type="text" class="form-control" name="mainTrainingPurpose" ng-model="vm.training.MainTrainingPurpose" />
+                <label ng-show="vm.validateForm==true && vm.validator.ValidMainTrainingPurpose==false" class="requiredError">Need to provide "Main Training Purpose"</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 for="planTimeForRest" class="control-label">Description:</h3>
+            </div>
+            <div class="col-md-12">
+                <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="control-label">Start Training:</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <wo-time-selector show-hours="true" show-minutes="true" show-seconds="true" time="vm.training.StartDateTime"></wo-time-selector>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="control-label">End Training:</h3>
+                    </div>
+                    <div class="col-md-9">
+                        <wo-time-selector show-hours="true" show-minutes="true" show-seconds="true" time="vm.training.EndDateTime"></wo-time-selector>
+                        <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidEndDate===false">'End Training' must be later than 'Start Training'</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 for="planTimeForRest" class="control-label">Sets:</h3>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Exercises:</th>
+                        <th>Planned time for Rest:</th>
+                        <th>Approaches:</th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="set in vm.training.Sets">
+                        <td>
+                            <div class="exerciseText" ng-repeat="exercise in set.Exercises">
+                                <span ng-bind="::exercise.Name"></span>
+                            </div>
+                        </td>
+                        <td ng-bind-template="Minute(s): {{ set.PlannedTime.Minutes }} Second(s): {{set.PlannedTime.Seconds}}"></td>
+                        <td>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Planned Time For Rest</th>
+                                    <th>Spent Time For Rest</th>
+                                </tr>
+                                <tr ng-repeat="approach in set.Approaches">
+                                    <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
+                                    <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{set.Approaches.length}}"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-info" ui-sref="setEdit({id:set.Id})">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <a class="btn btn-sm btn-danger" ng-click="vm.removeSet(set.Id)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
+                        <td class="text-right">
+                            <a id="cancel" class="btn btn-primary" ui-sref="setNew({trainingId:vm.training.Id})">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                Add Set
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidSets===false">If you provide 'Start Training', then sets must not be empty</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-buttons">
+        <button id="save" class="btn btn-primary" ng-click="vm.save(vm.training)" ng-disabled="vm.disableSaveButton">Save</button>
+        <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
+    </div>
+</div>
