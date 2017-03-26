@@ -1,13 +1,13 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('trainingTypeHomeController', trainingTypeHomeController)
+        .controller('TrainingTypeHomeController', TrainingTypeHomeController)
 
-    trainingTypeHomeController.$inject = [
+    TrainingTypeHomeController.$inject = [
         'trainingTypeService',
         'workOutHelper'];
 
-    function trainingTypeHomeController(
+    function TrainingTypeHomeController(
         trainingTypeService,
         workOutHelper) {
 

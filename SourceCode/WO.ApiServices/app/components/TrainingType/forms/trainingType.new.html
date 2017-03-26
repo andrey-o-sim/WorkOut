@@ -1,17 +1,24 @@
 ﻿<h2 class="page-header">Add Training Type</h2>
 <div class="container-fluid">
-    <form data-toggle="validator" role="form">
-        <div class="form-group">
-            <label for="trainingType" class="control-label">Training Type:</label>
-            <input type="text" class="form-control" id="trainingType" ng-model="vm.trainingType.TypeTraining" required/>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Training Type:</h3>
         </div>
-        <div class="form-group">
-            <label for="description" class="control-label">Description:</label>
-            <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.trainingType.Description" required></textarea>
+        <div class="col-md-12">
+            <input type="text" class="form-control" id="trainingType" ng-model="vm.trainingType.TypeTraining" />
+            <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false">Need to provide "Training Type"</label>
         </div>
-        <div class="footer-buttons">
-            <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.trainingType)">Save</button>
-            <a id="cancel" class="btn btn-warning" ui-sref="trainingTypeHome">Cancel</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Description:</h3>
         </div>
-    </form>
+        <div class="col-md-12">
+            <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.trainingType.Description"></textarea>
+        </div>
+    </div>
+    <div class="footer-buttons">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.trainingType)">Save</button>
+        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
+    </div>
 </div>

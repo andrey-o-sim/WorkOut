@@ -5,17 +5,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/app/assets/css")
-    @Scripts.Render("~/app/assets/js")
-    @Scripts.Render("~/app/assets/js/angularUiRoute")
-    @Scripts.Render("~/app/components/modules")
-    @Scripts.Render("~/app/components/helpers")
-    @Scripts.Render("~/app/components/services")
-    @Scripts.Render("~/app/shared/directives")
-    @Scripts.Render("~/app/components/controllers")
 </head>
 <body ng-app="woApp">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -61,4 +52,15 @@
         </div>
     </div>
 </body>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/app/assets/js")
+@Scripts.Render("~/app/assets/js/angularUiRoute")
+@Scripts.Render("~/app/components/modules")
+@Scripts.Render("~/app/components/helpers")
+@Scripts.Render("~/app/components/services")
+@Scripts.Render("~/app/shared/directives")
+@Scripts.Render("~/app/components/controllers")
 </html>

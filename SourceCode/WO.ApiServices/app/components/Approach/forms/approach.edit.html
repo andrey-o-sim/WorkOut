@@ -1,4 +1,4 @@
-﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
 <div class="container-fluid" ng-if="vm.formIsReady">
     <h2 class="page-header">Edit Approach</h2>
@@ -12,6 +12,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.approach.PlannedTimeForRest"></wo-time-selector>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidPlannedTimeForRest==false">Need to provide 'Planned Time For Rest'</label>
                 </div>
             </div>
         </div>
@@ -30,8 +31,8 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.approach)">Save</button>
-        <a id="cancel" class="btn btn-warning" ui-sref="approachHome">Cancel</a>
+    <div class="footer-buttons">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.approach)">Save</button>
+        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
     </div>
 </div>

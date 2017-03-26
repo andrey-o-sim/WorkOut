@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.TimeForRest"></wo-time-selector>
-                    <label ng-show="vm.validateForm==true && vm.validator.ValidTimeForRest==false" class="requiredError">Need to provide 'Time For Reset After Approach'</label>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTimeForRest==false">Need to provide 'Time For Reset After Approach'</label>
                 </div>
             </div>
         </div>
@@ -39,9 +39,9 @@
                 <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
             </div>
             <div class="input-group" ng-if="vm.Exercises">
-                <ui-select ng-model="vm.set.Exercises" multiple close-on-select="false" theme="selectize" title="Choose Exercises">
+                <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.set.Exercises">
                     <ui-select-match placeholder="Select an excercise in the list...">
-                        <span ng-click="vm.addEditExercise($item.Id,vm.set.Id)" tooltip-placement="right" uib-tooltip="Update">{{$item.Name}}</span>
+                        <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id)">{{$item.Name}}</span>
                     </ui-select-match>
                     <ui-select-choices repeat="exercise in vm.Exercises">
                         <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
@@ -54,7 +54,7 @@
                 </span>
             </div>
             <div>
-                <label ng-show="vm.validateForm==true && vm.validator.ValidExercises==false" class="requiredError">Need to provide at least one exercise</label>
+                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidExercises==false">Need to provide at least one exercise</label>
             </div>
         </div>
     </div>
@@ -65,12 +65,12 @@
         </div>
         <div class="col-md-3">
             <input type="number" class="form-control" name="countApproaches" ng-model="vm.set.CountApproaches" />
-            <label ng-show="vm.validateForm==true && vm.validator.ValidCountApproaches==false" class="requiredError">Count of Approaches must be great than 0.</label>
+            <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidCountApproaches==false">Count of Approaches must be great than 0.</label>
         </div>
     </div>
 
     <div class="footer-buttons">
-        <button id="save" type="submit" class="btn btn-primary" ng-click="vm.save(vm.set)" ng-disabled="vm.disableSaveButton">Save</button>
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.set)">Save</button>
         <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
     </div>
 </div>

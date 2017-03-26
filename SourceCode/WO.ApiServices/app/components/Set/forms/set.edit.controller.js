@@ -24,7 +24,6 @@
 
         var vm = this;
         vm.formIsReady = false;
-
         vm.save = save;
         vm.removeApproach = removeApproach;
         vm.addEditApproach = addEditApproach;

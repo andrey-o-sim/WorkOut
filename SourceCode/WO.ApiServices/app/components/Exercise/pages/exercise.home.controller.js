@@ -1,13 +1,13 @@
 ﻿angular
     .module('woApp')
-    .controller('exerciseHomeController', exerciseHomeController);
+    .controller('ExerciseHomeController', ExerciseHomeController);
 
-exerciseHomeController.$inject = [
+ExerciseHomeController.$inject = [
     '$uibModal',
     'exerciseService',
     'workOutHelper'];
 
-function exerciseHomeController(
+function ExerciseHomeController(
     $uibModal,
     exerciseService,
     workOutHelper) {

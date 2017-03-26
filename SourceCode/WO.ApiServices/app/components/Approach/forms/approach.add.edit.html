@@ -1,4 +1,4 @@
-﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
 <div ng-if="vm.formIsReady">
     <div class="modal-header">
@@ -12,7 +12,7 @@
                     <div class="col-md-12">
                         <label class="control-label">Planned Time For Rest:</label>
                         <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.approach.PlannedTimeForRest"></wo-time-selector>
-                        <label ng-show="vm.validateForm==true && vm.validator.ValidPlannedTimeForRest==false" class="requiredError">Need to provide 'Planned Time For Rest'</label>
+                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidPlannedTimeForRest==false">Need to provide 'Planned Time For Rest'</label>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="modal-footer">
-        <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.approach)">Save</button>
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.approach)">Save</button>
         <a id="cancel" class="btn btn-warning" ng-click="vm.cancel()">Cancel</a>
     </div>
 </div>

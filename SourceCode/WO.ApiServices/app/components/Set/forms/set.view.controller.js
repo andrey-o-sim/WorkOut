@@ -9,6 +9,7 @@
     function SetViewController(
         $stateParams,
         setService) {
+
         var vm = this;
         vm.formIsReady = false;
 

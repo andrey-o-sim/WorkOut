@@ -1,17 +1,17 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('approachViewController', approachViewController);
+        .controller('ApproachViewController', ApproachViewController);
 
-    approachViewController.$inject = [
-        'approachService',
+    ApproachViewController.$inject = [
         '$state',
-        '$stateParams'];
+        '$stateParams',
+        'approachService'];
 
-    function approachViewController(
-        approachService,
+    function ApproachViewController(
         $state,
-        $stateParams) {
+        $stateParams,
+        approachService) {
 
         var vm = this;
         vm.formIsReady = false;

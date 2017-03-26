@@ -1,21 +1,20 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('approachEditController', approachEditController);
+        .controller('ApproachEditController', ApproachEditController);
 
-    approachEditController.$inject = [
-        'approachService',
+    ApproachEditController.$inject = [
         '$state',
-        '$stateParams'];
+        '$stateParams',
+        'approachService'];
 
-    function approachEditController(
-        approachService,
+    function ApproachEditController(
         $state,
-        $stateParams) {
+        $stateParams,
+        approachService) {
 
         var vm = this;
         vm.formIsReady = false;
-
         vm.save = save;
 
         init();
@@ -39,15 +38,31 @@
         }
 
         function save(approach) {
-            vm.disableSaveButton = true;
-            approachService.update(approach).then(function (result) {
-                if (result.Succeed) {
-                    $state.go('approachHome');
-                }
-                else {
-                    vm.disableSaveButton = false;
-                }
-            });
+            if (isValidForm(approach)) {
+                vm.disableSaveButton = true;
+                approachService.update(approach).then(function (result) {
+                    if (result.Succeed) {
+                        $state.go('approachHome');
+                    }
+                    else {
+                        vm.disableSaveButton = false;
+                    }
+                });
+            }
+        }
+
+        function isValidForm(approach) {
+            vm.validator = {};
+            var isValid = true;
+            vm.validateForm = true;
+
+            if (!approach.PlannedTimeForRest
+                || (approach.PlannedTimeForRest.Minutes === 0 && approach.PlannedTimeForRest.Seconds === 0)) {
+                vm.validator.ValidPlannedTimeForRest = false;
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }());

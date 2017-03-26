@@ -1,14 +1,14 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .config(routeConfig1)
+        .config(routeConfig)
 
-    function routeConfig1($stateProvider) {
+    function routeConfig($stateProvider) {
         var homeRoute = {
             name: 'approachHome',
             url: '/approach',
             templateUrl: '/app/components/Approach/pages/approach.home.html',
-            controller: 'approachHomeController',
+            controller: 'ApproachHomeController',
             controllerAs: 'vm'
         };
 
@@ -16,7 +16,7 @@
             name: 'approachNew',
             url: '/approach/new',
             templateUrl: '/app/components/Approach/forms/approach.new.html',
-            controller: 'approachNewController',
+            controller: 'ApproachNewController',
             controllerAs: 'vm'
         };
 
@@ -24,7 +24,7 @@
             name: 'approachEdit',
             url: '/approach/edit/{id}',
             templateUrl: '/app/components/Approach/forms/approach.edit.html',
-            controller: 'approachEditController',
+            controller: 'ApproachEditController',
             controllerAs: 'vm'
         };
 
@@ -32,7 +32,7 @@
             name: 'approachView',
             url: '/approach/view/{id}',
             templateUrl: '/app/components/Approach/forms/approach.view.html',
-            controller: 'approachViewController',
+            controller: 'ApproachViewController',
             controllerAs: 'vm'
         };
 

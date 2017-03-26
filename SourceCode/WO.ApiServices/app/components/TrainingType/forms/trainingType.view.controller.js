@@ -1,9 +1,9 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('trainingTypeViewController', trainingTypeViewController)
+        .controller('TrainingTypeViewController', TrainingTypeViewController)
 
-    function trainingTypeViewController(
+    function TrainingTypeViewController(
         $scope,
         $stateParams,
         trainingTypeService) {

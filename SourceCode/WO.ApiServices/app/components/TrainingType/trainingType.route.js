@@ -8,7 +8,7 @@
             name: 'trainingTypeHome',
             url: '/trainingType',
             templateUrl: '/app/components/TrainingType/pages/trainingType.home.html',
-            controller: 'trainingTypeHomeController',
+            controller: 'TrainingTypeHomeController',
             controllerAs: 'vm'
         };
 
@@ -16,7 +16,7 @@
             name: 'trainingTypeNew',
             url: '/trainingType/new',
             templateUrl: '/app/components/TrainingType/forms/trainingType.new.html',
-            controller: 'trainingTypeNewController',
+            controller: 'TrainingTypeNewController',
             controllerAs: 'vm'
         };
 
@@ -24,7 +24,7 @@
             name: 'trainingTypeEdit',
             url: '/trainingType/edit/{id}',
             templateUrl: '/app/components/TrainingType/forms/trainingType.edit.html',
-            controller: 'trainingTypeEditController',
+            controller: 'TrainingTypeEditController',
             controllerAs: 'vm'
         };
 
@@ -32,7 +32,7 @@
             name: 'trainingTypeView',
             url: '/trainingType/view/{id}',
             templateUrl: '/app/components/TrainingType/forms/trainingType.view.html',
-            controller: 'trainingTypeViewController',
+            controller: 'TrainingTypeViewController',
             controllerAs: 'vm'
         };
 

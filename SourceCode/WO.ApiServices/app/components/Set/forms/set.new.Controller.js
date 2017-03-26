@@ -17,18 +17,10 @@
         setService) {
 
         var vm = this;
-
         vm.save = save;
-
-        init();
-
         vm.addEditExercise = addEditExercise;
 
-        vm.validator = validator;
-
-        function validator() {
-
-        }
+        init();
 
         function init() {
             vm.set = {

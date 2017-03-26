@@ -3,7 +3,12 @@
         .module('woApp')
         .factory('workOutHelper', workOutHelper);
 
-    function workOutHelper() {
+    workOutHelper.$inject = [
+        '$log'];
+
+    function workOutHelper(
+        $log) {
+
         var service = {
             removeElementFromArray: removeElementFromArray,
             writeErrorMessageToConsole: writeErrorMessageToConsole
@@ -25,7 +30,7 @@
         }
 
         function writeErrorMessageToConsole(response) {
-            console.error(response.status + " " + response.statusText);
+            $log.debug(response.status + " " + response.statusText);
         }
     }
 }());

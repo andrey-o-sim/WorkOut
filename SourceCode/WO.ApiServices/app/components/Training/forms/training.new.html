@@ -11,7 +11,7 @@
             </div>
             <div ng-show="vm.TrainingTypes">
                 <div>
-                    <ui-select ng-model="vm.training.TrainingType" theme="selectize" title="Choose a Training Type">
+                    <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
                         <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
                         <ui-select-choices repeat="trainingType in vm.TrainingTypes">
                             <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
@@ -19,23 +19,23 @@
                     </ui-select>
                 </div>
                 <div>
-                    <label ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false" class="requiredError">Need to provide "Training Type"</label>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false">Need to provide "Training Type"</label>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3 for="planTimeForRest" class="control-label">Main Training Purpose:</h3>
+            <h3 class="control-label">Main Training Purpose:</h3>
         </div>
         <div class="col-md-12">
             <input type="text" class="form-control" name="mainTrainingPurpose" ng-model="vm.training.MainTrainingPurpose" />
-            <label ng-show="vm.validateForm==true && vm.validator.ValidMainTrainingPurpose==false" class="requiredError">Need to provide "Main Training Purpose"</label>
+            <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidMainTrainingPurpose==false">Need to provide "Main Training Purpose"</label>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3 for="planTimeForRest" class="control-label">Description:</h3>
+            <h3 class="control-label">Description:</h3>
         </div>
         <div class="col-md-12">
             <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="footer-buttons">
-        <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.training)">Save</button>
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.training)">Save</button>
         <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
     </div>
 </div>

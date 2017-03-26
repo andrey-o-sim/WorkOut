@@ -35,6 +35,12 @@ namespace WO.Core.DAL.DataBaseContext
                 .WithMany(s => s.Approaches)
                 .HasForeignKey(a => new { a.SetId })
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Set>()
+                .HasOptional<Training>(s => s.Training)
+                .WithMany(t => t.Sets)
+                .HasForeignKey(t => new { t.TrainingId })
+                .WillCascadeOnDelete(true);
         }
     }
 }

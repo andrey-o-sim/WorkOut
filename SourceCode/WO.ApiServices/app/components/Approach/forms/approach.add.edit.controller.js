@@ -23,9 +23,7 @@
         vm.formIsReady = false;
         vm.approachId = id;
         vm.setId = setId;
-
         vm.title = id > 0 ? 'Edit Approach' : 'Add New Approach'
-
         vm.save = save;
         vm.cancel = cancel;
 

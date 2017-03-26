@@ -1,19 +1,19 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('trainingTypeEditController', trainingTypeEditController)
+        .controller('TrainingTypeEditController', TrainingTypeEditController)
 
-    trainingTypeEditController.$inject = [
+    TrainingTypeEditController.$inject = [
         '$scope',
         '$stateParams',
-        'trainingTypeService',
-        '$state'];
+        '$state',
+        'trainingTypeService'];
 
-    function trainingTypeEditController(
+    function TrainingTypeEditController(
         $scope,
         $stateParams,
-        trainingTypeService,
-        $state) {
+        $state,
+        trainingTypeService) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -30,10 +30,7 @@
         }
 
         function save(trainingType) {
-            vm.disableSaveButton = true;
-            var isValid = isRequiredFieldsPopulated(trainingType);
-
-            if (isValid) {
+            if (isValidForm(trainingType)) {
                 trainingTypeService.update(trainingType).then(function (result) {
                     if (result.Succeed) {
                         $state.go('trainingTypeHome');
@@ -48,11 +45,17 @@
             }
         }
 
-        function isRequiredFieldsPopulated(trainingType) {
-            vm.requiredTypeTraining = vm.trainingType.TypeTraining == "";
-            vm.requiredDescription = vm.trainingType.Description == "";
+        function isValidForm(trainingType) {
+            vm.validator = {};
+            var isValid = true;
+            vm.validateForm = true;
 
-            return !(vm.requiredTypeTraining || vm.requiredDescription);
+            if (!trainingType.TypeTraining || trainingType.TypeTraining === '') {
+                isValid = false;
+                vm.validator.ValidTrainingType = false;
+            }
+
+            return isValid;
         }
     }
 }());

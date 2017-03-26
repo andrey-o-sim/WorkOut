@@ -2,52 +2,52 @@
     <tbody>
         <tr class="text-center">
             <td ng-show="vm.showHours">
-                <a ng-click="vm.increaseHours()" class="btn btn-link" ng-disabled="vm.time.Hours===vm.maxHours">
+                <a class="btn btn-link" ng-disabled="vm.time.Hours===vm.maxHours" ng-click="vm.increaseHours()">
                     <span class="glyphicon glyphicon-chevron-up">
                     </span>
                 </a>
             </td>
             <td ng-show="vm.showHours">&nbsp;</td>
             <td ng-show="vm.showMinutes">
-                <a ng-click="vm.increaseMinutes()" class="btn btn-link" ng-disabled="vm.time.Hours===vm.maxHours && vm.time.Minutes===vm.maxMinutes">
+                <a class="btn btn-link" ng-disabled="vm.time.Hours===vm.maxHours && vm.time.Minutes===vm.maxMinutes" ng-click="vm.increaseMinutes()">
                     <span class="glyphicon glyphicon-chevron-up"></span>
                 </a>
             </td>
             <td ng-show="vm.showSeconds && vm.showMinutes">&nbsp;</td>
             <td ng-show="vm.showSeconds">
-                <a ng-click="vm.increaseSeconds()" class="btn btn-link" ng-disabled="vm.time.Hours===vm.maxHours && vm.time.Minutes===vm.maxMinutes && vm.time.Seconds===vm.maxSeconds">
+                <a class="btn btn-link" ng-disabled="vm.time.Hours===vm.maxHours && vm.time.Minutes===vm.maxMinutes && vm.time.Seconds===vm.maxSeconds" ng-click="vm.increaseSeconds()">
                     <span class="glyphicon glyphicon-chevron-up"></span>
                 </a>
             </td>
         </tr>
         <tr>
             <td class="form-group uib-time" ng-show="vm.showHours">
-                <input type="text" placeholder="HH" ng-model="vm.time.Hours" class="form-control text-center" maxlength="2" ng-readonly="true" tooltip-placement="bottom" uib-tooltip="Hours">
+                <input type="text" placeholder="HH" class="form-control text-center" maxlength="2" tooltip-placement="bottom" uib-tooltip="Hours" ng-model="vm.time.Hours" ng-readonly="true">
             </td>
             <td ng-show="vm.showHours">:</td>
             <td class="form-group uib-time" ng-show="vm.showMinutes">
-                <input type="text" placeholder="MM" ng-model="vm.time.Minutes" class="form-control text-center" maxlength="2" ng-readonly="true" tooltip-placement="bottom" uib-tooltip="Minutes">
+                <input type="text" placeholder="MM" class="form-control text-center" maxlength="2" tooltip-placement="bottom" uib-tooltip="Minutes" ng-model="vm.time.Minutes" ng-readonly="true">
             </td>
             <td ng-show="vm.showSeconds && vm.showMinutes">:</td>
             <td class="form-group uib-time" ng-show="vm.showSeconds">
-                <input type="text" placeholder="SS" ng-model="vm.time.Seconds" class="form-control text-center" maxlength="2" ng-readonly="true" tooltip-placement="bottom" uib-tooltip="Seconds">
+                <input type="text" placeholder="SS" class="form-control text-center" maxlength="2" tooltip-placement="bottom" uib-tooltip="Seconds" ng-model="vm.time.Seconds" ng-readonly="true">
             </td>
         </tr>
         <tr class="text-center">
             <td ng-show="vm.showHours">
-                <a ng-hide="!vm.time" ng-click="vm.decreaseHours()" class="btn btn-link" ng-disabled="!vm.time || vm.time.Hours===0">
+                <a class="btn btn-link" ng-hide="!vm.time" ng-disabled="vm.time.Hours===0" ng-click="vm.decreaseHours()">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </td>
             <td ng-show="vm.showHours">&nbsp;</td>
             <td ng-show="vm.showMinutes">
-                <a ng-hide="!vm.time" ng-click="vm.decreaseMinutes()" class="btn btn-link" ng-disabled="!vm.time || (vm.time.Minutes===0 && vm.time.Hours===0)">
+                <a class="btn btn-link" ng-hide="!vm.time" ng-disabled="vm.time.Minutes===0 && vm.time.Hours===0" ng-click="vm.decreaseMinutes()">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </td>
             <td ng-show="vm.showSeconds && vm.showMinutes">&nbsp;</td>
             <td ng-show="vm.showSeconds">
-                <a ng-hide="!vm.time" ng-click="vm.decreaseSeconds()" class="btn btn-link" ng-disabled="!vm.time || (vm.time.Seconds===0 && vm.time.Minutes===0)">
+                <a class="btn btn-link" ng-hide="!vm.time" ng-disabled="vm.time.Seconds===0 && vm.time.Minutes===0" ng-click="vm.decreaseSeconds()">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </td>

@@ -1,16 +1,15 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('approachNewController', approachNewController);
+        .controller('ApproachNewController', ApproachNewController);
 
-    approachNewController
-        .$inject = [
-            'approachService',
-            '$state'];
+    ApproachNewController.$inject = [
+        '$state',
+        'approachService'];
 
-    function approachNewController(
-        approachService,
-        $state) {
+    function ApproachNewController(
+        $state,
+        approachService) {
 
         var vm = this;
         vm.save = save;
@@ -31,15 +30,31 @@
         }
 
         function save(approach) {
-            vm.disableSaveButton = true;
-            approachService.create(approach).then(function (result) {
-                if (result.Succeed) {
-                    $state.go('approachHome')
-                }
-                else {
-                    vm.disableSaveButton = false;
-                }
-            });
+            if (isValidForm(approach)) {
+                vm.disableSaveButton = true;
+                approachService.create(approach).then(function (result) {
+                    if (result.Succeed) {
+                        $state.go('approachHome')
+                    }
+                    else {
+                        vm.disableSaveButton = false;
+                    }
+                });
+            }
+        }
+
+        function isValidForm(approach) {
+            vm.validator = {};
+            var isValid = true;
+            vm.validateForm = true;
+
+            if (!approach.PlannedTimeForRest
+                || (approach.PlannedTimeForRest.Minutes === 0 && approach.PlannedTimeForRest.Seconds === 0)) {
+                vm.validator.ValidPlannedTimeForRest = false;
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }());

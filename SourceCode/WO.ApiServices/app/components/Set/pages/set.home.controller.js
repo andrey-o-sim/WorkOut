@@ -10,10 +10,9 @@
     function SetHomeController(
         setService,
         workOutHelper) {
+
         var vm = this;
-
         vm.formIsReady = false;
-
         vm.remove = remove;
 
         init();

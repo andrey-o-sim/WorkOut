@@ -3,9 +3,15 @@
         .module('woApp')
         .controller('ExerciseAddEditController', ExerciseAddEditController);
 
-    ExerciseAddEditController.$inject = ['$uibModalInstance', 'exerciseService', 'id'];
+    ExerciseAddEditController.$inject = [
+        '$uibModalInstance',
+        'exerciseService',
+        'id'];
 
-    function ExerciseAddEditController($uibModalInstance, exerciseService, id) {
+    function ExerciseAddEditController(
+        $uibModalInstance,
+        exerciseService,
+        id) {
 
         var vm = this;
         vm.exerciseId = id;

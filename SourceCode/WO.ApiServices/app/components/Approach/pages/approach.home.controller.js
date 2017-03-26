@@ -1,20 +1,20 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('approachHomeController', approachHomeController)
+        .controller('ApproachHomeController', ApproachHomeController)
 
-    approachHomeController.$inject = [
+    ApproachHomeController.$inject = [
         'approachService',
         'workOutHelper'];
 
-    function approachHomeController(
+    function ApproachHomeController(
         approachService,
         workOutHelper) {
 
         var vm = this;
         vm.formIsReady = false;
-
         vm.remove = remove;
+
         init();
 
         function init() {

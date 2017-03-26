@@ -1,4 +1,4 @@
-﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
 <div class="container-fluid" ng-if="vm.formIsReady">
     <h2 class="page-header">View Approach</h2>
@@ -11,11 +11,11 @@
             </div>
             <div class="row border">
                 <div class="col-md-6">
-                    <label class="control-label" ng-bind="vm.approach.PlannedTimeForRest.Minutes"></label>
+                    <label class="control-label" ng-bind="::vm.approach.PlannedTimeForRest.Minutes"></label>
                     <label class="control-label">Minute(s)</label>
                 </div>
                 <div class="col-md-6">
-                    <label class="control-label" ng-bind="vm.approach.PlannedTimeForRest.Seconds"></label>
+                    <label class="control-label" ng-bind="::vm.approach.PlannedTimeForRest.Seconds"></label>
                     <label class="control-label">Second(s)</label>
                 </div>
             </div>
@@ -28,19 +28,17 @@
             </div>
             <div class="row border">
                 <div class="col-md-6">
-                    <label class="control-label" ng-bind="vm.approach.SpentTimeForRest.Minutes"></label>
+                    <label class="control-label" ng-bind="::vm.approach.SpentTimeForRest.Minutes"></label>
                     <label class="control-label">Minute(s)</label>
                 </div>
                 <div class="col-md-6">
-                    <label class="control-label" ng-bind="vm.approach.SpentTimeForRest.Seconds"></label>
+                    <label class="control-label" ng-bind="::vm.approach.SpentTimeForRest.Seconds"></label>
                     <label class="control-label">Second(s)</label>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <a id="cancel" class="btn btn-warning" ui-sref="approachHome">Cancel</a>
-        </div>
+    <div class="footer-buttons">
+        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
     </div>
 </div>

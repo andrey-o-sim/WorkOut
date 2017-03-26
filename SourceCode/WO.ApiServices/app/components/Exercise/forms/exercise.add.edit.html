@@ -1,4 +1,4 @@
-﻿<span ng-if="!vm.formIsReady" class="loader"></span>
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
 <div ng-if="vm.formIsReady">
     <div class="modal-header">
@@ -10,14 +10,14 @@
             <div class="col-md-12">
                 <label class="control-label">Name:</label>
                 <input type="text" class="form-control" id="name" ng-model="vm.exercise.Name" />
-                <label ng-show="vm.validateForm==true && vm.validator.ValidName==false" class="requiredError">Need to provide 'Name'</label>
-                <label ng-show="vm.validateForm==true && vm.validator.ValidNameAlreadyPresent" class="requiredError">Exercise with name '{{vm.exercise.Name}}' already present in the system. Please, provide another name</label>
+                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidName==false">Need to provide 'Name'</label>
+                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidNameAlreadyPresent">Exercise with name '{{vm.exercise.Name}}' already present in the system. Please, provide another name</label>
             </div>
         </div>
     </div>
 
     <div class="modal-footer">
-        <button id="save" type="submit" ng-disabled="vm.disableSaveButton" class="btn btn-primary" ng-click="vm.save(vm.exercise)">Save</button>
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.exercise)">Save</button>
         <a id="cancel" class="btn btn-warning" ng-click="vm.cancel()">Cancel</a>
     </div>
 </div>

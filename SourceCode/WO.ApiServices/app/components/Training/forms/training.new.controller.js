@@ -49,7 +49,7 @@
             var isValid = true;
             vm.validateForm = true;
 
-            if (!training.TrainingType || !training.TrainingType.Id || !training.TrainingType.TypeTraining === '') {
+            if (!training.TrainingType || !training.TrainingType.Id || training.TrainingType.TypeTraining === '') {
                 isValid = false;
                 vm.validator.ValidTrainingType = false;
             }
