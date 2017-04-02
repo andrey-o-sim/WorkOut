@@ -23,6 +23,7 @@ namespace TestConsoleApplication
 
             //var set = context.Sets.FirstOrDefault();
 
+            TrainingType trainingType1 = context.TrainingTypes.FirstOrDefault<TrainingType>();
             var training = context.Trainings.Where(tr => tr.Id == 1).FirstOrDefault();
 
             //set.Training = training;

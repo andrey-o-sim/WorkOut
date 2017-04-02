@@ -12,6 +12,6 @@ namespace WO.Core.DAL.Model
         [Required]
         public string TypeTraining { get; set; }
         public string Description { get; set; }
-        public virtual IEnumerable<Training> Trainings { get; set; }
+        public virtual ICollection<Training> Trainings { get; set; }
     }
 }

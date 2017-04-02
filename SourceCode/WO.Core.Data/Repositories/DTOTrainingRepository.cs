@@ -39,6 +39,9 @@ namespace WO.Core.Data.Repositories
             var training = _mapper.Map<Training>(trainingDTO);
             training.ModifiedDate = DateTime.Now;
 
+            training.TrainingType = trainingDTO.TrainingType != null 
+                ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id) 
+                : new TrainingType();
             training.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
 
             _repository.Update(training);
