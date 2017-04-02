@@ -31,12 +31,18 @@ namespace WO.Core.Data.Configs
 
                 cfg.CreateMap<TrainingTypeDTO, TrainingType>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
-                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.Trainings, dl => dl.Ignore());
+
 
                 cfg.CreateMap<Training, TrainingDTO>();
+
                 cfg.CreateMap<TrainingDTO, Training>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
-                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.TrainingType, dl => dl.Ignore())
+                .ForMember(dto => dto.Sets, dl => dl.Ignore());
+
 
                 cfg.CreateMap<Set, SetDTO>()
                 .ForMember(dto => dto.Training, dl => dl.Ignore());
@@ -47,18 +53,23 @@ namespace WO.Core.Data.Configs
                 .ForMember(dto => dto.Approaches, dl => dl.Ignore())
                 .ForMember(dto => dto.Exercises, dl => dl.Ignore());
 
+
                 cfg.CreateMap<Exercise, ExerciseDTO>()
                 .ForMember(dl => dl.Sets, dl => dl.Ignore());
+
                 cfg.CreateMap<ExerciseDTO, Exercise>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.Sets, dto => dto.Ignore());
 
+
                 cfg.CreateMap<Approach, ApproachDTO>()
                 .ForMember(dto => dto.Set, dl => dl.Ignore());
+
                 cfg.CreateMap<ApproachDTO, Approach>()
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
-                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.Set, dl => dl.Ignore());
             });
         }
     }

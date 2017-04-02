@@ -29,22 +29,30 @@ namespace WO.Core.Data.Repositories
             training.CreatedDate = DateTime.Now;
             training.ModifiedDate = DateTime.Now;
 
-            training.TrainingType = _trainingTypeRepository.Get(training.TrainingType.Id);
+            training.TrainingType = trainingDTO.TrainingType != null
+                ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id)
+                : new TrainingType();
 
             return _repository.Create(training);
         }
 
         public override void Update(TrainingDTO trainingDTO)
         {
-            var training = _mapper.Map<Training>(trainingDTO);
-            training.ModifiedDate = DateTime.Now;
+            var trainingForUpdate = _repository.Get(trainingDTO.Id);
+            _mapper.Map<TrainingDTO, Training>(trainingDTO, trainingForUpdate);
+            trainingForUpdate.ModifiedDate = DateTime.Now;
 
-            training.TrainingType = trainingDTO.TrainingType != null 
-                ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id) 
-                : new TrainingType();
-            training.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
+            if (trainingDTO.TrainingType.Id != trainingForUpdate.TrainingType.Id)
+            {
+                trainingForUpdate.TrainingType = trainingDTO.TrainingType != null
+                    ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id)
+                    : new TrainingType();
+                trainingForUpdate.TrainingType.Trainings.Add(trainingForUpdate);
+            }
 
-            _repository.Update(training);
+            trainingForUpdate.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
+
+            _repository.Update(trainingForUpdate);
         }
 
     }

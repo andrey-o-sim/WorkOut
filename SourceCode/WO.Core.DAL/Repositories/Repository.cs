@@ -29,8 +29,8 @@ namespace WO.Core.DAL.Repositories
         public virtual void Update(T item)
         {
             var entry = _dbContext.Entry(item);
-            AttachToContext(item, EntityState.Modified);
 
+            entry.State = EntityState.Modified;
             entry.Property(i => i.CreatedDate).IsModified = false;
             _dbContext.SaveChanges();
         }
@@ -61,15 +61,6 @@ namespace WO.Core.DAL.Repositories
         public virtual IEnumerable<T> GetAll()
         {
             return _dbContext.Set<T>().ToList();
-        }
-
-        public virtual void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel
-        {
-            if (!_dbContext.ChangeTracker.Entries<TEntity>().Any(b => b.Entity.Id == item.Id))
-            {
-                _dbContext.Set<TEntity>().Attach(item);
-                _dbContext.Entry(item).State = state;
-            }
         }
 
         public void Dispose()
