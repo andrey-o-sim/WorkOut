@@ -54,7 +54,7 @@ namespace WO.Core.DAL.Repositories
 
         public virtual T Get(int id)
         {
-            var result = _dbContext.Set<T>().Where(item => item.Id == id).FirstOrDefault();
+            var result = _dbContext.Set<T>().Find(id);
             return result;
         }
 

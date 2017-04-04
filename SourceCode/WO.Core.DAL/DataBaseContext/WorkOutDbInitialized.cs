@@ -5,7 +5,7 @@ using WO.Core.DAL.Model;
 
 namespace WO.Core.DAL.DataBaseContext
 {
-    public class WorkOutDbInitialized : DropCreateDatabaseAlways<WorkOutContext>
+    public class WorkOutDbInitialized : DropCreateDatabaseIfModelChanges<WorkOutContext>
     {
         WorkOutContext _context;
         protected override void Seed(WorkOutContext context)
