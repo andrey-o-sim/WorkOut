@@ -1228,6 +1228,14 @@
       <Project>{c15b0dc4-37a3-4345-bf0d-bf67fd8f0813}</Project>
       <Name>WO.Core.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WO.LoggerFactory\WO.LoggerFactory.csproj">
+      <Project>{2a96ad96-8103-46c8-aed6-0b2252c91a6d}</Project>
+      <Name>WO.LoggerFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WO.LoggingService\WO.LoggerService.csproj">
+      <Project>{a2249754-1da2-4645-b1b2-03ff6951268c}</Project>
+      <Name>WO.LoggerService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

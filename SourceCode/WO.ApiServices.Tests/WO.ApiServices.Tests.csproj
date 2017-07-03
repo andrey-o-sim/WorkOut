@@ -139,6 +139,14 @@
       <Project>{781af302-7dca-493e-8131-2e0c0413ca02}</Project>
       <Name>WO.Core.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WO.LoggerFactory\WO.LoggerFactory.csproj">
+      <Project>{2a96ad96-8103-46c8-aed6-0b2252c91a6d}</Project>
+      <Name>WO.LoggerFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WO.LoggingService\WO.LoggerService.csproj">
+      <Project>{a2249754-1da2-4645-b1b2-03ff6951268c}</Project>
+      <Name>WO.LoggerService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

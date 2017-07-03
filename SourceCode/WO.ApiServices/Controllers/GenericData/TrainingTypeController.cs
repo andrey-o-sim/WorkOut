@@ -6,6 +6,8 @@ using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using WO.LoggerService;
+using WO.LoggerFactory;
 
 namespace WO.ApiServices.Controllers.GenericData
 {
@@ -13,11 +15,13 @@ namespace WO.ApiServices.Controllers.GenericData
     {
         private IService<TrainingTypeDTO> _service;
         private IMapper _mapper;
+        private ILoggerService _loggerService;
 
-        public TrainingTypeController(IService<TrainingTypeDTO> service)
+        public TrainingTypeController(IService<TrainingTypeDTO> service, ILoggerFactory loggerFactory)
         {
             _service = service;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
+            _loggerService = loggerFactory.Create<TrainingController>();
         }
 
         // GET: api/TrainingType/5
