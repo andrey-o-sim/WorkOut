@@ -8,30 +8,46 @@ using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 using WO.LoggerService;
 using WO.LoggerFactory;
+using System;
+using WO.Core.BLL;
 
 namespace WO.ApiServices.Controllers.GenericData
 {
-    public class TrainingTypeController : ApiController
+    public class TrainingTypeController : WoBaseController<TrainingTypeController>
     {
         private IService<TrainingTypeDTO> _service;
         private IMapper _mapper;
-        private ILoggerService _loggerService;
 
         public TrainingTypeController(IService<TrainingTypeDTO> service, ILoggerFactory loggerFactory)
+            : base(loggerFactory)
         {
             _service = service;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
-            _loggerService = loggerFactory.Create<TrainingController>();
         }
 
         // GET: api/TrainingType/5
         public IHttpActionResult Get(int id)
         {
-            var trainingTypeDTO = _service.Get(id);
-            if (trainingTypeDTO != null)
+            LoggerService.Info("Getting 'Training Type' by id = '{0}'", id);
+
+            try
             {
-                var trainingType = _mapper.Map<TrainingType>(trainingTypeDTO);
-                return Ok<TrainingType>(trainingType);
+                var trainingTypeDTO = _service.Get(id);
+                if (trainingTypeDTO != null)
+                {
+                    var trainingType = _mapper.Map<TrainingType>(trainingTypeDTO);
+
+                    LogInfoObjectToJson(trainingType);
+                    return Ok<TrainingType>(trainingType);
+                }
+                else
+                {
+                    LoggerService.Info("There is no 'Training Type' with Id = '{0}'", id);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during getting 'Training Type' with id = {0}", id);
             }
 
             return NotFound();
@@ -40,38 +56,86 @@ namespace WO.ApiServices.Controllers.GenericData
         // GET: api/TrainingType
         public IHttpActionResult GetAll()
         {
-            var allTrainingTypesDTO = _service.GetAll();
-            var trainingTypes = _mapper.Map<List<TrainingType>>(allTrainingTypesDTO);
+            LoggerService.Info("Getting all 'Training Types'");
 
-            return Ok<List<TrainingType>>(trainingTypes);
+            try
+            {
+                var allTrainingTypesDTO = _service.GetAll();
+                var trainingTypes = _mapper.Map<List<TrainingType>>(allTrainingTypesDTO);
+
+                LogInfoObjectToJson(trainingTypes);
+                return Ok<List<TrainingType>>(trainingTypes);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during getting all 'Training Types'");
+            }
+
+            return NotFound();
         }
 
         // POST: api/TrainingType
         [HttpPost]
         public IHttpActionResult Create(TrainingType trainingType)
         {
-            var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-            var result = _service.Create(trainingTypeDTO);
+            LogInfoObjectToJson(trainingType, "Creating 'Training Type':");
 
-            return Ok<IOperationResult>(result);
+            try
+            {
+                var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
+                var result = _service.Create(trainingTypeDTO);
+
+                LogInfoObjectToJson(result, "Created 'Training Type':");
+                return Ok<IOperationResult>(result);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during creating 'Training Type'");
+            }
+
+            return Ok<IOperationResult>(DefaultOperatingResult);
         }
 
         // PUT: api/TrainingType/5
         [HttpPut]
         public IHttpActionResult Update(TrainingType trainingType)
         {
-            var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-            var result = _service.Update(trainingTypeDTO);
+            LogInfoObjectToJson(trainingType, "Updating 'Training Type':");
 
-            return Ok<IOperationResult>(result);
+            try
+            {
+                var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
+                var result = _service.Update(trainingTypeDTO);
+
+                LogInfoObjectToJson(trainingType, "Updated 'Training Type':");
+                return Ok<IOperationResult>(result);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during updating 'Training Type'");
+            }
+
+            return Ok<IOperationResult>(DefaultOperatingResult);
         }
 
         // DELETE: api/TrainingType/5
         public IHttpActionResult Delete(int id)
         {
-            var result = _service.Delete(id);
+            LoggerService.Info("Deleting 'Training Type' with id = '{0}'", id);
 
-            return Ok<IOperationResult>(result);
+            try
+            {
+                var result = _service.Delete(id);
+
+                LoggerService.Info("'Training Type' was removed");
+                return Ok<IOperationResult>(result);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during deleting 'Training Type'");
+            }
+
+            return Ok<IOperationResult>(DefaultOperatingResult);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace WO.ApiServices.Tests.Controllers
         public void Init()
         {
             _mock = new Mock<IService<SetDTO>>();
-            _setController = new SetController(_mock.Object);
+            _setController = new SetController(_mock.Object, null);
 
             _sets = new List<SetDTO>
             {

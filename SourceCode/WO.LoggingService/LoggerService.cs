@@ -28,44 +28,44 @@ namespace WO.LoggerService
 
         public string Name => _logger.Name;
 
-        public void Debug(string message)
+        public void Debug(string messageFormat, params object[] parameters)
         {
-            _logger.Debug(message);
+            _logger.Debug(messageFormat, parameters);
         }
 
-        public void Error(string message)
+        public void Error(string messageFormat, params object[] parameters)
         {
-            _logger.Error(message);
+            _logger.Error(messageFormat, parameters);
         }
 
-        public void ErrorException(string message, Exception exception)
+        public void ErrorException(Exception exception, string messageFormat, params object[] parameters)
         {
-            _logger.Error(exception, message);
+            _logger.Error(exception, messageFormat, parameters);
         }
 
-        public void Fatal(string message)
+        public void Fatal(string messageFormat, params object[] parameters)
         {
-            _logger.Fatal(message);
+            _logger.Fatal(messageFormat, parameters);
         }
 
-        public void Fatal(string message, Exception exception)
+        public void Fatal(Exception exception, string messageFormat, params object[] parameters)
         {
-            _logger.Fatal(exception, message);
+            _logger.Fatal(exception, messageFormat, parameters);
         }
 
-        public void Info(string message)
+        public void Info(string messageFormat, params object[] parameters)
         {
-            _logger.Info(message);
+            _logger.Info(messageFormat, parameters);
         }
 
-        public void Trace(string message)
+        public void Trace(string messageFormat, params object[] parameters)
         {
-            _logger.Trace(message);
+            _logger.Trace(messageFormat, parameters);
         }
 
-        public void Warn(string message)
+        public void Warn(string messageFormat, params object[] parameters)
         {
-            _logger.Warn(message);
+            _logger.Warn(messageFormat, parameters);
         }
 
         public void Log(LogLevel level, string messageFormat, params object[] parameters)
