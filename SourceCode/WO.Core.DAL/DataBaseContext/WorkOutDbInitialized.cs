@@ -2,20 +2,32 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using WO.Core.DAL.Model;
+using WO.LoggerFactory;
+using WO.LoggerService;
 
 namespace WO.Core.DAL.DataBaseContext
 {
     public class WorkOutDbInitialized : DropCreateDatabaseIfModelChanges<WorkOutContext>
     {
-        WorkOutContext _context;
+        private WorkOutContext _context;
+        private ILoggerService _loggerService;
+
+        public WorkOutDbInitialized(ILoggerFactory loggerFactory)
+        {
+            _loggerService = loggerFactory.Create<WorkOutDbInitialized>();
+        }
+
         protected override void Seed(WorkOutContext context)
         {
             _context = context;
 
+            _loggerService.Info("Creating 'Training Type' and 'Excercise' items...");
             InitialTrainingTypes();
             InitialExercises();
 
             context.SaveChanges();
+
+            _loggerService.Info("Sub items were created.");
         }
 
         private void InitialTrainingTypes()

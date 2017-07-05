@@ -7,16 +7,19 @@ using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 using WO.Core.BLL.Interfaces.Services;
+using WO.LoggerFactory;
+using System;
 
 namespace WO.ApiServices.Controllers
 {
     [RoutePrefix("api/Exercise")]
-    public class ExerciseController : ApiController
+    public class ExerciseController : WoBaseController<ExerciseController>
     {
         private IExerciseService _service;
         private IMapper _mapper;
 
-        public ExerciseController(IExerciseService exerciseService)
+        public ExerciseController(IExerciseService exerciseService, ILoggerFactory loggerFactory)
+            : base(loggerFactory)
         {
             _service = exerciseService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
@@ -26,12 +29,27 @@ namespace WO.ApiServices.Controllers
         [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            var exerciseDTO = _service.Get(id);
+            LoggerService.Info("Getting 'Exercise' by id = '{0}'", id);
 
-            if (exerciseDTO != null)
+            try
             {
-                var exercise = _mapper.Map<Exercise>(exerciseDTO);
-                return Ok<Exercise>(exercise);
+                var exerciseDTO = _service.Get(id);
+
+                if (exerciseDTO != null)
+                {
+                    var exercise = _mapper.Map<Exercise>(exerciseDTO);
+
+                    LogInfoObjectToJson(exercise);
+                    return Ok<Exercise>(exercise);
+                }
+                else
+                {
+                    LoggerService.Info("There is no 'Exercise' with Id = '{0}'", id);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during getting 'Exercise' with id = {0}", id);
             }
 
             return NotFound();
@@ -40,53 +58,118 @@ namespace WO.ApiServices.Controllers
         [Route("{exerciseName}")]
         public IHttpActionResult GetByName(string exerciseName)
         {
-            var exerciseDTO = _service.GetByName(exerciseName);
+            LoggerService.Info("Getting 'Exercise' by Name = '{0}'", exerciseName);
 
-            if (exerciseDTO != null)
+            try
             {
-                var exercise = _mapper.Map<Exercise>(exerciseDTO);
-                return Ok<Exercise>(exercise);
+                var exerciseDTO = _service.GetByName(exerciseName);
+
+                if (exerciseDTO != null)
+                {
+                    var exercise = _mapper.Map<Exercise>(exerciseDTO);
+
+                    LogInfoObjectToJson(exercise);
+                    return Ok<Exercise>(exercise);
+                }
+                else
+                {
+                    LoggerService.Info("There is no 'Exercise' with Name = '{0}'", exerciseName);
+                }
+
+                return Ok<Exercise>(new Exercise());
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during getting 'Exercise' with id = {0}", exerciseName);
             }
 
-            return Ok<Exercise>(new Exercise());
+            return NotFound();
         }
 
         // GET: api/Exercise
         public IHttpActionResult GetAll()
         {
-            var exercisesDTO = _service.GetAll();
-            var exercises = _mapper.Map<List<Exercise>>(exercisesDTO);
+            LoggerService.Info("Getting all 'Exercises'");
 
-            return Ok<List<Exercise>>(exercises);
+            try
+            {
+                var exercisesDTO = _service.GetAll();
+                var exercises = _mapper.Map<List<Exercise>>(exercisesDTO);
+
+                LogInfoObjectToJson(exercises);
+                return Ok<List<Exercise>>(exercises);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during getting all 'Exercises'");
+            }
+
+            return NotFound();
         }
 
         // POST: api/Exercise
         [HttpPost]
         public IHttpActionResult Create([FromBody]Exercise exercise)
         {
-            var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-            var result = _service.Create(exerciseDTO);
+            LogInfoObjectToJson(exercise, "Creating 'Exercise':");
 
-            return Ok<IOperationResult>(result);
+            try
+            {
+                var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
+                var result = _service.Create(exerciseDTO);
+
+                LogInfoObjectToJson(result, "Created 'Exercise':");
+                return Ok<IOperationResult>(result);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during creating 'Exercise'");
+            }
+
+            return Ok<IOperationResult>(DefaultOperatingResult);
         }
 
         // PUT: api/Exercise/5
         [HttpPut]
         public IHttpActionResult Update([FromBody]Exercise exercise)
         {
-            var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-            var result = _service.Update(exerciseDTO);
+            LogInfoObjectToJson(exercise, "Updating 'Exercise':");
 
-            return Ok<IOperationResult>(result);
+            try
+            {
+                var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
+                var result = _service.Update(exerciseDTO);
+
+                LogInfoObjectToJson(result, "Updated 'Exercise':");
+                return Ok<IOperationResult>(result);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during updating 'Exercise'");
+            }
+
+            return Ok<IOperationResult>(DefaultOperatingResult);
         }
 
         // DELETE: api/Exercise/5
         [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
-            var result = _service.Delete(id);
+            LoggerService.Info("Deleting 'Exercise' with id = '{0}'", id);
 
-            return Ok<IOperationResult>(result);
+            try
+            {
+                var result = _service.Delete(id);
+
+                LoggerService.Info("'Exercise' was removed");
+                return Ok<IOperationResult>(result);
+            }
+            catch (Exception ex)
+            {
+                LoggerService.ErrorException(ex, "Error during deleting 'Exercise'");
+            }
+
+            return Ok<IOperationResult>(DefaultOperatingResult);
         }
     }
 }

@@ -71,6 +71,16 @@
   <ItemGroup>
     <Folder Include="DataBaseContext\Conventions\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WO.LoggerFactory\WO.LoggerFactory.csproj">
+      <Project>{2a96ad96-8103-46c8-aed6-0b2252c91a6d}</Project>
+      <Name>WO.LoggerFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WO.LoggingService\WO.LoggerService.csproj">
+      <Project>{a2249754-1da2-4645-b1b2-03ff6951268c}</Project>
+      <Name>WO.LoggerService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

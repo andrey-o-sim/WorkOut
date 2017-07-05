@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WO.Core.Data", "WO.Core.Data\WO.Core.Data.csproj", "{C15B0DC4-37A3-4345-BF0D-BF67FD8F0813}"
 EndProject
@@ -14,6 +14,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WO.ApiServices.Tests", "WO.ApiServices.Tests\WO.ApiServices.Tests.csproj", "{99347AFE-FCF9-43B0-AF99-F77DDB28E982}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApplication", "TestConsoleApplication\TestConsoleApplication.csproj", "{F993AD50-492F-4EFE-B959-8E927617C3B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WO.Logging", "WO.Logging", "{2F7505D4-6AD3-4159-81BE-1968023E7496}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WO.LoggerService", "WO.LoggingService\WO.LoggerService.csproj", "{A2249754-1DA2-4645-B1B2-03FF6951268C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WO.LoggerFactory", "WO.LoggerFactory\WO.LoggerFactory.csproj", "{2A96AD96-8103-46C8-AED6-0B2252C91A6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +51,20 @@ Global
 		{F993AD50-492F-4EFE-B959-8E927617C3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F993AD50-492F-4EFE-B959-8E927617C3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F993AD50-492F-4EFE-B959-8E927617C3B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2249754-1DA2-4645-B1B2-03FF6951268C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2249754-1DA2-4645-B1B2-03FF6951268C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2249754-1DA2-4645-B1B2-03FF6951268C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2249754-1DA2-4645-B1B2-03FF6951268C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A96AD96-8103-46C8-AED6-0B2252C91A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A96AD96-8103-46C8-AED6-0B2252C91A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A96AD96-8103-46C8-AED6-0B2252C91A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A96AD96-8103-46C8-AED6-0B2252C91A6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2249754-1DA2-4645-B1B2-03FF6951268C} = {2F7505D4-6AD3-4159-81BE-1968023E7496}
+		{2A96AD96-8103-46C8-AED6-0B2252C91A6D} = {2F7505D4-6AD3-4159-81BE-1968023E7496}
 	EndGlobalSection
 EndGlobal

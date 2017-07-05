@@ -25,7 +25,7 @@ namespace WO.ApiServices.Tests.Controllers
         public void Init()
         {
             _mock = new Mock<IExerciseService>();
-            _exerciseController = new ExerciseController(_mock.Object);
+            _exerciseController = new ExerciseController(_mock.Object, null);
 
             _exercises = new List<ExerciseDTO>
             {
