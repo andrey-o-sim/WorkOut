@@ -1,25 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.DAL.Model;
+using WO.LoggerFactory;
+using WO.LoggerService;
 
 namespace WO.Core.DAL.DataBaseContext
 {
     public class WorkOutContext : DbContext
     {
+        private static ILoggerFactory _loggerFactory;
+        private static ILoggerService _loggerService;
         static WorkOutContext()
         {
-            Database.SetInitializer<WorkOutContext>(new WorkOutDbInitialized());
+            _loggerFactory = new LoggerFactory.LoggerFactory();
+            _loggerService = _loggerFactory.Create<WorkOutContext>();
+
+            Database.SetInitializer<WorkOutContext>(new WorkOutDbInitialized(_loggerFactory));
         }
 
         public WorkOutContext(string connectionString)
             : base(connectionString)
         {
-            Database.CreateIfNotExists();
+            try
+            {
+                _loggerService.Info("Initialization DB. Connection string is: '{0}'", connectionString);
+                Database.CreateIfNotExists();
+                _loggerService.Info("DB was successfully initializated.");
+            }
+            catch (Exception ex)
+            {
+                _loggerService.ErrorException(ex, "Error during initialization DB");
+            }
         }
 
         public DbSet<TrainingType> TrainingTypes { get; set; }
