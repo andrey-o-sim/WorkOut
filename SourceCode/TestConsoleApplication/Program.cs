@@ -57,9 +57,9 @@ namespace TestConsoleApplication
             };
 
 
-            DTOSetRepository dtoSetRepository = new DTOSetRepository(repSet, repApproach, repExercise, repTraining);
-            DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(repApproach);
-            DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(repExercise);
+            DTOSetRepository dtoSetRepository = new DTOSetRepository(null, repApproach, repExercise, repTraining);
+            DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(null);
+            DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(null);
 
             firstEx.Id = dtoExcerciseRepository.Create(firstEx);
             firstEx.CreatedDate = DateTime.Now;

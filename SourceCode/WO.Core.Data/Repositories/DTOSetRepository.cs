@@ -17,11 +17,11 @@ namespace WO.Core.Data.Repositories
         private IRepository<Exercise> _exerciseRepository;
         private IRepository<Training> _trainingRepository;
 
-        public DTOSetRepository(IRepository<Set> setRepository,
+        public DTOSetRepository(IUnitOfWork unitOfWork,
             IRepository<Approach> approachRepository,
             IRepository<Exercise> exerciseRepository,
             IRepository<Training> trainingRepository)
-            : base(setRepository)
+            : base(unitOfWork)
         {
             _approachRepository = approachRepository;
             _exerciseRepository = exerciseRepository;

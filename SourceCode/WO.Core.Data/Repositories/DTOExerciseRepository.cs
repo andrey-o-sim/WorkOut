@@ -12,7 +12,8 @@ namespace WO.Core.Data.Repositories
 {
     public class DTOExerciseRepository : DTORepository<Exercise, ExerciseDTO>, IExerciseRepositoryDTO
     {
-        public DTOExerciseRepository(IRepository<Exercise> repository) : base(repository)
+        public DTOExerciseRepository(IUnitOfWork unitOfWork) 
+            : base(unitOfWork)
         { }
 
         public ExerciseDTO GetByName(string name)

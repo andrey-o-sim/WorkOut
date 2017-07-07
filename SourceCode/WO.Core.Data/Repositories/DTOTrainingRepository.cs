@@ -15,9 +15,9 @@ namespace WO.Core.Data.Repositories
         private IRepository<TrainingType> _trainingTypeRepository;
         private IRepository<Set> _setRepository;
         public DTOTrainingRepository(
-            IRepository<Training> repository,
+            IUnitOfWork unitOfWork,
             IRepository<TrainingType> trainingTypeRepository,
-            IRepository<Set> setRepository) : base(repository)
+            IRepository<Set> setRepository) : base(unitOfWork)
         {
             _trainingTypeRepository = trainingTypeRepository;
             _setRepository = setRepository;

@@ -12,9 +12,9 @@ namespace WO.Core.DAL
         private static WorkOutContext _woContext;
         private bool disposed = false;
 
-        public UnitOfWork(string contextName)
+        public UnitOfWork(string connectionString)
         {
-            _woContext = new WorkOutContext(contextName);
+            _woContext = new WorkOutContext(connectionString);
         }
 
         public IRepository<T> GetGenericRepository<T>() where T : BaseModel

@@ -7,6 +7,7 @@ using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
 using WO.Core.Data.Configs;
+using WO.Core.DAL;
 
 namespace WO.Core.Data.Repositories
 {
@@ -14,9 +15,9 @@ namespace WO.Core.Data.Repositories
     {
         protected IRepository<TData> _repository;
         protected IMapper _mapper;
-        public DTORepository(IRepository<TData> repository)
+        public DTORepository(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _repository = unitOfWork.GetGenericRepository<TData>();
             _mapper = AutoMapperDataConfiguration.MapperConfiguration.CreateMapper();
         }
 
