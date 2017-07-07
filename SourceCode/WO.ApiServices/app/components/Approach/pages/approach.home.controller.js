@@ -5,11 +5,13 @@
 
     ApproachHomeController.$inject = [
         'approachService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr'];
 
     function ApproachHomeController(
         approachService,
-        workOutHelper) {
+        workOutHelper,
+        toastr) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -25,11 +27,14 @@
         }
 
         function remove(id) {
-            approachService.remove(id).then(function (result) {
-                if (result.Succeed) {
-                    vm.approaches = workOutHelper.removeElementFromArray(vm.approaches, result.ResultItemId);
-                }
-            });
+            if (confirm("Do you realy want to remove the item?")) {
+                approachService.remove(id).then(function (result) {
+                    if (result.Succeed) {
+                        vm.approaches = workOutHelper.removeElementFromArray(vm.approaches, result.ResultItemId);
+                        toastr.info("Approach with Id '" + result.ResultItemId + "' was successfully removed.");
+                    }
+                });
+            }
         }
     }
 }());

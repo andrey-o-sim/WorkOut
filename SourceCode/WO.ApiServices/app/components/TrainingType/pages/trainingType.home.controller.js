@@ -5,11 +5,15 @@
 
     TrainingTypeHomeController.$inject = [
         'trainingTypeService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr',
+        'toastrConfig'];
 
     function TrainingTypeHomeController(
         trainingTypeService,
-        workOutHelper) {
+        workOutHelper,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -24,12 +28,15 @@
             });
         }
 
-        function remove(id) {
-            trainingTypeService.remove(id).then(function (result) {
-                if (result.Succeed) {
-                    vm.trainingTypes = workOutHelper.removeElementFromArray(vm.trainingTypes, result.ResultItemId);
-                }
-            });
+        function remove(trainingType) {
+            if (confirm("Do you realy want to remove '" + trainingType.TypeTraining + "' ?")) {
+                trainingTypeService.remove(trainingType.Id).then(function (result) {
+                    if (result.Succeed) {
+                        vm.trainingTypes = workOutHelper.removeElementFromArray(vm.trainingTypes, result.ResultItemId);
+                        toastr.info("Training type '" + trainingType.TypeTraining + "' was successfully removed.");
+                    }
+                });
+            }
         }
     }
 }());
