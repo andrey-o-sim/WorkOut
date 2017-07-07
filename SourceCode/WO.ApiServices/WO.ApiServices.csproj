@@ -339,6 +339,8 @@
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\angular-toastr.css" />
+    <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -349,6 +351,8 @@
     <Content Include="Content\select.css" />
     <Content Include="Content\select.min.css" />
     <Content Include="Content\selectize.default.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -1177,6 +1181,10 @@
     <Content Include="app\assets\libs\moment\moment-with-locales.min.js" />
     <Content Include="app\assets\libs\moment\moment.js" />
     <Content Include="app\assets\libs\moment\moment.min.js" />
+    <Content Include="app\assets\libs\angular-toastr.js" />
+    <Content Include="app\assets\libs\angular-toastr.min.js" />
+    <Content Include="app\assets\libs\angular-toastr.tpls.js" />
+    <Content Include="app\assets\libs\angular-toastr.tpls.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1217,6 +1225,8 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="app\components\Training\pages\training.home.html" />
     <Content Include="Content\datetimepicker.css.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Project_Readme.html" />
     <Content Include="app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>

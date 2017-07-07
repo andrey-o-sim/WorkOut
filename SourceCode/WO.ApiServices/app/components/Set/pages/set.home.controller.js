@@ -5,11 +5,13 @@
 
     SetHomeController.$inject = [
         'setService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr'];
 
     function SetHomeController(
         setService,
-        workOutHelper) {
+        workOutHelper,
+        toastr) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -27,10 +29,13 @@
             });
         }
 
-        function remove(id) {
-            setService.remove(id).then(function (result) {
-                vm.sets = workOutHelper.removeElementFromArray(vm.sets, result.ResultItemId);
-            });
+        function remove(set) {
+            if (confirm("Do you realy want to remove the item?")) {
+                setService.remove(set.Id).then(function (result) {
+                    vm.sets = workOutHelper.removeElementFromArray(vm.sets, result.ResultItemId);
+                    toastr.info("Set with Id '" + result.ResultItemId + "' was successfully removed.");
+                });
+            }
         }
     }
 })();

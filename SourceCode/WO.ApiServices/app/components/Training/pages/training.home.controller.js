@@ -6,11 +6,13 @@
 
     TrainingHomeController.$inject = [
         'trainingService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr'];
 
     function TrainingHomeController(
         trainingService,
-        workOutHelper) {
+        workOutHelper,
+        toastr) {
 
         var vm = this;
         vm.remove = remove;
@@ -26,12 +28,15 @@
             });
         }
 
-        function remove(id) {
-            trainingService.remove(id).then(function (result) {
-                if (result.Succeed) {
-                    vm.trainings = workOutHelper.removeElementFromArray(vm.trainings, result.ResultItemId);
-                }
-            });
+        function remove(training) {
+            if (confirm("Do you realy want to remove the item?")) {
+                trainingService.remove(training.Id).then(function (result) {
+                    if (result.Succeed) {
+                        vm.trainings = workOutHelper.removeElementFromArray(vm.trainings, result.ResultItemId);
+                        toastr.info("Training with Id '" + result.ResultItemId + "' was successfully removed.");
+                    }
+                });
+            }
         }
     }
 })();

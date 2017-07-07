@@ -6,7 +6,10 @@
             'angularValidator',
             'ngSanitize',
             'ui.select',
-            'ui.bootstrap.datetimepicker']);
+            'ui.bootstrap.datetimepicker',
+            'ngAnimate',
+            'toastr'
+        ]);
 
     angular
         .module('woApp').config(['$locationProvider', function ($locationProvider) {
