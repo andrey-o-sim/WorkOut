@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using WO.Core.DAL.DataBaseContext.Configurations;
 using WO.Core.DAL.Model;
 using WO.LoggerFactory;
 using WO.LoggerService;
@@ -31,17 +32,11 @@ namespace WO.Core.DAL.DataBaseContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Approach>()
-                .HasOptional<Set>(a => a.Set)
-                .WithMany(s => s.Approaches)
-                .HasForeignKey(a => new { a.SetId })
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Set>()
-                .HasOptional<Training>(s => s.Training)
-                .WithMany(t => t.Sets)
-                .HasForeignKey(t => new { t.TrainingId })
-                .WillCascadeOnDelete(true);
+            modelBuilder.Configurations.Add(new TrainingTypeConfiguration());
+            modelBuilder.Configurations.Add(new ExerciseConfiguration());
+            modelBuilder.Configurations.Add(new TrainingConfiguration());
+            modelBuilder.Configurations.Add(new ApproachConfiguration());
+            modelBuilder.Configurations.Add(new SetConfiguration());
         }
 
         public int Commit()

@@ -9,7 +9,6 @@ namespace WO.Core.DAL.Model
 {
     public class Approach : BaseModel
     {
-        [Required]
         public int PlannedTimeForRest { get; set; }
         public int SpentTimeForRest { get; set; }
 

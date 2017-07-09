@@ -9,18 +9,11 @@ namespace WO.Core.DAL.Model
 {
     public class Training : BaseModel
     {
-        public Training()
-        {
-            Sets = new List<Set>();
-        }
-
-        [Required]
         public virtual TrainingType TrainingType { get; set; }
         public int? TrainingTypeId { get; set; }
-        [Required]
         public string MainTrainingPurpose { get; set; }
 
-        public virtual ICollection<Set> Sets { get; set; }
+        public virtual ICollection<Set> Sets { get; set; } = new List<Set>();
         public DateTime? StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }
         public string Description { get; set; }
