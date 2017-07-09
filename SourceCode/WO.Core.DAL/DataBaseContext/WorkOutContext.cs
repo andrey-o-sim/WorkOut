@@ -21,16 +21,6 @@ namespace WO.Core.DAL.DataBaseContext
         public WorkOutContext(string connectionString)
             : base(connectionString)
         {
-            try
-            {
-                _loggerService.Info("Initialization DB. Connection string is: '{0}'", connectionString);
-                Database.CreateIfNotExists();
-                _loggerService.Info("DB was successfully initializated.");
-            }
-            catch (Exception ex)
-            {
-                _loggerService.ErrorException(ex, "Error during initialization DB");
-            }
         }
 
         public DbSet<TrainingType> TrainingTypes { get; set; }
@@ -52,6 +42,11 @@ namespace WO.Core.DAL.DataBaseContext
                 .WithMany(t => t.Sets)
                 .HasForeignKey(t => new { t.TrainingId })
                 .WillCascadeOnDelete(true);
+        }
+
+        public int Commit()
+        {
+            return base.SaveChanges();
         }
     }
 }

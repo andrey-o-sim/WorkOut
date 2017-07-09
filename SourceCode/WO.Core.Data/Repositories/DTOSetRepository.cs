@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
@@ -17,15 +14,12 @@ namespace WO.Core.Data.Repositories
         private IRepository<Exercise> _exerciseRepository;
         private IRepository<Training> _trainingRepository;
 
-        public DTOSetRepository(IUnitOfWork unitOfWork,
-            IRepository<Approach> approachRepository,
-            IRepository<Exercise> exerciseRepository,
-            IRepository<Training> trainingRepository)
+        public DTOSetRepository(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
-            _approachRepository = approachRepository;
-            _exerciseRepository = exerciseRepository;
-            _trainingRepository = trainingRepository;
+            _approachRepository = unitOfWork.GetGenericRepository<Approach>();
+            _exerciseRepository = unitOfWork.GetGenericRepository<Exercise>();
+            _trainingRepository = unitOfWork.GetGenericRepository<Training>();
         }
 
         public override int Create(SetDTO setDto)
@@ -51,7 +45,8 @@ namespace WO.Core.Data.Repositories
 
             AddDeleteTraining(set);
 
-            return _repository.Create(set);
+            _repository.Create(set);
+            return _unitOfWork.Commit();
         }
 
         public override void Update(SetDTO setDto)
@@ -65,6 +60,7 @@ namespace WO.Core.Data.Repositories
             AddDeleteTraining(setForUpdate);
 
             _repository.Update(setForUpdate);
+            _unitOfWork.Commit();
         }
 
         public override void Delete(int id)
@@ -72,6 +68,7 @@ namespace WO.Core.Data.Repositories
             var itemForRemove = _repository.Get(id);
             itemForRemove.Approaches = _approachRepository.FindMany(app => app.SetId == id).ToList(); ;
             _repository.Delete(itemForRemove);
+            _unitOfWork.Commit();
         }
 
         private void AddDeleteExercises(Set setForUpdate, SetDTO setDto)

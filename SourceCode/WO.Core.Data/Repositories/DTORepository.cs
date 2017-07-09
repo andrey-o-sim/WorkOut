@@ -15,8 +15,10 @@ namespace WO.Core.Data.Repositories
     {
         protected IRepository<TData> _repository;
         protected IMapper _mapper;
+        protected IUnitOfWork _unitOfWork;
         public DTORepository(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _repository = unitOfWork.GetGenericRepository<TData>();
             _mapper = AutoMapperDataConfiguration.MapperConfiguration.CreateMapper();
         }
@@ -27,7 +29,8 @@ namespace WO.Core.Data.Repositories
             dbItem.CreatedDate = DateTime.Now;
             dbItem.ModifiedDate = DateTime.Now;
 
-            return _repository.Create(dbItem);
+            _repository.Create(dbItem);
+            return _unitOfWork.Commit();
         }
 
         public virtual void Update(TDto item)
@@ -38,12 +41,14 @@ namespace WO.Core.Data.Repositories
             itemForUpdate.ModifiedDate = DateTime.Now;
 
             _repository.Update(itemForUpdate);
+            _unitOfWork.Commit();
         }
 
         public virtual void Delete(int id)
         {
             var itemForRemove = _repository.Get(id);
             _repository.Delete(itemForRemove);
+            _unitOfWork.Commit();
         }
 
         public virtual TDto Find(Func<TDto, bool> predicate)

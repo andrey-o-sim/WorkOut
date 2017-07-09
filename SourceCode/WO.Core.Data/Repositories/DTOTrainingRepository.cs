@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
@@ -14,13 +11,11 @@ namespace WO.Core.Data.Repositories
     {
         private IRepository<TrainingType> _trainingTypeRepository;
         private IRepository<Set> _setRepository;
-        public DTOTrainingRepository(
-            IUnitOfWork unitOfWork,
-            IRepository<TrainingType> trainingTypeRepository,
-            IRepository<Set> setRepository) : base(unitOfWork)
+        public DTOTrainingRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            _trainingTypeRepository = trainingTypeRepository;
-            _setRepository = setRepository;
+            _trainingTypeRepository = unitOfWork.GetGenericRepository<TrainingType>();
+            _setRepository = unitOfWork.GetGenericRepository<Set>();
         }
 
         public override int Create(TrainingDTO trainingDTO)
@@ -33,7 +28,8 @@ namespace WO.Core.Data.Repositories
                 ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id)
                 : new TrainingType();
 
-            return _repository.Create(training);
+            _repository.Create(training);
+            return _unitOfWork.Commit();
         }
 
         public override void Update(TrainingDTO trainingDTO)
@@ -53,6 +49,7 @@ namespace WO.Core.Data.Repositories
             trainingForUpdate.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
 
             _repository.Update(trainingForUpdate);
+            _unitOfWork.Commit();
         }
 
     }

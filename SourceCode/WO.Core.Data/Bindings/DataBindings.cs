@@ -1,10 +1,7 @@
 ﻿using Ninject.Modules;
-using Ninject.Web.Common;
-using System.Data.Entity;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL;
-using WO.Core.DAL.DataBaseContext;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
 using WO.Core.DAL.Repositories;
@@ -16,9 +13,8 @@ namespace WO.Core.Data.Bindings
     {
         public override void Load()
         {
-            //Bind<DbContext>().To<WorkOutContext>().InRequestScope().WithConstructorArgument("connectionString", "WorkOutDbConnection");
-
-            Bind<IUnitOfWork>().To<UnitOfWork>().WithConstructorArgument("connectionString", "WorkOutDbConnection");
+            Bind<IDbFactory>().To<DbFactory>();
+            Bind<IUnitOfWork>().To<UnitOfWork>();
 
             Bind<IRepository<TrainingType>>().To<Repository<TrainingType>>();
             Bind<IRepositoryDTO<TrainingTypeDTO>>().To<DTORepository<TrainingType, TrainingTypeDTO>>();

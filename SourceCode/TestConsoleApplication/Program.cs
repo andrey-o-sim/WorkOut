@@ -57,7 +57,7 @@ namespace TestConsoleApplication
             };
 
 
-            DTOSetRepository dtoSetRepository = new DTOSetRepository(null, repApproach, repExercise, repTraining);
+            DTOSetRepository dtoSetRepository = null;
             DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(null);
             DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(null);
 

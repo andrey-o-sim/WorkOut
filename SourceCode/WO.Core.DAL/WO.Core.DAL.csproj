@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="DataBaseContext\WorkOutContext.cs" />
     <Compile Include="DataBaseContext\WorkOutDbInitialized.cs" />
+    <Compile Include="DbFactory.cs" />
+    <Compile Include="Interfaces\IDbFactory.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Model\Approach.cs" />
