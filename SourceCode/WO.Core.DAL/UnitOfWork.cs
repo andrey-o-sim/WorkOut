@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using WO.Core.DAL.DataBaseContext;
+﻿using WO.Core.DAL.DataBaseContext;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
 using WO.Core.DAL.Repositories;
@@ -9,12 +7,13 @@ namespace WO.Core.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private static WorkOutContext _woContext;
-        private bool disposed = false;
+        private IDbFactory _dbFactory;
+        private WorkOutContext _woContext;
 
-        public UnitOfWork(string contextName)
+        public UnitOfWork(IDbFactory dbFactory)
         {
-            _woContext = new WorkOutContext(contextName);
+            this._dbFactory = dbFactory;
+            _woContext = _dbFactory.Init();
         }
 
         public IRepository<T> GetGenericRepository<T>() where T : BaseModel
@@ -25,30 +24,9 @@ namespace WO.Core.DAL
         #region Properties Of Repositories
         #endregion
 
-        public async Task SaveAsync()
+        public int Commit()
         {
-            await _woContext.SaveChangesAsync();
+           return _woContext.Commit();
         }
-
-        #region Dispose Context
-        public virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _woContext.Dispose();
-                }
-
-                this.disposed = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
     }
 }
