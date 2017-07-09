@@ -31,7 +31,7 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting 'Training' by id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainigDTO = _service.Get(id);
                 if (trainigDTO != null)
@@ -45,13 +45,9 @@ namespace WO.ApiServices.Controllers
                 {
                     LoggerService.Info("There is no 'Training' with Id = '{0}'", id);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting 'Training' with id = {0}", id);
-            }
 
-            return NotFound();
+                return NotFound();
+            });
         }
 
         // GET: api/Training
@@ -59,20 +55,14 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting all 'Trainings'");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainigsDTO = _service.GetAll();
                 var trainings = _mapper.Map<List<Training>>(trainigsDTO);
 
                 LogInfoObjectToJson(trainings);
                 return Ok<List<Training>>(trainings);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting all 'Trainings'");
-            }
-
-            return NotFound();
+            });
         }
 
         // POST: api/Training
@@ -81,20 +71,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(training, "Creating 'Training':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainigDTO = _mapper.Map<TrainingDTO>(training);
                 var result = _service.Create(trainigDTO);
 
                 LogInfoObjectToJson(result, "Created 'Training':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during creating 'Training'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // PUT: api/Training/5
@@ -103,20 +87,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(training, "Updating 'Training':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainigDTO = _mapper.Map<TrainingDTO>(training);
                 var result = _service.Update(trainigDTO);
 
                 LogInfoObjectToJson(result, "Updated 'Training':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during updating 'Training'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // DELETE: api/Training/5
@@ -124,19 +102,13 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Deleting 'Training' with id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var result = _service.Delete(id);
 
                 LoggerService.Info("'Training' was removed");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during deleting 'Training'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
     }
 }

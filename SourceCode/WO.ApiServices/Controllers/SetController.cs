@@ -29,7 +29,7 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting 'Set' by id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var setDTO = _service.Get(id);
 
@@ -44,13 +44,9 @@ namespace WO.ApiServices.Controllers
                 {
                     LoggerService.Info("There is no 'Set' with Id = '{0}'", id);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting 'Set' with id = {0}", id);
-            }
 
-            return NotFound();
+                return NotFound();
+            });
         }
 
         // GET: api/Set
@@ -58,21 +54,14 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting all 'Sets'");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var setsDTO = _service.GetAll();
                 var sets = _mapper.Map<List<Set>>(setsDTO);
 
                 LogInfoObjectToJson(sets);
                 return Ok<List<Set>>(sets);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting all 'Sets'");
-            }
-
-            return NotFound();
-
+            });
         }
 
         // POST: api/Set
@@ -81,7 +70,7 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(set, "Creating 'Set':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var setViewModel = new SetViewModel();
                 setViewModel.GetFullSetData(set);
@@ -92,13 +81,7 @@ namespace WO.ApiServices.Controllers
 
                 LogInfoObjectToJson(result, "Created 'Set':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during creating 'Set'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // PUT: api/Set/5
@@ -107,20 +90,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(set, "Updating 'Set':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var setDTO = _mapper.Map<SetDTO>(set);
                 var result = _service.Update(setDTO);
 
                 LogInfoObjectToJson(result, "Updated 'Set':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during updating 'Set'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // DELETE: api/Set/5
@@ -128,20 +105,14 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Deleting 'Set' with id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
 
                 var result = _service.Delete(id);
 
                 LoggerService.Info("'Set' was removed");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during deleting 'Set'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
     }
 }

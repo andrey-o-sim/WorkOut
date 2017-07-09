@@ -24,9 +24,9 @@ namespace WO.Core.DAL
         #region Properties Of Repositories
         #endregion
 
-        public int Commit()
+        public void Commit()
         {
-           return _woContext.Commit();
+           _woContext.Commit();
         }
     }
 }

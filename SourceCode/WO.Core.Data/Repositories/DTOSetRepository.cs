@@ -46,7 +46,9 @@ namespace WO.Core.Data.Repositories
             AddDeleteTraining(set);
 
             _repository.Create(set);
-            return _unitOfWork.Commit();
+            _unitOfWork.Commit();
+
+            return set.Id;
         }
 
         public override void Update(SetDTO setDto)
