@@ -50,6 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBaseContext\Configurations\ApproachConfiguration.cs" />
+    <Compile Include="DataBaseContext\Configurations\ExerciseConfiguration.cs" />
+    <Compile Include="DataBaseContext\Configurations\SetConfiguration.cs" />
+    <Compile Include="DataBaseContext\Configurations\TrainingConfiguration.cs" />
+    <Compile Include="DataBaseContext\Configurations\TrainingTypeConfiguration.cs" />
     <Compile Include="DataBaseContext\WorkOutContext.cs" />
     <Compile Include="DataBaseContext\WorkOutDbInitialized.cs" />
     <Compile Include="DbFactory.cs" />
