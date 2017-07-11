@@ -1,11 +1,11 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WO.ApiServices.Models.Helper;
+using WO.ApiServices.Models.Validators;
 
 namespace WO.ApiServices.Models
 {
+    [Validator(typeof(SetValidator))]
     public class Set : BaseModel
     {
         public Set()

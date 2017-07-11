@@ -1,4 +1,7 @@
-﻿using Ninject.Modules;
+﻿using FluentValidation;
+using Ninject.Modules;
+using WO.ApiServices.Models;
+using WO.ApiServices.Models.Validators;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Services;
 using WO.Core.BLL.Services;

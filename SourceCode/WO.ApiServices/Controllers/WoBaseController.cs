@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Web.Http;
 using WO.Core.BLL;
 using WO.Core.BLL.Interfaces;
@@ -27,8 +28,12 @@ namespace WO.ApiServices.Controllers
 
         protected IHttpActionResult ExecuteRequest(Func<IHttpActionResult> function)
         {
-            IHttpActionResult actionResult = null;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            IHttpActionResult actionResult = null;
             try
             {
                 actionResult = function.Invoke();

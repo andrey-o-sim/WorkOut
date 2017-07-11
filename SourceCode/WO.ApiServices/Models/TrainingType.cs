@@ -1,10 +1,11 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
+using WO.ApiServices.Models.Validators;
 
 namespace WO.ApiServices.Models
 {
+    [Validator(typeof(TrainingTypeValidator))]
     public class TrainingType : BaseModel
     {
         public string TypeTraining { get; set; }
