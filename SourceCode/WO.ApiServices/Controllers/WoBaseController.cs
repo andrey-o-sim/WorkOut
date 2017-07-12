@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Http;
+using WO.ApiServices.Models.Helper;
 using WO.Core.BLL;
 using WO.Core.BLL.Interfaces;
 using WO.LoggerFactory;
@@ -26,11 +29,20 @@ namespace WO.ApiServices.Controllers
             LoggerService.Info(string.Format("{0}{1}", message, jsonResult));
         }
 
+        protected void LogWarningObjectToJson(object data, string message = "")
+        {
+            var jsonResult = JsonConvert.SerializeObject(data);
+            LoggerService.Warn(string.Format("{0}{1}", message, jsonResult));
+        }
+
         protected IHttpActionResult ExecuteRequest(Func<IHttpActionResult> function)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errors = GetValidationErrors();
+                LogWarningObjectToJson(errors);
+                var jsonErrors = JsonConvert.SerializeObject(errors);
+                return BadRequest(jsonErrors);
             }
 
             IHttpActionResult actionResult = null;
@@ -50,6 +62,20 @@ namespace WO.ApiServices.Controllers
             }
 
             return actionResult;
+        }
+
+        private IEnumerable<ValidationError> GetValidationErrors()
+        {
+            var errors = new List<ValidationError>();
+            foreach (var modelStateValue in ModelState.Values)
+            {
+                foreach (var error in modelStateValue.Errors)
+                {
+                    errors.Add(new ValidationError { ErrorMessage = error.ErrorMessage });
+                }
+            }
+
+            return errors;
         }
     }
 }

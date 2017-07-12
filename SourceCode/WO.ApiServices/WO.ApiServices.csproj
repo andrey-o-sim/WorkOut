@@ -279,6 +279,7 @@
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Helper\TimeWO.cs" />
     <Compile Include="Models\Helper\TimeWoOperations.cs" />
+    <Compile Include="Models\Helper\ValidationError.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\TrainingType.cs" />

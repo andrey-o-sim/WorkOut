@@ -14,8 +14,8 @@
         workOutHelper) {
 
         var service = {
-            getAll: getAll,
             getById: getById,
+            getAll: getAll,
             create: create,
             update: update,
             remove: remove
@@ -23,49 +23,79 @@
 
         return service;
 
-        function getAll() {
-            return $http.get(serviceUrl).then(function (response) {
-                var data = response ? response.data : {};
-                return data;
-            }, function errorCallback(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
-            });
+        function getById(id) {
+            return $http.get(serviceUrl + id)
+                .then(success, error)
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                return {};
+            }
         }
 
-        function getById(id) {
-            return $http.get(serviceUrl + id).then(function (response) {
-                var data = response ? response.data : {};
-                return data;
-            }, function errorCallback(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
-            });
+        function getAll() {
+            return $http.get(serviceUrl)
+                .then(success, error);
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                return [];
+            }
         }
 
         function create(trainingType) {
-            return $http.post(serviceUrl, trainingType).then(function (response) {
-                var data = response ? response.data : {};
-                return data;
-            }, function errorCallback(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
-            });
+            return $http.post(serviceUrl, trainingType)
+                .then(success, error);
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
+            }
         }
 
         function update(trainingType) {
-            return $http.put(serviceUrl, trainingType).then(function (response) {
-                var data = response ? response.data : {};
-                return data;
-            }, function errorCallBack(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
-            });
+            return $http.put(serviceUrl, trainingType)
+                .then(success, error);
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
+            }
         }
 
         function remove(id) {
-            return $http.delete(serviceUrl + id).then(function (response) {
-                var data = response ? response.data : {};
-                return data;
-            }, function errorCallBack(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
-            });
+            return $http.delete(serviceUrl + id)
+                .then(success, error);
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
+            }
         }
     };
 }());

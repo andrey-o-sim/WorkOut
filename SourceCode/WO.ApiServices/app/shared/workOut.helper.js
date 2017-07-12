@@ -29,8 +29,13 @@
             return array;
         }
 
-        function writeErrorMessageToConsole(response) {
-            $log.debug(response.status + " " + response.statusText);
+        function writeErrorMessageToConsole(error) {
+            $log.error(error.status + " " + error.statusText);
+
+            var errorMessages = JSON.parse(error.data.Message);
+            errorMessages.forEach(function (message) {
+                $log.error("Message: " + message.ErrorMessage);
+            });
         }
     }
 }());
