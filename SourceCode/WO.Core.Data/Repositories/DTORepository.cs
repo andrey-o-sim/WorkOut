@@ -30,7 +30,9 @@ namespace WO.Core.Data.Repositories
             dbItem.ModifiedDate = DateTime.Now;
 
             _repository.Create(dbItem);
-            return _unitOfWork.Commit();
+            _unitOfWork.Commit();
+
+            return dbItem.Id;
         }
 
         public virtual void Update(TDto item)

@@ -11,6 +11,7 @@ using WO.ApiServices.Bindings;
 using WO.ApiServices.Configs;
 using WO.Core.Data.Bindings;
 using WO.Core.Data.Configs;
+using FluentValidation.WebApi;
 
 namespace WO.ApiServices
 {

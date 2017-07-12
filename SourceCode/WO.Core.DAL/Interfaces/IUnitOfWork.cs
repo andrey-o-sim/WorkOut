@@ -10,6 +10,6 @@ namespace WO.Core.DAL.Interfaces
     public interface IUnitOfWork
     {
         IRepository<T> GetGenericRepository<T>() where T : BaseModel;
-        int Commit();
+        void Commit();
     }
 }

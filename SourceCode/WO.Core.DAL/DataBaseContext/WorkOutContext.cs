@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using WO.Core.DAL.DataBaseContext.Configurations;
 using WO.Core.DAL.Model;
 using WO.LoggerFactory;
@@ -39,9 +38,9 @@ namespace WO.Core.DAL.DataBaseContext
             modelBuilder.Configurations.Add(new SetConfiguration());
         }
 
-        public int Commit()
+        public void Commit()
         {
-            return base.SaveChanges();
+            base.SaveChanges();
         }
     }
 }

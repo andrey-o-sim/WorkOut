@@ -29,7 +29,9 @@ namespace WO.Core.Data.Repositories
                 : new TrainingType();
 
             _repository.Create(training);
-            return _unitOfWork.Commit();
+            _unitOfWork.Commit();
+
+            return training.Id;
         }
 
         public override void Update(TrainingDTO trainingDTO)

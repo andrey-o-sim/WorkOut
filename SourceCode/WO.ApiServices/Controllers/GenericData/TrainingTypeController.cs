@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Web.Http;
-using AutoMapper;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
-using WO.LoggerService;
 using WO.LoggerFactory;
-using System;
-using WO.Core.BLL;
 
 namespace WO.ApiServices.Controllers.GenericData
 {
@@ -30,7 +27,7 @@ namespace WO.ApiServices.Controllers.GenericData
         {
             LoggerService.Info("Getting 'Training Type' by id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainingTypeDTO = _service.Get(id);
                 if (trainingTypeDTO != null)
@@ -44,13 +41,9 @@ namespace WO.ApiServices.Controllers.GenericData
                 {
                     LoggerService.Info("There is no 'Training Type' with Id = '{0}'", id);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting 'Training Type' with id = {0}", id);
-            }
 
-            return NotFound();
+                return NotFound();
+            });
         }
 
         // GET: api/TrainingType
@@ -58,20 +51,14 @@ namespace WO.ApiServices.Controllers.GenericData
         {
             LoggerService.Info("Getting all 'Training Types'");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var allTrainingTypesDTO = _service.GetAll();
                 var trainingTypes = _mapper.Map<List<TrainingType>>(allTrainingTypesDTO);
 
                 LogInfoObjectToJson(trainingTypes);
                 return Ok<List<TrainingType>>(trainingTypes);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting all 'Training Types'");
-            }
-
-            return NotFound();
+            });
         }
 
         // POST: api/TrainingType
@@ -80,20 +67,14 @@ namespace WO.ApiServices.Controllers.GenericData
         {
             LogInfoObjectToJson(trainingType, "Creating 'Training Type':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
                 var result = _service.Create(trainingTypeDTO);
 
                 LogInfoObjectToJson(result, "Created 'Training Type':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during creating 'Training Type'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // PUT: api/TrainingType/5
@@ -102,20 +83,14 @@ namespace WO.ApiServices.Controllers.GenericData
         {
             LogInfoObjectToJson(trainingType, "Updating 'Training Type':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
                 var result = _service.Update(trainingTypeDTO);
 
                 LogInfoObjectToJson(trainingType, "Updated 'Training Type':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during updating 'Training Type'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // DELETE: api/TrainingType/5
@@ -123,19 +98,13 @@ namespace WO.ApiServices.Controllers.GenericData
         {
             LoggerService.Info("Deleting 'Training Type' with id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var result = _service.Delete(id);
 
                 LoggerService.Info("'Training Type' was removed");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during deleting 'Training Type'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
     }
 }

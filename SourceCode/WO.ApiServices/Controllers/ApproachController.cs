@@ -28,7 +28,7 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting 'Approach' by id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var approachDTO = _service.Get(id);
                 if (approachDTO != null)
@@ -42,13 +42,9 @@ namespace WO.ApiServices.Controllers
                 {
                     LoggerService.Info("There is no 'Approach' with Id = '{0}'", id);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting 'Approach' with id = {0}", id);
-            }
 
-            return NotFound();
+                return NotFound();
+            });
         }
 
         // GET: api/Approach
@@ -56,20 +52,14 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting all 'Approaches'");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var approachesDTO = _service.GetAll();
                 var approaches = _mapper.Map<List<Approach>>(approachesDTO);
 
                 LogInfoObjectToJson(approaches);
                 return Ok<List<Approach>>(approaches);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting all 'Approaches'");
-            }
-
-            return NotFound();
+            });
         }
 
         // POST: api/Approach
@@ -78,20 +68,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(approach, "Creating 'Approach':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var approachDTO = _mapper.Map<ApproachDTO>(approach);
                 var result = _service.Create(approachDTO);
 
                 LogInfoObjectToJson(result, "Created 'Approach':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during creating 'Approach'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // PUT: api/Approach/5
@@ -100,20 +84,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(approach, "Updating 'Approach':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var approachDTO = _mapper.Map<ApproachDTO>(approach);
                 var result = _service.Update(approachDTO);
 
                 LogInfoObjectToJson(result, "Updated 'Approach':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during updating 'Approach'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // DELETE: api/Approach/5
@@ -121,19 +99,13 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Deleting 'Approach' with id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var result = _service.Delete(id);
 
                 LoggerService.Info("'Approach' was removed");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during deleting 'Approach'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
     }
 }

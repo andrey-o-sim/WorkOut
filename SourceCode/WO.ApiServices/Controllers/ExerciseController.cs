@@ -31,7 +31,7 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting 'Exercise' by id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var exerciseDTO = _service.Get(id);
 
@@ -46,13 +46,8 @@ namespace WO.ApiServices.Controllers
                 {
                     LoggerService.Info("There is no 'Exercise' with Id = '{0}'", id);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting 'Exercise' with id = {0}", id);
-            }
-
-            return NotFound();
+                return NotFound();
+            });
         }
 
         [Route("{exerciseName}")]
@@ -60,7 +55,7 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting 'Exercise' by Name = '{0}'", exerciseName);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var exerciseDTO = _service.GetByName(exerciseName);
 
@@ -77,13 +72,7 @@ namespace WO.ApiServices.Controllers
                 }
 
                 return Ok<Exercise>(new Exercise());
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting 'Exercise' with id = {0}", exerciseName);
-            }
-
-            return NotFound();
+            });
         }
 
         // GET: api/Exercise
@@ -91,20 +80,14 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Getting all 'Exercises'");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var exercisesDTO = _service.GetAll();
                 var exercises = _mapper.Map<List<Exercise>>(exercisesDTO);
 
                 LogInfoObjectToJson(exercises);
                 return Ok<List<Exercise>>(exercises);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during getting all 'Exercises'");
-            }
-
-            return NotFound();
+            });
         }
 
         // POST: api/Exercise
@@ -113,20 +96,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(exercise, "Creating 'Exercise':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
                 var result = _service.Create(exerciseDTO);
 
                 LogInfoObjectToJson(result, "Created 'Exercise':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during creating 'Exercise'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // PUT: api/Exercise/5
@@ -135,20 +112,14 @@ namespace WO.ApiServices.Controllers
         {
             LogInfoObjectToJson(exercise, "Updating 'Exercise':");
 
-            try
+            return ExecuteRequest(() =>
             {
                 var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
                 var result = _service.Update(exerciseDTO);
 
                 LogInfoObjectToJson(result, "Updated 'Exercise':");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during updating 'Exercise'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
 
         // DELETE: api/Exercise/5
@@ -157,19 +128,13 @@ namespace WO.ApiServices.Controllers
         {
             LoggerService.Info("Deleting 'Exercise' with id = '{0}'", id);
 
-            try
+            return ExecuteRequest(() =>
             {
                 var result = _service.Delete(id);
 
                 LoggerService.Info("'Exercise' was removed");
                 return Ok<IOperationResult>(result);
-            }
-            catch (Exception ex)
-            {
-                LoggerService.ErrorException(ex, "Error during deleting 'Exercise'");
-            }
-
-            return Ok<IOperationResult>(DefaultOperatingResult);
+            });
         }
     }
 }

@@ -33,7 +33,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return {};
             }
         }
 
@@ -47,7 +48,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return [];
             }
         }
 
@@ -61,7 +63,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
             }
         }
 
@@ -75,7 +78,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
             }
         }
 
@@ -89,7 +93,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
             }
         }
     }

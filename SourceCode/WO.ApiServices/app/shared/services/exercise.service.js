@@ -35,6 +35,7 @@
 
             function error(response) {
                 workOutHelper.writeErrorMessageToConsole(response);
+                return {};
             }
         }
 
@@ -49,6 +50,7 @@
 
             function error(response) {
                 workOutHelper.writeErrorMessageToConsole(response);
+                return {};
             }
         }
 
@@ -63,6 +65,7 @@
 
             function error(response) {
                 workOutHelper.writeErrorMessageToConsole(response);
+                return [];
             }
         }
 
@@ -77,6 +80,7 @@
 
             function error(response) {
                 workOutHelper.writeErrorMessageToConsole(response);
+                return { Succeed: false };
             }
         }
 
@@ -91,6 +95,7 @@
 
             function error(response) {
                 workOutHelper.writeErrorMessageToConsole(response);
+                return { Succeed: false };
             }
         }
 
@@ -105,6 +110,7 @@
 
             function error(response) {
                 workOutHelper.writeErrorMessageToConsole(response);
+                return { Succeed: false };
             }
         }
     }
