@@ -64,7 +64,7 @@
                         'hour': training.StartDateTime.Hours,
                         'minute': training.StartDateTime.Minutes,
                         'second': training.StartDateTime.Seconds
-                    });
+                    }).format();
                 }
 
                 if (training.EndDateTime) {
@@ -73,7 +73,7 @@
                         'hour': training.EndDateTime.Hours,
                         'minute': training.EndDateTime.Minutes,
                         'second': training.EndDateTime.Seconds
-                    });
+                    }).format();
                 }
 
                 vm.disableButton = true;
