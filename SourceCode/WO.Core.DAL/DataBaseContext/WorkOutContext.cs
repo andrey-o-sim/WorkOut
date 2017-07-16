@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using WO.Core.DAL.DataBaseContext.Configurations;
+using WO.Core.DAL.Migrations;
 using WO.Core.DAL.Model;
 using WO.LoggerFactory;
 using WO.LoggerService;
@@ -14,13 +15,16 @@ namespace WO.Core.DAL.DataBaseContext
         {
             _loggerFactory = new LoggerFactory.LoggerFactory();
             _loggerService = _loggerFactory.Create<WorkOutContext>();
-
-            Database.SetInitializer<WorkOutContext>(new WorkOutDbInitialized(_loggerFactory));
         }
+
+        public WorkOutContext()
+            :base("WorkOutDbConnection")
+        { }
 
         public WorkOutContext(string connectionString)
             : base(connectionString)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<WorkOutContext, WoDbConfiguration>(connectionString));
         }
 
         public DbSet<TrainingType> TrainingTypes { get; set; }
