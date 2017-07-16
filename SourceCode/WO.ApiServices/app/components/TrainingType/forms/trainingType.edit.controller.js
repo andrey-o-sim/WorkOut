@@ -7,13 +7,17 @@
         '$scope',
         '$stateParams',
         '$state',
-        'trainingTypeService'];
+        'trainingTypeService',
+        'toastr',
+        'toastrConfig'];
 
     function TrainingTypeEditController(
         $scope,
         $stateParams,
         $state,
-        trainingTypeService) {
+        trainingTypeService,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -24,7 +28,14 @@
 
         function init() {
             trainingTypeService.getById($stateParams.id).then(function (result) {
-                vm.trainingType = result;
+                if (result) {
+                    vm.trainingType = result;
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Training type with id = '" + $stateParams.id + "' in the system.");
+                }
                 vm.formIsReady = true;
             });
         }

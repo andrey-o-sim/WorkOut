@@ -6,14 +6,12 @@
     TrainingTypeHomeController.$inject = [
         'trainingTypeService',
         'workOutHelper',
-        'toastr',
-        'toastrConfig'];
+        'toastr'];
 
     function TrainingTypeHomeController(
         trainingTypeService,
         workOutHelper,
-        toastr,
-        toastrConfig) {
+        toastr) {
 
         var vm = this;
         vm.formIsReady = false;

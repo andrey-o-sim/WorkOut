@@ -30,12 +30,14 @@
         }
 
         function writeErrorMessageToConsole(error) {
-            $log.error(error.status + " " + error.statusText);
+            if (error.status != "404") {
+                $log.error(error.status + " " + error.statusText);
 
-            var errorMessages = JSON.parse(error.data.Message);
-            errorMessages.forEach(function (message) {
-                $log.error("Message: " + message.ErrorMessage);
-            });
+                var errorMessages = JSON.parse(error.data.Message);
+                errorMessages.forEach(function (message) {
+                    $log.error("Message: " + message.ErrorMessage);
+                });
+            }
         }
     }
 }());

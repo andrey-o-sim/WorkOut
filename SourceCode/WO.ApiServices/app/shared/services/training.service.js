@@ -34,7 +34,12 @@
 
             function error(error) {
                 workOutHelper.writeErrorMessageToConsole(error);
-                return {};
+                if (error.status == "404") {
+                    return null;
+                }
+                else {
+                    return {};
+                }
             }
         }
 
