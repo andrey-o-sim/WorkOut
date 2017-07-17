@@ -33,9 +33,14 @@
                 return result;
             }
 
-            function error(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
-                return {};
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                if (error.status == "404") {
+                    return null;
+                }
+                else {
+                    return {};
+                }
             }
         }
 
@@ -48,8 +53,8 @@
                 return result;
             }
 
-            function error(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
                 return {};
             }
         }
@@ -63,8 +68,8 @@
                 return result;
             }
 
-            function error(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
                 return [];
             }
         }
@@ -78,8 +83,8 @@
                 return result;
             }
 
-            function error(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
         }
@@ -93,8 +98,8 @@
                 return result;
             }
 
-            function error(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
         }
@@ -108,8 +113,8 @@
                 return result;
             }
 
-            function error(response) {
-                workOutHelper.writeErrorMessageToConsole(response);
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
         }

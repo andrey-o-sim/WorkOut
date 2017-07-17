@@ -6,11 +6,15 @@
 
     TrainingViewController.$inject = [
         '$stateParams',
-        'trainingService'];
+        'trainingService',
+        'toastr',
+        'toastrConfig'];
 
     function TrainingViewController(
         $stateParams,
-        trainingService) {
+        trainingService,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -19,7 +23,15 @@
 
         function init() {
             trainingService.getById($stateParams.id).then(function (result) {
-                vm.training = result;
+                if (result) {
+                    vm.training = result;
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Training with id = '" + $stateParams.id + "' in the system.");
+                }
+
                 vm.formIsReady = true;
             });
         }

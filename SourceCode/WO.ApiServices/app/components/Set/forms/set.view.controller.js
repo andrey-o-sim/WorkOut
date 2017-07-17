@@ -4,11 +4,15 @@
 
     SetViewController.$inject = [
         '$stateParams',
-        'setService'];
+        'setService',
+        'toastr',
+        'toastrConfig'];
 
     function SetViewController(
         $stateParams,
-        setService) {
+        setService,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -17,7 +21,15 @@
 
         function init() {
             setService.getById($stateParams.id).then(function (result) {
-                vm.set = result;
+                if (result) {
+                    vm.set = result;
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Set with id = '" + $stateParams.id + "' in the system.");
+                }
+
                 vm.formIsReady = true;
             })
         }

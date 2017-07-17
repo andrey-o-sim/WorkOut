@@ -6,12 +6,16 @@
     ApproachEditController.$inject = [
         '$state',
         '$stateParams',
-        'approachService'];
+        'approachService',
+        'toastr',
+        'toastrConfig'];
 
     function ApproachEditController(
         $state,
         $stateParams,
-        approachService) {
+        approachService,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -20,19 +24,16 @@
         init();
 
         function init() {
-            vm.approach = {
-                PlannedTimeForRest: {
-                    Minutes: 0,
-                    Seconds: 0
-                },
-                SpentTimeForRest: {
-                    Minutes: 0,
-                    Seconds: 0
-                }
-            };
-
             approachService.getById($stateParams.id).then(function (result) {
-                vm.approach = result;
+                if (result) {
+                    vm.approach = result;
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Approach with id = '" + $stateParams.id + "' in the system.");
+                }
+
                 vm.formIsReady = true;
             });
         }
