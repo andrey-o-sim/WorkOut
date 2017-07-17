@@ -11,7 +11,9 @@
 
         var service = {
             removeElementFromArray: removeElementFromArray,
-            writeErrorMessageToConsole: writeErrorMessageToConsole
+            writeErrorMessageToConsole: writeErrorMessageToConsole,
+            normalTimeToWoTime: normalTimeToWoTime,
+            woTimeToNormalTime: woTimeToNormalTime
         };
 
         return service;
@@ -38,6 +40,27 @@
                     $log.error("Message: " + message.ErrorMessage);
                 });
             }
+        }
+
+        function normalTimeToWoTime(time) {
+            var currentDateTime = !time ? moment() : moment(time);
+            var result = {
+                Hours: currentDateTime.get('hours'),
+                Minutes: currentDateTime.get('minutes'),
+                Seconds: currentDateTime.get('seconds')
+            }
+
+            return result;
+        }
+
+        function woTimeToNormalTime(woTime) {
+            var currentDate = moment();
+
+            return currentDate.set({
+                'hour': woTime.Hours,
+                'minute': woTime.Minutes,
+                'second': woTime.Seconds
+            }).format();
         }
     }
 }());

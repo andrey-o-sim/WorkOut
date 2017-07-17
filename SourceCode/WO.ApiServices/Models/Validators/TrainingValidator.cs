@@ -21,14 +21,15 @@ namespace WO.ApiServices.Models.Validators
                 .Must(tt => tt.Id > 0)
                 .WithMessage("Please, provide 'Training Type'");
 
-            RuleFor(tr => tr.Sets)
-                .NotNull()
-                .Must(sets => sets.Count() > 0)
-                .WithMessage("Please, provide at least one 'Set'");
+            //Return when "Move Edit Form to New"
+            //RuleFor(tr => tr.Sets)
+            //    .NotNull()
+            //    .Must(sets => sets.Count() > 0)
+            //    .WithMessage("Please, provide at least one 'Set'");
 
-            RuleFor(tr => tr)
-                .Must(tr => tr.StartDateTime < tr.EndDateTime)
-                .WithMessage("'End Training' must be later than 'Start Training'");
+            //RuleFor(tr => tr)
+            //    .Must(tr => tr.StartDateTime < tr.EndDateTime)
+            //    .WithMessage("'End Training' must be later than 'Start Training'");
         }
     }
 }

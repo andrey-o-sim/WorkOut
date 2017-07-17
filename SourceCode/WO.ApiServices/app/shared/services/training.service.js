@@ -29,6 +29,10 @@
 
             function success(response) {
                 var result = response ? response.data : {};
+
+                result.StartDateTime = workOutHelper.normalTimeToWoTime(result.StartDateTime);
+                result.EndDateTime = workOutHelper.normalTimeToWoTime(result.EndDateTime);
+
                 return result;
             }
 
@@ -59,6 +63,15 @@
         }
 
         function create(training) {
+
+            if (training.StartDateTime) {
+                training.StartDateTime = workOutHelper.woTimeToNormalTime(training.StartDateTime);
+            }
+
+            if (training.EndDateTime) {
+                training.EndDateTime = workOutHelper.woTimeToNormalTime(training.EndDateTime);
+            }
+
             return $http.post(serviceUrl, training)
                 .then(success, error);
 
@@ -74,6 +87,15 @@
         }
 
         function update(training) {
+
+            if (training.StartDateTime) {
+                training.StartDateTime = workOutHelper.woTimeToNormalTime(training.StartDateTime);
+            }
+
+            if (training.EndDateTime) {
+                training.EndDateTime = workOutHelper.woTimeToNormalTime(training.EndDateTime);
+            }
+
             return $http.put(serviceUrl, training)
                 .then(success, error);
 

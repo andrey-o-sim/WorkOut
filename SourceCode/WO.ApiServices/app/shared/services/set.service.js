@@ -30,7 +30,7 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
                 if (error.status == "404") {
                     return null;
                 }
@@ -50,7 +50,7 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
                 return [];
             }
         }
@@ -65,7 +65,7 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
         }
@@ -80,7 +80,7 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
         }
@@ -95,7 +95,7 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
         }

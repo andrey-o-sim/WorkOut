@@ -36,6 +36,7 @@
                     toastrConfig.autoDismiss = false;
                     toastr.error("There is no Training type with id = '" + $stateParams.id + "' in the system.");
                 }
+
                 vm.formIsReady = true;
             });
         }
