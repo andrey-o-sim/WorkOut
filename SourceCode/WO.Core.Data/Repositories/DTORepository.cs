@@ -16,6 +16,7 @@ namespace WO.Core.Data.Repositories
         protected IRepository<TData> _repository;
         protected IMapper _mapper;
         protected IUnitOfWork _unitOfWork;
+
         public DTORepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -40,7 +41,7 @@ namespace WO.Core.Data.Repositories
             var itemForUpdate = _repository.Get(item.Id);
 
             _mapper.Map<TDto, TData>(item, itemForUpdate);
-            itemForUpdate.ModifiedDate = DateTime.Now;
+            itemForUpdate.ModifiedDate = DateTime.Now.ToUniversalTime();
 
             _repository.Update(itemForUpdate);
             _unitOfWork.Commit();
@@ -56,7 +57,9 @@ namespace WO.Core.Data.Repositories
         public virtual TDto Find(Func<TDto, bool> predicate)
         {
             var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
+
             var result = _repository.Find(repPredicate);
+
             var dataItems = _mapper.Map<TDto>(result);
 
             return dataItems;
@@ -65,7 +68,9 @@ namespace WO.Core.Data.Repositories
         public virtual IEnumerable<TDto> FindMany(Func<TDto, bool> predicate)
         {
             var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
+
             var result = _repository.FindMany(repPredicate).ToList();
+
             var dataItems = _mapper.Map<List<TDto>>(result);
 
             return dataItems;
@@ -74,6 +79,7 @@ namespace WO.Core.Data.Repositories
         public virtual TDto Get(int id)
         {
             var dbItem = _repository.Get(id);
+
             var dataItem = _mapper.Map<TDto>(dbItem);
             return dataItem;
         }
@@ -81,6 +87,7 @@ namespace WO.Core.Data.Repositories
         public virtual IEnumerable<TDto> GetAll()
         {
             var dbItems = _repository.GetAll();
+
             var dataItems = _mapper.Map<List<TDto>>(dbItems);
             return dataItems;
         }
