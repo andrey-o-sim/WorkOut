@@ -19,7 +19,6 @@ namespace WO.Core.Data.Repositories
         public ExerciseDTO GetByName(string name)
         {
             var exercise = _repository.Find(ex => ex.Name == name);
-            FromUtcToLocal(exercise);
 
             var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
 

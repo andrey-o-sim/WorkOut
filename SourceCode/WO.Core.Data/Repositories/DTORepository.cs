@@ -17,19 +17,6 @@ namespace WO.Core.Data.Repositories
         protected IMapper _mapper;
         protected IUnitOfWork _unitOfWork;
 
-        protected void FromUtcToLocal(IEnumerable<TData> items)
-        {
-            foreach (TData item in items)
-            {
-                FromUtcToLocal(item);
-            }
-        }
-        protected void FromUtcToLocal(TData item)
-        {
-            item.CreatedDate = item.CreatedDate.ToLocalTime();
-            item.ModifiedDate = item.ModifiedDate.ToLocalTime();
-        }
-
         public DTORepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -40,8 +27,8 @@ namespace WO.Core.Data.Repositories
         public virtual int Create(TDto item)
         {
             var dbItem = _mapper.Map<TData>(item);
-            dbItem.CreatedDate = DateTime.Now.ToUniversalTime();
-            dbItem.ModifiedDate = DateTime.Now.ToUniversalTime();
+            dbItem.CreatedDate = DateTime.Now;
+            dbItem.ModifiedDate = DateTime.Now;
 
             _repository.Create(dbItem);
             _unitOfWork.Commit();
@@ -72,7 +59,6 @@ namespace WO.Core.Data.Repositories
             var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
 
             var result = _repository.Find(repPredicate);
-            FromUtcToLocal(result);
 
             var dataItems = _mapper.Map<TDto>(result);
 
@@ -84,7 +70,6 @@ namespace WO.Core.Data.Repositories
             var repPredicate = _mapper.Map<Func<TDto, bool>, Func<TData, bool>>(predicate);
 
             var result = _repository.FindMany(repPredicate).ToList();
-            FromUtcToLocal(result);
 
             var dataItems = _mapper.Map<List<TDto>>(result);
 
@@ -94,7 +79,6 @@ namespace WO.Core.Data.Repositories
         public virtual TDto Get(int id)
         {
             var dbItem = _repository.Get(id);
-            FromUtcToLocal(dbItem);
 
             var dataItem = _mapper.Map<TDto>(dbItem);
             return dataItem;
@@ -103,7 +87,6 @@ namespace WO.Core.Data.Repositories
         public virtual IEnumerable<TDto> GetAll()
         {
             var dbItems = _repository.GetAll();
-            FromUtcToLocal(dbItems);
 
             var dataItems = _mapper.Map<List<TDto>>(dbItems);
             return dataItems;
