@@ -8,7 +8,8 @@
             'ui.select',
             'ui.bootstrap.datetimepicker',
             'ngAnimate',
-            'toastr'
+            'toastr',
+            'g1b.datetime-range'
         ]);
 
     angular

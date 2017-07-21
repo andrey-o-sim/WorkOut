@@ -13,7 +13,7 @@
                 <div>
                     <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
                         <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
-                        <ui-select-choices repeat="trainingType in vm.TrainingTypes">
+                        <ui-select-choices repeat="trainingType in vm.TrainingTypes | filter: $select.search">
                             <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>

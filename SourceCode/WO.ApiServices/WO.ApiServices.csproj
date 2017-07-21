@@ -296,6 +296,9 @@
     <Content Include="app\assets\img\loading.gif" />
     <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.js" />
     <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.templates.js" />
+    <Content Include="app\assets\libs\angular-datetime-range\datetime-range.css" />
+    <Content Include="app\assets\libs\angular-datetime-range\datetime-range.html" />
+    <Content Include="app\assets\libs\angular-datetime-range\datetime-range.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="app\assets\libs\angular-ui-router\resolveService.js" />
