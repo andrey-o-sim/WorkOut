@@ -15,7 +15,7 @@
                     <div>
                         <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
                             <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
-                            <ui-select-choices repeat="trainingType in vm.TrainingTypes">
+                            <ui-select-choices repeat="trainingType in vm.TrainingTypes | filter: $select.search">
                                 <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
@@ -44,26 +44,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="control-label">Start Training:</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <wo-time-selector show-hours="true" show-minutes="true" show-seconds="true" time="vm.training.StartDateTime"></wo-time-selector>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="control-label">End Training:</h3>
-                    </div>
-                    <div class="col-md-9">
-                        <wo-time-selector show-hours="true" show-minutes="true" show-seconds="true" time="vm.training.EndDateTime"></wo-time-selector>
-                        <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidEndDate===false">'End Training' must be later than 'Start Training'</label>
-                    </div>
-
+            <div class="col-md-4">
+                <h3 class="control-label">Training Time:</h3>
+                <div>
+                    <datetime-range start="vm.training.StartDateTime" end="vm.training.EndDateTime"></datetime-range>
                 </div>
             </div>
         </div>

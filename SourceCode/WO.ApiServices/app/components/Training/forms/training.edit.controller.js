@@ -55,6 +55,10 @@
         function save(training) {
             if (isValidForm(training)) {
                 vm.disableButton = true;
+
+                vm.training.StartDateTime = vm.training.StartDateTime.format();
+                vm.training.EndDateTime = vm.training.EndDateTime.format();
+
                 trainingService.update(training).then(function (result) {
                     if (result.Succeed) {
                         $state.go('trainingHome');

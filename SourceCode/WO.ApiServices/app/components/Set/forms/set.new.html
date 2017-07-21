@@ -43,7 +43,7 @@
                     <ui-select-match placeholder="Select an excercise in the list...">
                         <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id)">{{$item.Name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="exercise in vm.Exercises">
+                    <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
                         <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
