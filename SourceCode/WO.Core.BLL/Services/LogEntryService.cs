@@ -3,9 +3,9 @@ using WO.Core.BLL.Interfaces.Repositories;
 
 namespace WO.Core.BLL.Services
 {
-    public class ApproachService : GenericService<ApproachDTO>
+    public class LogEntryService : GenericService<LogEntryDTO>
     {
-        public ApproachService(IRepositoryDTO<ApproachDTO> repository) 
+        public LogEntryService(IRepositoryDTO<LogEntryDTO> repository)
             : base(repository)
         {
         }

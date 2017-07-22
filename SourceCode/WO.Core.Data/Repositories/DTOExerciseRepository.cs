@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WO.Core.BLL.DTO;
+﻿using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;

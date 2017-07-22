@@ -40,10 +40,8 @@ namespace WO.ApiServices.Controllers
                     LogInfoObjectToJson(set);
                     return Ok<Set>(set);
                 }
-                else
-                {
-                    LoggerService.Info("There is no 'Set' with Id = '{0}'", id);
-                }
+
+                LoggerService.Info("There is no 'Set' with Id = '{0}'", id);
 
                 return NotFound();
             });

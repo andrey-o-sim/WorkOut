@@ -42,10 +42,9 @@ namespace WO.ApiServices.Controllers
                     LogInfoObjectToJson(exercise);
                     return Ok<Exercise>(exercise);
                 }
-                else
-                {
-                    LoggerService.Info("There is no 'Exercise' with Id = '{0}'", id);
-                }
+
+                LoggerService.Info("There is no 'Exercise' with Id = '{0}'", id);
+
                 return NotFound();
             });
         }

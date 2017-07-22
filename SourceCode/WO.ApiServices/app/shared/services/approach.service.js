@@ -1,7 +1,7 @@
 ﻿(function () {
     angular
         .module('woApp')
-    .factory('approachService', approachService);
+        .factory('approachService', approachService);
 
     approachService.$inject = [
         '$http',

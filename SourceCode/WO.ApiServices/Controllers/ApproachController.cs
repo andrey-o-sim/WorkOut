@@ -38,10 +38,8 @@ namespace WO.ApiServices.Controllers
                     LogInfoObjectToJson(approach);
                     return Ok<Approach>(approach);
                 }
-                else
-                {
-                    LoggerService.Info("There is no 'Approach' with Id = '{0}'", id);
-                }
+
+                LoggerService.Info("There is no 'Approach' with Id = '{0}'", id);
 
                 return NotFound();
             });

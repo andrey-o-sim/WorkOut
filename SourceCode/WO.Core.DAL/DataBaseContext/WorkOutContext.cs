@@ -32,6 +32,7 @@ namespace WO.Core.DAL.DataBaseContext
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<Approach> Approachs { get; set; }
+        public DbSet<LogEntry> LogEntries { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
