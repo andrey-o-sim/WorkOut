@@ -52,7 +52,8 @@ namespace WO.ApiServices
                 "~/app/shared/services/approach.service.js",
                 "~/app/shared/services/exercise.service.js",
                 "~/app/shared/services/set.service.js",
-                "~/app/shared/services/training.service.js"));
+                "~/app/shared/services/training.service.js",
+                "~/app/shared/services/log.service.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/helpers").Include(
                 "~/app/shared/workOut.helper.js"));
@@ -88,7 +89,10 @@ namespace WO.ApiServices
                 "~/app/components/Training/forms/training.new.controller.js",
                 "~/app/components/Training/forms/training.edit.controller.js",
                 "~/app/components/Training/forms/training.view.controller.js",
-                "~/app/components/Training/training.route.js"
+                "~/app/components/Training/training.route.js",
+
+                "~/app/components/Log/log.home.controller.js",
+                "~/app/components/Log/log.route.js"
                 ));
 
             BundleTable.EnableOptimizations = false;

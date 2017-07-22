@@ -8,18 +8,18 @@ using WO.Core.BLL.Services;
 
 namespace WO.ApiServices.Controllers
 {
-    public class LogEntryController : ApiController
+    public class LogController : ApiController
     {
         IService<LogEntryDTO> _service;
         private IMapper _mapper;
 
-        public LogEntryController(IService<LogEntryDTO> service)
+        public LogController(IService<LogEntryDTO> service)
         {
             _service = service;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
         }
 
-        // GET: api/LogDb/5
+        // GET: api/Log/5
         public IHttpActionResult Get(int id)
         {
             var errorDTO = _service.Get(id);
@@ -33,7 +33,7 @@ namespace WO.ApiServices.Controllers
             return NotFound();
         }
 
-        // GET: api/LogDb
+        // GET: api/Log
         public IHttpActionResult GetAll()
         {
             var allErrors = _service.GetAll();

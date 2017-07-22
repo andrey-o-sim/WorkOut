@@ -323,6 +323,8 @@
     <Content Include="app\components\Exercise\forms\exercise.add.edit.html" />
     <Content Include="app\components\Exercise\pages\exercise.home.controller.js" />
     <Content Include="app\components\Exercise\pages\exercise.home.html" />
+    <Content Include="app\components\Log\log.home.controller.js" />
+    <Content Include="app\components\Log\log.route.js" />
     <Content Include="app\components\Set\forms\set.edit.controller.js" />
     <Content Include="app\components\Set\forms\set.edit.html" />
     <Content Include="app\components\Set\forms\set.new.Controller.js" />
@@ -351,6 +353,7 @@
     <Content Include="app\shared\directives\wo.timeSelector.html" />
     <Content Include="app\shared\services\approach.service.js" />
     <Content Include="app\shared\services\exercise.service.js" />
+    <Content Include="app\shared\services\log.service.js" />
     <Content Include="app\shared\services\set.service.js" />
     <Content Include="app\shared\services\training.service.js" />
     <Content Include="app\shared\services\trainingType.service.js" />
@@ -1218,6 +1221,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="app\assets\libs\ui-select\select.min.js.map" />
+    <Content Include="app\components\Log\log.home.html" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>

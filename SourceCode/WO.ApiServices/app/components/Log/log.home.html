@@ -1,0 +1,23 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">Logs</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Level</th>
+                    <th>Message</th>
+                    <th>Stack Trace</th>
+                    <th>Created</th>
+                </tr>
+                <tr ng-repeat="log in vm.logs">
+                    <td ng-bind="log.Level"></td>
+                    <td ng-bind="log.Message"></td>
+                    <td ng-bind="log.StackTrace"></td>
+                    <td ng-bind-template="{{ log.CreatedDate | date : 'MMM d, yyyy HH:mm:ss'}}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
