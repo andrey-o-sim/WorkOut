@@ -37,6 +37,9 @@
 
                 if (result) {
                     vm.training = result;
+
+                    vm.training.StartDateTime = vm.training.StartDateTime ? vm.training.StartDateTime : moment();
+                    vm.training.EndDateTime = vm.training.EndDateTime ? vm.training.EndDateTime : moment();
                 }
                 else {
                     toastrConfig.positionClass = 'toast-top-center';
@@ -56,8 +59,8 @@
             if (isValidForm(training)) {
                 vm.disableButton = true;
 
-                vm.training.StartDateTime = vm.training.StartDateTime.format();
-                vm.training.EndDateTime = vm.training.EndDateTime.format();
+                vm.training.StartDateTime = vm.training.StartDateTime._i;
+                vm.training.EndDateTime = vm.training.EndDateTime._i;
 
                 trainingService.update(training).then(function (result) {
                     if (result.Succeed) {
