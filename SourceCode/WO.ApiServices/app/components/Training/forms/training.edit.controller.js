@@ -59,8 +59,10 @@
             if (isValidForm(training)) {
                 vm.disableButton = true;
 
-                vm.training.StartDateTime = vm.training.StartDateTime._i;
-                vm.training.EndDateTime = vm.training.EndDateTime._i;
+                var timeZoneLength = 6;
+
+                vm.training.StartDateTime = vm.training.StartDateTime.format().substring(0, vm.training.StartDateTime.format().length - timeZoneLength);
+                vm.training.EndDateTime = vm.training.EndDateTime.format().substring(0, vm.training.EndDateTime.format().length - timeZoneLength);
 
                 trainingService.update(training).then(function (result) {
                     if (result.Succeed) {
