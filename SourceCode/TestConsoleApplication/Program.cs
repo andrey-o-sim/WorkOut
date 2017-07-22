@@ -23,7 +23,18 @@ namespace TestConsoleApplication
 
             //var set = context.Sets.FirstOrDefault();
 
-            var training = context.Trainings.Where(tr => tr.Id == 1).FirstOrDefault();
+            TrainingType tt2 = context.TrainingTypes.FirstOrDefault();
+
+            var trainingType1 = context.TrainingTypes.FirstOrDefault<TrainingType>();
+            trainingType1.TypeTraining = "База 1";
+
+            var ttEntry = context.Entry<TrainingType>(trainingType1);
+            var trainingCol = ttEntry.Collection<Training>("Trainings");
+            ttEntry.Reload();
+
+
+            var training = context.Trainings.Where(tr => tr.Id == 2).FirstOrDefault();
+            context.Trainings.Remove(training);
 
             //set.Training = training;
             //context.SaveChanges();
@@ -46,9 +57,9 @@ namespace TestConsoleApplication
             };
 
 
-            DTOSetRepository dtoSetRepository = new DTOSetRepository(repSet, repApproach, repExercise, repTraining);
-            DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(repApproach);
-            DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(repExercise);
+            DTOSetRepository dtoSetRepository = null;
+            DTORepository<Approach, ApproachDTO> dtoApproachRepository = new DTORepository<Approach, ApproachDTO>(null);
+            DTORepository<Exercise, ExerciseDTO> dtoExcerciseRepository = new DTORepository<Exercise, ExerciseDTO>(null);
 
             firstEx.Id = dtoExcerciseRepository.Create(firstEx);
             firstEx.CreatedDate = DateTime.Now;

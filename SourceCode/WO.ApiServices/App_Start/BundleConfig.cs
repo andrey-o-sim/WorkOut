@@ -18,10 +18,12 @@ namespace WO.ApiServices
                       "~/Content/selectize.default.css",
                       "~/Content/select.css",
                       "~/Content/font-awesome.css",
-                      "~/Content/datetimepicker.css"));
+                      "~/Content/datetimepicker.css",
+                      "~/Content/angular-toastr.css"));
 
-            bundles.Add(new StyleBundle("~/app/assets/css").Include(
-                "~/app/assets/css/app.css"));
+            bundles.Add(new StyleBundle("~/app/assets").Include(
+                "~/app/assets/css/app.css",
+                 "~/app/assets/libs/angular-datetime-range/datetime-range.css"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js").Include(
                 "~/app/assets/libs/moment/moment.js",
@@ -33,7 +35,10 @@ namespace WO.ApiServices
                 "~/app/assets/libs/angular-validator/angular-validator.js",
                 "~/app/assets/libs/ui-select/select.js",
                 "~/app/assets/libs/angular-datetime-picker/datetimepicker.js",
-                "~/app/assets/libs/angular-datetime-picker/datetimepicker.templates.js"));
+                "~/app/assets/libs/angular-datetime-picker/datetimepicker.templates.js",
+                "~/app/assets/libs/angular-toastr.js",
+                "~/app/assets/libs/angular-toastr.tpls.js",
+                "~/app/assets/libs/angular-datetime-range/datetime-range.js"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));
@@ -47,7 +52,8 @@ namespace WO.ApiServices
                 "~/app/shared/services/approach.service.js",
                 "~/app/shared/services/exercise.service.js",
                 "~/app/shared/services/set.service.js",
-                "~/app/shared/services/training.service.js"));
+                "~/app/shared/services/training.service.js",
+                "~/app/shared/services/log.service.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/helpers").Include(
                 "~/app/shared/workOut.helper.js"));
@@ -83,7 +89,10 @@ namespace WO.ApiServices
                 "~/app/components/Training/forms/training.new.controller.js",
                 "~/app/components/Training/forms/training.edit.controller.js",
                 "~/app/components/Training/forms/training.view.controller.js",
-                "~/app/components/Training/training.route.js"
+                "~/app/components/Training/training.route.js",
+
+                "~/app/components/Log/log.home.controller.js",
+                "~/app/components/Log/log.route.js"
                 ));
 
             BundleTable.EnableOptimizations = false;

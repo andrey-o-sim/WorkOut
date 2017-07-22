@@ -24,7 +24,7 @@ namespace WO.ApiServices.Tests.Controllers
         public void Init()
         {
             _mock = new Mock<IService<TrainingTypeDTO>>();
-            _trainingTypeController = new TrainingTypeController(_mock.Object);
+            _trainingTypeController = new TrainingTypeController(_mock.Object, null);
 
             _trainingTypes = new List<TrainingTypeDTO>
             {

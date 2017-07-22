@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
 
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/app/assets/css")
+    @Styles.Render("~/app/assets")
 </head>
 <body ng-app="woApp">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,6 +43,7 @@
                     <li ui-sref-active="active"><a ui-sref="exerciseHome">Exercises</a></li>
                     <li ui-sref-active="active"><a ui-sref="setHome">Sets</a></li>
                     <li ui-sref-active="active"><a ui-sref="trainingHome">Trainings</a></li>
+                    <li ui-sref-active="active"><a ui-sref="logHome">Logs</a></li>
                 </ul>
             </div>
 

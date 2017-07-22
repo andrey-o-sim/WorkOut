@@ -7,9 +7,9 @@ using WO.Core.DAL.Model;
 
 namespace WO.Core.DAL.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IRepository<T> GetGenericRepository<T>() where T : BaseModel;
-        Task SaveAsync();
+        void Commit();
     }
 }

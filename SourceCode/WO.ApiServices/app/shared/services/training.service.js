@@ -29,11 +29,18 @@
 
             function success(response) {
                 var result = response ? response.data : {};
+
                 return result;
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                if (error.status == "404") {
+                    return null;
+                }
+                else {
+                    return {};
+                }
             }
         }
 
@@ -47,11 +54,13 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return [];
             }
         }
 
         function create(training) {
+
             return $http.post(serviceUrl, training)
                 .then(success, error);
 
@@ -61,11 +70,13 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
             }
         }
 
         function update(training) {
+
             return $http.put(serviceUrl, training)
                 .then(success, error);
 
@@ -75,7 +86,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
             }
         }
 
@@ -89,7 +101,8 @@
             }
 
             function error(error) {
-                workOutHelper.writeErrorMessageToConsole(response);
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
             }
         }
     }

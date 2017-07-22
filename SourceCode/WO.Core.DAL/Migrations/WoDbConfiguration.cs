@@ -1,13 +1,22 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using WO.Core.DAL.Model;
-
-namespace WO.Core.DAL.DataBaseContext
+namespace WO.Core.DAL.Migrations
 {
-    public class WorkOutDbInitialized : DropCreateDatabaseAlways<WorkOutContext>
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity.Migrations;
+    using WO.Core.DAL.DataBaseContext;
+    using WO.Core.DAL.Model;
+
+
+    internal sealed class WoDbConfiguration : DbMigrationsConfiguration<WorkOutContext>
     {
-        WorkOutContext _context;
+        private WorkOutContext _context;
+
+        public WoDbConfiguration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
+
         protected override void Seed(WorkOutContext context)
         {
             _context = context;
@@ -27,32 +36,35 @@ namespace WO.Core.DAL.DataBaseContext
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Ð‘Ð°Ð·Ð°"
+                   TypeTraining = "Áàçà"
                 },
                 new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "ÐšÑ€Ð¾ÑÑ„Ð¸Ñ‚"
+                   TypeTraining = "Êðîñôèò"
                 },
                 new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹"
+                   TypeTraining = "Ýëåìåíòû"
                 },
                  new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Ð¡Ñ‚Ð°Ñ‚Ð¸ÐºÐ°"
+                   TypeTraining = "Ñòàòèêà"
                 }
             };
 
-            _context.TrainingTypes.AddRange(trainingTypes);
+            foreach (var trainingType in trainingTypes)
+            {
+                _context.TrainingTypes.AddOrUpdate(t => t.TypeTraining, trainingType);
+            }
         }
 
         private void InitialExercises()
@@ -63,59 +75,62 @@ namespace WO.Core.DAL.DataBaseContext
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="ÐŸÐ¾Ð´Ñ‚ÑÐ³Ð¸Ð²Ð°Ð½Ð¸Ðµ"
+                    Name="Ïîäòÿãèâàíèå"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="ÐžÑ‚Ð¶Ð¸Ð¼Ð°Ð½Ð¸Ðµ Ð½Ð° Ð‘Ñ€ÑƒÑÑŒÑÑ…"
+                    Name="Îòæèìàíèå íà Áðóñüÿõ"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="ÐžÑ‚Ð¶Ð¸Ð¼Ð°Ð½Ð¸Ðµ Ð¾Ñ‚ Ð¿Ð¾Ð»Ð°"
+                    Name="Îòæèìàíèå îò ïîëà"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Ð¡ÐºÑ€ÑƒÑ‡Ð¸Ð²Ð°Ð½Ð¸Ðµ"
+                    Name="Ñêðó÷èâàíèå"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Ð“Ð¸Ð¿ÐµÑ€ÑÐºÑÑ‚ÐµÐ½Ð·Ð¸Ñ"
+                    Name="Ãèïåðýêñòåíçèÿ"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="ÐŸÐ»Ð°Ð½ÐºÐ°"
+                    Name="Ïëàíêà"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="ÐŸÑ€Ð¸ÑÐµÐ´Ð°Ð½Ð¸Ðµ"
+                    Name="Ïðèñåäàíèå"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Ð‘ÐµÑ€Ð¿Ð¸"
+                    Name="Áåðïè"
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="ÐŸÐ¾Ð´ÑŒÐµÐ¼ Ð³Ð¸Ñ€Ð¸"
+                    Name="Ïîäüåì ãèðè"
                 }
             };
 
-            _context.Exercises.AddRange(exercises);
+            foreach (var exercise in exercises)
+            {
+                _context.Exercises.AddOrUpdate(ex => ex.Name, exercise);
+            }
         }
     }
 }

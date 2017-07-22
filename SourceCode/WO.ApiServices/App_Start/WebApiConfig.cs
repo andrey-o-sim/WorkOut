@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using FluentValidation.WebApi;
 using System.Web.Http;
-using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
 
 namespace WO.ApiServices
 {
@@ -19,6 +14,8 @@ namespace WO.ApiServices
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
+
+            FluentValidationModelValidatorProvider.Configure(config);
         }
     }
 }

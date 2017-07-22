@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
 
@@ -17,29 +15,24 @@ namespace WO.Core.DAL.Repositories
             _dbContext = dbContext;
         }
 
-        public virtual int Create(T item)
+        public virtual void Create(T item)
         {
             _dbContext.Set<T>().Add(item);
             _dbContext.Entry(item).State = EntityState.Added;
-            _dbContext.SaveChanges();
-
-            return item.Id;
         }
 
         public virtual void Update(T item)
         {
             var entry = _dbContext.Entry(item);
-            AttachToContext(item, EntityState.Modified);
 
+            entry.State = EntityState.Modified;
             entry.Property(i => i.CreatedDate).IsModified = false;
-            _dbContext.SaveChanges();
         }
 
         public virtual void Delete(T item)
         {
             _dbContext.Set<T>().Remove(item);
             _dbContext.Entry(item).State = EntityState.Deleted;
-            _dbContext.SaveChanges();
         }
 
         public virtual T Find(Func<T, bool> predicate)
@@ -54,22 +47,13 @@ namespace WO.Core.DAL.Repositories
 
         public virtual T Get(int id)
         {
-            var result = _dbContext.Set<T>().Where(item => item.Id == id).FirstOrDefault();
+            var result = _dbContext.Set<T>().Find(id);
             return result;
         }
 
         public virtual IEnumerable<T> GetAll()
         {
             return _dbContext.Set<T>().ToList();
-        }
-
-        public virtual void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel
-        {
-            if (!_dbContext.ChangeTracker.Entries<TEntity>().Any(b => b.Entity.Id == item.Id))
-            {
-                _dbContext.Set<TEntity>().Attach(item);
-                _dbContext.Entry(item).State = state;
-            }
         }
 
         public void Dispose()

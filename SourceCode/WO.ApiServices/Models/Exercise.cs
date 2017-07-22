@@ -1,10 +1,10 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using WO.ApiServices.Models.Validators;
 
 namespace WO.ApiServices.Models
 {
+    [Validator(typeof(ExerciseValidator))]
     public class Exercise : BaseModel
     {
         public Exercise()

@@ -9,24 +9,15 @@ namespace WO.Core.DAL.Model
 {
     public class Set : BaseModel
     {
-        public Set()
-        {
-            Exercises = new List<Exercise>();
-            Approaches = new List<Approach>();
-        }
-
         public int? PlannedTime { get; set; }
 
-        [Required]
         public int TimeForRest { get; set; }
 
         public int? SpentTime { get; set; }
 
-        [Required]
-        public virtual ICollection<Exercise> Exercises { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
 
-        [Required]
-        public virtual ICollection<Approach> Approaches { get; set; }
+        public virtual ICollection<Approach> Approaches { get; set; } = new List<Approach>();
 
         public int? TrainingId { get; set; }
         public virtual Training Training { get; set; }

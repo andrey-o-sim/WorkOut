@@ -6,12 +6,16 @@
     ApproachViewController.$inject = [
         '$state',
         '$stateParams',
-        'approachService'];
+        'approachService',
+        'toastr',
+        'toastrConfig'];
 
     function ApproachViewController(
         $state,
         $stateParams,
-        approachService) {
+        approachService,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -20,7 +24,15 @@
 
         function init() {
             approachService.getById($stateParams.id).then(function (result) {
-                vm.approach = result;
+                if (result) {
+                    vm.approach = result;
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Approach with id = '" + $stateParams.id + "' in the system.");
+                }
+
                 vm.formIsReady = true;
             });
         }

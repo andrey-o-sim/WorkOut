@@ -43,7 +43,7 @@
                     <ui-select-match placeholder="Select an excercise in the list...">
                         <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id)">{{$item.Name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="exercise in vm.Exercises">
+                    <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
                         <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
@@ -64,7 +64,7 @@
             <h3 for="planTimeForRest" class="control-label">Count Approaches:</h3>
         </div>
         <div class="col-md-3">
-            <input type="number" class="form-control" name="countApproaches" ng-model="vm.set.CountApproaches" />
+            <input type="number" min="1" class="form-control" name="countApproaches" ng-model="vm.set.CountApproaches" />
             <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidCountApproaches==false">Count of Approaches must be great than 0.</label>
         </div>
     </div>

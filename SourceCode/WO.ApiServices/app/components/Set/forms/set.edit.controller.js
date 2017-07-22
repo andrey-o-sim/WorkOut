@@ -10,7 +10,9 @@
         'setService',
         'exerciseService',
         'approachService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr',
+        'toastrConfig'];
 
     function SetEditController(
         $rootScope,
@@ -20,7 +22,9 @@
         setService,
         exerciseService,
         approachService,
-        workOutHelper) {
+        workOutHelper,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.formIsReady = false;
@@ -32,13 +36,15 @@
         init();
 
         function init() {
-            vm.set = {};
-
             setService.getById($stateParams.id).then(function (result) {
                 if (result) {
                     vm.set = result;
-
                     vm.set.Exercises = getShotExercises(vm.set.Exercises);
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Set with id = '" + $stateParams.id + "' in the system.");
                 }
 
                 vm.formIsReady = true;
@@ -51,8 +57,8 @@
             });
         }
 
-        function getShotExercises(fulExercises) {
-            return fulExercises.map(function (item) {
+        function getShotExercises(fullExercises) {
+            return fullExercises.map(function (item) {
                 var resultItem = {
                     Id: item.Id,
                     Name: item.Name

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
@@ -14,13 +11,11 @@ namespace WO.Core.Data.Repositories
     {
         private IRepository<TrainingType> _trainingTypeRepository;
         private IRepository<Set> _setRepository;
-        public DTOTrainingRepository(
-            IRepository<Training> repository,
-            IRepository<TrainingType> trainingTypeRepository,
-            IRepository<Set> setRepository) : base(repository)
+        public DTOTrainingRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            _trainingTypeRepository = trainingTypeRepository;
-            _setRepository = setRepository;
+            _trainingTypeRepository = unitOfWork.GetGenericRepository<TrainingType>();
+            _setRepository = unitOfWork.GetGenericRepository<Set>();
         }
 
         public override int Create(TrainingDTO trainingDTO)
@@ -29,19 +24,34 @@ namespace WO.Core.Data.Repositories
             training.CreatedDate = DateTime.Now;
             training.ModifiedDate = DateTime.Now;
 
-            training.TrainingType = _trainingTypeRepository.Get(training.TrainingType.Id);
+            training.TrainingType = trainingDTO.TrainingType != null
+                ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id)
+                : new TrainingType();
 
-            return _repository.Create(training);
+            _repository.Create(training);
+            _unitOfWork.Commit();
+
+            return training.Id;
         }
 
         public override void Update(TrainingDTO trainingDTO)
         {
-            var training = _mapper.Map<Training>(trainingDTO);
-            training.ModifiedDate = DateTime.Now;
+            var trainingForUpdate = _repository.Get(trainingDTO.Id);
+            _mapper.Map<TrainingDTO, Training>(trainingDTO, trainingForUpdate);
+            trainingForUpdate.ModifiedDate = DateTime.Now;
 
-            training.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
+            if (trainingDTO.TrainingType.Id != trainingForUpdate.TrainingType.Id)
+            {
+                trainingForUpdate.TrainingType = trainingDTO.TrainingType != null
+                    ? _trainingTypeRepository.Get(trainingDTO.TrainingType.Id)
+                    : new TrainingType();
+                trainingForUpdate.TrainingType.Trainings.Add(trainingForUpdate);
+            }
 
-            _repository.Update(training);
+            trainingForUpdate.Sets = _setRepository.FindMany(set => set.TrainingId == trainingDTO.Id).ToList();
+
+            _repository.Update(trainingForUpdate);
+            _unitOfWork.Commit();
         }
 
     }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FluentValidation.Attributes;
 using WO.ApiServices.Models.Helper;
+using WO.ApiServices.Models.Validators;
 
 namespace WO.ApiServices.Models
 {
+    [Validator(typeof(ApproachValidator))]
     public class Approach : BaseModel
     {
         public TimeWO PlannedTimeForRest { get; set; }

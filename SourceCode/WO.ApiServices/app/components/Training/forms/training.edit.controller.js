@@ -10,7 +10,9 @@
         'trainingService',
         'trainingTypeService',
         'setService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr',
+        'toastrConfig'];
 
     function TrainingEditController(
         $state,
@@ -18,7 +20,9 @@
         trainingService,
         trainingTypeService,
         setService,
-        workOutHelper) {
+        workOutHelper,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
         vm.save = save;
@@ -31,23 +35,18 @@
         function init() {
             trainingService.getById($stateParams.id).then(function (result) {
 
-                var currentDateTime = !result.StartDateTime ? moment() : moment(result.StartDateTime);
-                result.StartDateTime = {
-                    Hours: currentDateTime.get('hours'),
-                    Minutes: currentDateTime.get('minutes'),
-                    Seconds: currentDateTime.get('seconds')
+                if (result) {
+                    vm.training = result;
+
+                    vm.training.StartDateTime = vm.training.StartDateTime ? vm.training.StartDateTime : moment();
+                    vm.training.EndDateTime = vm.training.EndDateTime ? vm.training.EndDateTime : moment();
+                }
+                else {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("There is no Training with id = '" + $stateParams.id + "' in the system.");
                 }
 
-                if (result.EndDateTime) {
-                    currentDateTime = moment(result.EndDateTime);
-                    result.EndDateTime = {
-                        Hours: currentDateTime.get('hours'),
-                        Minutes: currentDateTime.get('minutes'),
-                        Seconds: currentDateTime.get('seconds')
-                    }
-                }
-
-                vm.training = result;
                 vm.formIsReady = true;
             });
 
@@ -58,25 +57,13 @@
 
         function save(training) {
             if (isValidForm(training)) {
-                var currentDate = moment();
-                if (training.StartDateTime) {
-                    training.StartDateTime = currentDate.set({
-                        'hour': training.StartDateTime.Hours,
-                        'minute': training.StartDateTime.Minutes,
-                        'second': training.StartDateTime.Seconds
-                    });
-                }
-
-                if (training.EndDateTime) {
-                    var currentDate = moment();
-                    training.EndDateTime = currentDate.set({
-                        'hour': training.EndDateTime.Hours,
-                        'minute': training.EndDateTime.Minutes,
-                        'second': training.EndDateTime.Seconds
-                    });
-                }
-
                 vm.disableButton = true;
+
+                var timeZoneLength = 6;
+
+                vm.training.StartDateTime = vm.training.StartDateTime.format().substring(0, vm.training.StartDateTime.format().length - timeZoneLength);
+                vm.training.EndDateTime = vm.training.EndDateTime.format().substring(0, vm.training.EndDateTime.format().length - timeZoneLength);
+
                 trainingService.update(training).then(function (result) {
                     if (result.Succeed) {
                         $state.go('trainingHome');

@@ -10,15 +10,17 @@ using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using WO.LoggerFactory;
 
 namespace WO.ApiServices.Controllers
 {
-    public class TrainingController : ApiController
+    public class TrainingController : WoBaseController<TrainingController>
     {
         private IService<TrainingDTO> _service;
         private IMapper _mapper;
 
-        public TrainingController(IService<TrainingDTO> trainingService)
+        public TrainingController(IService<TrainingDTO> trainingService, ILoggerFactory loggerFactory)
+            : base(loggerFactory)
         {
             _service = trainingService;
             _mapper = AutoMapperWebApiConfiguration.MapperConfiguration.CreateMapper();
@@ -27,51 +29,84 @@ namespace WO.ApiServices.Controllers
         // GET: api/Training/5
         public IHttpActionResult Get(int id)
         {
-            var trainigDTO = _service.Get(id);
-            if (trainigDTO != null)
-            {
-                var training = _mapper.Map<Training>(trainigDTO);
-                return Ok<Training>(training);
-            }
+            LoggerService.Info("Getting 'Training' by id = '{0}'", id);
 
-            return NotFound();
+            return ExecuteRequest(() =>
+            {
+                var trainigDTO = _service.Get(id);
+                if (trainigDTO != null)
+                {
+                    var training = _mapper.Map<Training>(trainigDTO);
+
+                    LogInfoObjectToJson(training);
+                    return Ok<Training>(training);
+                }
+
+                LoggerService.Info("There is no 'Training' with Id = '{0}'", id);
+
+                return NotFound();
+            });
         }
 
         // GET: api/Training
         public IHttpActionResult GetAll()
         {
-            var trainigsDTO = _service.GetAll();
-            var trainings = _mapper.Map<List<Training>>(trainigsDTO);
+            LoggerService.Info("Getting all 'Trainings'");
 
-            return Ok<List<Training>>(trainings);
+            return ExecuteRequest(() =>
+            {
+                var trainigsDTO = _service.GetAll();
+                var trainings = _mapper.Map<List<Training>>(trainigsDTO);
+
+                LogInfoObjectToJson(trainings);
+                return Ok<List<Training>>(trainings);
+            });
         }
 
         // POST: api/Training
         [HttpPost]
         public IHttpActionResult Create([FromBody]Training training)
         {
-            var trainigDTO = _mapper.Map<TrainingDTO>(training);
-            var result = _service.Create(trainigDTO);
+            LogInfoObjectToJson(training, "Creating 'Training':");
 
-            return Ok<IOperationResult>(result);
+            return ExecuteRequest(() =>
+            {
+                var trainigDTO = _mapper.Map<TrainingDTO>(training);
+                var result = _service.Create(trainigDTO);
+
+                LogInfoObjectToJson(result, "Created 'Training':");
+                return Ok<IOperationResult>(result);
+            });
         }
 
         // PUT: api/Training/5
         [HttpPut]
         public IHttpActionResult Update([FromBody]Training training)
         {
-            var trainigDTO = _mapper.Map<TrainingDTO>(training);
-            var result = _service.Update(trainigDTO);
+            LogInfoObjectToJson(training, "Updating 'Training':");
 
-            return Ok<IOperationResult>(result);
+            return ExecuteRequest(() =>
+            {
+                var trainigDTO = _mapper.Map<TrainingDTO>(training);
+                var result = _service.Update(trainigDTO);
+
+                LogInfoObjectToJson(result, "Updated 'Training':");
+                return Ok<IOperationResult>(result);
+            });
         }
 
         // DELETE: api/Training/5
         public IHttpActionResult Delete(int id)
         {
-            var result = _service.Delete(id);
+            LoggerService.Info("Deleting 'Training' with id = '{0}'", id);
 
-            return Ok<IOperationResult>(result);
+            return ExecuteRequest(() =>
+            {
+                var result = _service.Delete(id);
+
+                LoggerService.Info("'Training' was removed");
+                return Ok<IOperationResult>(result);
+            });
         }
     }
 }

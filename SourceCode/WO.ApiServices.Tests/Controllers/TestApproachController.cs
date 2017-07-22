@@ -25,7 +25,7 @@ namespace WO.ApiServices.Tests.Controllers
         public void Init()
         {
             _mock = new Mock<IService<ApproachDTO>>();
-            _approachController = new ApproachController(_mock.Object);
+            _approachController = new ApproachController(_mock.Object, null);
 
             _approaches = new List<ApproachDTO>
             {

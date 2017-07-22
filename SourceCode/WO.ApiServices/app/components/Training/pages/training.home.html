@@ -16,8 +16,8 @@
                 <tr ng-repeat="training in vm.trainings">
                     <td ng-bind="training.TrainingType.TypeTraining"></td>
                     <td ng-bind="training.MainTrainingPurpose"></td>
-                    <td ng-bind-template="{{ training.StartDateTime | date : 'medium'}}"></td>
-                    <td ng-bind-template="{{ training.EndDateTime | date : 'medium'}}"></td>
+                    <td ng-bind-template="{{ training.StartDateTime | date : 'MMM d, yyyy HH:mm:ss'}}"></td>
+                    <td ng-bind-template="{{ training.EndDateTime | date : 'MMM d, yyyy HH:mm:ss'}}"></td>
                     <td ng-bind-template="{{ training.Description | limitTo: 100 }}{{training.Description.length > 100 ? '...' : ''}}"></td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ui-sref="trainingView({id:{{training.Id}}})">
@@ -26,7 +26,7 @@
                         <a class="btn btn-sm btn-info" ui-sref="trainingEdit({id:{{training.Id}}})">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(training.Id)">
+                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(training)">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </td>

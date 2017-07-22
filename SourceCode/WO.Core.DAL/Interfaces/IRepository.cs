@@ -14,9 +14,8 @@ namespace WO.Core.DAL.Interfaces
         T Get(int id);
         T Find(Func<T, bool> predicate);
         IEnumerable<T> FindMany(Func<T, bool> predicate);
-        int Create(T item);
+        void Create(T item);
         void Update(T item);
         void Delete(T item);
-        void AttachToContext<TEntity>(TEntity item, EntityState state) where TEntity : BaseModel;
     }
 }

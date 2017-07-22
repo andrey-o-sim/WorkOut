@@ -5,12 +5,14 @@
 ExerciseHomeController.$inject = [
     '$uibModal',
     'exerciseService',
-    'workOutHelper'];
+    'workOutHelper',
+    'toastr'];
 
 function ExerciseHomeController(
     $uibModal,
     exerciseService,
-    workOutHelper) {
+    workOutHelper,
+    toastr) {
 
     var vm = this;
     vm.formIsReady = false;
@@ -77,11 +79,14 @@ function ExerciseHomeController(
         return modalInstance;
     }
 
-    function remove(id) {
-        exerciseService.remove(id).then(function (result) {
-            if (result.Succeed) {
-                vm.exercises = workOutHelper.removeElementFromArray(vm.exercises, result.ResultItemId);
-            }
-        })
+    function remove(exercise) {
+        if (confirm("Do you realy want to remove '" + exercise.Name + "' ?")) {
+            exerciseService.remove(exercise.Id).then(function (result) {
+                if (result.Succeed) {
+                    vm.exercises = workOutHelper.removeElementFromArray(vm.exercises, result.ResultItemId);
+                    toastr.info("Exercise '" + exercise.Name + "' was successfully removed.");
+                }
+            });
+        }
     }
 }

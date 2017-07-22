@@ -9,9 +9,8 @@ namespace WO.Core.DAL.Model
 {
     public class TrainingType : BaseModel
     {
-        [Required]
         public string TypeTraining { get; set; }
         public string Description { get; set; }
-        public virtual IEnumerable<Training> Trainings { get; set; }
+        public virtual ICollection<Training> Trainings { get; set; } = new List<Training>();
     }
 }

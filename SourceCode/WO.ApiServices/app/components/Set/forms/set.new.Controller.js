@@ -81,7 +81,7 @@
                 isValid = false;
             }
 
-            if (!set.CountApproaches || set.CountApproaches === 0) {
+            if (!set.CountApproaches || set.CountApproaches < 1) {
                 vm.validator.ValidCountApproaches = false;
                 isValid = false;
             }

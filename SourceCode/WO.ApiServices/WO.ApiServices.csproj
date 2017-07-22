@@ -17,7 +17,7 @@
     <AssemblyName>WO.ApiServices</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -48,6 +48,12 @@
     <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.1.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.WebApi.7.1.0\lib\net45\FluentValidation.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -258,23 +264,32 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Bindings\ApiBindings.cs" />
     <Compile Include="Controllers\ApproachController.cs" />
+    <Compile Include="Controllers\LogEntryController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\GenericData\TrainingTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SetController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\ViewModel\SetViewModel.cs" />
+    <Compile Include="Controllers\WoBaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Approach.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Helper\TimeWO.cs" />
     <Compile Include="Models\Helper\TimeWoOperations.cs" />
+    <Compile Include="Models\Helper\ValidationError.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\TrainingType.cs" />
+    <Compile Include="Models\Validators\ApproachValidator.cs" />
+    <Compile Include="Models\Validators\ExerciseValidator.cs" />
+    <Compile Include="Models\Validators\SetValidator.cs" />
+    <Compile Include="Models\Validators\TrainingTypeValidator.cs" />
+    <Compile Include="Models\Validators\TrainingValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -283,6 +298,9 @@
     <Content Include="app\assets\img\loading.gif" />
     <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.js" />
     <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.templates.js" />
+    <Content Include="app\assets\libs\angular-datetime-range\datetime-range.css" />
+    <Content Include="app\assets\libs\angular-datetime-range\datetime-range.html" />
+    <Content Include="app\assets\libs\angular-datetime-range\datetime-range.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="app\assets\libs\angular-ui-router\resolveService.js" />
@@ -305,6 +323,8 @@
     <Content Include="app\components\Exercise\forms\exercise.add.edit.html" />
     <Content Include="app\components\Exercise\pages\exercise.home.controller.js" />
     <Content Include="app\components\Exercise\pages\exercise.home.html" />
+    <Content Include="app\components\Log\log.home.controller.js" />
+    <Content Include="app\components\Log\log.route.js" />
     <Content Include="app\components\Set\forms\set.edit.controller.js" />
     <Content Include="app\components\Set\forms\set.edit.html" />
     <Content Include="app\components\Set\forms\set.new.Controller.js" />
@@ -333,11 +353,14 @@
     <Content Include="app\shared\directives\wo.timeSelector.html" />
     <Content Include="app\shared\services\approach.service.js" />
     <Content Include="app\shared\services\exercise.service.js" />
+    <Content Include="app\shared\services\log.service.js" />
     <Content Include="app\shared\services\set.service.js" />
     <Content Include="app\shared\services\training.service.js" />
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\angular-toastr.css" />
+    <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -348,6 +371,8 @@
     <Content Include="Content\select.css" />
     <Content Include="Content\select.min.css" />
     <Content Include="Content\selectize.default.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -1176,6 +1201,10 @@
     <Content Include="app\assets\libs\moment\moment-with-locales.min.js" />
     <Content Include="app\assets\libs\moment\moment.js" />
     <Content Include="app\assets\libs\moment\moment.min.js" />
+    <Content Include="app\assets\libs\angular-toastr.js" />
+    <Content Include="app\assets\libs\angular-toastr.min.js" />
+    <Content Include="app\assets\libs\angular-toastr.tpls.js" />
+    <Content Include="app\assets\libs\angular-toastr.tpls.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1192,11 +1221,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="app\assets\libs\ui-select\select.min.js.map" />
+    <Content Include="app\components\Log\log.home.html" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\assets\js\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1216,6 +1248,8 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="app\components\Training\pages\training.home.html" />
     <Content Include="Content\datetimepicker.css.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Project_Readme.html" />
     <Content Include="app\assets\libs\jquery-1.10.2.min.map" />
   </ItemGroup>
@@ -1227,6 +1261,14 @@
     <ProjectReference Include="..\WO.Core.Data\WO.Core.Data.csproj">
       <Project>{c15b0dc4-37a3-4345-bf0d-bf67fd8f0813}</Project>
       <Name>WO.Core.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WO.LoggerFactory\WO.LoggerFactory.csproj">
+      <Project>{2a96ad96-8103-46c8-aed6-0b2252c91a6d}</Project>
+      <Name>WO.LoggerFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WO.LoggingService\WO.LoggerService.csproj">
+      <Project>{a2249754-1da2-4645-b1b2-03ff6951268c}</Project>
+      <Name>WO.LoggerService</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -1247,7 +1289,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59017</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59017/</IISUrl>
+          <IISUrl>http://localhost:1235</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
