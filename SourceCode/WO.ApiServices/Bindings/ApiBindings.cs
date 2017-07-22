@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using Ninject.Modules;
-using WO.ApiServices.Models;
-using WO.ApiServices.Models.Validators;
+﻿using Ninject.Modules;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Services;
 using WO.Core.BLL.Services;
@@ -21,6 +18,7 @@ namespace WO.ApiServices.Bindings
             Bind<IService<SetDTO>>().To<SetService>();
             Bind<IService<TrainingDTO>>().To<TrainingService>();
             Bind<IExerciseService>().To<ExerciseService>();
+            Bind<IService<LogEntryDTO>>().To<LogEntryService>();
         }
     }
 }

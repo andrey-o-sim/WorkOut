@@ -7,7 +7,6 @@ using WO.Core.BLL.Interfaces.Repositories;
 using WO.Core.DAL.Interfaces;
 using WO.Core.DAL.Model;
 using WO.Core.Data.Configs;
-using WO.Core.DAL;
 
 namespace WO.Core.Data.Repositories
 {
@@ -41,7 +40,7 @@ namespace WO.Core.Data.Repositories
             var itemForUpdate = _repository.Get(item.Id);
 
             _mapper.Map<TDto, TData>(item, itemForUpdate);
-            itemForUpdate.ModifiedDate = DateTime.Now.ToUniversalTime();
+            itemForUpdate.ModifiedDate = DateTime.Now;
 
             _repository.Update(itemForUpdate);
             _unitOfWork.Commit();

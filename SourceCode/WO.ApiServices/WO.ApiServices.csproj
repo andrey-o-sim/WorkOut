@@ -264,6 +264,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Bindings\ApiBindings.cs" />
     <Compile Include="Controllers\ApproachController.cs" />
+    <Compile Include="Controllers\LogEntryController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\GenericData\TrainingTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -276,6 +277,7 @@
     </Compile>
     <Compile Include="Models\Approach.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Helper\TimeWO.cs" />
     <Compile Include="Models\Helper\TimeWoOperations.cs" />
@@ -1222,6 +1224,7 @@
     <Folder Include="app\assets\js\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

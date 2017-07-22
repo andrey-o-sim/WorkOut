@@ -41,10 +41,8 @@ namespace WO.ApiServices.Controllers
                     LogInfoObjectToJson(training);
                     return Ok<Training>(training);
                 }
-                else
-                {
-                    LoggerService.Info("There is no 'Training' with Id = '{0}'", id);
-                }
+
+                LoggerService.Info("There is no 'Training' with Id = '{0}'", id);
 
                 return NotFound();
             });

@@ -63,6 +63,7 @@
     <Compile Include="Migrations\WoDbConfiguration.cs" />
     <Compile Include="Model\Approach.cs" />
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\LogEntry.cs" />
     <Compile Include="Model\Exercise.cs" />
     <Compile Include="Model\Set.cs" />
     <Compile Include="Model\Training.cs" />

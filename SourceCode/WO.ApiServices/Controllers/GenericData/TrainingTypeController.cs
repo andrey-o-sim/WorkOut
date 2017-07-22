@@ -37,10 +37,8 @@ namespace WO.ApiServices.Controllers.GenericData
                     LogInfoObjectToJson(trainingType);
                     return Ok<TrainingType>(trainingType);
                 }
-                else
-                {
-                    LoggerService.Info("There is no 'Training Type' with Id = '{0}'", id);
-                }
+
+                LoggerService.Info("There is no 'Training Type' with Id = '{0}'", id);
 
                 return NotFound();
             });

@@ -62,6 +62,9 @@ namespace WO.ApiServices.Configs
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.PlannedTimeForRest)))
                   .ForMember(dest => dest.SpentTimeForRest,
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.SpentTimeForRest)));
+
+                  cfg.CreateMap<LogEntry, LogEntryDTO>();
+                  cfg.CreateMap<LogEntryDTO, LogEntry>();
               });
         }
     }
