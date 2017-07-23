@@ -8,15 +8,16 @@ using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 using WO.LoggerFactory;
 using System;
+using WO.Core.BLL.Interfaces.Services;
 
 namespace WO.ApiServices.Controllers
 {
     public class ApproachController : WoBaseController<ApproachController>
     {
-        private IService<ApproachDTO> _service;
+        private IApproachService _service;
         private IMapper _mapper;
 
-        public ApproachController(IService<ApproachDTO> approachService, ILoggerFactory loggerFactory)
+        public ApproachController(IApproachService approachService, ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
             _service = approachService;
@@ -104,6 +105,29 @@ namespace WO.ApiServices.Controllers
                 LoggerService.Info("'Approach' was removed");
                 return Ok<IOperationResult>(result);
             });
+        }
+
+        [Route("api/Approach/GenerateApproachesForSet")]
+        public IHttpActionResult GenerateApproachesForSet(Set set)
+        {
+            string logMessage = set.Id > 0
+                ? string.Format("Genereting Approaches for Set Id = {0}", set.Id)
+                : "Genereting Approaches for New Set";
+
+            LoggerService.Info(logMessage);
+
+            return ExecuteRequest(() =>
+            {
+                var setDTO = _mapper.Map<SetDTO>(set);
+
+                var result = _service.GenerateApproachesForSet(setDTO);
+                var approaches = _mapper.Map<List<Approach>>(result);
+
+                approaches.ForEach(ap => set.Approaches.Add(ap));
+
+                LoggerService.Info("{0} Approaches were generated", set.Approaches.Count);
+                return Ok<Set>(set);
+            }, true);
         }
     }
 }

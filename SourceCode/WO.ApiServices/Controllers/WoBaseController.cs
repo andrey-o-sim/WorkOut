@@ -33,9 +33,9 @@ namespace WO.ApiServices.Controllers
             LoggerService.Warn(string.Format("{0}{1}", message, jsonResult));
         }
 
-        protected IHttpActionResult ExecuteRequest(Func<IHttpActionResult> function)
+        protected IHttpActionResult ExecuteRequest(Func<IHttpActionResult> function, bool skipValidation = false)
         {
-            if (!ModelState.IsValid)
+            if (!skipValidation && !ModelState.IsValid)
             {
                 var errors = GetValidationErrors();
                 LogWarningObjectToJson(errors);

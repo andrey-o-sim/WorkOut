@@ -18,7 +18,8 @@
             getAll: getAll,
             create: create,
             update: update,
-            remove: remove
+            remove: remove,
+            generateApproachesForSet: generateApproachesForSet
         };
 
         return service;
@@ -90,6 +91,21 @@
 
         function remove(id) {
             return $http.delete(serviceUrl + id)
+                .then(success, error);
+
+            function success(response) {
+                var result = response ? response.data : {};
+                return result;
+            }
+
+            function error(error) {
+                workOutHelper.writeErrorMessageToConsole(error);
+                return { Succeed: false };
+            }
+        }
+
+        function generateApproachesForSet(set) {
+            return $http.post(serviceUrl + 'GenerateApproachesForSet', set)
                 .then(success, error);
 
             function success(response) {

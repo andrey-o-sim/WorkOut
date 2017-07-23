@@ -11,20 +11,21 @@ using WO.Core.BLL;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
+using WO.Core.BLL.Interfaces.Services;
 
 namespace WO.ApiServices.Tests.Controllers
 {
     [TestClass]
     public class TestApproachController
     {
-        private Mock<IService<ApproachDTO>> _mock;
+        private Mock<IApproachService> _mock;
         private ApproachController _approachController;
         private List<ApproachDTO> _approaches;
 
         [TestInitialize]
         public void Init()
         {
-            _mock = new Mock<IService<ApproachDTO>>();
+            _mock = new Mock<IApproachService>();
             _approachController = new ApproachController(_mock.Object, null);
 
             _approaches = new List<ApproachDTO>

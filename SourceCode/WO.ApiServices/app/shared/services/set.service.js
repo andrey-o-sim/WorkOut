@@ -31,7 +31,7 @@
 
             function error(error) {
                 workOutHelper.writeErrorMessageToConsole(error);
-                if (error.status == "404") {
+                if (error.status === "404") {
                     return null;
                 }
                 else {

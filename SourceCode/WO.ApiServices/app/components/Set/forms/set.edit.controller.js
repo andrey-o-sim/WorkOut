@@ -33,6 +33,8 @@
         vm.addEditApproach = addEditApproach;
         vm.addEditExercise = addEditExercise;
 
+        vm.generateApproaches = generateApproaches;
+
         init();
 
         function init() {
@@ -65,14 +67,6 @@
                 };
 
                 return resultItem;
-            });
-        }
-
-        function removeApproach(id) {
-            approachService.remove(id).then(function (result) {
-                if (result.Succeed) {
-                    vm.set.Approaches = workOutHelper.removeElementFromArray(vm.set.Approaches, id);
-                }
             });
         }
 
@@ -195,6 +189,14 @@
             );
         }
 
+        function removeApproach(id) {
+            approachService.remove(id).then(function (result) {
+                if (result.Succeed) {
+                    vm.set.Approaches = workOutHelper.removeElementFromArray(vm.set.Approaches, id);
+                }
+            });
+        }
+
         function openModal(modalProperties) {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -214,6 +216,14 @@
             });
 
             return modalInstance;
+        }
+
+        function generateApproaches(set) {
+            vm.generetingApproaches = true;
+            approachService.generateApproachesForSet(set).then(function (result) {
+                vm.set = result;
+                vm.generetingApproaches = false;
+            });
         }
     }
 }());

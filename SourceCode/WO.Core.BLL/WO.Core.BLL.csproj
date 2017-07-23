@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IOperationResult.cs" />
     <Compile Include="Interfaces\Repositories\IExerciseRepositoryDTO.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryDTO.cs" />
+    <Compile Include="Interfaces\Services\IApproachService.cs" />
     <Compile Include="Interfaces\Services\IExerciseService.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

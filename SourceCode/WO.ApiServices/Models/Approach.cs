@@ -7,8 +7,8 @@ namespace WO.ApiServices.Models
     [Validator(typeof(ApproachValidator))]
     public class Approach : BaseModel
     {
-        public TimeWO PlannedTimeForRest { get; set; }
-        public TimeWO SpentTimeForRest { get; set; }
+        public TimeWO PlannedTimeForRest { get; set; } = new TimeWO();
+        public TimeWO SpentTimeForRest { get; set; } = new TimeWO();
         public Set Set { get; set; }
         public int? SetId { get; set; }
     }

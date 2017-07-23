@@ -6,7 +6,6 @@ using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
-using WO.ApiServices.Controllers.ViewModel;
 using WO.LoggerFactory;
 using System;
 
@@ -70,9 +69,6 @@ namespace WO.ApiServices.Controllers
 
             return ExecuteRequest(() =>
             {
-                var setViewModel = new SetViewModel();
-                setViewModel.GetFullSetData(set);
-
                 var setDTO = _mapper.Map<SetDTO>(set);
 
                 var result = _service.Create(setDTO);

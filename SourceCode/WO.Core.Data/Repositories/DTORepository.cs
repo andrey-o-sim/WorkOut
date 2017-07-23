@@ -35,6 +35,24 @@ namespace WO.Core.Data.Repositories
             return dbItem.Id;
         }
 
+        public virtual ICollection<TDto> CreateMany(ICollection<TDto> items)
+        {
+            var dbItems = _mapper.Map<List<TData>>(items);
+
+            foreach (TData item in dbItems)
+            {
+                item.CreatedDate = DateTime.Now;
+                item.ModifiedDate = DateTime.Now;
+
+                _repository.Create(item);
+            }
+            _unitOfWork.Commit();
+
+            var result = _mapper.Map<List<TDto>>(dbItems);
+
+            return result;
+        }
+
         public virtual void Update(TDto item)
         {
             var itemForUpdate = _repository.Get(item.Id);

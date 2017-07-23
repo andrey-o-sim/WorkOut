@@ -7,18 +7,25 @@
         '$stateParams',
         '$uibModal',
         'exerciseService',
-        'setService',];
+        'setService',
+        'approachService',
+        'workOutHelper'];
 
     function SetNewController(
         $state,
         $stateParams,
         $uibModal,
         exerciseService,
-        setService) {
+        setService,
+        approachService,
+        workOutHelper) {
 
         var vm = this;
         vm.save = save;
         vm.addEditExercise = addEditExercise;
+        vm.generateApproaches = generateApproaches;
+        vm.removeApproach = removeApproach;
+        vm.addEditApproach = addEditApproach;
 
         init();
 
@@ -81,8 +88,8 @@
                 isValid = false;
             }
 
-            if (!set.CountApproaches || set.CountApproaches < 1) {
-                vm.validator.ValidCountApproaches = false;
+            if (!set.Approaches || set.Approaches.length === 0) {
+                vm.validator.ValidApproaches = false;
                 isValid = false;
             }
 
@@ -155,5 +162,79 @@
 
             return modalInstance;
         }
+
+        function generateApproaches(set) {
+            set.Id = 0;
+            vm.generetingApproaches = true;
+            approachService.generateApproachesForSet(set).then(function (result) {
+                vm.set = result;
+                vm.generetingApproaches = false;
+            });
+        }
+
+        function addEditApproach(approachId, setId) {
+            var ariaLabel = approachId > 0 ? 'Approach Edit' : 'Approach New';
+
+            var modalProperties = {
+                ariaLabelledBy: ariaLabel,
+                templateUrl: '/app/components/Approach/forms/approach.add.edit.html',
+                controller: 'ApproachAddEditController',
+                itemId: approachId,
+                setId: setId
+            };
+
+            var modalInstance = openModal(modalProperties);
+
+            modalInstance.result.then(
+                function (resultApproach) {
+                    var indexForUpdate = -1;
+                    vm.set.Approaches.forEach(function (setApproach, index) {
+                        if (setApproach.Id === resultApproach.Id) {
+                            indexForUpdate = index;
+                            return true;
+                        }
+                    });
+
+                    if (indexForUpdate > -1) {
+                        vm.set.Approaches[indexForUpdate].PlannedTimeForRest = resultApproach.PlannedTimeForRest;
+                        vm.set.Approaches[indexForUpdate].SpentTimeForRest = resultApproach.SpentTimeForRest;
+                    }
+                    else {
+                        vm.set.Approaches.push(resultApproach);
+                    }
+                },
+                function () { }
+            );
+        }
+
+        function removeApproach(id) {
+            approachService.remove(id).then(function (result) {
+                if (result.Succeed) {
+                    vm.set.Approaches = workOutHelper.removeElementFromArray(vm.set.Approaches, id);
+                }
+            });
+        }
+
+        function openModal(modalProperties) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: modalProperties.ariaLabell,
+                templateUrl: modalProperties.templateUrl,
+                controller: modalProperties.controller,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return modalProperties.itemId;
+                    },
+                    setId: function () {
+                        return modalProperties.setId;
+                    }
+                }
+            });
+
+            return modalInstance;
+        }
+
     }
 }());
