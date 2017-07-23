@@ -1,6 +1,6 @@
 ﻿(function () {
     angular.module('woApp')
-            .config(routeConfig);
+        .config(routeConfig);
 
     function routeConfig($stateProvider) {
         var homeRoute = {
@@ -14,8 +14,8 @@
         var newRoute = {
             name: 'trainingNew',
             url: '/training/new',
-            templateUrl: '/app/components/Training/forms/training.new.html',
-            controller: 'TrainingNewController',
+            templateUrl: '/app/components/Training/forms/training.form.html',
+            controller: 'TrainingFormController',
             controllerAs: 'vm',
             params: {
                 training: null
@@ -25,15 +25,18 @@
         var editRoute = {
             name: 'trainingEdit',
             url: '/training/edit/{id}',
-            templateUrl: '/app/components/Training/forms/training.edit.html',
-            controller: 'TrainingEditController',
-            controllerAs: 'vm'
+            templateUrl: '/app/components/Training/forms/training.form.html',
+            controller: 'TrainingFormController',
+            controllerAs: 'vm',
+            params: {
+                training: null
+            }
         };
 
         var viewRoute = {
             name: 'trainingView',
             url: '/training/view/{id}',
-            templateUrl: '/app/components/Training/forms/training.View.html',
+            templateUrl: '/app/components/Training/forms/training.view.html',
             controller: 'TrainingViewController',
             controllerAs: 'vm'
         };

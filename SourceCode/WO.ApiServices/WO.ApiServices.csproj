@@ -341,8 +341,8 @@
     <Content Include="app\components\TrainingType\pages\trainingType.home.html" />
     <Content Include="app\components\Training\forms\training.edit.html" />
     <Content Include="app\components\Training\forms\training.edit.controller.js" />
-    <Content Include="app\components\Training\forms\training.new.html" />
-    <Content Include="app\components\Training\forms\training.new.controller.js" />
+    <Content Include="app\components\Training\forms\training.form.html" />
+    <Content Include="app\components\Training\forms\training.form.controller.js" />
     <Content Include="app\components\Training\forms\training.view.html" />
     <Content Include="app\components\Training\forms\training.view.controller.js" />
     <Content Include="app\components\Training\pages\training.home.controller.js" />

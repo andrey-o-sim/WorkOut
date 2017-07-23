@@ -1,7 +1,7 @@
 ﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
 <div ng-if="vm.formIsReady && vm.training">
-    <h2 class="page-header">Edit Training</h2>
+    <h2 class="page-header">Add Training</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -28,16 +28,16 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3 for="planTimeForRest" class="control-label">Main Training Purpose:</h3>
+                <h3 class="control-label">Main Training Purpose:</h3>
             </div>
             <div class="col-md-12">
                 <input type="text" class="form-control" name="mainTrainingPurpose" ng-model="vm.training.MainTrainingPurpose" />
-                <label ng-show="vm.validateForm==true && vm.validator.ValidMainTrainingPurpose==false" class="requiredError">Need to provide "Main Training Purpose"</label>
+                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidMainTrainingPurpose==false">Need to provide "Main Training Purpose"</label>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3 for="planTimeForRest" class="control-label">Description:</h3>
+                <h3 class="control-label">Description:</h3>
             </div>
             <div class="col-md-12">
                 <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
@@ -97,7 +97,7 @@
                     <tr>
                         <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
                         <td class="text-right">
-                            <a id="cancel" class="btn btn-primary" ui-sref="setNew({trainingId:vm.training.Id})">
+                            <a id="cancel" class="btn btn-primary" ui-sref="setNew({training:vm.training})">
                                 <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                                 Add Set
                             </a>
@@ -109,10 +109,10 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer-buttons">
-        <button id="save" class="btn btn-primary" ng-click="vm.save(vm.training)" ng-disabled="vm.disableSaveButton">Save</button>
-        <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
+        <div class="footer-buttons">
+            <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.training)">Save</button>
+            <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
+        </div>
     </div>
 </div>

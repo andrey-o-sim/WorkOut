@@ -1,70 +1,82 @@
 ﻿(function () {
-
     angular
         .module('woApp')
-        .controller('TrainingEditController', TrainingEditController);
+        .controller('TrainingFormController', TrainingFormController);
 
-    TrainingEditController.$inject = [
+    TrainingFormController.$inject = [
+        '$q',
         '$state',
         '$stateParams',
         'trainingService',
         'trainingTypeService',
         'setService',
-        'workOutHelper',
-        'toastr',
-        'toastrConfig'];
+        'workOutHelper'];
 
-    function TrainingEditController(
+    function TrainingFormController(
+        $q,
         $state,
         $stateParams,
         trainingService,
         trainingTypeService,
         setService,
-        workOutHelper,
-        toastr,
-        toastrConfig) {
+        workOutHelper) {
 
         var vm = this;
-        vm.save = save;
-        vm.formIsReady = false;
 
+        vm.save = save;
         vm.removeSet = removeSet;
 
-        init();
+        vm.editForm = $stateParams.id && $stateParams.id > 0;
+
+        init().then(function (result) {
+            vm.training = result;
+            vm.training.StartDateTime = vm.training.StartDateTime ? moment(vm.training.StartDateTime) : moment();
+            vm.training.EndDateTime = vm.training.EndDateTime ? moment(vm.training.EndDateTime) : moment();
+
+            vm.formIsReady = true;
+        });
 
         function init() {
-            trainingService.getById($stateParams.id).then(function (result) {
-
-                if (result) {
-                    vm.training = result;
-
-                    vm.training.StartDateTime = vm.training.StartDateTime ? vm.training.StartDateTime : moment();
-                    vm.training.EndDateTime = vm.training.EndDateTime ? vm.training.EndDateTime : moment();
-                }
-                else {
-                    toastrConfig.positionClass = 'toast-top-center';
-                    toastrConfig.autoDismiss = false;
-                    toastr.error("There is no Training with id = '" + $stateParams.id + "' in the system.");
-                }
-
-                vm.formIsReady = true;
-            });
-
             trainingTypeService.getAll().then(function (result) {
                 vm.TrainingTypes = result;
             });
+
+            if ($stateParams.training) {
+                return $q.when($stateParams.training);
+            }
+            else {
+                if (vm.editForm) {
+                    return trainingService.getById($stateParams.id).then(function (result) {
+
+                        if (result) {
+                            return result;
+                        }
+                        else {
+                            toastrConfig.positionClass = 'toast-top-center';
+                            toastrConfig.autoDismiss = false;
+                            toastr.error("There is no Training with id = '" + $stateParams.id + "' in the system.");
+                        }
+                    });
+                }
+                else {
+                    var newTraining = {
+                        TrainingType: {},
+                        MainTrainingPurpose: '',
+                        Description: '',
+                        StartDateTime: moment(),
+                        EndDateTime: moment(),
+                        Sets: []
+                    };
+
+                    return $q.when(newTraining);
+                }
+            }
         }
 
         function save(training) {
             if (isValidForm(training)) {
                 vm.disableButton = true;
-
-                var timeZoneLength = 6;
-
-                vm.training.StartDateTime = vm.training.StartDateTime.format().substring(0, vm.training.StartDateTime.format().length - timeZoneLength);
-                vm.training.EndDateTime = vm.training.EndDateTime.format().substring(0, vm.training.EndDateTime.format().length - timeZoneLength);
-
-                trainingService.update(training).then(function (result) {
+                trainingService.create(training).then(function (result) {
                     if (result.Succeed) {
                         $state.go('trainingHome');
                     }

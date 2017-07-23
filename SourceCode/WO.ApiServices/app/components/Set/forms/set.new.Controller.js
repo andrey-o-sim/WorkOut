@@ -63,7 +63,9 @@
                         if (vm.training) {
                             set.Id = result.ResultItemId;
                             vm.training.Sets.push(set)
-                            $state.go('trainingNew', { 'training': vm.training });
+
+                            var tainingRoute = vm.training.Id > 0 ? 'trainingEdit' : 'trainingNew';
+                            $state.go(tainingRoute, { 'id': vm.training.Id, 'training': vm.training });
                         }
                         else {
                             $state.go('setHome');
