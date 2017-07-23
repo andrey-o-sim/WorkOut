@@ -14,7 +14,7 @@ namespace WO.ApiServices.Bindings
             Bind<ILoggerFactory>().To<LoggerFactory.LoggerFactory>();
 
             Bind<IService<TrainingTypeDTO>>().To<TrainingTypeService>();
-            Bind<IService<ApproachDTO>>().To<ApproachService>();
+            Bind<IApproachService>().To<ApproachService>();
             Bind<IService<SetDTO>>().To<SetService>();
             Bind<IService<TrainingDTO>>().To<TrainingService>();
             Bind<IExerciseService>().To<ExerciseService>();

@@ -11,6 +11,7 @@ namespace WO.Core.BLL.Interfaces.Repositories
         IEnumerable<TDto> GetAll();
         TDto Get(int id);
         int Create(TDto item);
+        ICollection<TDto> CreateMany(ICollection<TDto> items);
         void Update(TDto item);
         void Delete(int id);
     }
