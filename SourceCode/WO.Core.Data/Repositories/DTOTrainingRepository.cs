@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces.Repositories;
@@ -31,6 +32,8 @@ namespace WO.Core.Data.Repositories
             _repository.Create(training);
             _unitOfWork.Commit();
 
+            UpdateRelatedSets(training.Id, trainingDTO.Sets);
+
             return training.Id;
         }
 
@@ -54,5 +57,18 @@ namespace WO.Core.Data.Repositories
             _unitOfWork.Commit();
         }
 
+        private void UpdateRelatedSets(int trainingId, IEnumerable<SetDTO> setDTOs)
+        {
+            if (trainingId > 0)
+            {
+                foreach (var setDTO in setDTOs)
+                {
+                    var set = _setRepository.Get(setDTO.Id);
+                    set.TrainingId = trainingId;
+                    _setRepository.Update(set);
+                }
+                _unitOfWork.Commit();
+            }
+        }
     }
 }

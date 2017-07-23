@@ -86,8 +86,7 @@ namespace WO.ApiServices
                 "~/app/components/Set/set.route.js",
 
                 "~/app/components/Training/pages/training.home.controller.js",
-                "~/app/components/Training/forms/training.new.controller.js",
-                "~/app/components/Training/forms/training.edit.controller.js",
+                "~/app/components/Training/forms/training.form.controller.js",
                 "~/app/components/Training/forms/training.view.controller.js",
                 "~/app/components/Training/training.route.js",
 
