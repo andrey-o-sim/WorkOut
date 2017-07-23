@@ -16,7 +16,10 @@
             url: '/training/new',
             templateUrl: '/app/components/Training/forms/training.new.html',
             controller: 'TrainingNewController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            params: {
+                training: null
+            }
         };
 
         var editRoute = {

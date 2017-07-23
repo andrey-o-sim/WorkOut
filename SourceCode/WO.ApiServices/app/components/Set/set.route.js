@@ -13,10 +13,13 @@
 
         var newRoute = {
             name: 'setNew',
-            url: '/set/new?trainingId',
+            url: '/set/new',
             templateUrl: '/app/components/Set/forms/set.new.html',
             controller: 'SetNewController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            params: {
+                training: null
+            }
         };
 
         var editRoute = {

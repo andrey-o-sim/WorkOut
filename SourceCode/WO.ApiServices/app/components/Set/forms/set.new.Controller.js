@@ -21,6 +21,7 @@
         workOutHelper) {
 
         var vm = this;
+        vm.training = $stateParams.training;
         vm.save = save;
         vm.addEditExercise = addEditExercise;
         vm.generateApproaches = generateApproaches;
@@ -42,7 +43,7 @@
                     Seconds: 0
                 },
                 CountApproaches: 0,
-                TrainingId: $stateParams.trainingId
+                TrainingId: vm.training ? vm.training.Id : null
             };
 
             exerciseService.getAll().then(function (result) {
@@ -59,8 +60,10 @@
 
                 setService.create(set).then(function (result) {
                     if (result.Succeed) {
-                        if ($stateParams.trainingId && $stateParams.trainingId > 0) {
-                            $state.go('trainingEdit', { 'id': set.TrainingId });
+                        if (vm.training) {
+                            set.Id = result.ResultItemId;
+                            vm.training.Sets.push(set)
+                            $state.go('trainingNew', { 'training': vm.training });
                         }
                         else {
                             $state.go('setHome');
@@ -214,27 +217,5 @@
                 }
             });
         }
-
-        function openModal(modalProperties) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                backdrop: 'static',
-                ariaLabelledBy: modalProperties.ariaLabell,
-                templateUrl: modalProperties.templateUrl,
-                controller: modalProperties.controller,
-                controllerAs: 'vm',
-                resolve: {
-                    id: function () {
-                        return modalProperties.itemId;
-                    },
-                    setId: function () {
-                        return modalProperties.setId;
-                    }
-                }
-            });
-
-            return modalInstance;
-        }
-
     }
 }());

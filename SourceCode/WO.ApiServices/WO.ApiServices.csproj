@@ -1226,7 +1226,6 @@
   <ItemGroup>
     <Folder Include="app\assets\js\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\ViewModel\" />
     <Folder Include="Scripts\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>

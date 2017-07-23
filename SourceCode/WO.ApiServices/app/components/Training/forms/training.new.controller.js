@@ -5,11 +5,13 @@
 
     TrainingNewController.$inject = [
         '$state',
+        '$stateParams',
         'trainingService',
         'trainingTypeService'];
 
     function TrainingNewController(
         $state,
+        $stateParams,
         trainingService,
         trainingTypeService) {
         var vm = this;
@@ -19,11 +21,19 @@
         init();
 
         function init() {
-            vm.training = {
-                TrainingType: {},
-                MainTrainingPurpose: '',
-                Description: ''
-            };
+            if ($stateParams.training) {
+                vm.training = $stateParams.training;
+            }
+            else {
+                vm.training = {
+                    TrainingType: {},
+                    MainTrainingPurpose: '',
+                    Description: '',
+                    StartDateTime: moment(),
+                    EndDateTime: moment(),
+                    Sets: []
+                };
+            }
 
             trainingTypeService.getAll().then(function (result) {
                 vm.TrainingTypes = result;
@@ -35,7 +45,7 @@
                 vm.disableButton = true;
                 trainingService.create(training).then(function (result) {
                     if (result.Succeed) {
-                        $state.go('trainingEdit', { 'id': + result.ResultItemId });
+                        $state.go('trainingHome');
                     }
                     else {
                         vm.disableButton = false;

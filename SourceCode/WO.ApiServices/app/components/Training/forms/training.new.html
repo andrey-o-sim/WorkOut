@@ -41,6 +41,72 @@
             <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.training.Description"></textarea>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="control-label">Training Time:</h3>
+            <div>
+                <datetime-range start="vm.training.StartDateTime" end="vm.training.EndDateTime"></datetime-range>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 for="planTimeForRest" class="control-label">Sets:</h3>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>Exercises:</th>
+                    <th>Planned time for Rest:</th>
+                    <th>Approaches:</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="set in vm.training.Sets">
+                    <td>
+                        <div class="exerciseText" ng-repeat="exercise in set.Exercises">
+                            <span ng-bind="::exercise.Name"></span>
+                        </div>
+                    </td>
+                    <td ng-bind-template="Minute(s): {{ set.PlannedTime.Minutes }} Second(s): {{set.PlannedTime.Seconds}}"></td>
+                    <td>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Planned Time For Rest</th>
+                                <th>Spent Time For Rest</th>
+                            </tr>
+                            <tr ng-repeat="approach in set.Approaches">
+                                <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
+                                <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Approaches: {{set.Approaches.length}}"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-info" ui-sref="setEdit({id:set.Id})">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-sm btn-danger" ng-click="vm.removeSet(set.Id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
+                    <td class="text-right">
+                        <a id="cancel" class="btn btn-primary" ui-sref="setNew({training:vm.training})">
+                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                            Add Set
+                        </a>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidSets===false">If you provide 'Start Training', then sets must not be empty</label>
+            </div>
+        </div>
+    </div>
 
     <div class="footer-buttons">
         <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.training)">Save</button>
