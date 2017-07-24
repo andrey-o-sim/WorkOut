@@ -16,8 +16,7 @@
         var service = {
             getById: getById,
             getAll: getAll,
-            create: create,
-            update: update,
+            save: save,
             remove: remove
         };
 
@@ -58,22 +57,7 @@
             }
         }
 
-        function create(trainingType) {
-            return $http.post(serviceUrl, trainingType)
-                .then(success, error);
-
-            function success(response) {
-                var result = response ? response.data : {};
-                return result;
-            }
-
-            function error(error) {
-                workOutHelper.writeErrorMessageToConsole(error);
-                return { Succeed: false };
-            }
-        }
-
-        function update(trainingType) {
+        function save(trainingType) {
             return $http.put(serviceUrl, trainingType)
                 .then(success, error);
 

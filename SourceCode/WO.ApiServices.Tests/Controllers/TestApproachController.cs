@@ -118,7 +118,7 @@ namespace WO.ApiServices.Tests.Controllers
            });
 
             //Act
-            var result = _approachController.Create(approach);
+            var result = _approachController.Save(approach);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
@@ -156,7 +156,7 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             //Act
-            var result = _approachController.Update(updateApproach);
+            var result = _approachController.Save(updateApproach);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert

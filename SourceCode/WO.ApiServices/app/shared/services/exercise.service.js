@@ -17,8 +17,7 @@
             getById: getById,
             getByName: getByName,
             getAll: getAll,
-            create: create,
-            update: update,
+            save: save,
             remove: remove
         };
 
@@ -74,22 +73,7 @@
             }
         }
 
-        function create(exercise) {
-            return $http.post(exerciseServiceUrl, exercise)
-                .then(success, error);
-
-            function success(response) {
-                var result = response ? response.data : {};
-                return result;
-            }
-
-            function error(error) {
-                workOutHelper.writeErrorMessageToConsole(error);
-                return { Succeed: false };
-            }
-        }
-
-        function update(exercise) {
+        function save(exercise) {
             return $http.put(exerciseServiceUrl, exercise)
                 .then(success, error);
 

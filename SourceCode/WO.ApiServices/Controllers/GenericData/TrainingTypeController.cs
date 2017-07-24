@@ -59,34 +59,20 @@ namespace WO.ApiServices.Controllers.GenericData
             });
         }
 
-        // POST: api/TrainingType
-        [HttpPost]
-        public IHttpActionResult Create(TrainingType trainingType)
-        {
-            LogInfoObjectToJson(trainingType, "Creating 'Training Type':");
-
-            return ExecuteRequest(() =>
-            {
-                var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-                var result = _service.Create(trainingTypeDTO);
-
-                LogInfoObjectToJson(result, "Created 'Training Type':");
-                return Ok<IOperationResult>(result);
-            });
-        }
-
         // PUT: api/TrainingType/5
         [HttpPut]
-        public IHttpActionResult Update(TrainingType trainingType)
+        public IHttpActionResult Save(TrainingType trainingType)
         {
-            LogInfoObjectToJson(trainingType, "Updating 'Training Type':");
+            LogInfoObjectToJson(trainingType, "Saving 'Training Type':");
 
             return ExecuteRequest(() =>
             {
                 var trainingTypeDTO = _mapper.Map<TrainingTypeDTO>(trainingType);
-                var result = _service.Update(trainingTypeDTO);
+                var result = trainingType.Id > 0
+                            ? _service.Update(trainingTypeDTO)
+                            : _service.Create(trainingTypeDTO);
 
-                LogInfoObjectToJson(trainingType, "Updated 'Training Type':");
+                LogInfoObjectToJson(trainingType, "Saving 'Training Type':");
                 return Ok<IOperationResult>(result);
             });
         }

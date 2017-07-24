@@ -1,14 +1,14 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('ExerciseAddEditController', ExerciseAddEditController);
+        .controller('ExerciseFormController', ExerciseFormController);
 
-    ExerciseAddEditController.$inject = [
+    ExerciseFormController.$inject = [
         '$uibModalInstance',
         'exerciseService',
         'id'];
 
-    function ExerciseAddEditController(
+    function ExerciseFormController(
         $uibModalInstance,
         exerciseService,
         id) {
@@ -45,22 +45,15 @@
                         vm.validator.ValidNameAlreadyPresent = true;
                     }
                     else {
-                        if (vm.exerciseId > 0) {
-                            exerciseService.update(exercise).then(function (result) {
-                                postCreateOrUpdate(exercise, result);
-                            });
-                        }
-                        else {
-                            exerciseService.create(exercise).then(function (result) {
-                                postCreateOrUpdate(exercise, result);
-                            });
-                        }
+                        exerciseService.save(exercise).then(function (result) {
+                            postSave(exercise, result);
+                        });
                     }
                 });
             }
         }
 
-        function postCreateOrUpdate(exercise, result) {
+        function postSave(exercise, result) {
             if (result.Succeed) {
                 exercise.Id = result.ResultItemId;
                 $uibModalInstance.close(exercise);

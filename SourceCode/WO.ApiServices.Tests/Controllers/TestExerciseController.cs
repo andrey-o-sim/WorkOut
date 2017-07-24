@@ -112,7 +112,7 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             //Act
-            var result = _exerciseController.Create(newExercise);
+            var result = _exerciseController.Save(newExercise);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert
@@ -146,7 +146,7 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             //Act
-            var result = _exerciseController.Update(exerciseForUpdate);
+            var result = _exerciseController.Save(exerciseForUpdate);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             //Assert

@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Web.Http;
-using AutoMapper;
 using WO.ApiServices.Configs;
 using WO.ApiServices.Models;
 using WO.Core.BLL.DTO;
 using WO.Core.BLL.Interfaces;
 using WO.Core.BLL.Services;
 using WO.LoggerFactory;
-using System;
 
 namespace WO.ApiServices.Controllers
 {
@@ -61,35 +60,21 @@ namespace WO.ApiServices.Controllers
             });
         }
 
-        // POST: api/Set
-        [HttpPost]
-        public IHttpActionResult Create([FromBody]Set set)
-        {
-            LogInfoObjectToJson(set, "Creating 'Set':");
-
-            return ExecuteRequest(() =>
-            {
-                var setDTO = _mapper.Map<SetDTO>(set);
-
-                var result = _service.Create(setDTO);
-
-                LogInfoObjectToJson(result, "Created 'Set':");
-                return Ok<IOperationResult>(result);
-            });
-        }
-
         // PUT: api/Set/5
         [HttpPut]
-        public IHttpActionResult Update([FromBody]Set set)
+        public IHttpActionResult Save([FromBody]Set set)
         {
-            LogInfoObjectToJson(set, "Updating 'Set':");
+            LogInfoObjectToJson(set, "Saving 'Set':");
 
             return ExecuteRequest(() =>
             {
                 var setDTO = _mapper.Map<SetDTO>(set);
-                var result = _service.Update(setDTO);
+                var result = set.Id > 0
+                        ? _service.Update(setDTO)
+                        : _service.Create(setDTO);
 
-                LogInfoObjectToJson(result, "Updated 'Set':");
+                LogInfoObjectToJson(result, "Saved 'Set':");
+
                 return Ok<IOperationResult>(result);
             });
         }

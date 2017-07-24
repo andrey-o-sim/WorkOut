@@ -89,34 +89,20 @@ namespace WO.ApiServices.Controllers
             });
         }
 
-        // POST: api/Exercise
-        [HttpPost]
-        public IHttpActionResult Create([FromBody]Exercise exercise)
-        {
-            LogInfoObjectToJson(exercise, "Creating 'Exercise':");
-
-            return ExecuteRequest(() =>
-            {
-                var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-                var result = _service.Create(exerciseDTO);
-
-                LogInfoObjectToJson(result, "Created 'Exercise':");
-                return Ok<IOperationResult>(result);
-            });
-        }
-
         // PUT: api/Exercise/5
         [HttpPut]
-        public IHttpActionResult Update([FromBody]Exercise exercise)
+        public IHttpActionResult Save([FromBody]Exercise exercise)
         {
-            LogInfoObjectToJson(exercise, "Updating 'Exercise':");
+            LogInfoObjectToJson(exercise, "Saving 'Exercise':");
 
             return ExecuteRequest(() =>
             {
                 var exerciseDTO = _mapper.Map<ExerciseDTO>(exercise);
-                var result = _service.Update(exerciseDTO);
+                var result = exercise.Id > 0
+                            ? _service.Update(exerciseDTO)
+                            :_service.Create(exerciseDTO);
 
-                LogInfoObjectToJson(result, "Updated 'Exercise':");
+                LogInfoObjectToJson(result, "Saving 'Exercise':");
                 return Ok<IOperationResult>(result);
             });
         }

@@ -14,8 +14,8 @@
         var newRoute = {
             name: 'setNew',
             url: '/set/new',
-            templateUrl: '/app/components/Set/forms/set.new.html',
-            controller: 'SetNewController',
+            templateUrl: '/app/components/Set/forms/set.form.html',
+            controller: 'SetFormController',
             controllerAs: 'vm',
             params: {
                 training: null
@@ -25,9 +25,12 @@
         var editRoute = {
             name: 'setEdit',
             url: '/set/edit/{id}',
-            templateUrl: '/app/components/Set/forms/set.edit.html',
-            controller: 'SetEditController',
-            controllerAs: 'vm'
+            templateUrl: '/app/components/Set/forms/set.form.html',
+            controller: 'SetFormController',
+            controllerAs: 'vm',
+            params: {
+                training: null
+            }
         };
 
         var viewRoute = {

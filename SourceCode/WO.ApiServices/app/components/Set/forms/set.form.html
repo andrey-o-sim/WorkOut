@@ -1,6 +1,7 @@
-﻿<h2 class="page-header">Add Set</h2>
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
-<div class="container-fluid">
+<div class="container-fluid" ng-if="vm.formIsReady && vm.set">
+    <h2 class="page-header">Set</h2>
     <div class="row">
         <div class="col-md-3">
             <div class="row">

@@ -25,7 +25,7 @@
             if (isValidForm(trainingType)) {
                 vm.disableSaveButton = true;
 
-                trainingTypeService.create(trainingType).then(function (result) {
+                trainingTypeService.save(trainingType).then(function (result) {
                     if (result.Succeed) {
                         vm.disableSaveButton = false;
                         $state.go('trainingTypeHome');

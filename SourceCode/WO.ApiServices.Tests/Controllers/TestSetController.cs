@@ -120,7 +120,7 @@ namespace WO.ApiServices.Tests.Controllers
            });
 
             // Act
-            var result = _setController.Create(newSet);
+            var result = _setController.Save(newSet);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
@@ -154,7 +154,7 @@ namespace WO.ApiServices.Tests.Controllers
            });
 
             // Act
-            var result = _setController.Update(updateSet);
+            var result = _setController.Save(updateSet);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
