@@ -56,20 +56,13 @@
         function save(approach) {
             if (isValidForm(approach)) {
                 vm.disableSaveButton = true;
-                if (vm.approachId > 0) {
-                    approachService.update(approach).then(function (result) {
-                        postCreateOrUpdate(approach, result);
-                    });
-                }
-                else {
-                    approachService.create(approach).then(function (result) {
-                        postCreateOrUpdate(approach, result);
-                    });
-                }
+                approachService.save(approach).then(function (result) {
+                    postSave(approach, result);
+                });
             }
         }
 
-        function postCreateOrUpdate(approach, result) {
+        function postSave(approach, result) {
             if (result.Succeed) {
                 approach.Id = result.ResultItemId;
                 $uibModalInstance.close(approach);

@@ -16,8 +16,7 @@
         var service = {
             getById, getById,
             getAll: getAll,
-            create: create,
-            update: update,
+            save: save,
             remove: remove
         };
 
@@ -35,7 +34,7 @@
 
             function error(error) {
                 workOutHelper.writeErrorMessageToConsole(error);
-                if (error.status == "404") {
+                if (error.status == 404) {
                     return null;
                 }
                 else {
@@ -59,23 +58,7 @@
             }
         }
 
-        function create(training) {
-
-            return $http.post(serviceUrl, training)
-                .then(success, error);
-
-            function success(response) {
-                var result = response ? response.data : {};
-                return result;
-            }
-
-            function error(error) {
-                workOutHelper.writeErrorMessageToConsole(error);
-                return { Succeed: false };
-            }
-        }
-
-        function update(training) {
+        function save(training) {
 
             return $http.put(serviceUrl, training)
                 .then(success, error);

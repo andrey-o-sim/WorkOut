@@ -32,7 +32,7 @@
         function save(approach) {
             if (isValidForm(approach)) {
                 vm.disableSaveButton = true;
-                approachService.create(approach).then(function (result) {
+                approachService.save(approach).then(function (result) {
                     if (result.Succeed) {
                         $state.go('approachHome')
                     }

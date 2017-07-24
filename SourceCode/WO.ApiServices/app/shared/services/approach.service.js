@@ -16,8 +16,7 @@
         var service = {
             getById: getById,
             getAll: getAll,
-            create: create,
-            update: update,
+            save: save,
             remove: remove,
             generateApproachesForSet: generateApproachesForSet
         };
@@ -59,22 +58,7 @@
             }
         }
 
-        function create(approach) {
-            return $http.post(serviceUrl, approach)
-                .then(success, error);
-
-            function success(response) {
-                var result = response ? response.data : {};
-                return result;
-            }
-
-            function error(error) {
-                workOutHelper.writeErrorMessageToConsole(error);
-                return { Succeed: false };
-            }
-        }
-
-        function update(approach) {
+        function save(approach) {
             return $http.put(serviceUrl, approach)
                 .then(success, error);
 

@@ -118,7 +118,7 @@ namespace WO.ApiServices.Tests.Controllers
            });
 
             // Act
-            var result = _trainingTypeController.Create(newTrainingType);
+            var result = _trainingTypeController.Save(newTrainingType);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert
@@ -153,7 +153,7 @@ namespace WO.ApiServices.Tests.Controllers
              });
 
             // Act
-            var result = _trainingTypeController.Update(updateTrainingType);
+            var result = _trainingTypeController.Save(updateTrainingType);
             var operationResult = result as OkNegotiatedContentResult<IOperationResult>;
 
             // Assert

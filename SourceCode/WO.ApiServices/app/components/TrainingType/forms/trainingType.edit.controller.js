@@ -43,7 +43,7 @@
 
         function save(trainingType) {
             if (isValidForm(trainingType)) {
-                trainingTypeService.update(trainingType).then(function (result) {
+                trainingTypeService.save(trainingType).then(function (result) {
                     if (result.Succeed) {
                         $state.go('trainingTypeHome');
                     }

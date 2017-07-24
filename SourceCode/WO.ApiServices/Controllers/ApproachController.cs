@@ -61,34 +61,20 @@ namespace WO.ApiServices.Controllers
             });
         }
 
-        // POST: api/Approach
-        [HttpPost]
-        public IHttpActionResult Create([FromBody]Approach approach)
-        {
-            LogInfoObjectToJson(approach, "Creating 'Approach':");
-
-            return ExecuteRequest(() =>
-            {
-                var approachDTO = _mapper.Map<ApproachDTO>(approach);
-                var result = _service.Create(approachDTO);
-
-                LogInfoObjectToJson(result, "Created 'Approach':");
-                return Ok<IOperationResult>(result);
-            });
-        }
-
         // PUT: api/Approach/5
         [HttpPut]
-        public IHttpActionResult Update([FromBody]Approach approach)
+        public IHttpActionResult Save([FromBody]Approach approach)
         {
-            LogInfoObjectToJson(approach, "Updating 'Approach':");
+            LogInfoObjectToJson(approach, "Saving 'Approach':");
 
             return ExecuteRequest(() =>
             {
                 var approachDTO = _mapper.Map<ApproachDTO>(approach);
-                var result = _service.Update(approachDTO);
+                var result = approach.Id > 0 
+                            ? _service.Update(approachDTO)
+                            : _service.Create(approachDTO);
 
-                LogInfoObjectToJson(result, "Updated 'Approach':");
+                LogInfoObjectToJson(result, "Saving 'Approach':");
                 return Ok<IOperationResult>(result);
             });
         }

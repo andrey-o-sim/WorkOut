@@ -33,8 +33,8 @@ function ExerciseHomeController(
 
         var modalProperties = {
             ariaLabelledBy: ariaLabel,
-            templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
-            controller: 'ExerciseAddEditController',
+            templateUrl: '/app/components/Exercise/forms/exercise.form.html',
+            controller: 'ExerciseFormController',
             itemId: exerciseId
         };
 

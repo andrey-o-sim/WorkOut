@@ -10,7 +10,9 @@
         'trainingService',
         'trainingTypeService',
         'setService',
-        'workOutHelper'];
+        'workOutHelper',
+        'toastr',
+        'toastrConfig'];
 
     function TrainingFormController(
         $q,
@@ -19,7 +21,9 @@
         trainingService,
         trainingTypeService,
         setService,
-        workOutHelper) {
+        workOutHelper,
+        toastr,
+        toastrConfig) {
 
         var vm = this;
 
@@ -28,11 +32,12 @@
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
-        init().then(function (result) {
-            vm.training = result;
-            vm.training.StartDateTime = vm.training.StartDateTime ? moment(vm.training.StartDateTime) : moment();
-            vm.training.EndDateTime = vm.training.EndDateTime ? moment(vm.training.EndDateTime) : moment();
-
+        init().then(function (training) {
+            if (training) {
+                vm.training = training;
+                vm.training.StartDateTime = vm.training.StartDateTime ? moment(vm.training.StartDateTime) : moment();
+                vm.training.EndDateTime = vm.training.EndDateTime ? moment(vm.training.EndDateTime) : moment();
+            }
             vm.formIsReady = true;
         });
 
@@ -55,6 +60,8 @@
                             toastrConfig.positionClass = 'toast-top-center';
                             toastrConfig.autoDismiss = false;
                             toastr.error("There is no Training with id = '" + $stateParams.id + "' in the system.");
+
+                            return $q.when(null);
                         }
                     });
                 }
@@ -76,7 +83,12 @@
         function save(training) {
             if (isValidForm(training)) {
                 vm.disableButton = true;
-                trainingService.create(training).then(function (result) {
+
+                var timeZoneLength = 6;
+                training.StartDateTime = training.StartDateTime.format().substring(0, training.StartDateTime.format().length - timeZoneLength);
+                training.EndDateTime = training.EndDateTime.format().substring(0, training.EndDateTime.format().length - timeZoneLength);
+
+                trainingService.save(training).then(function (result) {
                     if (result.Succeed) {
                         $state.go('trainingHome');
                     }

@@ -1,26 +1,27 @@
 ﻿(function () {
     angular.module('woApp')
-        .controller('SetEditController', SetEditController)
+        .controller('SetFormController', SetFormController);
 
-    SetEditController.$inject = [
-        '$rootScope',
+    SetFormController.$inject = [
+        '$q',
         '$state',
         '$stateParams',
         '$uibModal',
-        'setService',
         'exerciseService',
+        'setService',
         'approachService',
         'workOutHelper',
         'toastr',
-        'toastrConfig'];
+        'toastrConfig'
+    ];
 
-    function SetEditController(
-        $rootScope,
+    function SetFormController(
+        $q,
         $state,
         $stateParams,
         $uibModal,
-        setService,
         exerciseService,
+        setService,
         approachService,
         workOutHelper,
         toastr,
@@ -28,46 +29,60 @@
 
         var vm = this;
         vm.formIsReady = false;
+        vm.training = $stateParams.training;
         vm.save = save;
+        vm.addEditExercise = addEditExercise;
+        vm.generateApproaches = generateApproaches;
         vm.removeApproach = removeApproach;
         vm.addEditApproach = addEditApproach;
-        vm.addEditExercise = addEditExercise;
 
-        vm.generateApproaches = generateApproaches;
+        vm.editForm = $stateParams.id && $stateParams.id > 0;
 
-        init();
+        init().then(function (set) {
+            vm.set = set;
+            vm.formIsReady = true;
+        });
 
         function init() {
-            setService.getById($stateParams.id).then(function (result) {
-                if (result) {
-                    vm.set = result;
-                    vm.set.Exercises = getShotExercises(vm.set.Exercises);
-                }
-                else {
-                    toastrConfig.positionClass = 'toast-top-center';
-                    toastrConfig.autoDismiss = false;
-                    toastr.error("There is no Set with id = '" + $stateParams.id + "' in the system.");
-                }
-
-                vm.formIsReady = true;
-            });
 
             exerciseService.getAll().then(function (result) {
                 if (result) {
-                    vm.Exercises = getShotExercises(result);
+                    vm.Exercises = result;
                 }
             });
-        }
 
-        function getShotExercises(fullExercises) {
-            return fullExercises.map(function (item) {
-                var resultItem = {
-                    Id: item.Id,
-                    Name: item.Name
+            if (vm.editForm) {
+                return setService.getById($stateParams.id).then(function (result) {
+                    if (result) {
+                        return result;
+                    }
+                    else {
+                        toastrConfig.positionClass = 'toast-top-center';
+                        toastrConfig.autoDismiss = false;
+                        toastr.error("There is no Set with id = '" + $stateParams.id + "' in the system.");
+                        return $q.when(null);
+                    }
+
+                });
+            }
+            else {
+                var set = {
+                    PlannedTime: {
+                        Hours: 0,
+                        Minutes: 0,
+                        Seconds: 0
+                    },
+                    TimeForRest: {
+                        Hours: 0,
+                        Minutes: 0,
+                        Seconds: 0
+                    },
+                    CountApproaches: 0,
+                    TrainingId: vm.training ? vm.training.Id : null
                 };
 
-                return resultItem;
-            });
+                return $q.when(set);
+            }
         }
 
         function save(set) {
@@ -75,9 +90,18 @@
             if (isValidForm(set)) {
                 vm.disableSaveButton = true;
 
-                setService.update(set).then(function (result) {
+                setService.save(set).then(function (result) {
                     if (result.Succeed) {
-                        $rootScope.close();
+                        if (vm.training) {
+                            set.Id = result.ResultItemId;
+                            vm.training.Sets.push(set)
+
+                            var tainingRoute = vm.training.Id > 0 ? 'trainingEdit' : 'trainingNew';
+                            $state.go(tainingRoute, { 'id': vm.training.Id, 'training': vm.training });
+                        }
+                        else {
+                            $state.go('setHome');
+                        }
                     }
                     else {
                         vm.disableSaveButton = false;
@@ -101,10 +125,11 @@
                 isValid = false;
             }
 
-            if (vm.set.Approaches.length === 0) {
-                vm.validator.ValidCountApproaches = false;
+            if (!set.Approaches || set.Approaches.length === 0) {
+                vm.validator.ValidApproaches = false;
                 isValid = false;
             }
+
             return isValid;
         }
 
@@ -113,8 +138,8 @@
 
             var modalProperties = {
                 ariaLabelledBy: ariaLabel,
-                templateUrl: '/app/components/Exercise/forms/exercise.add.edit.html',
-                controller: 'ExerciseAddEditController',
+                templateUrl: '/app/components/Exercise/forms/exercise.form.html',
+                controller: 'ExerciseFormController',
                 itemId: exerciseId,
                 setId: setId
             };
@@ -152,6 +177,36 @@
                 },
                 function () {
                 });
+        }
+
+        function openModal(modalProperties) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: modalProperties.ariaLabell,
+                templateUrl: modalProperties.templateUrl,
+                controller: modalProperties.controller,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return modalProperties.itemId;
+                    },
+                    setId: function () {
+                        return modalProperties.setId;
+                    }
+                }
+            });
+
+            return modalInstance;
+        }
+
+        function generateApproaches(set) {
+            set.Id = set.Id ? set.Id : 0;
+            vm.generetingApproaches = true;
+            approachService.generateApproachesForSet(set).then(function (result) {
+                vm.set = result;
+                vm.generetingApproaches = false;
+            });
         }
 
         function addEditApproach(approachId, setId) {
@@ -194,35 +249,6 @@
                 if (result.Succeed) {
                     vm.set.Approaches = workOutHelper.removeElementFromArray(vm.set.Approaches, id);
                 }
-            });
-        }
-
-        function openModal(modalProperties) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                backdrop: 'static',
-                ariaLabelledBy: modalProperties.ariaLabell,
-                templateUrl: modalProperties.templateUrl,
-                controller: modalProperties.controller,
-                controllerAs: 'vm',
-                resolve: {
-                    id: function () {
-                        return modalProperties.itemId;
-                    },
-                    setId: function () {
-                        return modalProperties.setId;
-                    }
-                }
-            });
-
-            return modalInstance;
-        }
-
-        function generateApproaches(set) {
-            vm.generetingApproaches = true;
-            approachService.generateApproachesForSet(set).then(function (result) {
-                vm.set = result;
-                vm.generetingApproaches = false;
             });
         }
     }
