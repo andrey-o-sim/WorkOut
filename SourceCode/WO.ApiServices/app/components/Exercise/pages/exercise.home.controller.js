@@ -16,8 +16,8 @@ function ExerciseHomeController(
 
     var vm = this;
     vm.formIsReady = false;
-    vm.addEdit = addEdit;
-    vm.remove = remove;
+    vm.addEditExercise = addEditExercise;
+    vm.removeExercise = removeExercise;
 
     init();
 
@@ -28,7 +28,7 @@ function ExerciseHomeController(
         });
     }
 
-    function addEdit(exerciseId) {
+    function addEditExercise(exerciseId,itemIndex) {
         var ariaLabel = exerciseId > 0 ? 'Exercise Edit' : 'Exercise New';
 
         var modalProperties = {
@@ -42,16 +42,8 @@ function ExerciseHomeController(
 
         modalInstance.result.then(
             function (resultExercise) {
-                var indexForUpdate = -1;
-                vm.exercises.forEach(function (item, index) {
-                    if (item.Id === resultExercise.Id) {
-                        indexForUpdate = index;
-                        return true;
-                    }
-                });
-
-                if (indexForUpdate > -1) {
-                    vm.exercises[indexForUpdate].Name = resultExercise.Name;
+                if (exerciseId > 0) {
+                    vm.exercises[itemIndex] = resultExercise;
                 }
                 else {
                     vm.exercises.push(resultExercise);
@@ -79,7 +71,7 @@ function ExerciseHomeController(
         return modalInstance;
     }
 
-    function remove(exercise) {
+    function removeExercise(exercise) {
         if (confirm("Do you realy want to remove '" + exercise.Name + "' ?")) {
             exerciseService.remove(exercise.Id).then(function (result) {
                 if (result.Succeed) {

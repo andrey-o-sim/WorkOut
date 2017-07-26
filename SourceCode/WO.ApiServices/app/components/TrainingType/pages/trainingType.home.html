@@ -18,7 +18,7 @@
                     </td>
                     <td ng-bind-template="{{ trainingType.Description | limitTo: 100 }}{{trainingType.Description.length > 100 ? '...' : ''}}"></td>
                     <td class="text-right">
-                        <a class="btn btn-sm btn-info" ui-sref="trainingTypeEdit({id:{{trainingType.Id}}})">
+                        <a class="btn btn-sm btn-info" ng-click="vm.addEditTrainingType(trainingType.Id,$index)">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-sm btn-danger" ng-click="vm.remove(trainingType)">
@@ -29,7 +29,7 @@
             </table>
         </div>
         <div class="row">
-            <a class="btn btn-primary" ui-sref="trainingTypeNew">
+            <a class="btn btn-primary" ng-click="vm.addEditTrainingType()">
                 <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp; Create New
             </a>
         </div>

@@ -12,10 +12,10 @@
                 <tr ng-repeat="exercise in vm.exercises">
                     <td ng-bind="exercise.Name"></td>
                     <td class="text-right">
-                        <a class="btn btn-sm btn-info" ng-click="vm.addEdit(exercise.Id)">
+                        <a class="btn btn-sm btn-info" ng-click="vm.addEditExercise(exercise.Id,$index)">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(exercise)">
+                        <a class="btn btn-sm btn-danger" ng-click="vm.removeExercise(exercise)">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </td>
@@ -23,7 +23,7 @@
             </table>
         </div>
         <div class="row">
-            <a class="btn btn-primary" ng-click="vm.addEdit()">
+            <a class="btn btn-primary" ng-click="vm.addEditExercise()">
                 <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp; Create New
             </a>
         </div>

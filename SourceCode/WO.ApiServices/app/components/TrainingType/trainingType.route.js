@@ -12,22 +12,6 @@
             controllerAs: 'vm'
         };
 
-        var newRoute = {
-            name: 'trainingTypeNew',
-            url: '/trainingType/new',
-            templateUrl: '/app/components/TrainingType/forms/trainingType.new.html',
-            controller: 'TrainingTypeNewController',
-            controllerAs: 'vm'
-        };
-
-        var editRoute = {
-            name: 'trainingTypeEdit',
-            url: '/trainingType/edit/{id}',
-            templateUrl: '/app/components/TrainingType/forms/trainingType.edit.html',
-            controller: 'TrainingTypeEditController',
-            controllerAs: 'vm'
-        };
-
         var viewRoute = {
             name: 'trainingTypeView',
             url: '/trainingType/view/{id}',
@@ -37,8 +21,6 @@
         };
 
         $stateProvider.state(homeRoute);
-        $stateProvider.state(newRoute);
-        $stateProvider.state(editRoute);
         $stateProvider.state(viewRoute);
     }
 }());
