@@ -4,11 +4,13 @@
         .controller('ApproachHomeController', ApproachHomeController)
 
     ApproachHomeController.$inject = [
+        '$uibModal',
         'approachService',
         'workOutHelper',
         'toastr'];
 
     function ApproachHomeController(
+        $uibModal,
         approachService,
         workOutHelper,
         toastr) {
@@ -16,6 +18,7 @@
         var vm = this;
         vm.formIsReady = false;
         vm.remove = remove;
+        vm.editApproach = editApproach;
 
         init();
 
@@ -35,6 +38,29 @@
                     }
                 });
             }
+        }
+
+        function editApproach(approachId,itemIndex) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: 'Approach Edit',
+                templateUrl: '/app/components/Approach/forms/approach.form.html',
+                controller: 'ApproachFormController',
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return approachId;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (resultApproach) {
+                vm.approaches[itemIndex] = resultApproach;
+            },
+            function () {
+            });
         }
     }
 }());

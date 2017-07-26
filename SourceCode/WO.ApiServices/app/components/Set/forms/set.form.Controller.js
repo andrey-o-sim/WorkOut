@@ -34,7 +34,7 @@
         vm.addEditExercise = addEditExercise;
         vm.generateApproaches = generateApproaches;
         vm.removeApproach = removeApproach;
-        vm.addEditApproach = addEditApproach;
+        vm.editApproach = editApproach;
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
@@ -190,10 +190,8 @@
                 resolve: {
                     id: function () {
                         return modalProperties.itemId;
-                    },
-                    setId: function () {
-                        return modalProperties.setId;
                     }
+
                 }
             });
 
@@ -209,36 +207,21 @@
             });
         }
 
-        function addEditApproach(approachId, setId) {
+        function editApproach(approachId, itemIndex) {
             var ariaLabel = approachId > 0 ? 'Approach Edit' : 'Approach New';
 
             var modalProperties = {
                 ariaLabelledBy: ariaLabel,
-                templateUrl: '/app/components/Approach/forms/approach.add.edit.html',
-                controller: 'ApproachAddEditController',
-                itemId: approachId,
-                setId: setId
+                templateUrl: '/app/components/Approach/forms/approach.form.html',
+                controller: 'ApproachFormController',
+                itemId: approachId
             };
 
             var modalInstance = openModal(modalProperties);
 
             modalInstance.result.then(
                 function (resultApproach) {
-                    var indexForUpdate = -1;
-                    vm.set.Approaches.forEach(function (setApproach, index) {
-                        if (setApproach.Id === resultApproach.Id) {
-                            indexForUpdate = index;
-                            return true;
-                        }
-                    });
-
-                    if (indexForUpdate > -1) {
-                        vm.set.Approaches[indexForUpdate].PlannedTimeForRest = resultApproach.PlannedTimeForRest;
-                        vm.set.Approaches[indexForUpdate].SpentTimeForRest = resultApproach.SpentTimeForRest;
-                    }
-                    else {
-                        vm.set.Approaches.push(resultApproach);
-                    }
+                    vm.set.Approaches[itemIndex] = resultApproach;
                 },
                 function () { }
             );

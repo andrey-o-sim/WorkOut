@@ -17,7 +17,7 @@
                         <a class="btn btn-sm btn-info" ui-sref="approachView({id:{{approach.Id}}})">
                             <span class="glyphicon glyphicon-file"></span>
                         </a>
-                        <a class="btn btn-sm btn-info" ui-sref="approachEdit({id:{{approach.Id}}})">
+                        <a class="btn btn-sm btn-info" ng-click="vm.editApproach(approach.Id,$index)">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-sm btn-danger" ng-click="vm.remove(approach.Id)">
@@ -26,11 +26,6 @@
                     </td>
                 </tr>
             </table>
-        </div>
-        <div class="row">
-            <a class="btn btn-primary" ui-sref="approachNew">
-                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>&nbsp; Create New
-            </a>
         </div>
     </div>
 </div>
