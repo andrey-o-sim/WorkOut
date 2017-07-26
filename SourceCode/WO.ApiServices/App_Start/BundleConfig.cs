@@ -63,8 +63,7 @@ namespace WO.ApiServices
 
             bundles.Add(new ScriptBundle("~/app/components/controllers").Include(
                 "~/app/components/TrainingType/pages/trainingType.home.controller.js",
-                "~/app/components/TrainingType/forms/trainingType.new.controller.js",
-                "~/app/components/TrainingType/forms/trainingType.edit.controller.js",
+                "~/app/components/TrainingType/forms/trainingType.form.controller.js",
                 "~/app/components/TrainingType/forms/trainingType.view.controller.js",
                 "~/app/components/TrainingType/trainingType.route.js",
 

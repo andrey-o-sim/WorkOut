@@ -1,0 +1,28 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{vm.title}}</h3>
+    </div>
+
+    <div class="modal-body" id="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <label class="control-label">Training Type:</label>
+                <input type="text" class="form-control" id="name" ng-model="vm.trainingType.TypeTraining" />
+                <label ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false" class="requiredError">Need to provide "Training Type"</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="control-label">Description:</label>
+                <textarea type="text" rows="4" class="form-control" id="description" ng-model="vm.trainingType.Description"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.trainingType)">Save</button>
+        <a id="cancel" class="btn btn-warning" ng-click="vm.cancel()">Cancel</a>
+    </div>
+</div>

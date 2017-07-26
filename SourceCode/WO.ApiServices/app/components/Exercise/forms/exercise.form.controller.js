@@ -36,8 +36,8 @@
         }
 
         function save(exercise) {
+            vm.disableSaveButton = true;
             if (isValidForm(exercise)) {
-                vm.disableSaveButton = true;
 
                 exerciseService.getByName(exercise.Name).then(function (result) {
                     if (result.Id > 0 && result.Id !== vm.exerciseId) {
@@ -50,6 +50,9 @@
                         });
                     }
                 });
+            }
+            else {
+                vm.disableSaveButton = false;
             }
         }
 
