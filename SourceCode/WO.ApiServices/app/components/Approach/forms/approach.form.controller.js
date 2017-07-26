@@ -1,29 +1,26 @@
 ﻿(function () {
     angular
         .module('woApp')
-        .controller('ApproachAddEditController', ApproachAddEditController);
+        .controller('ApproachFormController', ApproachFormController);
 
-    ApproachAddEditController.$inject = [
+    ApproachFormController.$inject = [
         '$state',
         '$stateParams',
         '$uibModalInstance',
         'approachService',
-        'id',
-        'setId'];
+        'id'];
 
-    function ApproachAddEditController(
+    function ApproachFormController(
         $state,
         $stateParams,
         $uibModalInstance,
         approachService,
-        id,
-        setId) {
+        id) {
 
         var vm = this;
         vm.formIsReady = false;
         vm.approachId = id;
-        vm.setId = setId;
-        vm.title = id > 0 ? 'Edit Approach' : 'Add New Approach'
+        vm.title = 'Edit Approach';
         vm.save = save;
         vm.cancel = cancel;
 
@@ -38,8 +35,7 @@
                 SpentTimeForRest: {
                     Minutes: 0,
                     Seconds: 0
-                },
-                SetId: vm.setId
+                }
             };
 
             if (vm.approachId > 0) {

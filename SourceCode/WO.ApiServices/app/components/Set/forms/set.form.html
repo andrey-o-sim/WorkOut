@@ -97,7 +97,7 @@
                         <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
                         <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
                         <td class="text-right">
-                            <a class="btn btn-sm btn-info" ng-click="vm.addEditApproach(approach.Id,vm.set.Id)">
+                            <a class="btn btn-sm btn-info" ng-click="vm.editApproach(approach.Id,$index)">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
                             <a class="btn btn-sm btn-danger" ng-click="vm.removeApproach(approach.Id)">
