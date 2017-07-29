@@ -54,6 +54,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 for="planTimeForRest" class="control-label">Sets:</h3>
+                <span class="help-block">Need to select 'Training Type' for adding new 'Set'</span>
             </div>
             <div class="col-md-12">
                 <table class="table table-striped">
@@ -86,7 +87,7 @@
                             </table>
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-sm btn-info" ui-sref="setEdit({id:set.Id})">
+                            <a class="btn btn-sm btn-info" ui-sref="setEdit({id:set.Id,training:vm.training})">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
                             <a class="btn btn-sm btn-danger" ng-click="vm.removeSet(set.Id)">
@@ -96,7 +97,7 @@
                     </tr>
                     <tr>
                         <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
-                        <td class="text-right">
+                        <td class="text-right" ng-if="vm.training.TrainingType && vm.training.TrainingType.Id > 0">
                             <a id="cancel" class="btn btn-primary" ui-sref="setNew({training:vm.training})">
                                 <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                                 Add Set

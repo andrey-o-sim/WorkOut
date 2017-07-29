@@ -3,6 +3,7 @@
         .controller('SetFormController', SetFormController);
 
     SetFormController.$inject = [
+        '$rootScope',
         '$q',
         '$state',
         '$stateParams',
@@ -10,12 +11,14 @@
         'exerciseService',
         'setService',
         'approachService',
+        'trainingService',
         'workOutHelper',
         'toastr',
         'toastrConfig'
     ];
 
     function SetFormController(
+        $rootScope,
         $q,
         $state,
         $stateParams,
@@ -23,6 +26,7 @@
         exerciseService,
         setService,
         approachService,
+        trainingService,
         workOutHelper,
         toastr,
         toastrConfig) {
@@ -31,6 +35,7 @@
         vm.formIsReady = false;
         vm.training = $stateParams.training;
         vm.save = save;
+        vm.close = close;
         vm.addEditExercise = addEditExercise;
         vm.generateApproaches = generateApproaches;
         vm.removeApproach = removeApproach;
@@ -38,19 +43,30 @@
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
-        init().then(function (set) {
-            vm.set = set;
+        $q.all({
+            set: initSet(),
+            exercises: exerciseService.getAll()
+        }).then(function (result) {
+            vm.set = result.set;
+            vm.allExercises = result.exercises;
+
+            if (vm.training) {
+                vm.Exercises = filterExercises(vm.allExercises, vm.training.TrainingType);
+            }
+            else if (vm.editForm) {
+                trainingService.getById(vm.set.TrainingId).then(function (result) {
+                    vm.training = result;
+                    vm.Exercises = filterExercises(vm.allExercises, result.TrainingType);
+                });
+            }
+            else {
+                vm.Exercises = [];
+            }
+
             vm.formIsReady = true;
         });
 
-        function init() {
-
-            exerciseService.getAll().then(function (result) {
-                if (result) {
-                    vm.Exercises = result;
-                }
-            });
-
+        function initSet() {
             if (vm.editForm) {
                 return setService.getById($stateParams.id).then(function (result) {
                     if (result) {
@@ -85,6 +101,14 @@
             }
         }
 
+        function filterExercises(exercises, trainingType) {
+            return exercises.filter(function (exercise) {
+                return exercise.TrainingTypes.some(function (exericseTrainingType) {
+                    return trainingType.Id === exericseTrainingType.Id;
+                });
+            });
+        }
+
         function save(set) {
             vm.validateForm = true;
             if (isValidForm(set)) {
@@ -93,20 +117,39 @@
                 setService.save(set).then(function (result) {
                     if (result.Succeed) {
                         if (vm.training) {
-                            set.Id = result.ResultItemId;
-                            vm.training.Sets.push(set)
+                            if (vm.editForm) {
+                                var indexForUpdate = vm.training.Sets.findIndex(function (set) {
+                                    return set.Id === result.ResultItemId;
+                                });
+                                vm.training.Sets[indexForUpdate] = set;
+                            }
+                            else {
+                                set.Id = result.ResultItemId;
+                                vm.training.Sets.push(set)
+                            }
 
-                            var tainingRoute = vm.training.Id > 0 ? 'trainingEdit' : 'trainingNew';
-                            $state.go(tainingRoute, { 'id': vm.training.Id, 'training': vm.training });
+                            var trainingRoute = vm.training.Id > 0 ? 'trainingEdit' : 'trainingNew';
+                            $state.go(trainingRoute, { 'id': vm.training.Id, 'training': vm.training });
                         }
                         else {
-                            $state.go('setHome');
+                            $rootScope.close();
                         }
                     }
                     else {
                         vm.disableSaveButton = false;
                     }
                 });
+            }
+        }
+
+        function close() {
+            var trainingParam = $stateParams.training;
+            if (trainingParam) {
+                var trainingRoute = trainingParam.Id > 0 ? 'trainingEdit' : 'trainingNew';
+                $state.go(trainingRoute, { 'id': trainingParam.Id, 'training': trainingParam });
+            }
+            else {
+                $rootScope.close();
             }
         }
 

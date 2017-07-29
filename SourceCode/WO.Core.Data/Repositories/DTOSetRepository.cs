@@ -37,13 +37,11 @@ namespace WO.Core.Data.Repositories
 
             foreach (ApproachDTO approachDto in setDto.Approaches)
             {
-                var approach = _mapper.Map<Approach>(approachDto);
-                approach.CreatedDate = DateTime.Now;
-                approach.ModifiedDate = DateTime.Now;
+                var approach = _approachRepository.Get(approachDto.Id);
                 set.Approaches.Add(approach);
             }
 
-            AddDeleteTraining(set);
+            GetTraining(set);
 
             _repository.Create(set);
             _unitOfWork.Commit();
@@ -59,7 +57,7 @@ namespace WO.Core.Data.Repositories
             setForUpdate.ModifiedDate = DateTime.Now;
 
             AddDeleteExercises(setForUpdate, setDto);
-            AddDeleteTraining(setForUpdate);
+            GetTraining(setForUpdate);
 
             _repository.Update(setForUpdate);
             _unitOfWork.Commit();
@@ -103,15 +101,11 @@ namespace WO.Core.Data.Repositories
             }
         }
 
-        private void AddDeleteTraining(Set setForUpdate)
+        private void GetTraining(Set setForUpdate)
         {
             if (setForUpdate.TrainingId.HasValue && setForUpdate.TrainingId.Value > 0)
             {
                 setForUpdate.Training = _trainingRepository.Get(setForUpdate.TrainingId.Value);
-            }
-            else
-            {
-                setForUpdate.Training = null;
             }
         }
     }

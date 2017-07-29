@@ -15,7 +15,11 @@ namespace WO.ApiServices.Models.Validators
             RuleFor(ex => ex.Name)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Please provide 'Exercise Name'"); ;
+                .WithMessage("Please provide 'Exercise Name'");
+
+            RuleFor(ex => ex.TrainingTypes)
+                .NotNull()
+                .Must(s => s.Count > 0);
         }
     }
 }
