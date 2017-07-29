@@ -6,11 +6,13 @@
     ExerciseFormController.$inject = [
         '$uibModalInstance',
         'exerciseService',
+        'trainingTypeService',
         'id'];
 
     function ExerciseFormController(
         $uibModalInstance,
         exerciseService,
+        trainingTypeService,
         id) {
 
         var vm = this;
@@ -24,6 +26,11 @@
         init();
 
         function init() {
+
+            trainingTypeService.getAll().then(function (result) {
+                vm.TrainingTypes = result;
+            });
+
             if (vm.exerciseId > 0) {
                 exerciseService.getById(vm.exerciseId).then(function (result) {
                     vm.exercise = result;
@@ -31,6 +38,7 @@
                 });
             }
             else {
+                vm.exercise = {};
                 vm.formIsReady = true;
             }
         }
@@ -73,6 +81,11 @@
 
             if (!exercise.Name || exercise.Name === "") {
                 vm.validator.ValidName = false;
+                isValid = false;
+            }
+
+            if (!exercise.TrainingTypes || exercise.TrainingTypes.length === 0) {
+                vm.validator.ValidTrainingTypes = false;
                 isValid = false;
             }
 

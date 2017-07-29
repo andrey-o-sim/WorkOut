@@ -6,6 +6,7 @@ namespace WO.Core.BLL.DTO
     {
         public string Name { get; set; }
 
+        public ICollection<TrainingTypeDTO> TrainingTypes { get; set; }
         public ICollection<SetDTO> Sets { get; set; } = new List<SetDTO>();
     }
 }

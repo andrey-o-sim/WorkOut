@@ -3,6 +3,7 @@ namespace WO.Core.DAL.Migrations
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using System.Linq;
     using WO.Core.DAL.DataBaseContext;
     using WO.Core.DAL.Model;
 
@@ -10,6 +11,11 @@ namespace WO.Core.DAL.Migrations
     internal sealed class WoDbConfiguration : DbMigrationsConfiguration<WorkOutContext>
     {
         private WorkOutContext _context;
+
+        private const string BASE_TRAINING_TYPE = "База";
+        private const string CROSSFIT_TRAINING_TYPE = "Кросфит";
+        private const string ELEMENTS_TRAINING_TYPE = "Элементы";
+        private const string STATIC_TRAINING_TYPE = "Статика";
 
         public WoDbConfiguration()
         {
@@ -21,13 +27,14 @@ namespace WO.Core.DAL.Migrations
         {
             _context = context;
 
-            InitialTrainingTypes();
-            InitialExercises();
+            var trainingTypes = InitialTrainingTypes();
+            context.SaveChanges();
 
+            InitialExercises(trainingTypes);
             context.SaveChanges();
         }
 
-        private void InitialTrainingTypes()
+        private List<TrainingType> InitialTrainingTypes()
         {
             var trainingTypes = new List<TrainingType>
             {
@@ -36,28 +43,28 @@ namespace WO.Core.DAL.Migrations
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "База"
+                   TypeTraining = BASE_TRAINING_TYPE
                 },
                 new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Кросфит"
+                   TypeTraining = CROSSFIT_TRAINING_TYPE
                 },
                 new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Элементы"
+                   TypeTraining = ELEMENTS_TRAINING_TYPE
                 },
                  new TrainingType
                 {
                    CreatedDate = DateTime.Now,
                    ModifiedDate = DateTime.Now,
                    Description = string.Empty,
-                   TypeTraining = "Статика"
+                   TypeTraining = STATIC_TRAINING_TYPE
                 }
             };
 
@@ -65,65 +72,77 @@ namespace WO.Core.DAL.Migrations
             {
                 _context.TrainingTypes.AddOrUpdate(t => t.TypeTraining, trainingType);
             }
+
+            return trainingTypes;
         }
 
-        private void InitialExercises()
+        private void InitialExercises(List<TrainingType> trainingTypes)
         {
+
             var exercises = new List<Exercise>
             {
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Подтягивание"
+                    Name="Подтягивание",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE || tt.TypeTraining==STATIC_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Отжимание на Брусьях"
+                    Name="Отжимание на Брусьях",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE || tt.TypeTraining==STATIC_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Отжимание от пола"
+                    Name="Отжимание от пола",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Скручивание"
+                    Name="Скручивание",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Гиперэкстензия"
+                    Name="Гиперэкстензия",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Планка"
+                    Name="Планка",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE || tt.TypeTraining==STATIC_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Приседание"
+                    Name="Приседание",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Берпи"
+                    Name="Берпи",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE).ToList()
                 },
                 new Exercise
                 {
                     CreatedDate=DateTime.Now,
                     ModifiedDate=DateTime.Now,
-                    Name="Подьем гири"
+                    Name="Подьем гири",
+                    TrainingTypes=trainingTypes.Where(tt=>tt.TypeTraining==BASE_TRAINING_TYPE || tt.TypeTraining==CROSSFIT_TRAINING_TYPE).ToList()
                 }
             };
 

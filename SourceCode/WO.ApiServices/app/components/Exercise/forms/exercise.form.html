@@ -14,6 +14,30 @@
                 <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidNameAlreadyPresent">Exercise with name '{{vm.exercise.Name}}' already present in the system. Please, provide another name</label>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="control-label">Training Types:</h3>
+            </div>
+            <div class="col-md-12">
+                <div ng-show="!vm.TrainingTypes">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+                </div>
+                <div class="input-group col-md-12" ng-if="vm.TrainingTypes">
+                    <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.exercise.TrainingTypes">
+                        <ui-select-match placeholder="Select a training type in the list...">
+                            <span>{{$item.TypeTraining}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="trainingType in vm.TrainingTypes | filter: $select.search">
+                            <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingTypes==false">Need to provide at least one training type</label>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="modal-footer">

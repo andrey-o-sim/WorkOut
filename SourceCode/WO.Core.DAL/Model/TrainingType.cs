@@ -12,5 +12,6 @@ namespace WO.Core.DAL.Model
         public string TypeTraining { get; set; }
         public string Description { get; set; }
         public virtual ICollection<Training> Trainings { get; set; } = new List<Training>();
+        public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
     }
 }

@@ -39,23 +39,26 @@
             <div ng-show="!vm.Exercises">
                 <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
             </div>
-            <div class="input-group" ng-if="vm.Exercises">
-                <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.set.Exercises">
-                    <ui-select-match placeholder="Select an excercise in the list...">
-                        <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id)">{{$item.Name}}</span>
-                    </ui-select-match>
-                    <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
-                        <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select>
-                <span class="input-group-btn p-left5">
-                    <button type="button" class="btn btn-success btn-md" ng-click="vm.addEditExercise(null,vm.set.Id)">
-                        Add New <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </span>
-            </div>
-            <div>
-                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidExercises==false">Need to provide at least one exercise</label>
+            <div ng-if="vm.Exercises">
+                <span class="help-block" ng-bind-template="Exercises were filtered by Training Type = '{{vm.training.TrainingType.TypeTraining}}'"></span>
+                <div class="input-group">
+                    <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.set.Exercises">
+                        <ui-select-match placeholder="Select an excercise in the list...">
+                            <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id)">{{$item.Name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
+                            <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <span class="input-group-btn p-left5">
+                        <button type="button" class="btn btn-success btn-md" ng-click="vm.addEditExercise(null,vm.set.Id)">
+                            Add New <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </span>
+                </div>
+                <div>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidExercises==false">Need to provide at least one exercise</label>
+                </div>
             </div>
         </div>
     </div>
@@ -116,6 +119,6 @@
 
     <div class="footer-buttons">
         <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.set)">Save</button>
-        <a id="cancel" class="btn btn-warning" ng-click="close()">Cancel</a>
+        <a id="cancel" class="btn btn-warning" ng-click="vm.close()">Cancel</a>
     </div>
 </div>

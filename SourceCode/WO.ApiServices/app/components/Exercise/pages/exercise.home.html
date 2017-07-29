@@ -7,10 +7,16 @@
             <table class="table table-striped">
                 <tr>
                     <th>Name</th>
+                    <th>Training Types</th>
                     <th></th>
                 </tr>
                 <tr ng-repeat="exercise in vm.exercises">
                     <td ng-bind="exercise.Name"></td>
+                    <td>
+                        <div ng-repeat="trainingType in exercise.TrainingTypes">
+                            <span ng-bind="trainingType.TypeTraining"></span>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ng-click="vm.addEditExercise(exercise.Id,$index)">
                             <span class="glyphicon glyphicon-edit"></span>
