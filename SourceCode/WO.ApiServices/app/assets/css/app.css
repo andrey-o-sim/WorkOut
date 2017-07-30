@@ -76,7 +76,6 @@
 }
 
 .main .page-header {
-    margin-top: 0;
 }
 
 .loader {
@@ -117,4 +116,12 @@
 
 .p-left30 {
     padding-left: 30px;
+}
+
+.nopadding-left {
+    padding-left: 0px !important;
+}
+
+.nopadding-right {
+    padding-right: 0px !important;
 }

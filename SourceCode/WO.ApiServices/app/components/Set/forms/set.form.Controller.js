@@ -116,7 +116,7 @@
 
                 setService.save(set).then(function (result) {
                     if (result.Succeed) {
-                        if (vm.training) {
+                        if ($stateParams.training) {
                             if (vm.editForm) {
                                 var indexForUpdate = vm.training.Sets.findIndex(function (set) {
                                     return set.Id === result.ResultItemId;
@@ -128,7 +128,7 @@
                                 vm.training.Sets.push(set)
                             }
 
-                            var trainingRoute = vm.training.Id > 0 ? 'trainingEdit' : 'trainingNew';
+                            var trainingRoute = $stateParams.training.Id > 0 ? 'trainingEdit' : 'trainingNew';
                             $state.go(trainingRoute, { 'id': vm.training.Id, 'training': vm.training });
                         }
                         else {
@@ -176,7 +176,7 @@
             return isValid;
         }
 
-        function addEditExercise(exerciseId, setId) {
+        function addEditExercise(exerciseId, setId, exerciseIndex) {
             var ariaLabel = exerciseId > 0 ? 'Exercise Edit' : 'Exercise New';
 
             var modalProperties = {
@@ -191,28 +191,9 @@
 
             modalInstance.result.then(
                 function (resultExercise) {
-                    var indexForUpdate = -1;
-                    vm.Exercises.forEach(function (item, index) {
-                        if (item.Id === resultExercise.Id) {
-                            indexForUpdate = index;
-                            return true;
-                        }
-                    });
-
-                    if (indexForUpdate > -1) {
-                        vm.Exercises[indexForUpdate].Name = resultExercise.Name;
-
-                        indexForUpdate = -1;
-                        vm.set.Exercises.forEach(function (item, index) {
-                            if (item.Id === resultExercise.Id) {
-                                indexForUpdate = index;
-                                return true;
-                            }
-                        });
-
-                        if (indexForUpdate > -1) {
-                            vm.set.Exercises[indexForUpdate].Name = resultExercise.Name;
-                        }
+                    if (exerciseIndex) {
+                        vm.Exercises[exerciseIndex] = resultExercise;
+                        vm.set.Exercises[exerciseIndex] = resultExercise;
                     }
                     else {
                         vm.Exercises.push(resultExercise);

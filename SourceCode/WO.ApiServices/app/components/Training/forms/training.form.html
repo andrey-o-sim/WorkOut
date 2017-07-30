@@ -7,21 +7,28 @@
             <div class="col-md-12">
                 <h3 class="control-label">Training Type:</h3>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div ng-show="!vm.TrainingTypes">
                     <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
                 </div>
                 <div ng-show="vm.TrainingTypes">
-                    <div>
-                        <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
-                            <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
-                            <ui-select-choices repeat="trainingType in vm.TrainingTypes | filter: $select.search">
-                                <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.training.TrainingType">
+                                <ui-select-match placeholder="Select or search a Training Type in the list...">{{$select.selected.TypeTraining}}</ui-select-match>
+                                <ui-select-choices repeat="trainingType in vm.TrainingTypes | filter: $select.search">
+                                    <div ng-bind-html="trainingType.TypeTraining | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="col-md-8 nopadding-left">
+                            <button type="button" class="btn btn-success btn-md" ng-click="vm.addTrainingType()">
+                                Add New <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
                     </div>
                     <div>
-                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false">Need to provide "Training Type"</label>
+                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType===false">Need to provide "Training Type"</label>
                     </div>
                 </div>
             </div>
@@ -44,10 +51,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <h3 class="control-label">Training Time:</h3>
+            <div class="col-md-2">
+                <h3 class="control-label">Training Date:</h3>
                 <div>
-                    <datetime-range start="vm.training.StartDateTime" end="vm.training.EndDateTime"></datetime-range>
+                    <md-datepicker ng-model="vm.training.TrainingDate" md-placeholder="Enter date"></md-datepicker>
+                </div>
+                <div>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingDate===false">Need to provide "Training Date"</label>
                 </div>
             </div>
         </div>
@@ -106,14 +116,14 @@
                     </tr>
                 </table>
                 <div>
-                    <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidSets===false">If you provide 'Start Training', then sets must not be empty</label>
+                    <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidSets===false">Please, provide at least one Set</label>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="footer-buttons">
-            <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.training)">Save</button>
-            <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
-        </div>
+    <div class="footer-buttons">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.training)">Save</button>
+        <a id="cancel" class="btn btn-warning" ui-sref="trainingHome">Cancel</a>
     </div>
 </div>

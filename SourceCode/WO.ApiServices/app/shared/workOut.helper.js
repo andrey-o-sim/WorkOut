@@ -13,7 +13,8 @@
             removeElementFromArray: removeElementFromArray,
             writeErrorMessageToConsole: writeErrorMessageToConsole,
             normalTimeToWoTime: normalTimeToWoTime,
-            woTimeToNormalTime: woTimeToNormalTime
+            woTimeToNormalTime: woTimeToNormalTime,
+            getCurrentDateWithoutTimeZone: getCurrentDateWithoutTimeZone
         };
 
         return service;
@@ -61,6 +62,12 @@
                 'minute': woTime.Minutes,
                 'second': woTime.Seconds
             }).format();
+        }
+
+        function getCurrentDateWithoutTimeZone() {
+            var timeZoneLength = 6;
+            var currentDateTime = moment();
+            return currentDateTime.format().substring(0, currentDateTime.format().length - timeZoneLength);
         }
     }
 }());

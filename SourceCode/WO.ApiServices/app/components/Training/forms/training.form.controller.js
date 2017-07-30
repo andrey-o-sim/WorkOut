@@ -12,7 +12,8 @@
         'setService',
         'workOutHelper',
         'toastr',
-        'toastrConfig'];
+        'toastrConfig',
+        '$uibModal'];
 
     function TrainingFormController(
         $q,
@@ -23,20 +24,21 @@
         setService,
         workOutHelper,
         toastr,
-        toastrConfig) {
+        toastrConfig,
+        $uibModal) {
 
         var vm = this;
 
         vm.save = save;
         vm.removeSet = removeSet;
+        vm.addTrainingType = addTrainingType;
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
         init().then(function (training) {
             if (training) {
                 vm.training = training;
-                vm.training.StartDateTime = vm.training.StartDateTime ? moment(vm.training.StartDateTime) : moment();
-                vm.training.EndDateTime = vm.training.EndDateTime ? moment(vm.training.EndDateTime) : moment();
+                vm.training.TrainingDate = vm.training.TrainingDate ? moment(vm.training.TrainingDate) : moment();
             }
             vm.formIsReady = true;
         });
@@ -70,8 +72,6 @@
                         TrainingType: {},
                         MainTrainingPurpose: '',
                         Description: '',
-                        StartDateTime: moment(),
-                        EndDateTime: moment(),
                         Sets: []
                     };
 
@@ -83,10 +83,6 @@
         function save(training) {
             if (isValidForm(training)) {
                 vm.disableButton = true;
-
-                var timeZoneLength = 6;
-                training.StartDateTime = training.StartDateTime.format().substring(0, training.StartDateTime.format().length - timeZoneLength);
-                training.EndDateTime = training.EndDateTime.format().substring(0, training.EndDateTime.format().length - timeZoneLength);
 
                 trainingService.save(training).then(function (result) {
                     if (result.Succeed) {
@@ -122,33 +118,39 @@
                 vm.validator.ValidMainTrainingPurpose = false;
             }
 
-            var startDate = moment();
-            startDate = startDate.set({
-                'hour': training.StartDateTime.Hours,
-                'minute': training.StartDateTime.Minutes,
-                'second': training.StartDateTime.Seconds
-            });
-
-            if (training.EndDateTime) {
-                var endDate = moment();
-                endDate = endDate.set({
-                    'hour': training.EndDateTime.Hours,
-                    'minute': training.EndDateTime.Minutes,
-                    'second': training.EndDateTime.Seconds
-                });
-
-                if (startDate > endDate) {
-                    isValid = false;
-                    vm.validator.ValidEndDate = false;
-                }
+            if (!training.TrainingDate) {
+                isValid = false;
+                vm.validator.ValidTrainingDate = false;
             }
 
-            if (training.StartDateTime && (!training.Sets || training.Sets.length === 0)) {
+            if (!training.Sets || training.Sets.length === 0) {
                 isValid = false;
                 vm.validator.ValidSets = false;
             }
 
             return isValid;
+        }
+
+        function addTrainingType() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: 'Add Training Type',
+                templateUrl: '/app/components/TrainingType/forms/trainingType.form.html',
+                controller: 'TrainingTypeFormController',
+                controllerAs: 'vm',
+                resolve: {
+                    id: 0
+                }
+            });
+
+            modalInstance.result.then(
+                function (resultTrainingType) {
+                    vm.training.TrainingType = resultTrainingType;
+                    vm.TrainingTypes.push(resultTrainingType);
+                },
+                function () {
+                });
         }
     }
 })();

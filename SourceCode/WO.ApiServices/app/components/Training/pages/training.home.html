@@ -8,22 +8,28 @@
                 <tr>
                     <th>Training Type</th>
                     <th>Main Training Purpose</th>
+                    <th>Training Date</th>
                     <th>Start Date Time</th>
                     <th>End Date Time</th>
+                    <th>Started</th>
+                    <th>Finished</th>
                     <th>Description</th>
                     <th></th>
                 </tr>
                 <tr ng-repeat="training in vm.trainings">
                     <td ng-bind="training.TrainingType.TypeTraining"></td>
                     <td ng-bind="training.MainTrainingPurpose"></td>
+                    <td ng-bind-template="{{ training.TrainingDate | date : 'MMM d, yyyy'}}"></td>
                     <td ng-bind-template="{{ training.StartDateTime | date : 'MMM d, yyyy HH:mm:ss'}}"></td>
                     <td ng-bind-template="{{ training.EndDateTime | date : 'MMM d, yyyy HH:mm:ss'}}"></td>
+                    <td ng-bind-template="{{training.Started?'Yes':'No'}}"></td>
+                    <td ng-bind-template="{{training.Finished?'Yes':'No'}}"></td>
                     <td ng-bind-template="{{ training.Description | limitTo: 100 }}{{training.Description.length > 100 ? '...' : ''}}"></td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ui-sref="trainingView({id:{{training.Id}}})">
                             <span class="glyphicon glyphicon-file"></span>
                         </a>
-                        <a class="btn btn-sm btn-info" ui-sref="trainingEdit({id:{{training.Id}}})">
+                        <a ng-hide="training.Started || training.Finished" class="btn btn-sm btn-info" ui-sref="trainingEdit({id:{{training.Id}}})">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-sm btn-danger" ng-click="vm.remove(training)">

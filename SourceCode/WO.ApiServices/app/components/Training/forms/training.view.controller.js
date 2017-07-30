@@ -8,16 +8,20 @@
         '$stateParams',
         'trainingService',
         'toastr',
-        'toastrConfig'];
+        'toastrConfig',
+        'workOutHelper'];
 
     function TrainingViewController(
         $stateParams,
         trainingService,
         toastr,
-        toastrConfig) {
+        toastrConfig,
+        workOutHelper) {
 
         var vm = this;
         vm.formIsReady = false;
+        vm.startTraining = startTraining;
+        vm.finishTraining = finishTraining;
 
         init();
 
@@ -25,9 +29,6 @@
             trainingService.getById($stateParams.id).then(function (result) {
                 if (result) {
                     vm.training = result;
-
-                    vm.training.StartDateTime = vm.training.StartDateTime ? vm.training.StartDateTime : moment();
-                    vm.training.EndDateTime = vm.training.EndDateTime ? vm.training.EndDateTime : moment();
                 }
                 else {
                     toastrConfig.positionClass = 'toast-top-center';
@@ -36,6 +37,31 @@
                 }
 
                 vm.formIsReady = true;
+            });
+        }
+
+        function startTraining() {
+            vm.training.Started = true;
+            vm.training.StartDateTime = workOutHelper.getCurrentDateWithoutTimeZone();
+
+            save(vm.training);
+        }
+
+        function finishTraining() {
+            vm.training.Started = false;
+            vm.training.Finished = true;
+            vm.training.EndDateTime = workOutHelper.getCurrentDateWithoutTimeZone();
+
+            save(vm.training);
+        }
+
+        function save(training) {
+            trainingService.save(vm.training).then(function (result) {
+                if (!result || !result.Succeed) {
+                    toastrConfig.positionClass = 'toast-top-center';
+                    toastrConfig.autoDismiss = false;
+                    toastr.error("Something went wrong. Please try again.");
+                }
             });
         }
     }
