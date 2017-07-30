@@ -23,7 +23,8 @@ namespace WO.ApiServices
 
             bundles.Add(new StyleBundle("~/app/assets").Include(
                 "~/app/assets/css/app.css",
-                 "~/app/assets/libs/angular-datetime-range/datetime-range.css"));
+                "~/app/assets/libs/angular-datetime-range/datetime-range.css",
+                "~/app/assets/libs/angular-materials/angular-material.css"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js").Include(
                 "~/app/assets/libs/moment/moment.js",
@@ -38,7 +39,9 @@ namespace WO.ApiServices
                 "~/app/assets/libs/angular-datetime-picker/datetimepicker.templates.js",
                 "~/app/assets/libs/angular-toastr.js",
                 "~/app/assets/libs/angular-toastr.tpls.js",
-                "~/app/assets/libs/angular-datetime-range/datetime-range.js"));
+                "~/app/assets/libs/angular-datetime-range/datetime-range.js",
+                "~/app/assets/libs/angular-materials/angular-material.js",
+                "~/app/assets/libs/angular-aria/angular-aria.js"));
 
             bundles.Add(new ScriptBundle("~/app/assets/js/angularUiRoute").Include(
                 "~/app/assets/libs/angular-ui-router/angular-ui-router.js"));

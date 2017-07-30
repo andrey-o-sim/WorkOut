@@ -9,7 +9,8 @@
             'ui.bootstrap.datetimepicker',
             'ngAnimate',
             'toastr',
-            'g1b.datetime-range'
+            'g1b.datetime-range',
+            'ngMaterial'
         ]);
 
     angular

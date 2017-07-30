@@ -294,12 +294,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\assets\css\app.css" />
+    <Content Include="app\assets\i18n\angular-locale_de-it.js" />
+    <Content Include="app\assets\i18n\angular-locale_en-us-posix.js" />
+    <Content Include="app\assets\i18n\angular-locale_es-bz.js" />
+    <Content Include="app\assets\i18n\angular-locale_it-va.js" />
+    <Content Include="app\assets\i18n\angular-locale_mo.js" />
+    <Content Include="app\assets\i18n\angular-locale_nds-de.js" />
+    <Content Include="app\assets\i18n\angular-locale_nds-nl.js" />
+    <Content Include="app\assets\i18n\angular-locale_nds.js" />
+    <Content Include="app\assets\i18n\angular-locale_sh.js" />
     <Content Include="app\assets\img\loading.gif" />
+    <Content Include="app\assets\libs\angular-aria\angular-aria.js" />
     <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.js" />
     <Content Include="app\assets\libs\angular-datetime-picker\datetimepicker.templates.js" />
     <Content Include="app\assets\libs\angular-datetime-range\datetime-range.css" />
     <Content Include="app\assets\libs\angular-datetime-range\datetime-range.html" />
     <Content Include="app\assets\libs\angular-datetime-range\datetime-range.js" />
+    <Content Include="app\assets\libs\angular-materials\angular-material.css" />
+    <Content Include="app\assets\libs\angular-materials\angular-material.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.js" />
     <Content Include="app\assets\libs\angular-ui-router\angular-ui-router.min.js" />
     <Content Include="app\assets\libs\angular-ui-router\resolveService.js" />
@@ -1177,6 +1189,7 @@
     <Content Include="app\assets\libs\respond.js" />
     <Content Include="app\assets\libs\respond.min.js" />
     <Content Include="app\app.module.js" />
+    <Content Include="app\assets\libs\version.json" />
     <None Include="app\assets\_references.js" />
     <Content Include="app\assets\libs\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="app\assets\libs\angular-ui\ui-bootstrap-tpls.min.js" />
