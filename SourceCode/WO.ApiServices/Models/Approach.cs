@@ -9,6 +9,9 @@ namespace WO.ApiServices.Models
     {
         public TimeWO PlannedTimeForRest { get; set; } = new TimeWO();
         public TimeWO SpentTimeForRest { get; set; } = new TimeWO();
+        public bool Started { get; set; }
+        public bool Finished { get; set; }
+
         public Set Set { get; set; }
         public int? SetId { get; set; }
     }

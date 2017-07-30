@@ -8,11 +8,15 @@
                 <tr>
                     <th>Planned Time For Rest</th>
                     <th>Spent Time For Rest</th>
+                    <th>Started</th>
+                    <th>Finished</th>
                     <th></th>
                 </tr>
                 <tr ng-repeat="approach in vm.approaches">
                     <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
                     <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                    <td ng-bind-template="{{approach.Started?'Yes':'No'}}"></td>
+                    <td ng-bind-template="{{approach.Finished?'Yes':'No'}}"></td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ui-sref="approachView({id:{{approach.Id}}})">
                             <span class="glyphicon glyphicon-file"></span>
