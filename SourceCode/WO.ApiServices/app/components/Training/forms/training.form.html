@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div>
-                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType==false">Need to provide "Training Type"</label>
+                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingType===false">Need to provide "Training Type"</label>
                     </div>
                 </div>
             </div>
@@ -56,11 +56,8 @@
                 <div>
                     <md-datepicker ng-model="vm.training.TrainingDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <h3 class="control-label">Training Time:</h3>
                 <div>
-                    <datetime-range start="vm.training.StartDateTime" end="vm.training.EndDateTime"></datetime-range>
+                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTrainingDate===false">Need to provide "Training Date"</label>
                 </div>
             </div>
         </div>
@@ -119,7 +116,7 @@
                     </tr>
                 </table>
                 <div>
-                    <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidSets===false">If you provide 'Start Training', then sets must not be empty</label>
+                    <label class="requiredError" ng-show="vm.validateForm && vm.validator.ValidSets===false">Please, provide at least one Set</label>
                 </div>
             </div>
         </div>

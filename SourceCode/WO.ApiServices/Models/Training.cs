@@ -16,6 +16,7 @@ namespace WO.ApiServices.Models
         public DateTime? EndDateTime { get; set; }
         public string MainTrainingPurpose { get; set; }
         public string Description { get; set; }
+        public bool Started { get; set; }
         public bool Finished { get; set; }
     }
 }

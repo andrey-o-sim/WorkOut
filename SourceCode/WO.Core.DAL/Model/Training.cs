@@ -16,6 +16,7 @@ namespace WO.Core.DAL.Model
         public DateTime? TrainingDate { get; set; }
         public DateTime? StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }
+        public bool Started { get; set; }
         public bool Finished { get; set; }
         
         public virtual ICollection<Set> Sets { get; set; } = new List<Set>();
