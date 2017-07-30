@@ -12,7 +12,8 @@
         'setService',
         'workOutHelper',
         'toastr',
-        'toastrConfig'];
+        'toastrConfig',
+        '$uibModal'];
 
     function TrainingFormController(
         $q,
@@ -23,12 +24,14 @@
         setService,
         workOutHelper,
         toastr,
-        toastrConfig) {
+        toastrConfig,
+        $uibModal) {
 
         var vm = this;
 
         vm.save = save;
         vm.removeSet = removeSet;
+        vm.addTrainingType = addTrainingType;
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
@@ -149,6 +152,28 @@
             }
 
             return isValid;
+        }
+
+        function addTrainingType() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: 'Add Training Type',
+                templateUrl: '/app/components/TrainingType/forms/trainingType.form.html',
+                controller: 'TrainingTypeFormController',
+                controllerAs: 'vm',
+                resolve: {
+                    id: 0
+                }
+            });
+
+            modalInstance.result.then(
+                function (resultTrainingType) {
+                    vm.training.TrainingType = resultTrainingType;
+                    vm.TrainingTypes.push(resultTrainingType);
+                },
+                function () {
+                });
         }
     }
 })();

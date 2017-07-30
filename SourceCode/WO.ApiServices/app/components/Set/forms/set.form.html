@@ -35,26 +35,28 @@
         <div class="col-md-12">
             <h3 class="control-label">Exercises:</h3>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div ng-show="!vm.Exercises">
                 <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
             </div>
             <div ng-if="vm.Exercises">
                 <span class="help-block" ng-bind-template="Exercises were filtered by Training Type = '{{vm.training.TrainingType.TypeTraining}}'"></span>
-                <div class="input-group">
-                    <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.set.Exercises">
-                        <ui-select-match placeholder="Select an excercise in the list...">
-                            <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id)">{{$item.Name}}</span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
-                            <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
-                    <span class="input-group-btn p-left5">
-                        <button type="button" class="btn btn-success btn-md" ng-click="vm.addEditExercise(null,vm.set.Id)">
+                <div class="row">
+                    <div class="col-md-4">
+                        <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.set.Exercises">
+                            <ui-select-match placeholder="Select an excercise in the list...">
+                                <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id,$index)">{{$item.Name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
+                                <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="col-md-8 nopadding-left">
+                        <button type="button" class="btn btn-success btn-md" ng-click="vm.addEditExercise(null,vm.set.Id,null)">
                             Add New <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                    </span>
+                    </div>
                 </div>
                 <div>
                     <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidExercises==false">Need to provide at least one exercise</label>
