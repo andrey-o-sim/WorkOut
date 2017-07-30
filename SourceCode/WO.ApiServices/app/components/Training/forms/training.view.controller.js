@@ -41,6 +41,15 @@
         }
 
         function startTraining() {
+            var today = moment().startOf('day');
+            var trainingDate = moment(vm.training.TrainingDate, "YYYY-MM-DD");
+
+            if (!today.isSame(trainingDate)) {
+                if (confirm('Training Date is different to current date. If you continue, training date will be changed to current date.')) {
+                    vm.training.TrainingDate = workOutHelper.getCurrentDateWithoutTimeZone();
+                }
+            }
+
             vm.training.Started = true;
             vm.training.StartDateTime = workOutHelper.getCurrentDateWithoutTimeZone();
 
