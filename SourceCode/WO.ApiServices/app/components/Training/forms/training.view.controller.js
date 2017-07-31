@@ -46,12 +46,12 @@
 
             if (!today.isSame(trainingDate)) {
                 if (confirm('Training Date is different to current date. If you continue, training date will be changed to current date.')) {
-                    vm.training.TrainingDate = workOutHelper.getCurrentDateWithoutTimeZone();
+                    vm.training.TrainingDate = workOutHelper.getCurrentDateTimeWithoutTimeZone();
                 }
             }
 
             vm.training.Started = true;
-            vm.training.StartDateTime = workOutHelper.getCurrentDateWithoutTimeZone();
+            vm.training.StartDateTime = workOutHelper.getCurrentDateTimeWithoutTimeZone();
 
             save(vm.training);
         }
@@ -59,16 +59,21 @@
         function finishTraining() {
             vm.training.Started = false;
             vm.training.Finished = true;
-            vm.training.EndDateTime = workOutHelper.getCurrentDateWithoutTimeZone();
+            vm.training.EndDateTime = workOutHelper.getCurrentDateTimeWithoutTimeZone();
 
             save(vm.training);
         }
 
         function save(training) {
-            trainingService.save(vm.training).then(function (result) {
-                if (!result || !result.Succeed) {
-                    toastrConfig.positionClass = 'toast-top-center';
-                    toastrConfig.autoDismiss = false;
+            trainingService.save(training).then(function (result) {
+                toastrConfig.positionClass = 'toast-top-center';
+                toastrConfig.autoDismiss = false;
+                if (result && result.Succeed) {
+                    if (training.Finished) {
+                        toastr.info("Congratulation, you have finished the Training.");
+                    }
+                }
+                else {
                     toastr.error("Something went wrong. Please try again.");
                 }
             });

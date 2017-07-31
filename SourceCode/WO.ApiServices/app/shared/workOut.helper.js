@@ -14,7 +14,8 @@
             writeErrorMessageToConsole: writeErrorMessageToConsole,
             normalTimeToWoTime: normalTimeToWoTime,
             woTimeToNormalTime: woTimeToNormalTime,
-            getCurrentDateWithoutTimeZone: getCurrentDateWithoutTimeZone
+            getCurrentDateTimeWithoutTimeZone: getCurrentDateTimeWithoutTimeZone,
+            getDateTimeWithoutTimeZone: getDateTimeWithoutTimeZone
         };
 
         return service;
@@ -64,9 +65,13 @@
             }).format();
         }
 
-        function getCurrentDateWithoutTimeZone() {
+        function getCurrentDateTimeWithoutTimeZone() {
+            return getDateTimeWithoutTimeZone(moment());
+        }
+
+        function getDateTimeWithoutTimeZone(dateTime) {
             var timeZoneLength = 6;
-            var currentDateTime = moment();
+            var currentDateTime = dateTime;
             return currentDateTime.format().substring(0, currentDateTime.format().length - timeZoneLength);
         }
     }

@@ -8,22 +8,30 @@
                 <tr>
                     <th>Planned Time</th>
                     <th>Time For Rest</th>
-                    <th>Spent Time</th>
                     <th>Count Approaches</th>
                     <th>Count Made Approaches</th>
+                    <th>Start Set Time</th>
+                    <th>Finish Set Time</th>
+                    <th>Spent Time</th>
+                    <th>Started</th>
+                    <th>Finished</th>
                     <th></th>
                 </tr>
                 <tr ng-repeat="set in vm.sets">
                     <td ng-bind-template="Minutes: {{set.PlannedTime.Minutes}}, Seconds: {{set.PlannedTime.Seconds}}"></td>
                     <td ng-bind-template="Minutes: {{set.TimeForRest.Minutes}}, Seconds: {{set.TimeForRest.Seconds}}"></td>
-                    <td ng-bind-template="Minutes: {{set.SpentTime.Minutes}}, Seconds: {{set.SpentTime.Seconds}}"></td>
                     <td ng-bind="set.Approaches.length"></td>
                     <td ng-bind-template="{{set.CountMadeApproaches?set.CountMadeApproaches:0}}"></td>
+                    <td ng-bind-template="{{set.StartDateTime| date : 'HH:mm:ss'}}"></td>
+                    <td ng-bind-template="{{set.EndDateTime| date : 'HH:mm:ss'}}"></td>
+                    <td ng-bind-template="Minutes: {{set.SpentTime.Minutes}}, Seconds: {{set.SpentTime.Seconds}}"></td>
+                    <td ng-bind-template="{{set.Started?'Yes':'No'}}"></td>
+                    <td ng-bind-template="{{set.Finished?'Yes':'No'}}"></td>
                     <td class="text-right">
                         <a class="btn btn-sm btn-info" ui-sref="setView({id:{{set.Id}}})">
                             <span class="glyphicon glyphicon-file"></span>
                         </a>
-                        <a class="btn btn-sm btn-info" ui-sref="setEdit({id:{{set.Id}}})">
+                        <a ng-if="!set.Finished" class="btn btn-sm btn-info" ui-sref="setEdit({id:{{set.Id}}})">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-sm btn-danger" ng-click="vm.remove(set)">
