@@ -3,6 +3,15 @@
 <div class="container-fluid" ng-if="vm.formIsReady && vm.set">
     <h2 class="page-header">View Set</h2>
     <div class="row">
+        <div class="col-md-12">
+            <div ng-if="!vm.set.Finished">
+                <button class="btn btn-success" ng-if="!vm.set.Started" ng-click="vm.startSet()">Start Set</button>
+                <button class="btn btn-danger" ng-if="vm.set.Started" ng-click="vm.finishSet()">Finish Set</button>
+            </div>
+            <span class="help-block text-center" ng-if="vm.set.Finished">This set was finished, you cannot start it again.</span>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <div class="row text-center">
                 <div class="col-md-12">
@@ -51,6 +60,53 @@
             <div class="input-group" ng-if="vm.set.Exercises">
                 <div class="exerciseText" ng-repeat="exercise in vm.set.Exercises">
                     <span ng-bind="::exercise.Name"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h4>Start Set:</h4>
+                    </div>
+                    <div class="controls">
+                        <label ng-bind-template="{{vm.set.StartDateTime|date:'MMM d, yyyy HH:mm:ss'}}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h4>End Set:</h4>
+                    </div>
+                    <div class="controls">
+                        <label ng-bind-template="{{vm.set.EndDateTime|date:'MMM d, yyyy HH:mm:ss'}}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="vm.set.Finished && vm.set.SpentTime">
+        <div class="col-md-6">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h3 for="planTimeForRest" class="control-label">Spent Time For Set:</h3>
+                </div>
+            </div>
+            <div class="row border">
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.set.SpentTime.Minutes"></label>
+                    <label class="control-label">Minute(s)</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label" ng-bind="::vm.set.SpentTime.Seconds"></label>
+                    <label class="control-label">Second(s)</label>
                 </div>
             </div>
         </div>

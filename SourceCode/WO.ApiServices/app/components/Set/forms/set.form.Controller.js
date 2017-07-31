@@ -53,7 +53,7 @@
             if (vm.training) {
                 vm.Exercises = filterExercises(vm.allExercises, vm.training.TrainingType);
             }
-            else if (vm.editForm) {
+            else if (vm.editForm && vm.set.TrainingId) {
                 trainingService.getById(vm.set.TrainingId).then(function (result) {
                     vm.training = result;
                     vm.Exercises = filterExercises(vm.allExercises, result.TrainingType);
@@ -197,6 +197,7 @@
                     }
                     else {
                         vm.Exercises.push(resultExercise);
+                        vm.set.Exercises.push(resultExercise);
                     }
                 },
                 function () {
