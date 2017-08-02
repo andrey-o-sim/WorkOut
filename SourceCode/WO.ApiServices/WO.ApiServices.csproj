@@ -275,6 +275,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Approach.cs" />
+    <Compile Include="Models\ApproachResult.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\Exercise.cs" />
@@ -282,10 +283,13 @@
     <Compile Include="Models\Helper\TimeWoOperations.cs" />
     <Compile Include="Models\Helper\ValidationError.cs" />
     <Compile Include="Models\Set.cs" />
+    <Compile Include="Models\SetTarget.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\TrainingType.cs" />
+    <Compile Include="Models\Validators\ApproachResultValidator.cs" />
     <Compile Include="Models\Validators\ApproachValidator.cs" />
     <Compile Include="Models\Validators\ExerciseValidator.cs" />
+    <Compile Include="Models\Validators\SetTargetValidator.cs" />
     <Compile Include="Models\Validators\SetValidator.cs" />
     <Compile Include="Models\Validators\TrainingTypeValidator.cs" />
     <Compile Include="Models\Validators\TrainingValidator.cs" />

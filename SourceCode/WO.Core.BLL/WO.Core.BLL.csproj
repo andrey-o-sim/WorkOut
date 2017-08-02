@@ -43,10 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\ApproachDTO.cs" />
+    <Compile Include="DTO\ApproachResultDTO.cs" />
     <Compile Include="DTO\BaseModelDTO.cs" />
     <Compile Include="DTO\LogEntryDTO.cs" />
     <Compile Include="DTO\ExerciseDTO.cs" />
     <Compile Include="DTO\SetDTO.cs" />
+    <Compile Include="DTO\SetTargetDTO.cs" />
     <Compile Include="DTO\TrainingDTO.cs" />
     <Compile Include="DTO\TrainingTypeDTO.cs" />
     <Compile Include="Interfaces\IOperationResult.cs" />

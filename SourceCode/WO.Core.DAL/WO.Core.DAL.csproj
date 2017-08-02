@@ -51,8 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext\Configurations\ApproachConfiguration.cs" />
+    <Compile Include="DataBaseContext\Configurations\ApproachResultConfiguration.cs" />
     <Compile Include="DataBaseContext\Configurations\ExerciseConfiguration.cs" />
     <Compile Include="DataBaseContext\Configurations\SetConfiguration.cs" />
+    <Compile Include="DataBaseContext\Configurations\SetTargetConfiguration.cs" />
     <Compile Include="DataBaseContext\Configurations\TrainingConfiguration.cs" />
     <Compile Include="DataBaseContext\Configurations\TrainingTypeConfiguration.cs" />
     <Compile Include="DataBaseContext\WorkOutContext.cs" />
@@ -65,7 +67,9 @@
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\LogEntry.cs" />
     <Compile Include="Model\Exercise.cs" />
+    <Compile Include="Model\ApproachResult.cs" />
     <Compile Include="Model\Set.cs" />
+    <Compile Include="Model\SetTarget.cs" />
     <Compile Include="Model\Training.cs" />
     <Compile Include="Model\TrainingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

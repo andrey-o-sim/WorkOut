@@ -10,6 +10,6 @@ namespace WO.ApiServices.Models
         public string Name { get; set; }
 
         public ICollection<TrainingType> TrainingTypes { get; set; } = new List<TrainingType>();
-        public ICollection<Set> Sets { get; set; } = new List<Set>();
+        public ICollection<SetTarget> SetTargets { get; set; } = new List<SetTarget>();
     }
 }

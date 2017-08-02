@@ -17,7 +17,7 @@ namespace WO.Core.BLL.DTO
         public int? TrainingId { get; set; }
         public TrainingDTO Training { get; set; }
 
-        public ICollection<ExerciseDTO> Exercises { get; set; } = new List<ExerciseDTO>();
         public ICollection<ApproachDTO> Approaches { get; set; } = new List<ApproachDTO>();
+        public ICollection<SetTargetDTO> SetTargets { get; set; } = new List<SetTargetDTO>();
     }
 }

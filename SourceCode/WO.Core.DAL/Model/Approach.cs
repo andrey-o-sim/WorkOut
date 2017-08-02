@@ -1,4 +1,6 @@
-﻿namespace WO.Core.DAL.Model
+﻿using System.Collections.Generic;
+
+namespace WO.Core.DAL.Model
 {
     public class Approach : BaseModel
     {
@@ -9,5 +11,7 @@
 
         public virtual Set Set { get; set; }
         public int? SetId { get; set; }
+
+        public virtual ICollection<ApproachResult> ApproachResults { get; set; } = new List<ApproachResult>();
     }
 }
