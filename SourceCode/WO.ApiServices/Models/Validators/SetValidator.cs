@@ -13,11 +13,6 @@ namespace WO.ApiServices.Models.Validators
                 .Must(time => time.Hours > 0 || time.Minutes > 0 || time.Seconds > 0)
                 .WithMessage("Please provide 'Time For Rest'");
 
-            //RuleFor(set => set.Exercises)
-            //    .NotNull()
-            //    .Must(exs => exs.Count > 0)
-            //    .WithMessage("Please, provide at least one 'Exercise'");
-
             RuleFor(set => set)
                 .Must(set => set.Approaches.Count > 0 || set.CountApproaches > 0)
                 .WithMessage(set =>

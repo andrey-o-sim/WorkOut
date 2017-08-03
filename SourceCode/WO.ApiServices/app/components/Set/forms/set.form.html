@@ -31,47 +31,13 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="control-label">Exercises:</h3>
-        </div>
-        <div class="col-md-12">
-            <div ng-show="!vm.Exercises">
-                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
-            </div>
-            <div ng-if="vm.Exercises">
-                <span class="help-block" ng-bind-template="Exercises were filtered by Training Type = '{{vm.training.TrainingType.TypeTraining}}'"></span>
-                <div class="row">
-                    <div class="col-md-5">
-                        <ui-select title="Choose Exercises" multiple close-on-select="false" theme="selectize" ng-model="vm.set.Exercises">
-                            <ui-select-match placeholder="Select an excercise in the list...">
-                                <span tooltip-placement="right" uib-tooltip="Update" ng-click="vm.addEditExercise($item.Id,vm.set.Id,$index)">{{$item.Name}}</span>
-                            </ui-select-match>
-                            <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
-                                <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <div class="col-md-7 nopadding-left">
-                        <button type="button" class="btn btn-success btn-md" ng-click="vm.addEditExercise(null,vm.set.Id,null)">
-                            Add New <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidExercises==false">Need to provide at least one exercise</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row" ng-show="vm.set.TimeForRest.Minutes>=1 || vm.set.TimeForRest.Seconds>=1">
         <div class="col-md-12">
             <h3 for="planTimeForRest" class="control-label">Count Approaches:</h3>
             <h6 for="planTimeForRest" class="help-block">Max approach count is 15</h6>
         </div>
         <div class="col-md-3">
-            <div class="input-group" ng-if="vm.Exercises">
+            <div class="input-group">
                 <input type="number" min="1" max="15" class="form-control" name="countApproaches" ng-model="vm.set.CountApproaches" />
                 <span class="input-group-btn p-left5" ng-show="vm.set.CountApproaches>0">
                     <button type="button" class="btn btn-success btn-md" ng-click="vm.generateApproaches(vm.set)">

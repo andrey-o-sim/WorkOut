@@ -86,16 +86,10 @@
                 <div class="controls">
                     <table class="table table-striped">
                         <tr>
-                            <th>Exercises:</th>
                             <th>Planned time for Rest:</th>
                             <th>Approaches:</th>
                         </tr>
                         <tr ng-repeat="set in vm.training.Sets">
-                            <td>
-                                <div class="exerciseText" ng-repeat="exercise in set.Exercises">
-                                    <span ng-bind="::exercise.Name"></span>
-                                </div>
-                            </td>
                             <td ng-bind-template="Minute(s): {{ set.PlannedTime.Minutes }} Second(s): {{set.PlannedTime.Seconds}}"></td>
                             <td>
                                 <table class="table table-bordered">
@@ -114,7 +108,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
+                            <td colspan="2" class="text-left countTableText" ng-bind-template="Count of Sets: {{vm.training.Sets.length}}"></td>
                         </tr>
                     </table>
                 </div>

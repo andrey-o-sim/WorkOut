@@ -8,7 +8,6 @@
         '$state',
         '$stateParams',
         '$uibModal',
-        'exerciseService',
         'setService',
         'approachService',
         'trainingService',
@@ -23,7 +22,6 @@
         $state,
         $stateParams,
         $uibModal,
-        exerciseService,
         setService,
         approachService,
         trainingService,
@@ -36,7 +34,6 @@
         vm.training = $stateParams.training;
         vm.save = save;
         vm.close = close;
-        vm.addEditExercise = addEditExercise;
         vm.generateApproaches = generateApproaches;
         vm.removeApproach = removeApproach;
         vm.editApproach = editApproach;
@@ -44,23 +41,14 @@
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
         $q.all({
-            set: initSet(),
-            exercises: exerciseService.getAll()
+            set: initSet()
         }).then(function (result) {
             vm.set = result.set;
-            vm.allExercises = result.exercises;
 
-            if (vm.training) {
-                vm.Exercises = filterExercises(vm.allExercises, vm.training.TrainingType);
-            }
-            else if (vm.editForm && vm.set.TrainingId) {
+            if (vm.editForm && vm.set.TrainingId) {
                 trainingService.getById(vm.set.TrainingId).then(function (result) {
                     vm.training = result;
-                    vm.Exercises = filterExercises(vm.allExercises, result.TrainingType);
                 });
-            }
-            else {
-                vm.Exercises = [];
             }
 
             vm.formIsReady = true;
@@ -99,14 +87,6 @@
 
                 return $q.when(set);
             }
-        }
-
-        function filterExercises(exercises, trainingType) {
-            return exercises.filter(function (exercise) {
-                return exercise.TrainingTypes.some(function (exericseTrainingType) {
-                    return trainingType.Id === exericseTrainingType.Id;
-                });
-            });
         }
 
         function save(set) {
@@ -163,64 +143,12 @@
                 isValid = false;
             }
 
-            if (!set.Exercises || set.Exercises.length === 0) {
-                vm.validator.ValidExercises = false;
-                isValid = false;
-            }
-
             if (!set.Approaches || set.Approaches.length === 0) {
                 vm.validator.ValidApproaches = false;
                 isValid = false;
             }
 
             return isValid;
-        }
-
-        function addEditExercise(exerciseId, setId, exerciseIndex) {
-            var ariaLabel = exerciseId > 0 ? 'Exercise Edit' : 'Exercise New';
-
-            var modalProperties = {
-                ariaLabelledBy: ariaLabel,
-                templateUrl: '/app/components/Exercise/forms/exercise.form.html',
-                controller: 'ExerciseFormController',
-                itemId: exerciseId,
-                setId: setId
-            };
-
-            var modalInstance = openModal(modalProperties);
-
-            modalInstance.result.then(
-                function (resultExercise) {
-                    if (exerciseIndex) {
-                        vm.Exercises[exerciseIndex] = resultExercise;
-                        vm.set.Exercises[exerciseIndex] = resultExercise;
-                    }
-                    else {
-                        vm.Exercises.push(resultExercise);
-                        vm.set.Exercises.push(resultExercise);
-                    }
-                },
-                function () {
-                });
-        }
-
-        function openModal(modalProperties) {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                backdrop: 'static',
-                ariaLabelledBy: modalProperties.ariaLabell,
-                templateUrl: modalProperties.templateUrl,
-                controller: modalProperties.controller,
-                controllerAs: 'vm',
-                resolve: {
-                    id: function () {
-                        return modalProperties.itemId;
-                    }
-
-                }
-            });
-
-            return modalInstance;
         }
 
         function generateApproaches(set) {
@@ -250,6 +178,25 @@
                 },
                 function () { }
             );
+        }
+
+        function openModal(modalProperties) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                backdrop: 'static',
+                ariaLabelledBy: modalProperties.ariaLabell,
+                templateUrl: modalProperties.templateUrl,
+                controller: modalProperties.controller,
+                controllerAs: 'vm',
+                resolve: {
+                    id: function () {
+                        return modalProperties.itemId;
+                    }
+
+                }
+            });
+
+            return modalInstance;
         }
 
         function removeApproach(id) {
