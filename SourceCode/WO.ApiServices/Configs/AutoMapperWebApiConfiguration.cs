@@ -63,6 +63,12 @@ namespace WO.ApiServices.Configs
                   .ForMember(dest => dest.SpentTimeForRest,
                              opt => opt.MapFrom(src => TimeWoOperations.FromSecondsToTimeWo(src.SpentTimeForRest)));
 
+                  cfg.CreateMap<SetTarget, SetTargetDTO>();
+                  cfg.CreateMap<SetTargetDTO, SetTarget>();
+
+                  cfg.CreateMap<ApproachResult, ApproachResultDTO>();
+                  cfg.CreateMap<ApproachResultDTO, ApproachResult>();
+
                   cfg.CreateMap<LogEntry, LogEntryDTO>();
                   cfg.CreateMap<LogEntryDTO, LogEntry>();
               });

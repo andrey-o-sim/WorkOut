@@ -9,8 +9,6 @@ namespace WO.ApiServices.Models
         public int MadeNumberOfTimes { get; set; }
         public string Description { get; set; }
 
-        public int? ExerciseId { get; set; }
-        public Exercise Exercise { get; set; }
         public int? SetTargetId { get; set; }
         public SetTarget SetTarget { get; set; }
         public int? ApproachId { get; set; }

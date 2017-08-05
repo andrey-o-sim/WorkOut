@@ -72,6 +72,16 @@ namespace WO.Core.Data.Configs
                 .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.Set, dl => dl.Ignore());
 
+                cfg.CreateMap<SetTarget, SetTargetDTO>();
+                cfg.CreateMap<SetTargetDTO, SetTarget>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+
+                cfg.CreateMap<ApproachResult, ApproachResultDTO>();
+                cfg.CreateMap<ApproachResultDTO, ApproachResult>()
+                .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
+                .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore());
+
                 cfg.CreateMap<LogEntry, LogEntryDTO>();
 
                 cfg.CreateMap<LogEntryDTO, LogEntry>()

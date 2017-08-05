@@ -10,7 +10,7 @@ namespace WO.Core.DAL.DataBaseContext.Configurations
             ToTable("Sets");
             Property(s => s.TimeForRest).IsRequired();
 
-            HasOptional<Training>(s => s.Training)
+            HasRequired<Training>(s => s.Training)
                 .WithMany(t => t.Sets)
                 .HasForeignKey(t => new { t.TrainingId })
                 .WillCascadeOnDelete(true);

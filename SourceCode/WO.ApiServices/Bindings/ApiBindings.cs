@@ -18,6 +18,9 @@ namespace WO.ApiServices.Bindings
             Bind<IService<SetDTO>>().To<SetService>();
             Bind<IService<TrainingDTO>>().To<TrainingService>();
             Bind<IExerciseService>().To<ExerciseService>();
+            Bind<IService<SetTargetDTO>>().To<SetTargetService>();
+            Bind<IService<ApproachResultDTO>>().To<ApproachResultService>();
+
             Bind<IService<LogEntryDTO>>().To<LogEntryService>();
         }
     }

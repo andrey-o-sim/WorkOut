@@ -9,13 +9,14 @@ namespace WO.Core.DAL.DataBaseContext.Configurations
         {
             ToTable("ApproachResults");
 
-            Property(a => a.ExerciseId).IsRequired();
-            Property(a => a.SetTargetId).IsRequired();
-            Property(a => a.ApproachId).IsRequired();
-
-            HasOptional<SetTarget>(a => a.SetTarget)
+            HasRequired<SetTarget>(ar => ar.SetTarget)
                 .WithMany(s => s.ApproachResults)
                 .HasForeignKey(a => new { a.SetTargetId })
+                .WillCascadeOnDelete(true);
+
+            HasRequired<Approach>(ar => ar.Approach)
+                .WithMany(a => a.ApproachResults)
+                .HasForeignKey(ar => new { ar.ApproachId })
                 .WillCascadeOnDelete(true);
         }
     }

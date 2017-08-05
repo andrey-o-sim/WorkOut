@@ -43,6 +43,8 @@ namespace WO.Core.DAL.DataBaseContext
             modelBuilder.Configurations.Add(new TrainingConfiguration());
             modelBuilder.Configurations.Add(new ApproachConfiguration());
             modelBuilder.Configurations.Add(new SetConfiguration());
+            modelBuilder.Configurations.Add(new SetTargetConfiguration());
+            modelBuilder.Configurations.Add(new ApproachResultConfiguration());
         }
 
         public void Commit()
