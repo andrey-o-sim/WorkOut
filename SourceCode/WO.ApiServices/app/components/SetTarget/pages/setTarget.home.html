@@ -1,1 +1,31 @@
-﻿
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <h2 class="page-header">Set Target Informations</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Plain Number Of Times</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="setTarget in vm.setTargets">
+                    <td ng-bind="::setTarget.PlainNumberOfTimes"></td>
+                    <td ng-bind="::setTarget.Description"></td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-info" ui-sref="setTargetView({id:{{setTarget.Id}}})">
+                            <span class="glyphicon glyphicon-file"></span>
+                        </a>
+                        <a class="btn btn-sm btn-info" ng-click="vm.editSetTarget(setTarget.Id,$index)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-sm btn-danger" ng-click="vm.remove(setTarget.Id,$index)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

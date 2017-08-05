@@ -7,7 +7,7 @@
         '$http',
         'workOutHelper'];
 
-    var serviceUrl = '/api/SetTarget';
+    var serviceUrl = '/api/SetTarget/';
 
     function setTargetService(
         $http,
@@ -17,7 +17,8 @@
             getById: getById,
             getAll: getAll,
             save: save,
-            remove: remove
+            remove: remove,
+            getEmptySetTargetResult: getEmptySetTargetResult
         };
 
         return service;
@@ -85,6 +86,13 @@
                 workOutHelper.writeErrorMessageToConsole(error);
                 return { Succeed: false };
             }
+        }
+
+        function getEmptySetTargetResult() {
+            return {
+                PlainNumberOfTimes: 0,
+                Description: ''
+            };
         }
     }
 })();
