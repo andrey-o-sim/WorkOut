@@ -40,7 +40,7 @@
             }
         }
 
-        function editApproach(approachId,itemIndex) {
+        function editApproach(approachId, itemIndex) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -56,11 +56,12 @@
                 }
             });
 
-            modalInstance.result.then(function (resultApproach) {
-                vm.approaches[itemIndex] = resultApproach;
-            },
-            function () {
-            });
+            modalInstance.result.then(
+                function (resultApproach) {
+                    vm.approaches[itemIndex] = resultApproach;
+                },
+                function () {
+                });
         }
     }
 }());

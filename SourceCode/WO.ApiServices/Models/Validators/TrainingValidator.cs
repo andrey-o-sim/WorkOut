@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace WO.ApiServices.Models.Validators
 {
@@ -23,7 +20,7 @@ namespace WO.ApiServices.Models.Validators
 
             RuleFor(tr => tr.Sets)
                 .NotNull()
-                .Must(sets => sets.Count() > 0)
+                .Must(sets => sets.Any())
                 .WithMessage("Please, provide at least one 'Set'");
         }
     }

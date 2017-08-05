@@ -65,7 +65,7 @@ namespace TestConsoleApplication
             firstEx.CreatedDate = DateTime.Now;
             firstEx.ModifiedDate = DateTime.Now;
 
-            set1.Exercises.Add(firstEx);
+            //set1.Exercises.Add(firstEx);
             dtoSetRepository.Create(set1);
 
             string settttt = "Set";

@@ -28,12 +28,12 @@ namespace WO.Core.Data.Repositories
             set.CreatedDate = DateTime.Now;
             set.ModifiedDate = DateTime.Now;
 
-            foreach (ExerciseDTO exercisedto in setDto.Exercises)
-            {
-                var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
-                set.Exercises.Add(exerciseForUpdate);
-                exerciseForUpdate.Sets.Add(set);
-            }
+            //foreach (ExerciseDTO exercisedto in setDto.Exercises)
+            //{
+            //    var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
+            //    set.Exercises.Add(exerciseForUpdate);
+            //    exerciseForUpdate.Sets.Add(set);
+            //}
 
             foreach (ApproachDTO approachDto in setDto.Approaches)
             {
@@ -56,7 +56,7 @@ namespace WO.Core.Data.Repositories
 
             setForUpdate.ModifiedDate = DateTime.Now;
 
-            AddDeleteExercises(setForUpdate, setDto);
+            //AddDeleteExercises(setForUpdate, setDto);
             GetTraining(setForUpdate);
 
             _repository.Update(setForUpdate);
@@ -71,35 +71,35 @@ namespace WO.Core.Data.Repositories
             _unitOfWork.Commit();
         }
 
-        private void AddDeleteExercises(Set setForUpdate, SetDTO setDto)
-        {
-            var setExercises = setForUpdate.Exercises;
+        //private void AddDeleteExercises(Set setForUpdate, SetDTO setDto)
+        //{
+        //    var setExercises = setForUpdate.Exercises;
 
-            foreach (ExerciseDTO exercisedto in setDto.Exercises)
-            {
-                if (setExercises.Any(s => s.Id == exercisedto.Id) == false)
-                {
-                    var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
-                    setForUpdate.Exercises.Add(exerciseForUpdate);
-                    exerciseForUpdate.Sets.Add(setForUpdate);
-                }
-            }
+        //    foreach (ExerciseDTO exercisedto in setDto.Exercises)
+        //    {
+        //        if (setExercises.Any(s => s.Id == exercisedto.Id) == false)
+        //        {
+        //            var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
+        //            setForUpdate.Exercises.Add(exerciseForUpdate);
+        //            exerciseForUpdate.Sets.Add(setForUpdate);
+        //        }
+        //    }
 
-            var exercisesForRemove = new List<Exercise>();
-            foreach (Exercise exercise in setExercises)
-            {
-                if (setDto.Exercises.Any(s => s.Id == exercise.Id) == false)
-                {
-                    exercisesForRemove.Add(exercise);
-                }
-            }
+        //    var exercisesForRemove = new List<Exercise>();
+        //    foreach (Exercise exercise in setExercises)
+        //    {
+        //        if (setDto.Exercises.Any(s => s.Id == exercise.Id) == false)
+        //        {
+        //            exercisesForRemove.Add(exercise);
+        //        }
+        //    }
 
-            foreach (Exercise exerciseForRemove in exercisesForRemove)
-            {
-                setForUpdate.Exercises.Remove(exerciseForRemove);
-                exerciseForRemove.Sets.Remove(setForUpdate);
-            }
-        }
+        //    foreach (Exercise exerciseForRemove in exercisesForRemove)
+        //    {
+        //        setForUpdate.Exercises.Remove(exerciseForRemove);
+        //        exerciseForRemove.Sets.Remove(setForUpdate);
+        //    }
+        //}
 
         private void GetTraining(Set setForUpdate)
         {

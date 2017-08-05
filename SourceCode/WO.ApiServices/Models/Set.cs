@@ -21,7 +21,8 @@ namespace WO.ApiServices.Models
         public int? TrainingId { get; set; }
         public Training Training { get; set; }
 
-        public ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
         public ICollection<Approach> Approaches { get; set; } = new List<Approach>();
+
+        public ICollection<SetTarget> SetTargets { get; set; } = new List<SetTarget>();
     }
 }

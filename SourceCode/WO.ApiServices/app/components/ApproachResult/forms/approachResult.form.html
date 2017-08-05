@@ -1,0 +1,32 @@
+﻿<span class="loader" ng-if="!vm.formIsReady"></span>
+
+<div ng-if="vm.formIsReady">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{vm.title}}</h3>
+    </div>
+
+    <div class="modal-body" id="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="control-label">Made Number Of Times:</h3>
+            </div>
+            <div class="col-md-12">
+                <input type="number" max="100" class="form-control" id="madeNumberOfTimes" ng-model="vm.approachResult.MadeNumberOfTimes" />
+                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidMadeNumberOfTimes==false">Need to provide 'Made Number Of Times'</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="control-label">Description:</h3>
+            </div>
+            <div class="col-md-12">
+                <textarea class="form-control" id="description" ng-model="vm.approachResult.Description" />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="save" class="btn btn-primary" ng-disabled="vm.disableSaveButton" ng-click="vm.save(vm.approachResult)">Save</button>
+        <a id="cancel" class="btn btn-warning" ng-click="vm.cancel()">Cancel</a>
+    </div>
+</div>

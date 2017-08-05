@@ -16,8 +16,8 @@ namespace WO.Core.DAL.Model
         public int? TrainingId { get; set; }
         public virtual Training Training { get; set; }
 
-        public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
-
         public virtual ICollection<Approach> Approaches { get; set; } = new List<Approach>();
+
+        public  virtual  ICollection<SetTarget> SetTargets { get; set; } = new List<SetTarget>();
     }
 }

@@ -264,17 +264,20 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Bindings\ApiBindings.cs" />
     <Compile Include="Controllers\ApproachController.cs" />
+    <Compile Include="Controllers\ApproachResultController.cs" />
     <Compile Include="Controllers\LogEntryController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\GenericData\TrainingTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SetController.cs" />
+    <Compile Include="Controllers\SetTargetController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\WoBaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Approach.cs" />
+    <Compile Include="Models\ApproachResult.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\LogEntry.cs" />
     <Compile Include="Models\Exercise.cs" />
@@ -282,10 +285,13 @@
     <Compile Include="Models\Helper\TimeWoOperations.cs" />
     <Compile Include="Models\Helper\ValidationError.cs" />
     <Compile Include="Models\Set.cs" />
+    <Compile Include="Models\SetTarget.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Models\TrainingType.cs" />
+    <Compile Include="Models\Validators\ApproachResultValidator.cs" />
     <Compile Include="Models\Validators\ApproachValidator.cs" />
     <Compile Include="Models\Validators\ExerciseValidator.cs" />
+    <Compile Include="Models\Validators\SetTargetValidator.cs" />
     <Compile Include="Models\Validators\SetValidator.cs" />
     <Compile Include="Models\Validators\TrainingTypeValidator.cs" />
     <Compile Include="Models\Validators\TrainingValidator.cs" />
@@ -318,6 +324,13 @@
     <Content Include="app\assets\libs\angular-ui-router\resolveService.min.js" />
     <Content Include="app\assets\libs\angular-ui-router\stateEvents.js" />
     <Content Include="app\assets\libs\angular-ui-router\stateEvents.min.js" />
+    <Content Include="app\components\ApproachResult\approachResult.route.js" />
+    <Content Include="app\components\ApproachResult\forms\approachResult.form.controller.js" />
+    <Content Include="app\components\ApproachResult\forms\approachResult.form.html" />
+    <Content Include="app\components\ApproachResult\forms\approachResult.view.controller.js" />
+    <Content Include="app\components\ApproachResult\forms\approachResult.view.html" />
+    <Content Include="app\components\ApproachResult\pages\approachResult.home.controller.js" />
+    <Content Include="app\components\ApproachResult\pages\approachResult.home.html" />
     <Content Include="app\components\Approach\approach.route.js" />
     <Content Include="app\components\Approach\forms\approach.form.controller.js" />
     <Content Include="app\components\Approach\forms\approach.form.html" />
@@ -332,6 +345,13 @@
     <Content Include="app\components\Exercise\pages\exercise.home.html" />
     <Content Include="app\components\Log\log.home.controller.js" />
     <Content Include="app\components\Log\log.route.js" />
+    <Content Include="app\components\SetTarget\forms\setTarget.form.controller.js" />
+    <Content Include="app\components\SetTarget\forms\setTarget.form.html" />
+    <Content Include="app\components\SetTarget\forms\setTarget.view.controller.js" />
+    <Content Include="app\components\SetTarget\forms\setTarget.view.html" />
+    <Content Include="app\components\SetTarget\pages\setTarget.home.controller.js" />
+    <Content Include="app\components\SetTarget\pages\setTarget.home.html" />
+    <Content Include="app\components\SetTarget\setTarget.route.js" />
     <Content Include="app\components\Set\forms\set.form.Controller.js" />
     <Content Include="app\components\Set\forms\set.form.html" />
     <Content Include="app\components\Set\forms\set.view.controller.js" />
@@ -358,6 +378,7 @@
     <Content Include="app\shared\services\exercise.service.js" />
     <Content Include="app\shared\services\log.service.js" />
     <Content Include="app\shared\services\set.service.js" />
+    <Content Include="app\shared\services\setTarget.service.js" />
     <Content Include="app\shared\services\training.service.js" />
     <Content Include="app\shared\services\trainingType.service.js" />
     <Content Include="app\shared\workOut.helper.js" />
@@ -1224,6 +1245,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="app\assets\libs\ui-select\select.min.js.map" />
     <Content Include="app\components\Log\log.home.html" />
+    <Content Include="app\shared\services\approachResult.service.js" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>

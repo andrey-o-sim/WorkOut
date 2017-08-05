@@ -1,4 +1,6 @@
-﻿namespace WO.Core.BLL.DTO
+﻿using System.Collections.Generic;
+
+namespace WO.Core.BLL.DTO
 {
     public class ApproachDTO : BaseModelDTO
     {
@@ -9,5 +11,7 @@
 
         public SetDTO Set { get; set; }
         public int? SetId { get; set; }
+
+        public ICollection<ApproachResultDTO> ApproachResults { get; set; } = new List<ApproachResultDTO>();
     }
 }

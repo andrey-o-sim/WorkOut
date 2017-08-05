@@ -56,6 +56,8 @@ namespace WO.ApiServices
                 "~/app/shared/services/exercise.service.js",
                 "~/app/shared/services/set.service.js",
                 "~/app/shared/services/training.service.js",
+                "~/app/shared/services/setTarget.service.js",
+                "~/app/shared/services/approachResult.service.js",
                 "~/app/shared/services/log.service.js"));
 
             bundles.Add(new ScriptBundle("~/app/components/helpers").Include(
@@ -88,6 +90,16 @@ namespace WO.ApiServices
                 "~/app/components/Training/forms/training.form.controller.js",
                 "~/app/components/Training/forms/training.view.controller.js",
                 "~/app/components/Training/training.route.js",
+
+                "~/app/components/SetTarget/pages/setTarget.home.controller.js",
+                "~/app/components/SetTarget/forms/setTarget.form.controller.js",
+                "~/app/components/SetTarget/forms/setTarget.view.controller.js",
+                "~/app/components/SetTarget/setTarget.route.js",
+
+                "~/app/components/ApproachResult/pages/approachResult.home.controller.js",
+                "~/app/components/ApproachResult/forms/approachResult.form.controller.js",
+                "~/app/components/ApproachResult/forms/approachResult.view.controller.js",
+                "~/app/components/ApproachResult/approachResult.route.js",
 
                 "~/app/components/Log/log.home.controller.js",
                 "~/app/components/Log/log.route.js"

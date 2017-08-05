@@ -43,10 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\ApproachDTO.cs" />
+    <Compile Include="DTO\ApproachResultDTO.cs" />
     <Compile Include="DTO\BaseModelDTO.cs" />
     <Compile Include="DTO\LogEntryDTO.cs" />
     <Compile Include="DTO\ExerciseDTO.cs" />
     <Compile Include="DTO\SetDTO.cs" />
+    <Compile Include="DTO\SetTargetDTO.cs" />
     <Compile Include="DTO\TrainingDTO.cs" />
     <Compile Include="DTO\TrainingTypeDTO.cs" />
     <Compile Include="Interfaces\IOperationResult.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Interfaces\Services\IExerciseService.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApproachResultService.cs" />
     <Compile Include="Services\ApproachService.cs" />
     <Compile Include="Services\LogEntryService.cs" />
     <Compile Include="Services\ExerciseService.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Services\GenericService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\SetService.cs" />
+    <Compile Include="Services\SetTargetService.cs" />
     <Compile Include="Services\TrainingService.cs" />
   </ItemGroup>
   <ItemGroup />
