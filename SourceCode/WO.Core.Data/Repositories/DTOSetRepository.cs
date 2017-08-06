@@ -13,6 +13,7 @@ namespace WO.Core.Data.Repositories
         private IRepository<Approach> _approachRepository;
         private IRepository<Exercise> _exerciseRepository;
         private IRepository<Training> _trainingRepository;
+        private IRepository<SetTarget> _setTargetRepository;
 
         public DTOSetRepository(IUnitOfWork unitOfWork)
             : base(unitOfWork)
@@ -20,6 +21,7 @@ namespace WO.Core.Data.Repositories
             _approachRepository = unitOfWork.GetGenericRepository<Approach>();
             _exerciseRepository = unitOfWork.GetGenericRepository<Exercise>();
             _trainingRepository = unitOfWork.GetGenericRepository<Training>();
+            _setTargetRepository = unitOfWork.GetGenericRepository<SetTarget>();
         }
 
         public override int Create(SetDTO setDto)
@@ -28,13 +30,6 @@ namespace WO.Core.Data.Repositories
             set.CreatedDate = DateTime.Now;
             set.ModifiedDate = DateTime.Now;
 
-            //foreach (ExerciseDTO exercisedto in setDto.Exercises)
-            //{
-            //    var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
-            //    set.Exercises.Add(exerciseForUpdate);
-            //    exerciseForUpdate.Sets.Add(set);
-            //}
-
             foreach (ApproachDTO approachDto in setDto.Approaches)
             {
                 var approach = _approachRepository.Get(approachDto.Id);
@@ -42,6 +37,7 @@ namespace WO.Core.Data.Repositories
             }
 
             GetTraining(set);
+            GetSetTargets(set, setDto);
 
             _repository.Create(set);
             _unitOfWork.Commit();
@@ -56,8 +52,8 @@ namespace WO.Core.Data.Repositories
 
             setForUpdate.ModifiedDate = DateTime.Now;
 
-            //AddDeleteExercises(setForUpdate, setDto);
             GetTraining(setForUpdate);
+            GetSetTargets(setForUpdate, setDto);
 
             _repository.Update(setForUpdate);
             _unitOfWork.Commit();
@@ -66,46 +62,26 @@ namespace WO.Core.Data.Repositories
         public override void Delete(int id)
         {
             var itemForRemove = _repository.Get(id);
-            itemForRemove.Approaches = _approachRepository.FindMany(app => app.SetId == id).ToList(); ;
+            itemForRemove.Approaches = _approachRepository.FindMany(app => app.SetId == id).ToList();
+            itemForRemove.SetTargets = _setTargetRepository.FindMany(setTarget => setTarget.SetId == id).ToList();
             _repository.Delete(itemForRemove);
             _unitOfWork.Commit();
         }
-
-        //private void AddDeleteExercises(Set setForUpdate, SetDTO setDto)
-        //{
-        //    var setExercises = setForUpdate.Exercises;
-
-        //    foreach (ExerciseDTO exercisedto in setDto.Exercises)
-        //    {
-        //        if (setExercises.Any(s => s.Id == exercisedto.Id) == false)
-        //        {
-        //            var exerciseForUpdate = _exerciseRepository.Get(exercisedto.Id);
-        //            setForUpdate.Exercises.Add(exerciseForUpdate);
-        //            exerciseForUpdate.Sets.Add(setForUpdate);
-        //        }
-        //    }
-
-        //    var exercisesForRemove = new List<Exercise>();
-        //    foreach (Exercise exercise in setExercises)
-        //    {
-        //        if (setDto.Exercises.Any(s => s.Id == exercise.Id) == false)
-        //        {
-        //            exercisesForRemove.Add(exercise);
-        //        }
-        //    }
-
-        //    foreach (Exercise exerciseForRemove in exercisesForRemove)
-        //    {
-        //        setForUpdate.Exercises.Remove(exerciseForRemove);
-        //        exerciseForRemove.Sets.Remove(setForUpdate);
-        //    }
-        //}
 
         private void GetTraining(Set setForUpdate)
         {
             if (setForUpdate.TrainingId.HasValue && setForUpdate.TrainingId.Value > 0)
             {
                 setForUpdate.Training = _trainingRepository.Get(setForUpdate.TrainingId.Value);
+            }
+        }
+
+        private void GetSetTargets(Set setForUpdate, SetDTO setDto)
+        {
+            foreach (var setTarget in setDto.SetTargets)
+            {
+                var setTargetDb = _setTargetRepository.Get(setTarget.Id);
+                setForUpdate.SetTargets.Add(setTargetDb);
             }
         }
     }

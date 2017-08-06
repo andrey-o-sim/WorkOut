@@ -1,6 +1,10 @@
 ﻿<span class="loader" ng-if="!vm.formIsReady"></span>
 
-<div class="container-fluid" ng-if="vm.formIsReady && vm.set">
+<div class="p-top15" ng-if="vm.formIsReady && !vm.isTrainingPresent()">
+    <span class="text-center requiredError">You cannot create new Set without training. Please return to your training and press button 'Add Set'</span>
+</div>
+
+<div class="container-fluid" ng-if="vm.formIsReady && vm.set && vm.isTrainingPresent()">
     <h2 class="page-header">Set</h2>
     <div class="row">
         <div class="col-md-3">
@@ -27,6 +31,49 @@
                     <wo-time-selector show-hours="false" show-minutes="true" show-seconds="true" time="vm.set.TimeForRest"></wo-time-selector>
                     <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidTimeForRest==false">Need to provide 'Time For Reset After Approach'</label>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="control-label">Set Targets:</h3>
+        </div>
+        <div class="col-md-12">
+            <div ng-show="!vm.set.SetTargets">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+            </div>
+            <div class="input-group col-md-12" ng-if="vm.set.SetTargets">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Plain Number Of Times</th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="setTarget in vm.set.SetTargets">
+                        <td ng-bind="setTarget.Exercise.Name"></td>
+                        <td ng-bind="setTarget.PlainNumberOfTimes"></td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-info" ng-click="vm.addEditSetTarget(setTarget.Id,$index)">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <a class="btn btn-sm btn-danger" ng-click="vm.removeSetTarget(approach.Id,$index)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">
+                            <a class="btn btn-success" ng-click="vm.addEditSetTarget()">
+                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                Add New
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidSetTarget==false">Need to provide at least one Set Target</label>
             </div>
         </div>
     </div>
@@ -71,7 +118,7 @@
                             <a class="btn btn-sm btn-info" ng-click="vm.editApproach(approach.Id,$index)">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
-                            <a class="btn btn-sm btn-danger" ng-click="vm.removeApproach(approach.Id)">
+                            <a class="btn btn-sm btn-danger" ng-click="vm.removeApproach(approach.Id,$index)">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         </td>

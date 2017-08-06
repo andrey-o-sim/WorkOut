@@ -11,11 +11,6 @@ namespace WO.Core.DAL.DataBaseContext.Configurations
 
             Property(s => s.PlainNumberOfTimes).IsRequired();
 
-            HasRequired<Set>(st => st.Set)
-                .WithMany(s => s.SetTargets)
-                .HasForeignKey(st => new { st.SetId })
-                .WillCascadeOnDelete(false);
-
             HasRequired<Exercise>(st => st.Exercise)
                .WithMany(s => s.SetTargets)
                .HasForeignKey(st => new { st.ExerciseId })
