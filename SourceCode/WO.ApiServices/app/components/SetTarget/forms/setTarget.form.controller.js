@@ -8,6 +8,7 @@
         '$stateParams',
         '$uibModalInstance',
         'setTargetService',
+        'exerciseService',
         'id'
     ];
 
@@ -16,6 +17,7 @@
         $stateParams,
         $uibModalInstance,
         setTargetService,
+        exerciseService,
         id) {
 
         var vm = this;
@@ -38,6 +40,10 @@
             else {
                 vm.formIsReady = true;
             }
+
+            exerciseService.getAll().then(function (result) {
+                vm.Exercises = result;
+            });
         }
 
         function save(setTarget) {

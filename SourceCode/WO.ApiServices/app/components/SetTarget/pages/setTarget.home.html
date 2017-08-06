@@ -6,11 +6,13 @@
         <div class="row">
             <table class="table table-striped">
                 <tr>
+                    <th>Exercise</th>
                     <th>Plain Number Of Times</th>
                     <th>Description</th>
                     <th></th>
                 </tr>
                 <tr ng-repeat="setTarget in vm.setTargets">
+                    <td ng-bind="::setTarget.Exercise.Name"></td>
                     <td ng-bind="::setTarget.PlainNumberOfTimes"></td>
                     <td ng-bind="::setTarget.Description"></td>
                     <td class="text-right">

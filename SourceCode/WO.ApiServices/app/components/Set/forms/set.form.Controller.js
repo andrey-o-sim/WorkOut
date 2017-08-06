@@ -9,6 +9,7 @@
         '$stateParams',
         '$uibModal',
         'setService',
+        'setTargetService',
         'approachService',
         'trainingService',
         'workOutHelper',
@@ -23,6 +24,7 @@
         $stateParams,
         $uibModal,
         setService,
+        setTargetService,
         approachService,
         trainingService,
         workOutHelper,
@@ -37,6 +39,11 @@
         vm.generateApproaches = generateApproaches;
         vm.removeApproach = removeApproach;
         vm.editApproach = editApproach;
+
+        vm.isTrainingPresent = isTrainingPresent;
+
+        vm.addEditSetTarget = addEditSetTarget;
+        vm.removeSetTarget = removeSetTarget;
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
@@ -82,7 +89,8 @@
                         Seconds: 0
                     },
                     CountApproaches: 0,
-                    TrainingId: vm.training ? vm.training.Id : null
+                    TrainingId: vm.training ? vm.training.Id : null,
+                    SetTargets: []
                 };
 
                 return $q.when(set);
@@ -180,6 +188,53 @@
             );
         }
 
+        function removeApproach(id, itemIndex) {
+            if (confirm("Do you realy want to remove the item?")) {
+                approachService.remove(id).then(function (result) {
+                    if (result.Succeed) {
+                        vm.set.Approaches.splice(itemIndex, 1);
+                        toastr.info("Approach with Id '" + result.ResultItemId + "' was successfully removed.");
+                    }
+                });
+            }
+        }
+
+        function addEditSetTarget(setTargetId, itemIndex) {
+            var ariaLabel = setTargetId > 0 ? 'Set Target Edit' : 'Set Target New';
+
+            var modalProperties = {
+                ariaLabelledBy: ariaLabel,
+                templateUrl: '/app/components/SetTarget/forms/setTarget.form.html',
+                controller: 'SetTargetFormController',
+                itemId: setTargetId
+            };
+
+            var modalInstance = openModal(modalProperties);
+
+            modalInstance.result.then(
+                function (resultSetTarget) {
+                    if (itemIndex || itemIndex >= 0) {
+                        vm.set.SetTargets[itemIndex] = resultSetTarget;
+                    }
+                    else {
+                        vm.set.SetTargets.push(resultSetTarget);
+                    }
+                },
+                function () { }
+            );
+        }
+
+        function removeSetTarget(id, itemIndex) {
+            if (confirm("Do you realy want to remove the item?")) {
+                setTargetService.remove(id).then(function (result) {
+                    if (result.Succeed) {
+                        vm.set.SetTargets.splice(itemIndex, 1);
+                        toastr.info("Set Target with Id '" + result.ResultItemId + "' was successfully removed.");
+                    }
+                });
+            }
+        }
+
         function openModal(modalProperties) {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -199,12 +254,8 @@
             return modalInstance;
         }
 
-        function removeApproach(id) {
-            approachService.remove(id).then(function (result) {
-                if (result.Succeed) {
-                    vm.set.Approaches = workOutHelper.removeElementFromArray(vm.set.Approaches, id);
-                }
-            });
+        function isTrainingPresent() {
+            return vm.set.Training || vm.training;
         }
     }
 }());

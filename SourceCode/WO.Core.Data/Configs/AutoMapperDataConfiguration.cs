@@ -51,7 +51,8 @@ namespace WO.Core.Data.Configs
                 .ForMember(dto => dto.CreatedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.ModifiedDate, dl => dl.Ignore())
                 .ForMember(dto => dto.Approaches, dl => dl.Ignore())
-                .ForMember(dto => dto.Training, dl => dl.Ignore());
+                .ForMember(dto => dto.Training, dl => dl.Ignore())
+                .ForMember(dto => dto.SetTargets, dl => dl.Ignore());
 
 
                 cfg.CreateMap<Exercise, ExerciseDTO>()
@@ -73,7 +74,6 @@ namespace WO.Core.Data.Configs
                 .ForMember(dto => dto.Set, dl => dl.Ignore());
 
                 cfg.CreateMap<SetTarget, SetTargetDTO>()
-                .ForMember(dto=>dto.Exercise,dl=>dl.Ignore())
                 .ForMember(dto => dto.Set, dl => dl.Ignore());
 
                 cfg.CreateMap<SetTargetDTO, SetTarget>()

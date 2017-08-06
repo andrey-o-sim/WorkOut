@@ -10,7 +10,7 @@ namespace WO.Core.DAL.Model
         public int ExerciseId { get; set; }
         public virtual Exercise Exercise { get; set; }
 
-        public int SetId { get; set; }
+        public int? SetId { get; set; }
         public virtual Set Set { get; set; }
 
         public virtual ICollection<ApproachResult> ApproachResults { get; set; } = new List<ApproachResult>();

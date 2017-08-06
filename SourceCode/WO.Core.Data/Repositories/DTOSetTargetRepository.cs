@@ -55,7 +55,7 @@ namespace WO.Core.Data.Repositories
 
             setTarget.Exercise = exerciseId.HasValue
                 ? _exerciseRepository.Get(exerciseId.Value)
-                : new Exercise();
+                : null;
 
             var setId = setTargetDTO.Set != null
                 ? setTargetDTO.Set.Id
@@ -63,7 +63,7 @@ namespace WO.Core.Data.Repositories
 
             setTarget.Set = setId.HasValue
                 ? _setRepository.Get(setId.Value)
-                : new Set();
+                : null;
         }
     }
 }

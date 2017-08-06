@@ -118,6 +118,10 @@
     padding-left: 30px;
 }
 
+.p-top15 {
+    padding-top: 15px;
+}
+
 .nopadding-left {
     padding-left: 0px !important;
 }

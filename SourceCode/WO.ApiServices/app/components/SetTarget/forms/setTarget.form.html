@@ -8,6 +8,31 @@
     <div class="modal-body" id="modal-body">
         <div class="row">
             <div class="col-md-12">
+                <h3 class="control-label">Exercise:</h3>
+            </div>
+            <div class="col-md-12">
+                <div ng-show="!vm.Exercises">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
+                </div>
+                <div ng-show="vm.Exercises">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <ui-select title="Choose a Training Type" theme="selectize" ng-model="vm.setTarget.Exercise">
+                                <ui-select-match placeholder="Select or search an Exercise in the list...">{{$select.selected.Name}}</ui-select-match>
+                                <ui-select-choices repeat="exercise in vm.Exercises | filter: $select.search">
+                                    <div ng-bind-html="exercise.Name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="requiredError" ng-show="vm.validateForm==true && vm.validator.ValidExercise===false">Need to provide "Exercise"</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <h3 class="control-label">Made Number Of Times:</h3>
             </div>
             <div class="col-md-12">
