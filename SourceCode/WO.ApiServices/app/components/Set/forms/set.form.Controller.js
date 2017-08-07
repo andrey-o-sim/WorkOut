@@ -40,6 +40,8 @@
         vm.removeApproach = removeApproach;
         vm.editApproach = editApproach;
 
+        vm.doneSetTarget = doneSetTarget;
+
         vm.isTrainingPresent = isTrainingPresent;
 
         vm.addEditSetTarget = addEditSetTarget;
@@ -47,10 +49,15 @@
 
         vm.editForm = $stateParams.id && $stateParams.id > 0;
 
+        vm.currentSetTargetIndex = 0;
+        vm.currentApproachIndex = 0;
+
         $q.all({
             set: initSet()
         }).then(function (result) {
             vm.set = result.set;
+            vm.countSetTargets = vm.set.SetTargets.length;
+            vm.countApproaches = vm.set.Approaches.length;
 
             if (vm.editForm && vm.set.TrainingId) {
                 trainingService.getById(vm.set.TrainingId).then(function (result) {
@@ -256,6 +263,21 @@
 
         function isTrainingPresent() {
             return vm.set.Training || vm.training;
+        }
+
+        function doneSetTarget(setTargetId, itemIndex) {
+            vm.currentSetTargetIndex = itemIndex + 1;
+            if (vm.currentSetTargetIndex == vm.countSetTargets) {
+                vm.set.Approaches[vm.currentApproachIndex].Finished = true;
+                vm.currentApproachIndex++;
+
+                if (vm.currentApproachIndex === vm.countApproaches) {
+                    vm.set.Finished = true;
+                }
+                else {
+                    vm.currentSetTargetIndex = 0;
+                }
+            }
         }
     }
 }());
