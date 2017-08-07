@@ -39,7 +39,7 @@
         <div class="col-md-12">
             <h3 class="control-label">Set Targets:</h3>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-9">
             <div ng-show="!vm.set.SetTargets">
                 <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:24px"></i>
             </div>
@@ -54,6 +54,12 @@
                         <td ng-bind="setTarget.Exercise.Name"></td>
                         <td ng-bind="setTarget.PlainNumberOfTimes"></td>
                         <td class="text-right">
+                            <button ng-class="{'btn btn-sm btn-success':vm.currentSetTargetIndex===$index,'btn btn-sm':vm.currentSetTargetIndex!==$index}"
+                                    ng-disabled="vm.currentSetTargetIndex!==$index"
+                                    ng-click="vm.doneSetTarget(setTarget.Id,$index)">
+                                <i class="glyphicon glyphicon-ok" aria-hidden="true"></i>
+                                Done
+                            </button>
                             <a class="btn btn-sm btn-info" ng-click="vm.addEditSetTarget(setTarget.Id,$index)">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
@@ -109,11 +115,13 @@
                     <tr>
                         <th>Planned Time For Rest</th>
                         <th>Spent Time For Rest</th>
+                        <th>Approach Status</th>
                         <th></th>
                     </tr>
                     <tr ng-repeat="approach in vm.set.Approaches">
                         <td ng-bind-template="Minute(s): {{ approach.PlannedTimeForRest.Minutes }} Second(s): {{approach.PlannedTimeForRest.Seconds}}"></td>
                         <td ng-bind-template="Minute(s): {{ approach.SpentTimeForRest.Minutes }} Second(s): {{approach.SpentTimeForRest.Seconds}}"></td>
+                        <td ng-bind="approach.Finished"></td>
                         <td class="text-right">
                             <a class="btn btn-sm btn-info" ng-click="vm.editApproach(approach.Id,$index)">
                                 <span class="glyphicon glyphicon-edit"></span>
