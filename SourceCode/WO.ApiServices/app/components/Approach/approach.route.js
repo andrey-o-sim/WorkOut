@@ -3,6 +3,8 @@
         .module('woApp')
         .config(routeConfig)
 
+    routeConfig.$inject = ['$stateProvider'];
+
     function routeConfig($stateProvider) {
         var homeRoute = {
             name: 'approachHome',

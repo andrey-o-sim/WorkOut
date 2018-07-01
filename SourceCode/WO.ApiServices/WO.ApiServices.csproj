@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -332,11 +333,20 @@
     <Content Include="app\components\ApproachResult\pages\approachResult.home.controller.js" />
     <Content Include="app\components\ApproachResult\pages\approachResult.home.html" />
     <Content Include="app\components\Approach\approach.route.js" />
+    <Content Include="app\components\Approach\approach.route.min.js">
+      <DependentUpon>approach.route.js</DependentUpon>
+    </Content>
     <Content Include="app\components\Approach\forms\approach.form.controller.js" />
+    <Content Include="app\components\Approach\forms\approach.form.controller.min.js">
+      <DependentUpon>approach.form.controller.js</DependentUpon>
+    </Content>
     <Content Include="app\components\Approach\forms\approach.form.html" />
     <Content Include="app\components\Approach\forms\approach.view.controller.js" />
     <Content Include="app\components\Approach\forms\approach.view.html" />
     <Content Include="app\components\Approach\pages\approach.home.controller.js" />
+    <Content Include="app\components\Approach\pages\approach.home.controller.min.js">
+      <DependentUpon>approach.home.controller.js</DependentUpon>
+    </Content>
     <Content Include="app\components\Approach\pages\approach.home.html" />
     <Content Include="app\components\Exercise\exercise.route.js" />
     <Content Include="app\components\Exercise\forms\exercise.form.controller.js" />
@@ -1246,6 +1256,7 @@
     <Content Include="app\assets\libs\ui-select\select.min.js.map" />
     <Content Include="app\components\Log\log.home.html" />
     <Content Include="app\shared\services\approachResult.service.js" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
@@ -1313,7 +1324,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59017</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost</IISUrl>
+          <IISUrl>http://localhost:1235</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
