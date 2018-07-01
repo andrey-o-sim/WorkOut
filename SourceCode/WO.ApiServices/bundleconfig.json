@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "app/components/Approach/approach.route.min.js",
+    "inputFiles": [
+      "app/components/Approach/approach.route.js"
+    ]
+  },
+  {
+    "outputFileName": "app/components/Approach/pages/approach.home.controller.min.js",
+    "inputFiles": [
+      "app/components/Approach/pages/approach.home.controller.js"
+    ]
+  },
+  {
+    "outputFileName": "app/components/Approach/forms/approach.form.controller.min.js",
+    "inputFiles": [
+      "app/components/Approach/forms/approach.form.controller.js"
+    ]
+  }
+]

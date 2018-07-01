@@ -10,7 +10,8 @@
             'ngAnimate',
             'toastr',
             'g1b.datetime-range',
-            'ngMaterial'
+            'ngMaterial',
+            'ngRoute'
         ]);
 
     angular

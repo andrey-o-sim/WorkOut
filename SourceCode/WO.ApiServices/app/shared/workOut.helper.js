@@ -22,19 +22,22 @@
 
         function removeElementFromArray(array, itemId) {
             var removeItem = array.find(function (element) {
-                return element.Id == itemId;
+                return element.Id === itemId;
             });
 
-            var index = array.indexOf(removeItem);
-            if (index != -1) {
-                array.splice(index, 1);
+            if (removeItem) {
+                var index = array.indexOf(removeItem);
+                if (index !== -1) {
+                    array.splice(index, 1);
+                }
             }
+
 
             return array;
         }
 
         function writeErrorMessageToConsole(error) {
-            if (error.status != "404") {
+            if (error.status !== "404") {
                 $log.error(error.status + " " + error.statusText);
 
                 var errorMessages = JSON.parse(error.data.Message);
