@@ -10,3 +10,4 @@ Use the following technologies:
 6) Asp.net Identity
 7) Asp.net core entity framework
 8) Azure
+9) NLog
