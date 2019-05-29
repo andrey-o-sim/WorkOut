@@ -2,7 +2,7 @@
 This is WorkOut training application. Ready to go!
 
 Use the following technologies:
-1) Angular 7
+1) Angular 8
 2) Aspnet core api
 3) SignalR (dynamic data update when add or finish excercises)
 4) Bootstrap 4
@@ -11,3 +11,5 @@ Use the following technologies:
 7) Asp.net core entity framework
 8) Azure
 9) NLog
+10) Postgresql
+11) Docker
